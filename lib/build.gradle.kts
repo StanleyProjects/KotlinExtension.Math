@@ -5,20 +5,30 @@ plugins {
 }
 
 tasks.getByName<JavaCompile>("compileJava") {
-    targetCompatibility = "1.8"
+    targetCompatibility = Version.jvmTarget
 }
 
-tasks.getByName<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>("compileKotlin") {
+val compileKotlinTask = tasks.getByName<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>("compileKotlin") {
     kotlinOptions {
-        jvmTarget = "1.8"
-        freeCompilerArgs = freeCompilerArgs + setOf("-module-name", "StanleyProjects:KotlinExtension.Math") // todo
+        jvmTarget = Version.jvmTarget
+        freeCompilerArgs = freeCompilerArgs + setOf("-module-name", Maven.groupId + ":" + Maven.artifactId)
     }
 }
 
 tasks.getByName<JavaCompile>("compileTestJava") {
-    targetCompatibility = "1.8"
+    targetCompatibility = Version.jvmTarget
 }
 
 tasks.getByName<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>("compileTestKotlin") {
-    kotlinOptions.jvmTarget = "1.8"
+    kotlinOptions.jvmTarget = Version.jvmTarget
+}
+
+"Snapshot".also { variant ->
+    val versionName = Version.name + "-" + variant.toUpperCase()
+    task<Jar>("assemble${variant}Jar") {
+        dependsOn(compileKotlinTask)
+        archiveBaseName.set(Maven.artifactId)
+        archiveVersion.set(versionName)
+        from(compileKotlinTask.destinationDirectory.asFileTree)
+    }
 }
