@@ -40,13 +40,3 @@ fun pointOf(
 ): Point {
     return pointOf(x = x.toDouble(), y = y.toDouble())
 }
-
-fun Point.updated(
-    dX: Double,
-    dY: Double
-): Point {
-    return pointOf(
-        x = x + dX,
-        y = y + dY
-    )
-}
