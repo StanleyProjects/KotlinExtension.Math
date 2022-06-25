@@ -38,6 +38,14 @@ fun Vector.getShortest(target: Point): Double {
     )
 }
 
+fun Vector.getPerpendicular(target: Point): Point {
+    return getPerpendicular(
+        a = target,
+        b = start,
+        c = finish
+    )
+}
+
 fun Vector.getIntersectionPointOrNull(that: Vector): Point? {
     return getIntersectionPointOrNull(
         a = this.start,

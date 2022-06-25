@@ -1,5 +1,6 @@
 package sp.kx.math.implementation.entity.geometry
 
+import sp.kx.math.foundation.entity.geometry.Offset
 import sp.kx.math.foundation.entity.geometry.Point
 import sp.kx.math.foundation.entity.geometry.Vector
 
@@ -11,7 +12,7 @@ private class EmptyVectorImpl(
     override val finish: Point
         get() = point
     override fun toString(): String {
-        return "{point:$point}"
+        return "EmptyVector{$point}"
     }
 
     override fun hashCode(): Int {
@@ -56,25 +57,34 @@ fun vectorOf(
     )
 }
 
-fun emptyVectorOf(
-    point: Point
+fun vectorOf(
+    start: Point,
+    finish: Point,
+    offset: Offset
 ): Vector {
-    return EmptyVectorImpl(
-        point = point
+    return VectorImpl(
+        start = start.updated(offset),
+        finish = finish.updated(offset)
     )
 }
 
-fun vectorOf(
-    start: Point,
+fun Point.toEmptyVector(): Vector {
+    return EmptyVectorImpl(point = this)
+}
+
+fun Point.vectorTo(
     length: Double,
     direction: Double
 ): Vector {
-    val finish = pointOf(
-        x = start.x + length * kotlin.math.cos(direction),
-        y = start.y + length * kotlin.math.sin(direction),
-    )
     return VectorImpl(
-        start = start,
-        finish = finish
+        start = this,
+        finish = moved(length = length, direction = direction)
+    )
+}
+
+fun Point.vectorTo(offset: Offset): Vector {
+    return vectorOf(
+        start = this,
+        finish = updated(offset)
     )
 }

@@ -1,6 +1,7 @@
-package sp.kx.math.implementation.entity.geometry
+package sp.kx.math.implementation.computation.geometry
 
 import sp.kx.math.foundation.entity.geometry.Point
+import sp.kx.math.implementation.entity.geometry.pointOf
 import kotlin.math.absoluteValue
 
 fun getAngle(startX: Double, startY: Double, finishX: Double, finishY: Double): Double {

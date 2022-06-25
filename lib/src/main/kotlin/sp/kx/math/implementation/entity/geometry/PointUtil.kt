@@ -2,7 +2,12 @@ package sp.kx.math.implementation.entity.geometry
 
 import sp.kx.math.foundation.entity.geometry.Offset
 import sp.kx.math.foundation.entity.geometry.Point
-import kotlin.math.abs
+import sp.kx.math.implementation.computation.number.isSame
+import sp.kx.math.implementation.computation.geometry.getAngle
+import sp.kx.math.implementation.computation.geometry.getDistance
+import sp.kx.math.implementation.computation.geometry.getShortest
+import sp.kx.math.implementation.computation.geometry.getIntersectionPointOrNull
+import sp.kx.math.implementation.computation.geometry.getPerpendicular
 
 fun Point.updated(
     dX: Double,
@@ -18,9 +23,25 @@ fun Point.updated(offset: Offset): Point {
     return updated(dX = offset.dX, dY = offset.dY)
 }
 
+fun Point.moved(
+    length: Double,
+    direction: Double
+): Point {
+    return updated(
+        dX = length * kotlin.math.cos(direction),
+        dY = length * kotlin.math.sin(direction),
+    )
+}
+
+fun Point.difference(that: Point): Offset {
+    return offsetOf(
+        dX = this.x - that.x,
+        dY = this.y - that.y
+    )
+}
+
 fun Point.isSame(that: Point, epsilon: Double): Boolean {
-    check(epsilon < 1.0)
-    return abs(this.x - that.x) < epsilon && abs(this.y - that.y) < epsilon
+    return x.isSame(that.x, epsilon = epsilon) && y.isSame(that.y, epsilon = epsilon)
 }
 
 fun getAngle(start: Point, finish: Point): Double {
@@ -43,7 +64,7 @@ fun getShortest(
         xStart = start.x,
         yStart = start.y,
         xFinish = finish.x,
-        yFinish = finish.x,
+        yFinish = finish.y,
         xTarget = target.x,
         yTarget = target.y
     )
