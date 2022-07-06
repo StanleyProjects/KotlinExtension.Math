@@ -2,7 +2,7 @@ package sp.kx.math.implementation.entity.geometry
 
 import sp.kx.math.foundation.entity.geometry.Point
 
-private class PointImpl(
+private data class PointImpl(
     override val x: Double,
     override val y: Double
 ): Point {
@@ -10,17 +10,6 @@ private class PointImpl(
         val fX = String.format("%.2f", x)
         val fY = String.format("%.2f", y)
         return "{x:$fX,y:$fY}"
-    }
-
-    override fun hashCode(): Int {
-        return (x + y * 13).toInt()
-    }
-
-    override fun equals(other: Any?): Boolean {
-        return when (other) {
-            is Point -> x == other.x && y == other.y
-            else -> false
-        }
     }
 }
 
