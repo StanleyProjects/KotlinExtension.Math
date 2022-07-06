@@ -55,8 +55,8 @@ tasks.getByName<JacocoCoverageVerification>("jacocoTestCoverageVerification") {
     }
 }
 
-setOf("main", "test").forEach { source ->
-    val detektTask = tasks.getByName<io.gitlab.arturbosch.detekt.Detekt>("detekt${source.capitalize()}")
+setOf("main", "test").forEach {
+    val detektTask = tasks.getByName<io.gitlab.arturbosch.detekt.Detekt>("detekt${it.capitalize()}")
     val configs = setOf(
         "common",
         "comments",
@@ -71,9 +71,9 @@ setOf("main", "test").forEach { source ->
     ).map { config ->
         File(rootDir, "buildSrc/src/main/resources/detekt/config/$config.yml").existing()
     }
-    task<io.gitlab.arturbosch.detekt.Detekt>("verifyCodeQuality${source.capitalize()}") {
+    task<io.gitlab.arturbosch.detekt.Detekt>("verifyCodeQuality${it.capitalize()}") {
         jvmTarget = Version.jvmTarget
-        setSource(files("src/$source/kotlin"))
+        setSource(files("src/$it/kotlin"))
         config.setFrom(configs)
         reports {
             xml.required.set(false)
@@ -81,9 +81,19 @@ setOf("main", "test").forEach { source ->
             txt.required.set(false)
             html {
                 required.set(true)
-                outputLocation.set(File(buildDir, "reports/analysis/code/quality/${source}/html/index.html"))
+                outputLocation.set(File(buildDir, "reports/analysis/code/quality/$it/html/index.html"))
             }
         }
         classpath.setFrom(detektTask.classpath)
+    }
+}
+
+"unstable".also { variant ->
+    val tag = "${Version.name}-${variant.toUpperCase()}"
+    task<Jar>("assemble${variant.capitalize()}Jar") {
+        dependsOn(compileKotlinTask)
+        archiveBaseName.set(Repository.name)
+        archiveVersion.set(tag)
+        from(compileKotlinTask.destinationDirectory.asFileTree)
     }
 }
