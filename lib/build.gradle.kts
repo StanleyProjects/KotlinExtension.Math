@@ -1,6 +1,7 @@
 repositories.mavenCentral()
 
 plugins {
+    id("io.gitlab.arturbosch.detekt") version Version.detekt
     id("org.jetbrains.kotlin.jvm")
 }
 
@@ -23,12 +24,35 @@ tasks.getByName<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>("compileTestKot
     kotlinOptions.jvmTarget = Version.jvmTarget
 }
 
-"Snapshot".also { variant ->
-    val versionName = Version.name + "-" + variant.toUpperCase()
-    task<Jar>("assemble${variant}Jar") {
-        dependsOn(compileKotlinTask)
-        archiveBaseName.set(Maven.artifactId)
-        archiveVersion.set(versionName)
-        from(compileKotlinTask.destinationDirectory.asFileTree)
+setOf("main", "test").forEach { source ->
+    val detektTask = tasks.getByName<io.gitlab.arturbosch.detekt.Detekt>("detekt${source.capitalize()}")
+    val configs = setOf(
+        "common",
+        "comments",
+        "complexity",
+        "coroutines",
+        "empty-blocks",
+        "exceptions",
+        "naming",
+        "performance",
+        "potential-bugs",
+        "style"
+    ).map { config ->
+        File(rootDir, "buildSrc/src/main/resources/detekt/config/$config.yml").existing()
+    }
+    task<io.gitlab.arturbosch.detekt.Detekt>("verifyCodeQuality${source.capitalize()}") {
+        jvmTarget = Version.jvmTarget
+        setSource(files("src/$source/kotlin"))
+        config.setFrom(configs)
+        reports {
+            xml.required.set(false)
+            sarif.required.set(false)
+            txt.required.set(false)
+            html {
+                required.set(true)
+                outputLocation.set(File(buildDir, "reports/analysis/code/quality/${source}/html/index.html"))
+            }
+        }
+        classpath.setFrom(detektTask.classpath)
     }
 }
