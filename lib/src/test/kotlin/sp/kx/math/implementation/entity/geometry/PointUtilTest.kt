@@ -16,6 +16,16 @@ class PointUtilTest {
     }
 
     @Test
+    fun updatedOffsetTest() {
+        val x = 1.0
+        val y = 2.0
+        val offset = offsetOf(dX = 3.0, dY = 4.0)
+        val point = pointOf(x = x, y = y).updated(offset)
+        point.x.assert(x + offset.dX, "x")
+        point.y.assert(y + offset.dY, "y")
+    }
+
+    @Test
     fun movedTest() {
         val x = 1.0
         val y = 2.0
