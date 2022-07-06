@@ -19,11 +19,11 @@ fun Point.updated(offset: Offset): Point {
 
 fun Point.moved(
     length: Double,
-    direction: Double
+    angle: Double
 ): Point {
     return updated(
-        dX = length * kotlin.math.cos(direction),
-        dY = length * kotlin.math.sin(direction),
+        dX = length * kotlin.math.cos(angle),
+        dY = length * kotlin.math.sin(angle),
     )
 }
 
