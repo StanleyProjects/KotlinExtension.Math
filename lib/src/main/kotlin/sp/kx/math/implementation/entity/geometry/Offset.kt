@@ -2,7 +2,7 @@ package sp.kx.math.implementation.entity.geometry
 
 import sp.kx.math.foundation.entity.geometry.Offset
 
-private class OffsetImpl(
+private data class OffsetImpl(
     override val dX: Double,
     override val dY: Double
 ) : Offset {
@@ -10,17 +10,6 @@ private class OffsetImpl(
         val fX = String.format("%.2f", dX)
         val fY = String.format("%.2f", dY)
         return "{dX:$fX,dY:$fY}"
-    }
-
-    override fun hashCode(): Int {
-        return (dX + dY * 13).toInt()
-    }
-
-    override fun equals(other: Any?): Boolean {
-        return when (other) {
-            is Offset -> dX == other.dX && dY == other.dY
-            else -> false
-        }
     }
 }
 
