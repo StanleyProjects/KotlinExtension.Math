@@ -37,4 +37,13 @@ class PointUtilTest {
         point.x.assert(x + dX, "x")
         point.y.assert(y + dY, "y")
     }
+
+    @Test
+    fun getDifferenceTest() {
+        val a = pointOf(x = 10.0, y = 20.0)
+        val b = pointOf(x = 4.0, y = 6.0)
+        val offset = a.getDifference(b)
+        offset.dX.assert(a.x - b.x, "dX")
+        offset.dY.assert(a.y - b.y, "dY")
+    }
 }

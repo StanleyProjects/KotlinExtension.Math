@@ -27,9 +27,9 @@ fun Point.moved(
     )
 }
 
-fun Point.difference(that: Point): Offset {
+fun Point.getDifference(that: Point): Offset {
     return offsetOf(
-        dX = this.x - that.x,
-        dY = this.y - that.y
+        dX = x - that.x,
+        dY = y - that.y
     )
 }
