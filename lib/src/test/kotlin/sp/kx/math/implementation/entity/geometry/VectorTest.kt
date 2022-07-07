@@ -29,4 +29,15 @@ class VectorTest {
         start.assert(vector.start, prefix = "start.")
         start.updated(offset).assert(vector.finish, prefix = "finish.")
     }
+
+    @Test
+    fun toVectorPointOffsetTest() {
+        var value = 0.0
+        val start = pointOf(x = ++value, y = ++value)
+        val finish = pointOf(x = ++value, y = ++value)
+        val offset = offsetOf(dX = ++value, dY = ++value)
+        val vector = start.toVector(finish = finish, offset = offset)
+        start.updated(offset).assert(vector.start, prefix = "start.")
+        finish.updated(offset).assert(vector.finish, prefix = "finish.")
+    }
 }
