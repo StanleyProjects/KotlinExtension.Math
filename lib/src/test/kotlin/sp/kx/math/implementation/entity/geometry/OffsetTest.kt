@@ -3,7 +3,7 @@ package sp.kx.math.implementation.entity.geometry
 import org.junit.Test
 import util.junit.assert
 
-class OffsetTest {
+internal class OffsetTest {
     @Test
     fun toStringTest() {
         val string = offsetOf(dX = 3.0, dY = 4.0).toString()

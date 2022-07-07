@@ -3,7 +3,7 @@ package sp.kx.math.implementation.entity.geometry
 import org.junit.Test
 import util.junit.assert
 
-class PointTest {
+internal class PointTest {
     @Test
     fun toStringTest() {
         val string = pointOf(x = 1.0, y = 2.0).toString()

@@ -3,7 +3,7 @@ package sp.kx.math.implementation.entity.geometry
 import org.junit.Test
 import util.junit.assert
 
-class PointUtilTest {
+internal class PointUtilTest {
     @Test
     fun updatedTest() {
         val x = 1.0
