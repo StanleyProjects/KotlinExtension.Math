@@ -4,87 +4,36 @@ import sp.kx.math.foundation.entity.geometry.Offset
 import sp.kx.math.foundation.entity.geometry.Point
 import sp.kx.math.foundation.entity.geometry.Vector
 
-private class EmptyVectorImpl(
-    private val point: Point
-) : Vector {
-    override val start: Point
-        get() = point
-    override val finish: Point
-        get() = point
-    override fun toString(): String {
-        return "EmptyVector{$point}"
-    }
-
-    override fun hashCode(): Int {
-        return start.hashCode() + finish.hashCode() * 13
-    }
-
-    override fun equals(other: Any?): Boolean {
-        return when (other) {
-            is Vector -> start == other.start && finish == other.finish
-            else -> false
-        }
-    }
-}
-
-private class VectorImpl(
+private data class VectorImpl(
     override val start: Point,
     override val finish: Point
 ) : Vector {
     override fun toString(): String {
         return "{start:$start,finish:$finish}"
     }
-
-    override fun hashCode(): Int {
-        return start.hashCode() + finish.hashCode() * 13
-    }
-
-    override fun equals(other: Any?): Boolean {
-        return when (other) {
-            is Vector -> start == other.start && finish == other.finish
-            else -> false
-        }
-    }
 }
 
-fun vectorOf(
-    start: Point,
-    finish: Point
-): Vector {
+fun Point.toVector(finish: Point): Vector {
     return VectorImpl(
-        start = start,
+        start = this,
         finish = finish
     )
 }
 
-fun vectorOf(
-    start: Point,
+fun Point.toVector(offset: Offset): Vector {
+    return toVector(finish = updated(offset))
+}
+
+fun Point.toVector(
     finish: Point,
     offset: Offset
 ): Vector {
-    return VectorImpl(
-        start = start.updated(offset),
-        finish = finish.updated(offset)
-    )
+    return updated(offset).toVector(finish = finish.updated(offset))
 }
 
-fun Point.toEmptyVector(): Vector {
-    return EmptyVectorImpl(point = this)
-}
-
-fun Point.vectorTo(
+fun Point.toVector(
     length: Double,
-    direction: Double
+    angle: Double
 ): Vector {
-    return VectorImpl(
-        start = this,
-        finish = moved(length = length, direction = direction)
-    )
-}
-
-fun Point.vectorTo(offset: Offset): Vector {
-    return vectorOf(
-        start = this,
-        finish = updated(offset)
-    )
+    return toVector(finish = moved(length = length, angle = angle))
 }

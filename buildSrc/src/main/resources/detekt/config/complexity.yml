@@ -51,6 +51,7 @@ complexity:
     ignoreAnnotation: true
     excludeStringsWithLessThan5Characters: true
     ignoreStringsRegex: '$^'
+    excludes: ['**/src/test/kotlin/**/*.kt'] # todo
   TooManyFunctions:
     active: true
     thresholdInFiles: 11
