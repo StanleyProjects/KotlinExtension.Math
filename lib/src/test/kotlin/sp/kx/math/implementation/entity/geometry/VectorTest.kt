@@ -40,4 +40,16 @@ class VectorTest {
         start.updated(offset).assert(vector.start, prefix = "start.")
         finish.updated(offset).assert(vector.finish, prefix = "finish.")
     }
+
+    @Test
+    fun toVectorAngleTest() {
+        var value = 0.0
+        val start = pointOf(x = ++value, y = ++value)
+        val length = ++value
+        val angle = ++value
+        val vector = start.toVector(length = length, angle = angle)
+        start.assert(vector.start, prefix = "start.")
+        val finish = start.moved(length = length, angle = angle)
+        finish.assert(vector.finish, prefix = "finish.")
+    }
 }
