@@ -6,7 +6,7 @@ object Version {
     const val jvmTarget = "1.8"
     const val kotlin = "1.5.31"
     const val ktlint = "0.45.2"
-    private const val minor = 0
-    private const val patch = 2
+    private const val minor = 1
+    private const val patch = 0
     const val name = "0.$minor.$patch"
 }
