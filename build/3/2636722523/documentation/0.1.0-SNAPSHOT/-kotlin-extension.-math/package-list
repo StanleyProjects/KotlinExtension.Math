@@ -1,0 +1,27 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+$dokka.location:sp.kx.math.foundation.entity.geometry////PointingToDeclaration/-kotlin-extension.-math/sp.kx.math.foundation.entity.geometry/index.html
+$dokka.location:sp.kx.math.foundation.entity.geometry/Offset///PointingToDeclaration/-kotlin-extension.-math/sp.kx.math.foundation.entity.geometry/-offset/index.html
+$dokka.location:sp.kx.math.foundation.entity.geometry/Offset/dX/#/PointingToDeclaration/-kotlin-extension.-math/sp.kx.math.foundation.entity.geometry/-offset/d-x.html
+$dokka.location:sp.kx.math.foundation.entity.geometry/Offset/dY/#/PointingToDeclaration/-kotlin-extension.-math/sp.kx.math.foundation.entity.geometry/-offset/d-y.html
+$dokka.location:sp.kx.math.foundation.entity.geometry/Point///PointingToDeclaration/-kotlin-extension.-math/sp.kx.math.foundation.entity.geometry/-point/index.html
+$dokka.location:sp.kx.math.foundation.entity.geometry/Point/x/#/PointingToDeclaration/-kotlin-extension.-math/sp.kx.math.foundation.entity.geometry/-point/x.html
+$dokka.location:sp.kx.math.foundation.entity.geometry/Point/y/#/PointingToDeclaration/-kotlin-extension.-math/sp.kx.math.foundation.entity.geometry/-point/y.html
+$dokka.location:sp.kx.math.foundation.entity.geometry/Vector///PointingToDeclaration/-kotlin-extension.-math/sp.kx.math.foundation.entity.geometry/-vector/index.html
+$dokka.location:sp.kx.math.foundation.entity.geometry/Vector/finish/#/PointingToDeclaration/-kotlin-extension.-math/sp.kx.math.foundation.entity.geometry/-vector/finish.html
+$dokka.location:sp.kx.math.foundation.entity.geometry/Vector/start/#/PointingToDeclaration/-kotlin-extension.-math/sp.kx.math.foundation.entity.geometry/-vector/start.html
+$dokka.location:sp.kx.math.implementation.entity.geometry////PointingToDeclaration/-kotlin-extension.-math/sp.kx.math.implementation.entity.geometry/index.html
+$dokka.location:sp.kx.math.implementation.entity.geometry//getDifference/sp.kx.math.foundation.entity.geometry.Point#sp.kx.math.foundation.entity.geometry.Point/PointingToDeclaration/-kotlin-extension.-math/sp.kx.math.implementation.entity.geometry/get-difference.html
+$dokka.location:sp.kx.math.implementation.entity.geometry//moved/sp.kx.math.foundation.entity.geometry.Point#kotlin.Double#kotlin.Double/PointingToDeclaration/-kotlin-extension.-math/sp.kx.math.implementation.entity.geometry/moved.html
+$dokka.location:sp.kx.math.implementation.entity.geometry//offsetOf/#kotlin.Double#kotlin.Double/PointingToDeclaration/-kotlin-extension.-math/sp.kx.math.implementation.entity.geometry/offset-of.html
+$dokka.location:sp.kx.math.implementation.entity.geometry//pointOf/#kotlin.Double#kotlin.Double/PointingToDeclaration/-kotlin-extension.-math/sp.kx.math.implementation.entity.geometry/point-of.html
+$dokka.location:sp.kx.math.implementation.entity.geometry//pointOf/#kotlin.Int#kotlin.Int/PointingToDeclaration/-kotlin-extension.-math/sp.kx.math.implementation.entity.geometry/point-of.html
+$dokka.location:sp.kx.math.implementation.entity.geometry//toVector/sp.kx.math.foundation.entity.geometry.Point#kotlin.Double#kotlin.Double/PointingToDeclaration/-kotlin-extension.-math/sp.kx.math.implementation.entity.geometry/to-vector.html
+$dokka.location:sp.kx.math.implementation.entity.geometry//toVector/sp.kx.math.foundation.entity.geometry.Point#sp.kx.math.foundation.entity.geometry.Offset/PointingToDeclaration/-kotlin-extension.-math/sp.kx.math.implementation.entity.geometry/to-vector.html
+$dokka.location:sp.kx.math.implementation.entity.geometry//toVector/sp.kx.math.foundation.entity.geometry.Point#sp.kx.math.foundation.entity.geometry.Point#sp.kx.math.foundation.entity.geometry.Offset/PointingToDeclaration/-kotlin-extension.-math/sp.kx.math.implementation.entity.geometry/to-vector.html
+$dokka.location:sp.kx.math.implementation.entity.geometry//toVector/sp.kx.math.foundation.entity.geometry.Point#sp.kx.math.foundation.entity.geometry.Point/PointingToDeclaration/-kotlin-extension.-math/sp.kx.math.implementation.entity.geometry/to-vector.html
+$dokka.location:sp.kx.math.implementation.entity.geometry//updated/sp.kx.math.foundation.entity.geometry.Point#kotlin.Double#kotlin.Double/PointingToDeclaration/-kotlin-extension.-math/sp.kx.math.implementation.entity.geometry/updated.html
+$dokka.location:sp.kx.math.implementation.entity.geometry//updated/sp.kx.math.foundation.entity.geometry.Point#sp.kx.math.foundation.entity.geometry.Offset/PointingToDeclaration/-kotlin-extension.-math/sp.kx.math.implementation.entity.geometry/updated.html
+sp.kx.math.foundation.entity.geometry
+sp.kx.math.implementation.entity.geometry
+
