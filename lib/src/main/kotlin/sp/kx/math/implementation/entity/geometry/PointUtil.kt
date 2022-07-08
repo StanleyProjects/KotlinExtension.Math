@@ -67,7 +67,7 @@ fun Point.updated(offset: Offset): Point {
 /**
  * @return An instance of [Point] moved by the [length] and [angle].
  * ```
- * val a = pointOf(1, 1)
+ * val a = pointOf(xN, yN)
  * val dX = xM - xN
  * val dY = yM - yN
  * val length = kotlin.math.sqrt(dX * dX + dY * dY)
@@ -100,6 +100,31 @@ fun Point.moved(
     )
 }
 
+/**
+ * @receiver The [Point] from whose coordinates the coordinates of [that] point will be subtracted.
+ * @return An instance of [Offset] built from the
+ * difference between the [Point.x] and [Point.y] coordinates of [this] [Point] receiver and [that] respectively.
+ * ```
+ * val a = pointOf(xN, yN)
+ * val b = pointOf(xM, yM)
+ * val offset = b.getDifference(a)
+ * assertEquals(offset.dX, xM - xN)
+ * assertEquals(offset.dY, yM - yN)
+ *
+ *    Y
+ *    |              b
+ * yM -             *
+ *    |
+ *    |
+ *    |    a
+ * yN -   *
+ *    |
+ *    +---|---------|-----> X
+ *       xN        xM
+ * ```
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.1.0
+ */
 fun Point.getDifference(that: Point): Offset {
     return offsetOf(
         dX = x - that.x,
