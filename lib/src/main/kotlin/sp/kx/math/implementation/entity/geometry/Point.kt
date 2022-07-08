@@ -14,6 +14,11 @@ private data class PointImpl(
     }
 }
 
+/**
+ * @return An instance of [Point] built from the [Double] values [x] and [y].
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.1.0
+ */
 fun pointOf(
     x: Double,
     y: Double
@@ -24,6 +29,11 @@ fun pointOf(
     )
 }
 
+/**
+ * @return An instance of [Point] built from the [Int] values [x] and [y].
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.1.0
+ */
 fun pointOf(
     x: Int,
     y: Int

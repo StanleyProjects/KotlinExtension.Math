@@ -26,6 +26,7 @@ interface Point {
      * The coordinate of the x-axis.
      */
     val x: Double
+
     /**
      * The coordinate of the y-axis.
      */

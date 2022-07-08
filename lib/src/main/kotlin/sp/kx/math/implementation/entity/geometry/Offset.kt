@@ -14,6 +14,11 @@ private data class OffsetImpl(
     }
 }
 
+/**
+ * @return An instance of [Offset] built from the [Double] values [dX] and [dY].
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.1.0
+ */
 fun offsetOf(
     dX: Double,
     dY: Double

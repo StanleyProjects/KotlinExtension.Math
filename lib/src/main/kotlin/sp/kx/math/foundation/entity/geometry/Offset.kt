@@ -28,6 +28,7 @@ interface Offset {
      * Offset along the x-axis.
      */
     val dX: Double
+
     /**
      * Offset along the y-axis.
      */
