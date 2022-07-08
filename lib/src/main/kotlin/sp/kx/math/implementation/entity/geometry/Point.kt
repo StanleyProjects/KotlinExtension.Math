@@ -1,29 +1,24 @@
 package sp.kx.math.implementation.entity.geometry
 
 import sp.kx.math.foundation.entity.geometry.Point
+import java.util.Locale
 
-private class PointImpl(
+private data class PointImpl(
     override val x: Double,
     override val y: Double
-): Point {
+) : Point {
     override fun toString(): String {
-        val fX = String.format("%.2f", x)
-        val fY = String.format("%.2f", y)
+        val fX = String.format(Locale.US, "%.2f", x)
+        val fY = String.format(Locale.US, "%.2f", y)
         return "{x:$fX,y:$fY}"
-    }
-
-    override fun hashCode(): Int {
-        return (x + y * 13).toInt()
-    }
-
-    override fun equals(other: Any?): Boolean {
-        return when (other) {
-            is Point -> x == other.x && y == other.y
-            else -> false
-        }
     }
 }
 
+/**
+ * @return An instance of [Point] built from the [Double] values [x] and [y].
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.1.0
+ */
 fun pointOf(
     x: Double,
     y: Double
@@ -34,6 +29,11 @@ fun pointOf(
     )
 }
 
+/**
+ * @return An instance of [Point] built from the [Int] values [x] and [y].
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.1.0
+ */
 fun pointOf(
     x: Int,
     y: Int

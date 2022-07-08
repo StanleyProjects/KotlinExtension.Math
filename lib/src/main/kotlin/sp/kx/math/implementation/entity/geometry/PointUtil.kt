@@ -2,13 +2,31 @@ package sp.kx.math.implementation.entity.geometry
 
 import sp.kx.math.foundation.entity.geometry.Offset
 import sp.kx.math.foundation.entity.geometry.Point
-import sp.kx.math.implementation.computation.number.isSame
-import sp.kx.math.implementation.computation.geometry.getAngle
-import sp.kx.math.implementation.computation.geometry.getDistance
-import sp.kx.math.implementation.computation.geometry.getShortest
-import sp.kx.math.implementation.computation.geometry.getIntersectionPointOrNull
-import sp.kx.math.implementation.computation.geometry.getPerpendicular
 
+/**
+ * @return An instance of [Point] modified by the [Double] values [dX] and [dY].
+ * ```
+ * val a = pointOf(1, 2)
+ * val dX = 2.0
+ * val dY = 1.0
+ * val b = a.updated(dX = dX, dY = dY)
+ * assertEquals(b.x, a.x + dX)
+ * assertEquals(b.y, a.y + dY)
+ *
+ *   Y
+ *   |            b
+ * 3 -           *
+ *   |    a
+ * 2 -   *
+ *   |
+ * 1 -
+ *   |
+ * 0 +---|---|---|---|---> X
+ *   0   1   2   3   4
+ * ```
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.1.0
+ */
 fun Point.updated(
     dX: Double,
     dY: Double
@@ -19,86 +37,97 @@ fun Point.updated(
     )
 }
 
+/**
+ * @return An instance of [Point] modified by the [offset].
+ * ```
+ * val a = pointOf(1, 2)
+ * val offset = offsetOf(2.0, 1.0)
+ * val b = a.updated(offset)
+ * assertEquals(b.x, a.x + offset.dX)
+ * assertEquals(b.y, a.y + offset.dY)
+ *
+ *   Y
+ *   |            b
+ * 3 -           *
+ *   |    a
+ * 2 -   *
+ *   |
+ * 1 -
+ *   |
+ * 0 +---|---|---|---|---> X
+ *   0   1   2   3   4
+ * ```
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.1.0
+ */
 fun Point.updated(offset: Offset): Point {
     return updated(dX = offset.dX, dY = offset.dY)
 }
 
+/**
+ * @return An instance of [Point] moved by the [length] and [angle].
+ * ```
+ * val a = pointOf(xN, yN)
+ * val dX = xM - xN
+ * val dY = yM - yN
+ * val length = kotlin.math.sqrt(dX * dX + dY * dY)
+ * val angle = kotlin.math.PI / 4
+ * val b = a.updated(length = length, angle = angle)
+ * assertEquals(b.x, a.x + dX)
+ * assertEquals(b.y, a.y + dY)
+ *
+ *    Y
+ *    |              b
+ * yM -             *
+ *    |           /
+ *    |        /
+ *    |    a/  (kotlin.math.PI / 4)
+ * yN -   * - - - - - - - -
+ *    |
+ *    +---|---------|-----> X
+ *       xN        xM
+ * ```
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.1.0
+ */
 fun Point.moved(
     length: Double,
-    direction: Double
+    angle: Double
 ): Point {
     return updated(
-        dX = length * kotlin.math.cos(direction),
-        dY = length * kotlin.math.sin(direction),
+        dX = length * kotlin.math.cos(angle),
+        dY = length * kotlin.math.sin(angle),
     )
 }
 
-fun Point.difference(that: Point): Offset {
+/**
+ * @receiver The [Point] from whose coordinates the coordinates of [that] point will be subtracted.
+ * @return An instance of [Offset] built from the
+ * difference between the [Point.x] and [Point.y] coordinates of [this] [Point] receiver and [that] respectively.
+ * ```
+ * val a = pointOf(xN, yN)
+ * val b = pointOf(xM, yM)
+ * val offset = b.getDifference(a)
+ * assertEquals(offset.dX, xM - xN)
+ * assertEquals(offset.dY, yM - yN)
+ *
+ *    Y
+ *    |              b
+ * yM -             *
+ *    |
+ *    |
+ *    |    a
+ * yN -   *
+ *    |
+ *    +---|---------|-----> X
+ *       xN        xM
+ * ```
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.1.0
+ */
+fun Point.getDifference(that: Point): Offset {
     return offsetOf(
-        dX = this.x - that.x,
-        dY = this.y - that.y
-    )
-}
-
-fun Point.isSame(that: Point, epsilon: Double): Boolean {
-    return x.isSame(that.x, epsilon = epsilon) && y.isSame(that.y, epsilon = epsilon)
-}
-
-fun getAngle(start: Point, finish: Point): Double {
-    return getAngle(startX = start.x, startY = start.y, finishX = finish.x, finishY = finish.y)
-}
-
-fun getDistance(
-    start: Point,
-    finish: Point
-): Double {
-    return getDistance(xStart = start.x, yStart = start.y, xFinish = finish.x, yFinish = finish.y)
-}
-
-fun getShortest(
-    start: Point,
-    finish: Point,
-    target: Point
-): Double {
-    return getShortest(
-        xStart = start.x,
-        yStart = start.y,
-        xFinish = finish.x,
-        yFinish = finish.y,
-        xTarget = target.x,
-        yTarget = target.y
-    )
-}
-
-fun getIntersectionPointOrNull(
-    a: Point,
-    b: Point,
-    c: Point,
-    d: Point
-): Point? {
-    return getIntersectionPointOrNull(
-        aX = a.x,
-        aY = a.y,
-        bX = b.x,
-        bY = b.y,
-        cX = c.x,
-        cY = c.y,
-        dX = d.x,
-        dY = d.y
-    )
-}
-
-fun getPerpendicular(
-    a: Point,
-    b: Point,
-    c: Point
-): Point {
-    return getPerpendicular(
-        aX = a.x,
-        aY = a.y,
-        bX = b.x,
-        bY = b.y,
-        cX = c.x,
-        cY = c.y
+        dX = x - that.x,
+        dY = y - that.y
     )
 }

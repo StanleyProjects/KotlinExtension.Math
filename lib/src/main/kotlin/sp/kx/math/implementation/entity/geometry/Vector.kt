@@ -4,87 +4,96 @@ import sp.kx.math.foundation.entity.geometry.Offset
 import sp.kx.math.foundation.entity.geometry.Point
 import sp.kx.math.foundation.entity.geometry.Vector
 
-private class EmptyVectorImpl(
-    private val point: Point
-) : Vector {
-    override val start: Point
-        get() = point
-    override val finish: Point
-        get() = point
-    override fun toString(): String {
-        return "EmptyVector{$point}"
-    }
-
-    override fun hashCode(): Int {
-        return start.hashCode() + finish.hashCode() * 13
-    }
-
-    override fun equals(other: Any?): Boolean {
-        return when (other) {
-            is Vector -> start == other.start && finish == other.finish
-            else -> false
-        }
-    }
-}
-
-private class VectorImpl(
+private data class VectorImpl(
     override val start: Point,
     override val finish: Point
 ) : Vector {
     override fun toString(): String {
         return "{start:$start,finish:$finish}"
     }
-
-    override fun hashCode(): Int {
-        return start.hashCode() + finish.hashCode() * 13
-    }
-
-    override fun equals(other: Any?): Boolean {
-        return when (other) {
-            is Vector -> start == other.start && finish == other.finish
-            else -> false
-        }
-    }
 }
 
-fun vectorOf(
-    start: Point,
-    finish: Point
-): Vector {
+/**
+ * @return An instance of [Vector] built from the
+ * [this] [Point] receiver as [Vector.start] and [finish] as [Vector.finish].
+ * ```
+ * val start = pointOf(1, 2)
+ * val finish = pointOf(3, 4)
+ * val vector = start.toVector(finish)
+ * assertEquals(vector.start, start)
+ * assertEquals(vector.finish, finish)
+ * ```
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.1.0
+ */
+fun Point.toVector(finish: Point): Vector {
     return VectorImpl(
-        start = start,
+        start = this,
         finish = finish
     )
 }
 
-fun vectorOf(
-    start: Point,
+/**
+ * @return An instance of [Vector] for which
+ * [Vector.start] is [this] [Point] receiver and
+ * [Vector.finish] is [this] [Point] receiver modified by the [offset].
+ * ```
+ * val start = pointOf(1, 2)
+ * val offset = offsetOf(3.0, 4.0)
+ * val vector = start.toVector(offset)
+ * assertEquals(vector.start, start)
+ * assertEquals(vector.finish, start.updated(offset))
+ * ```
+ * @see [Point.updated]
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.1.0
+ */
+fun Point.toVector(offset: Offset): Vector {
+    return toVector(finish = updated(offset))
+}
+
+/**
+ * @return An instance of [Vector] for which
+ * [Vector.start] is [this] [Point] receiver modified by the [offset] and
+ * [Vector.finish] is [finish] modified by the [offset].
+ * ```
+ * val start = pointOf(1, 2)
+ * val finish = pointOf(3, 4)
+ * val offset = offsetOf(5.0, 6.0)
+ * val vector = start.toVector(finish, offset)
+ * assertEquals(vector.start, start.updated(offset))
+ * assertEquals(vector.finish, finish.updated(offset))
+ * ```
+ * @see [Point.updated]
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.1.0
+ */
+fun Point.toVector(
     finish: Point,
     offset: Offset
 ): Vector {
-    return VectorImpl(
-        start = start.updated(offset),
-        finish = finish.updated(offset)
-    )
+    return updated(offset).toVector(finish = finish.updated(offset))
 }
 
-fun Point.toEmptyVector(): Vector {
-    return EmptyVectorImpl(point = this)
-}
-
-fun Point.vectorTo(
+/**
+ * @return An instance of [Vector] for which
+ * [Vector.start] is [this] [Point] receiver and
+ * [Vector.finish] is [this] [Point] receiver [moved] [Point.moved] by the [length] and [angle].
+ * ```
+ * val start = pointOf(1, 2)
+ * val length = 3.0
+ * val angle = 4.0
+ * val vector = start.toVector(length = length, angle = angle)
+ * assertEquals(vector.start, start)
+ * assertEquals(vector.finish, start.moved(length = length, angle = angle))
+ * ```
+ * @see [Point.moved]
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.1.0
+ */
+fun Point.toVector(
     length: Double,
-    direction: Double
+    angle: Double
 ): Vector {
-    return VectorImpl(
-        start = this,
-        finish = moved(length = length, direction = direction)
-    )
-}
-
-fun Point.vectorTo(offset: Offset): Vector {
-    return vectorOf(
-        start = this,
-        finish = updated(offset)
-    )
+    return toVector(finish = moved(length = length, angle = angle))
 }

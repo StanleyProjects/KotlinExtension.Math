@@ -1,29 +1,24 @@
 package sp.kx.math.implementation.entity.geometry
 
 import sp.kx.math.foundation.entity.geometry.Offset
+import java.util.Locale
 
-private class OffsetImpl(
+private data class OffsetImpl(
     override val dX: Double,
     override val dY: Double
 ) : Offset {
     override fun toString(): String {
-        val fX = String.format("%.2f", dX)
-        val fY = String.format("%.2f", dY)
+        val fX = String.format(Locale.US, "%.2f", dX)
+        val fY = String.format(Locale.US, "%.2f", dY)
         return "{dX:$fX,dY:$fY}"
-    }
-
-    override fun hashCode(): Int {
-        return (dX + dY * 13).toInt()
-    }
-
-    override fun equals(other: Any?): Boolean {
-        return when (other) {
-            is Offset -> dX == other.dX && dY == other.dY
-            else -> false
-        }
     }
 }
 
+/**
+ * @return An instance of [Offset] built from the [Double] values [dX] and [dY].
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.1.0
+ */
 fun offsetOf(
     dX: Double,
     dY: Double
