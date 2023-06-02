@@ -1,5 +1,7 @@
 import java.net.URL
 
+version = "0.2.0"
+
 repositories.mavenCentral()
 
 plugins {
