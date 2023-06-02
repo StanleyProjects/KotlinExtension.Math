@@ -29,11 +29,11 @@ import sp.kx.math.foundation.entity.geometry.Point
  */
 fun Point.updated(
     dX: Double,
-    dY: Double
+    dY: Double,
 ): Point {
     return pointOf(
         x = x + dX,
-        y = y + dY
+        y = y + dY,
     )
 }
 
@@ -92,7 +92,7 @@ fun Point.updated(offset: Offset): Point {
  */
 fun Point.moved(
     length: Double,
-    angle: Double
+    angle: Double,
 ): Point {
     return updated(
         dX = length * kotlin.math.cos(angle),
@@ -128,6 +128,6 @@ fun Point.moved(
 fun Point.getDifference(that: Point): Offset {
     return offsetOf(
         dX = x - that.x,
-        dY = y - that.y
+        dY = y - that.y,
     )
 }

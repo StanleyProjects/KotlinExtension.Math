@@ -5,7 +5,7 @@ import java.util.Locale
 
 private data class PointImpl(
     override val x: Double,
-    override val y: Double
+    override val y: Double,
 ) : Point {
     override fun toString(): String {
         val fX = String.format(Locale.US, "%.2f", x)
@@ -21,11 +21,11 @@ private data class PointImpl(
  */
 fun pointOf(
     x: Double,
-    y: Double
+    y: Double,
 ): Point {
     return PointImpl(
         x = x,
-        y = y
+        y = y,
     )
 }
 
@@ -36,7 +36,7 @@ fun pointOf(
  */
 fun pointOf(
     x: Int,
-    y: Int
+    y: Int,
 ): Point {
     return pointOf(x = x.toDouble(), y = y.toDouble())
 }

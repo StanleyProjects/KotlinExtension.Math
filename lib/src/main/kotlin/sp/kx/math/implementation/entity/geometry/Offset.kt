@@ -5,7 +5,7 @@ import java.util.Locale
 
 private data class OffsetImpl(
     override val dX: Double,
-    override val dY: Double
+    override val dY: Double,
 ) : Offset {
     override fun toString(): String {
         val fX = String.format(Locale.US, "%.2f", dX)
@@ -21,10 +21,10 @@ private data class OffsetImpl(
  */
 fun offsetOf(
     dX: Double,
-    dY: Double
+    dY: Double,
 ): Offset {
     return OffsetImpl(
         dX = dX,
-        dY = dY
+        dY = dY,
     )
 }

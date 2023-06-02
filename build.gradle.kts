@@ -35,7 +35,7 @@ task<JavaExec>("checkCodeStyle") {
         "lib/src/main/kotlin/**/*.kt",
         "lib/src/test/kotlin/**/*.kt",
         "lib/build.gradle.kts",
-        "--reporter=html,output=${buildDir.resolve("reports/analysis/code/style/html/index.html")}"
+        "--reporter=html,output=${buildDir.resolve("reports/analysis/code/style/html/index.html")}",
     )
 }
 
