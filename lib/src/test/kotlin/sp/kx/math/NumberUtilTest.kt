@@ -26,4 +26,34 @@ internal class NumberUtilTest {
             1.234.toString(points = -1)
         }
     }
+
+    @Test
+    fun eqTest() {
+        val actual = 1.23
+        Assertions.assertTrue(actual.eq(other = 1.0, points = 0))
+        Assertions.assertTrue(actual.eq(other = 1.2, points = 1))
+        Assertions.assertTrue(actual.eq(other = 1.23, points = 2))
+        Assertions.assertTrue(actual.eq(other = 1.234, points = 2))
+        Assertions.assertTrue(actual.eq(other = 1.23456789, points = 2))
+    }
+
+    @Test
+    fun eqNotTest() {
+        val actual = 1.23
+        Assertions.assertFalse(actual.eq(other = 1.0, points = 1))
+        Assertions.assertFalse(actual.eq(other = 1.2, points = 2))
+        Assertions.assertFalse(actual.eq(other = -1.23, points = 2))
+        Assertions.assertFalse(actual.eq(other = 1.234, points = 3))
+        Assertions.assertFalse(actual.eq(other = 1.23456789, points = 3))
+        Assertions.assertFalse(actual.eq(other = 1.23456789, points = 4))
+        Assertions.assertFalse(actual.eq(other = 1.23456789, points = 8))
+    }
+
+    @Test
+    fun eqErrorTest() {
+        Assertions.assertThrows(IllegalStateException::class.java) {
+            @Suppress("IgnoredReturnValue")
+            1.2.eq(other = 3.4, points = -1)
+        }
+    }
 }
