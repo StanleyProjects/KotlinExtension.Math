@@ -1,5 +1,6 @@
 package sp.kx.math
 
+import sp.kx.math.unsafe.toString
 import java.util.Locale
 import java.util.Objects
 
@@ -22,7 +23,7 @@ class MutablePoint(
     override var y: Double,
 ) : Point {
     override fun toString(): String {
-        return "{x: ${String.format(Locale.US, "%.2f", x)}, y: ${String.format(Locale.US, "%.2f", y)}}"
+        return toString(point = this, points = 2, locale = Locale.US)
     }
 
     override fun equals(other: Any?): Boolean {
