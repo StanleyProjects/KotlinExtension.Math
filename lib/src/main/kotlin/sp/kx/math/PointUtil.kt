@@ -37,6 +37,7 @@ fun Point.toString(points: Int, locale: Locale = Locale.US): String {
  * @throws IllegalStateException if [points] count is negative.
  * @author [Stanley Wintergreen](https://github.com/kepocnhh)
  * @since 0.2.1
+ * @see Double.eq
  */
 fun Point.eq(other: Point, points: Int): Boolean {
     if (points < 0) error("Points count is negative!")
