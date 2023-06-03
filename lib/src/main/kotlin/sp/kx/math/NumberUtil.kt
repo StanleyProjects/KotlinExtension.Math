@@ -1,9 +1,8 @@
 package sp.kx.math
 
 import sp.kx.math.unsafe.toString
+import sp.kx.math.unsafe.eq
 import java.util.Locale
-import kotlin.math.absoluteValue
-import kotlin.math.pow
 
 /**
  * Usage:
@@ -25,5 +24,5 @@ fun Double.toString(points: Int, locale: Locale = Locale.US): String {
 
 fun Double.eq(other: Double, points: Int): Boolean {
     if (points < 0) error("Points count is negative!")
-    return (this - other).absoluteValue < 10.0.pow(-points)
+    return eq(it = this, other = other, points = points)
 }

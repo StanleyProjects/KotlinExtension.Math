@@ -1,6 +1,7 @@
 package sp.kx.math
 
 import sp.kx.math.unsafe.toString
+import sp.kx.math.unsafe.eq
 import java.util.Locale
 
 /**
@@ -19,4 +20,9 @@ import java.util.Locale
 fun Point.toString(points: Int, locale: Locale = Locale.US): String {
     if (points < 0) error("Points count is negative!")
     return toString(point = this, points, locale)
+}
+
+fun Point.eq(other: Point, points: Int): Boolean {
+    if (points < 0) error("Points count is negative!")
+    return eq(it = this, other = other, points = points)
 }
