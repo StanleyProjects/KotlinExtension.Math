@@ -3,6 +3,7 @@ package sp.kx.math
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
+@Suppress("MagicNumber")
 internal class NumberUtilTest {
     @Test
     fun toStringTest() {
@@ -21,6 +22,7 @@ internal class NumberUtilTest {
     @Test
     fun toStringErrorTest() {
         Assertions.assertThrows(IllegalStateException::class.java) {
+            @Suppress("IgnoredReturnValue")
             1.234.toString(points = -1)
         }
     }

@@ -3,6 +3,7 @@ package sp.kx.math
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
+@Suppress("MagicNumber")
 internal class MutablePointTest {
     @Test
     fun constructorTest() {
@@ -61,6 +62,7 @@ internal class MutablePointTest {
 
     @Test
     fun hashCodeTest() {
+        @Suppress("IgnoredReturnValue")
         MutablePoint(
             x = 1.2,
             y = 3.4,
