@@ -1,10 +1,9 @@
-package sp.kx.math.foundation.entity.geometry
+package sp.kx.math
 
 /**
  * Stores two values. Can be used to store the coordinates of a point in 2D space.
- * @see sp.kx.math.implementation.entity.geometry.toVector
  * @author [Stanley Wintergreen](https://github.com/kepocnhh)
- * @since 0.1.0
+ * @since 0.2.0
  */
 interface Point {
     /**

@@ -1,12 +1,9 @@
 object Version {
-    const val detekt = "1.20.0"
-    const val dokka = "1.7.0"
-    const val jacoco = "0.8.8"
-    const val junit = "4.13.2"
-    const val jvmTarget = "1.8"
-    const val kotlin = "1.5.31"
-    const val ktlint = "0.45.2"
-    private const val minor = 1
-    private const val patch = 0
-    const val name = "0.$minor.$patch"
+    const val detekt = "1.22.0"
+    const val dokka = "1.8.10"
+    const val jacoco = "0.8.9"
+    const val jupiter = "5.9.3"
+    const val jvmTarget = "11"
+    const val kotlin = "1.7.10"
+    const val ktlint = "0.49.1"
 }
