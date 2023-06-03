@@ -10,9 +10,10 @@ import sp.gx.core.existing
 import sp.gx.core.file
 import sp.gx.core.filled
 import sp.gx.core.kebabCase
+import sp.gx.core.resolve
 import java.net.URL
 
-version = "0.2.0"
+version = "0.2.1"
 
 val maven = Maven.Artifact(
     group = "com.github.kepocnhh",
@@ -239,7 +240,7 @@ task<io.gitlab.arturbosch.detekt.Detekt>("checkDocumentation") {
             val expected = setOf(
                 badge,
                 Markdown.link("Maven", Maven.Snapshot.url(maven.group, maven.id, version)),
-                Markdown.link("Documentation", URL(GitHub.pages(gh.owner, gh.name).toString() + "/doc/$version")), // todo resolve
+                Markdown.link("Documentation", GitHub.pages(gh.owner, gh.name).resolve("doc").resolve(version)),
                 "implementation(\"${maven.group}:${maven.id}:$version\")",
             )
             rootDir.resolve("README.md").check(
