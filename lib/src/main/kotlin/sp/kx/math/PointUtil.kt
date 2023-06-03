@@ -1,7 +1,7 @@
 package sp.kx.math
 
-import sp.kx.math.unsafe.toString
 import sp.kx.math.unsafe.eq
+import sp.kx.math.unsafe.toString
 import java.util.Locale
 
 /**
