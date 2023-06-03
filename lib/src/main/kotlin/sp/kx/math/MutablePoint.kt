@@ -22,12 +22,7 @@ class MutablePoint(
     override var y: Double,
 ) : Point {
     override fun toString(): String {
-        return mapOf(
-            "x" to String.format(Locale.US, "%.2f", x),
-            "y" to String.format(Locale.US, "%.2f", y),
-        ).toList().joinToString(prefix = "{", separator = ", ", postfix = "}") { (k, v) ->
-            "$k: $v"
-        }
+        return "{x: ${String.format(Locale.US, "%.2f", x)}, y: ${String.format(Locale.US, "%.2f", y)}}"
     }
 
     override fun equals(other: Any?): Boolean {
