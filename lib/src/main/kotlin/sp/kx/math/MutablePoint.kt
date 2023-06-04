@@ -34,6 +34,19 @@ class MutablePoint(
     override fun hashCode(): Int {
         return Objects.hash(x, y)
     }
+
+    fun set(
+        x: Double,
+        y: Double,
+    ) {
+        this.x = x
+        this.y = y
+    }
+
+    fun reverse() {
+        x = y
+        y = x
+    }
 }
 
 /**
