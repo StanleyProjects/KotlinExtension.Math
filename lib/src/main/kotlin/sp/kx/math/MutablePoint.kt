@@ -88,7 +88,8 @@ class MutablePoint(
      * @since 0.2.2
      */
     fun swap() {
-        x = y
+        val x = x
+        this.x = y
         y = x
     }
 }
