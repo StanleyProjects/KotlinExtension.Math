@@ -24,11 +24,15 @@ internal class MutablePointTest {
 
     @Test
     fun toStringTest() {
-        val actual = MutablePoint(
-            x = 1.2,
-            y = 3.4,
-        )
-        Assertions.assertEquals("{x: 1.20, y: 3.40}", actual.toString())
+        MutablePoint(x = 1.2, y = 5.6).also { actual ->
+            Assertions.assertEquals("{x: 1.20, y: 5.60}", actual.toString())
+        }
+        MutablePoint(x = 1.23, y = 5.67).also { actual ->
+            Assertions.assertEquals("{x: 1.23, y: 5.67}", actual.toString())
+        }
+        MutablePoint(x = 1.234, y = 5.678).also { actual ->
+            Assertions.assertEquals("{x: 1.23, y: 5.68}", actual.toString())
+        }
     }
 
     @Test
@@ -63,10 +67,7 @@ internal class MutablePointTest {
     @Test
     fun hashCodeTest() {
         @Suppress("IgnoredReturnValue")
-        MutablePoint(
-            x = 1.2,
-            y = 3.4,
-        ).hashCode()
+        MutablePoint(x = 1.2, y = 3.4).hashCode()
     }
 
     @Test
@@ -82,6 +83,21 @@ internal class MutablePointTest {
         Assertions.assertNotEquals(actual.x, actual.y)
         Assertions.assertEquals(5.6, actual.x)
         Assertions.assertEquals(7.8, actual.y)
+    }
+
+    @Test
+    fun setPointTest() {
+        val foo = MutablePoint(
+            x = 1.2,
+            y = 3.4,
+        )
+        Assertions.assertNotEquals(foo.x, foo.y)
+        Assertions.assertEquals(1.2, foo.x)
+        Assertions.assertEquals(3.4, foo.y)
+        val bar = pointOf(x = 5.6, y = 7.8)
+        Assertions.assertNotEquals(foo, bar)
+        foo.set(bar)
+        Assertions.assertEquals(foo, bar)
     }
 
     @Test

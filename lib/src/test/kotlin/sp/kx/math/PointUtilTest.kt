@@ -19,7 +19,7 @@ internal class PointUtilTest {
     fun toStringErrorTest() {
         Assertions.assertThrows(IllegalStateException::class.java) {
             @Suppress("IgnoredReturnValue")
-            pointOf(x = 1.234, y = 5.67).toString(points = -1)
+            pointOf(x = 1.2, y = 5.6).toString(points = -1)
         }
     }
 
@@ -53,7 +53,7 @@ internal class PointUtilTest {
     fun eqErrorTest() {
         Assertions.assertThrows(IllegalStateException::class.java) {
             @Suppress("IgnoredReturnValue")
-            pointOf(x = 1.234, y = 5.67).eq(other = pointOf(x = 1.23, y = 5.67), points = -1)
+            pointOf(x = 1.2, y = 5.6).eq(other = pointOf(x = 1.2, y = 5.6), points = -1)
         }
     }
 
