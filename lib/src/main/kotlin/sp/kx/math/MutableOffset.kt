@@ -34,6 +34,25 @@ class MutableOffset(
     override fun hashCode(): Int {
         return Objects.hash(dX, dY)
     }
+
+    fun set(
+        dX: Double,
+        dY: Double,
+    ) {
+        this.dX = dX
+        this.dY = dY
+    }
+
+    fun set(other: Offset) {
+        dX = other.dX
+        dY = other.dY
+    }
+
+    fun swap() {
+        val dX = dX
+        this.dX = dY
+        dY = dX
+    }
 }
 
 /**

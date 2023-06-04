@@ -65,6 +65,11 @@ class MutablePoint(
         this.y = y
     }
 
+    fun set(other: Point) {
+        x = other.x
+        y = other.y
+    }
+
     /**
      * Swaps [x] and [y] coordinates.
      *
