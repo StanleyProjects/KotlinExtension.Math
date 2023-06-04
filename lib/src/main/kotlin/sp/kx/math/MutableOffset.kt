@@ -1,5 +1,9 @@
 package sp.kx.math
 
+import sp.kx.math.unsafe.toString
+import java.util.Locale
+import java.util.Objects
+
 /**
  * A mutable implementation of the [Offset] type.
  *
@@ -17,7 +21,20 @@ package sp.kx.math
 class MutableOffset(
     override var dX: Double,
     override var dY: Double,
-) : Offset
+) : Offset {
+    override fun toString(): String {
+        return toString(offset = this, points = 2, locale = Locale.US)
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (other !is Offset) return false
+        return dX == other.dX && dY == other.dY
+    }
+
+    override fun hashCode(): Int {
+        return Objects.hash(dX, dY)
+    }
+}
 
 /**
  * Usage:
