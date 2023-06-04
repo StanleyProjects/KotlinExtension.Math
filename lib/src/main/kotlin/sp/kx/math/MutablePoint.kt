@@ -65,6 +65,28 @@ class MutablePoint(
         this.y = y
     }
 
+    /**
+     * Method for setting both [x] and [y] coordinates from [other] object.
+     *
+     * Usage:
+     * ```
+     * val point = MutablePoint(x = 3.0, y = 2.0)
+     * point.set(pointOf(x = 2.0, y = 3.0))
+     *
+     *   ^
+     *   |
+     * 3 -   -   * new
+     *   |       |
+     * y -   -   -   * old
+     *   |
+     * 1 -       |   |
+     *   |
+     * 0 +---|---|---|---|--->
+     *   0   1   2   x   4
+     * ```
+     * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+     * @since 0.3.0
+     */
     fun set(other: Point) {
         x = other.x
         y = other.y

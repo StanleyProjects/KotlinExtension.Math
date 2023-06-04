@@ -35,6 +35,17 @@ class MutableOffset(
         return Objects.hash(dX, dY)
     }
 
+    /**
+     * Method for setting both [dX] and [dY] offsets.
+     *
+     * Usage:
+     * ```
+     * val offset = MutableOffset(dX = 3.0, dY = 2.0)
+     * offset.set(dX = 2.0, dY = 3.0)
+     * ```
+     * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+     * @since 0.3.0
+     */
     fun set(
         dX: Double,
         dY: Double,
@@ -43,11 +54,35 @@ class MutableOffset(
         this.dY = dY
     }
 
+    /**
+     * Method for setting both [dX] and [dY] offsets from [other] object.
+     *
+     * Usage:
+     * ```
+     * val offset = MutableOffset(dX = 3.0, dY = 2.0)
+     * offset.set(offsetOf(dX = 2.0, dY = 3.0))
+     * ```
+     * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+     * @since 0.3.0
+     */
     fun set(other: Offset) {
         dX = other.dX
         dY = other.dY
     }
 
+    /**
+     * Swaps [dX] and [dY] offsets.
+     *
+     * Usage:
+     * ```
+     * val offset = MutableOffset(dX = 3.0, dY = 2.0)
+     * offset.swap()
+     * assertEquals(2.0, offset.dX)
+     * assertEquals(3.0, offset.dY)
+     * ```
+     * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+     * @since 0.3.0
+     */
     fun swap() {
         val dX = dX
         this.dX = dY
