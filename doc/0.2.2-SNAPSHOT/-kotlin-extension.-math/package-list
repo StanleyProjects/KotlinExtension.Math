@@ -1,0 +1,24 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+$dokka.location:sp.kx.math////PointingToDeclaration/-kotlin-extension.-math/sp.kx.math/index.html
+$dokka.location:sp.kx.math//copy/sp.kx.math.Point#kotlin.Double#kotlin.Double/PointingToDeclaration/-kotlin-extension.-math/sp.kx.math/copy.html
+$dokka.location:sp.kx.math//eq/kotlin.Double#kotlin.Double#kotlin.Int/PointingToDeclaration/-kotlin-extension.-math/sp.kx.math/eq.html
+$dokka.location:sp.kx.math//eq/sp.kx.math.Point#sp.kx.math.Point#kotlin.Int/PointingToDeclaration/-kotlin-extension.-math/sp.kx.math/eq.html
+$dokka.location:sp.kx.math//pointOf/#kotlin.Double#kotlin.Double/PointingToDeclaration/-kotlin-extension.-math/sp.kx.math/point-of.html
+$dokka.location:sp.kx.math//swapped/sp.kx.math.Point#/PointingToDeclaration/-kotlin-extension.-math/sp.kx.math/swapped.html
+$dokka.location:sp.kx.math//toString/kotlin.Double#kotlin.Int#java.util.Locale/PointingToDeclaration/-kotlin-extension.-math/sp.kx.math/to-string.html
+$dokka.location:sp.kx.math//toString/sp.kx.math.Point#kotlin.Int#java.util.Locale/PointingToDeclaration/-kotlin-extension.-math/sp.kx.math/to-string.html
+$dokka.location:sp.kx.math/MutablePoint///PointingToDeclaration/-kotlin-extension.-math/sp.kx.math/-mutable-point/index.html
+$dokka.location:sp.kx.math/MutablePoint/MutablePoint/#kotlin.Double#kotlin.Double/PointingToDeclaration/-kotlin-extension.-math/sp.kx.math/-mutable-point/-mutable-point.html
+$dokka.location:sp.kx.math/MutablePoint/equals/#kotlin.Any?/PointingToDeclaration/-kotlin-extension.-math/sp.kx.math/-mutable-point/equals.html
+$dokka.location:sp.kx.math/MutablePoint/hashCode/#/PointingToDeclaration/-kotlin-extension.-math/sp.kx.math/-mutable-point/hash-code.html
+$dokka.location:sp.kx.math/MutablePoint/set/#kotlin.Double#kotlin.Double/PointingToDeclaration/-kotlin-extension.-math/sp.kx.math/-mutable-point/set.html
+$dokka.location:sp.kx.math/MutablePoint/swap/#/PointingToDeclaration/-kotlin-extension.-math/sp.kx.math/-mutable-point/swap.html
+$dokka.location:sp.kx.math/MutablePoint/toString/#/PointingToDeclaration/-kotlin-extension.-math/sp.kx.math/-mutable-point/to-string.html
+$dokka.location:sp.kx.math/MutablePoint/x/#/PointingToDeclaration/-kotlin-extension.-math/sp.kx.math/-mutable-point/x.html
+$dokka.location:sp.kx.math/MutablePoint/y/#/PointingToDeclaration/-kotlin-extension.-math/sp.kx.math/-mutable-point/y.html
+$dokka.location:sp.kx.math/Point///PointingToDeclaration/-kotlin-extension.-math/sp.kx.math/-point/index.html
+$dokka.location:sp.kx.math/Point/x/#/PointingToDeclaration/-kotlin-extension.-math/sp.kx.math/-point/x.html
+$dokka.location:sp.kx.math/Point/y/#/PointingToDeclaration/-kotlin-extension.-math/sp.kx.math/-point/y.html
+sp.kx.math
+
