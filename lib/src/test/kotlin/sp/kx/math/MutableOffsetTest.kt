@@ -3,6 +3,7 @@ package sp.kx.math
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
+@Suppress("MagicNumber")
 internal class MutableOffsetTest {
     @Test
     fun constructorTest() {
@@ -66,6 +67,7 @@ internal class MutableOffsetTest {
 
     @Test
     fun hashCodeTest() {
+        @Suppress("IgnoredReturnValue")
         MutableOffset(dX = 1.2, dY = 3.4).hashCode()
     }
 

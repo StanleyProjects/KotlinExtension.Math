@@ -3,6 +3,7 @@ package sp.kx.math
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
+@Suppress("MagicNumber")
 internal class OffsetUtilTest {
     @Test
     fun toStringTest() {
@@ -17,7 +18,8 @@ internal class OffsetUtilTest {
     @Test
     fun toStringErrorTest() {
         Assertions.assertThrows(IllegalStateException::class.java) {
-            offsetOf(dX = 1.234, dY = 5.67).toString(points = -1)
+            @Suppress("IgnoredReturnValue")
+            offsetOf(dX = 1.2, dY = 5.6).toString(points = -1)
         }
     }
 
@@ -50,7 +52,8 @@ internal class OffsetUtilTest {
     @Test
     fun eqErrorTest() {
         Assertions.assertThrows(IllegalStateException::class.java) {
-            offsetOf(dX = 1.234, dY = 5.67).eq(other = offsetOf(dX = 1.234, dY = 5.67), points = -1)
+            @Suppress("IgnoredReturnValue")
+            offsetOf(dX = 1.2, dY = 5.6).eq(other = offsetOf(dX = 1.2, dY = 5.6), points = -1)
         }
     }
 

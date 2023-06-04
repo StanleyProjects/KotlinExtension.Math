@@ -67,10 +67,7 @@ internal class MutablePointTest {
     @Test
     fun hashCodeTest() {
         @Suppress("IgnoredReturnValue")
-        MutablePoint(
-            x = 1.2,
-            y = 3.4,
-        ).hashCode()
+        MutablePoint(x = 1.2, y = 3.4).hashCode()
     }
 
     @Test
