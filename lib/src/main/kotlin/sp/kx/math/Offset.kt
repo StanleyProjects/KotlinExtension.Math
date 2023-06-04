@@ -21,7 +21,7 @@ package sp.kx.math
  *   0   1   2   x   4
  * ```
  * @author [Stanley Wintergreen](https://github.com/kepocnhh)
- * @since 0.2.0
+ * @since 0.3.0
  */
 interface Offset {
     /**
