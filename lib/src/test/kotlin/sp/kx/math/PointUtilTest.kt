@@ -56,4 +56,47 @@ internal class PointUtilTest {
             pointOf(x = 1.234, y = 5.67).eq(other = pointOf(x = 1.23, y = 5.67), points = -1)
         }
     }
+
+    @Test
+    fun copyTest() {
+        val foo = pointOf(x = 1.2, y = 3.4)
+        Assertions.assertNotEquals(foo.x, foo.y)
+        Assertions.assertEquals(1.2, foo.x)
+        Assertions.assertEquals(3.4, foo.y)
+        foo.copy().also { bar ->
+            Assertions.assertFalse(foo === bar)
+            Assertions.assertEquals(foo, bar)
+        }
+        foo.copy(x = 5.6).also { bar ->
+            Assertions.assertFalse(foo === bar)
+            Assertions.assertEquals(5.6, bar.x)
+            Assertions.assertEquals(foo.y, bar.y)
+        }
+        foo.copy(y = 5.6).also { bar ->
+            Assertions.assertFalse(foo === bar)
+            Assertions.assertEquals(foo.x, bar.x)
+            Assertions.assertEquals(5.6, bar.y)
+        }
+        foo.copy(x = 5.6, y = 7.8).also { bar ->
+            Assertions.assertFalse(foo === bar)
+            Assertions.assertEquals(5.6, bar.x)
+            Assertions.assertEquals(7.8, bar.y)
+        }
+    }
+
+    @Test
+    fun swappedTest() {
+        val foo = pointOf(x = 1.2, y = 3.4)
+        Assertions.assertNotEquals(foo.x, foo.y)
+        Assertions.assertEquals(1.2, foo.x)
+        Assertions.assertEquals(3.4, foo.y)
+        foo.swapped().also { bar ->
+            Assertions.assertFalse(foo === bar)
+            Assertions.assertNotEquals(foo, bar)
+            Assertions.assertNotEquals(bar.x, foo.x)
+            Assertions.assertEquals(bar.x, foo.y)
+            Assertions.assertNotEquals(bar.y, foo.y)
+            Assertions.assertEquals(bar.y, foo.x)
+        }
+    }
 }

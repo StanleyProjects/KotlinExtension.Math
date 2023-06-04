@@ -43,3 +43,60 @@ fun Point.eq(other: Point, points: Int): Boolean {
     if (points < 0) error("Points count is negative!")
     return eq(it = this, other = other, points = points)
 }
+
+/**
+ * Creates a new [Point] object with a copy of [this] receiver's coordinates or the values [x] and [y] passed in.
+ *
+ * Usage:
+ * ```
+ * val foo = pointOf(x = 3.0, y = 2.0)
+ * val bar = foo.copy(y = 3.0)
+ *
+ *   ^
+ *   |
+ * 3 -   -   -   * bar
+ *   |
+ * y -   -   -   * foo
+ *   |
+ * 1 -           |
+ *   |
+ * 0 +---|---|---|---|--->
+ *   0   1   2   x   4
+ * ```
+ * @param x This value will be set as the [Point.x]-coordinate. Default is [Point.x] coordinate of [this] receiver.
+ * @param y This value will be set as the [Point.y]-coordinate. Default is [Point.y] coordinate of [this] receiver.
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.2.2
+ */
+fun Point.copy(
+    x: Double = this.x,
+    y: Double = this.y,
+): Point {
+    return pointOf(x = x, y = y)
+}
+
+/**
+ * Creates a new [Point] object with a copy of [this] receiver's swapped coordinates.
+ *
+ * Usage:
+ * ```
+ * val foo = pointOf(x = 3.0, y = 2.0)
+ * val bar = foo.swapped()
+ *
+ *   ^
+ *   |
+ * 3 -   -   * bar
+ *   |       |
+ * y -   -   -   * foo
+ *   |
+ * 1 -       |   |
+ *   |
+ * 0 +---|---|---|---|--->
+ *   0   1   2   x   4
+ * ```
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.2.2
+ */
+fun Point.swapped(): Point {
+    return pointOf(x = y, y = x)
+}

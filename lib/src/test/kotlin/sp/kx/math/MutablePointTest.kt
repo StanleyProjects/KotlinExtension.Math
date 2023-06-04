@@ -68,4 +68,33 @@ internal class MutablePointTest {
             y = 3.4,
         ).hashCode()
     }
+
+    @Test
+    fun setTest() {
+        val actual = MutablePoint(
+            x = 1.2,
+            y = 3.4,
+        )
+        Assertions.assertNotEquals(actual.x, actual.y)
+        Assertions.assertEquals(1.2, actual.x)
+        Assertions.assertEquals(3.4, actual.y)
+        actual.set(x = 5.6, y = 7.8)
+        Assertions.assertNotEquals(actual.x, actual.y)
+        Assertions.assertEquals(5.6, actual.x)
+        Assertions.assertEquals(7.8, actual.y)
+    }
+
+    @Test
+    fun swapTest() {
+        val actual = MutablePoint(
+            x = 1.2,
+            y = 3.4,
+        )
+        Assertions.assertNotEquals(actual.x, actual.y)
+        Assertions.assertEquals(1.2, actual.x)
+        Assertions.assertEquals(3.4, actual.y)
+        actual.swap()
+        Assertions.assertEquals(3.4, actual.x)
+        Assertions.assertEquals(1.2, actual.y)
+    }
 }
