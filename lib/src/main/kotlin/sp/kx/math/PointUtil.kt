@@ -141,3 +141,20 @@ fun Point.moved(length: Double): Point {
         y = y,
     )
 }
+
+fun Point.offset(
+    x: Double,
+    y: Double,
+): Offset {
+    return offsetOf(
+        dX = this.x - x,
+        dY = this.y - y,
+    )
+}
+
+fun Point.offset(other: Point): Offset {
+    return offsetOf(
+        dX = x - other.x,
+        dY = y - other.y,
+    )
+}
