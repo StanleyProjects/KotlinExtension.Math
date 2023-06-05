@@ -120,6 +120,11 @@ class MutablePoint(
         y = x
     }
 
+    fun append(value: Double) {
+        x += value
+        y += value
+    }
+
     fun append(
         dX: Double,
         dY: Double,
@@ -131,6 +136,18 @@ class MutablePoint(
     fun append(offset: Offset) {
         x += offset.dX
         y += offset.dY
+    }
+
+    fun move(
+        length: Double,
+        angle: Double,
+    ) {
+        x += length * kotlin.math.cos(angle)
+        y += length * kotlin.math.sin(angle)
+    }
+
+    fun move(length: Double) {
+        x += length
     }
 }
 

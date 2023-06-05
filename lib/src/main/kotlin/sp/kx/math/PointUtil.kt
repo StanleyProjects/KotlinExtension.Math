@@ -101,6 +101,13 @@ fun Point.swapped(): Point {
     return pointOf(x = y, y = x)
 }
 
+fun Point.appended(value: Double): Point {
+    return pointOf(
+        x = x + value,
+        y = y + value,
+    )
+}
+
 fun Point.appended(
     dX: Double,
     dY: Double,
@@ -115,5 +122,22 @@ fun Point.appended(offset: Offset): Point {
     return pointOf(
         x = x + offset.dX,
         y = y + offset.dY,
+    )
+}
+
+fun Point.moved(
+    length: Double,
+    angle: Double,
+): Point {
+    return pointOf(
+        x = x + length * kotlin.math.cos(angle),
+        y = y + length * kotlin.math.sin(angle),
+    )
+}
+
+fun Point.moved(length: Double): Point {
+    return pointOf(
+        x = x + length,
+        y = y,
     )
 }
