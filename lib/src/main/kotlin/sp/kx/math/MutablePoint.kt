@@ -119,6 +119,19 @@ class MutablePoint(
         this.x = y
         y = x
     }
+
+    fun append(
+        dX: Double,
+        dY: Double,
+    ) {
+        x += dX
+        y += dY
+    }
+
+    fun append(offset: Offset) {
+        x += offset.dX
+        y += offset.dY
+    }
 }
 
 /**

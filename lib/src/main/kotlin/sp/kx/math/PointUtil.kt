@@ -100,3 +100,20 @@ fun Point.copy(
 fun Point.swapped(): Point {
     return pointOf(x = y, y = x)
 }
+
+fun Point.appended(
+    dX: Double,
+    dY: Double,
+): Point {
+    return pointOf(
+        x = x + dX,
+        y = y + dY,
+    )
+}
+
+fun Point.appended(offset: Offset): Point {
+    return pointOf(
+        x = x + offset.dX,
+        y = y + offset.dY,
+    )
+}
