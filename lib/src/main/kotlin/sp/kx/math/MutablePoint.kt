@@ -120,11 +120,6 @@ class MutablePoint(
         y = x
     }
 
-    fun append(value: Double) {
-        x += value
-        y += value
-    }
-
     fun append(
         dX: Double,
         dY: Double,

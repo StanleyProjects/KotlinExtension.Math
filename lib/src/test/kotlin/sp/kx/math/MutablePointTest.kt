@@ -113,4 +113,90 @@ internal class MutablePointTest {
         Assertions.assertEquals(3.4, actual.x)
         Assertions.assertEquals(1.2, actual.y)
     }
+
+    @Test
+    fun appendTest() {
+        val actual = MutablePoint(x = 1.2, y = 3.4)
+        Assertions.assertNotEquals(actual.x, actual.y)
+        Assertions.assertEquals(1.2, actual.x)
+        Assertions.assertEquals(3.4, actual.y)
+        (5.6 to 7.8).also { (dX, dY) ->
+            Assertions.assertNotEquals(dX, dY)
+            actual.append(dX = dX, dY = dY)
+            Assertions.assertNotEquals(actual.x, actual.y)
+            Assertions.assertEquals(1.2 + dX, actual.x)
+            Assertions.assertEquals(3.4 + dY, actual.y)
+        }
+        (-1.28 to -2.56).also { (dX, dY) ->
+            Assertions.assertNotEquals(dX, dY)
+            actual.append(dX = dX, dY = dY)
+            Assertions.assertNotEquals(actual.x, actual.y)
+            Assertions.assertEquals(1.2 + 5.6 + dX, actual.x)
+            Assertions.assertEquals(3.4 + 7.8 + dY, actual.y)
+        }
+    }
+
+    @Test
+    fun appendOffsetTest() {
+        val actual = MutablePoint(x = 1.2, y = 3.4)
+        Assertions.assertNotEquals(actual.x, actual.y)
+        Assertions.assertEquals(1.2, actual.x)
+        Assertions.assertEquals(3.4, actual.y)
+        offsetOf(dX = 5.6, dY = 7.8).also { offset ->
+            Assertions.assertNotEquals(offset.dX, offset.dY)
+            actual.append(offset = offset)
+            Assertions.assertNotEquals(actual.x, actual.y)
+            Assertions.assertEquals(1.2 + offset.dX, actual.x)
+            Assertions.assertEquals(3.4 + offset.dY, actual.y)
+        }
+        offsetOf(dX = -1.28, dY = -2.56).also { offset ->
+            Assertions.assertNotEquals(offset.dX, offset.dY)
+            actual.append(offset = offset)
+            Assertions.assertNotEquals(actual.x, actual.y)
+            Assertions.assertEquals(1.2 + 5.6 + offset.dX, actual.x)
+            Assertions.assertEquals(3.4 + 7.8 + offset.dY, actual.y)
+        }
+    }
+
+    @Test
+    fun moveTest() {
+        val actual = MutablePoint(x = 1.2, y = 3.4)
+        Assertions.assertNotEquals(actual.x, actual.y)
+        Assertions.assertEquals(1.2, actual.x)
+        Assertions.assertEquals(3.4, actual.y)
+        5.6.also { length ->
+            actual.move(length = length)
+            Assertions.assertEquals(1.2 + length, actual.x)
+            Assertions.assertEquals(3.4, actual.y)
+        }
+        (-1.28).also { length ->
+            actual.move(length = length)
+            Assertions.assertEquals(1.2 + 5.6 + length, actual.x)
+            Assertions.assertEquals(3.4, actual.y)
+        }
+    }
+
+    @Test
+    fun moveAngleTest() {
+        MutablePoint(x = 1.2, y = 3.4).also { point ->
+            Assertions.assertNotEquals(point.x, point.y)
+            Assertions.assertEquals(1.2, point.x)
+            Assertions.assertEquals(3.4, point.y)
+            val length = 5.6
+            val angle = 0.0
+            point.move(length = length, angle = angle)
+            Assertions.assertEquals(1.2 + length, point.x)
+            Assertions.assertEquals(3.4, point.y)
+        }
+        MutablePoint(x = 1.2, y = 3.4).also { point ->
+            Assertions.assertNotEquals(point.x, point.y)
+            Assertions.assertEquals(1.2, point.x)
+            Assertions.assertEquals(3.4, point.y)
+            val length = 5.6
+            val angle = kotlin.math.PI / 2
+            point.move(length = length, angle = angle)
+            Assertions.assertEquals(1.2, point.x, 0.000000000000001)
+            Assertions.assertEquals(3.4 + length, point.y)
+        }
+    }
 }

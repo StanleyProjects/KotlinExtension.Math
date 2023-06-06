@@ -38,6 +38,49 @@ internal class NumberUtilTest {
     }
 
     @Test
+    fun eqDeltaTest() {
+        kotlin.math.cos(0.0).also { expected ->
+            val actual = 1.0
+            Assertions.assertEquals(expected, actual)
+            Assertions.assertTrue(actual.eq(other = expected, points = 0))
+            Assertions.assertEquals(expected, actual, 0.1)
+            Assertions.assertTrue(actual.eq(other = expected, points = 1))
+            Assertions.assertEquals(expected, actual, 0.00000001)
+            Assertions.assertTrue(actual.eq(other = expected, points = 8))
+        }
+        kotlin.math.cos(kotlin.math.PI / 4).also { expected ->
+            val actual = 0.70710678 // 0.7071067811865476
+            Assertions.assertEquals(expected, actual, 0.1)
+            Assertions.assertTrue(actual.eq(other = expected, points = 1))
+            Assertions.assertEquals(expected, actual, 0.00000001)
+            Assertions.assertTrue(actual.eq(other = expected, points = 8))
+        }
+        kotlin.math.cos(kotlin.math.PI / 2).also { expected ->
+            val actual = 0.00000000000000006 // 0.00000000000000006123233995736766
+            Assertions.assertEquals(expected, actual, 0.1)
+            Assertions.assertTrue(actual.eq(other = expected, points = 1))
+            Assertions.assertEquals(expected, actual, 0.00000000000000001)
+            Assertions.assertTrue(actual.eq(other = expected, points = 17))
+        }
+        kotlin.math.cos(kotlin.math.PI / 2 + kotlin.math.PI / 4).also { expected ->
+            val actual = -0.70710678 // -0.7071067811865476
+            Assertions.assertEquals(expected, actual, 0.1)
+            Assertions.assertTrue(actual.eq(other = expected, points = 1))
+            Assertions.assertEquals(expected, actual, 0.00000001)
+            Assertions.assertTrue(actual.eq(other = expected, points = 8))
+        }
+        kotlin.math.cos(kotlin.math.PI).also { expected ->
+            val actual = -1.0
+            Assertions.assertEquals(expected, actual)
+            Assertions.assertTrue(actual.eq(other = expected, points = 0))
+            Assertions.assertEquals(expected, actual, 0.1)
+            Assertions.assertTrue(actual.eq(other = expected, points = 1))
+            Assertions.assertEquals(expected, actual, 0.00000001)
+            Assertions.assertTrue(actual.eq(other = expected, points = 8))
+        }
+    }
+
+    @Test
     fun eqNotTest() {
         val actual = 1.23
         Assertions.assertFalse(actual.eq(other = 1.0, points = 1))
@@ -47,6 +90,52 @@ internal class NumberUtilTest {
         Assertions.assertFalse(actual.eq(other = 1.23456789, points = 3))
         Assertions.assertFalse(actual.eq(other = 1.23456789, points = 4))
         Assertions.assertFalse(actual.eq(other = 1.23456789, points = 8))
+    }
+
+    @Test
+    fun eqNotDeltaTest() {
+        kotlin.math.cos(0.0).also { expected ->
+            val actual = 1.1
+            Assertions.assertEquals(expected, actual, 0.2)
+            Assertions.assertTrue(actual.eq(other = expected, points = 0))
+            Assertions.assertNotEquals(expected, actual, 0.01)
+            Assertions.assertFalse(actual.eq(other = expected, points = 1))
+            Assertions.assertNotEquals(expected, actual, 0.00000001)
+            Assertions.assertFalse(actual.eq(other = expected, points = 8))
+        }
+        kotlin.math.cos(kotlin.math.PI / 4).also { expected ->
+            val actual = 0.70710678 // 0.7071067811865476
+            Assertions.assertEquals(expected, actual, 0.1)
+            Assertions.assertTrue(actual.eq(other = expected, points = 0))
+            Assertions.assertTrue(actual.eq(other = expected, points = 1))
+            Assertions.assertNotEquals(expected, actual, 0.000000001)
+            Assertions.assertFalse(actual.eq(other = expected, points = 9))
+        }
+        kotlin.math.cos(kotlin.math.PI / 2).also { expected ->
+            val actual = 0.00000000000000006 // 0.00000000000000006123233995736766
+            Assertions.assertEquals(expected, actual, 0.1)
+            Assertions.assertTrue(actual.eq(other = expected, points = 0))
+            Assertions.assertTrue(actual.eq(other = expected, points = 1))
+            Assertions.assertNotEquals(expected, actual, 0.000000000000000001)
+            Assertions.assertFalse(actual.eq(other = expected, points = 18))
+        }
+        kotlin.math.cos(kotlin.math.PI / 2 + kotlin.math.PI / 4).also { expected ->
+            val actual = -0.70710678 // -0.7071067811865476
+            Assertions.assertEquals(expected, actual, 0.1)
+            Assertions.assertTrue(actual.eq(other = expected, points = 0))
+            Assertions.assertTrue(actual.eq(other = expected, points = 1))
+            Assertions.assertNotEquals(expected, actual, 0.000000001)
+            Assertions.assertFalse(actual.eq(other = expected, points = 9))
+        }
+        kotlin.math.cos(kotlin.math.PI).also { expected ->
+            val actual = -1.1
+            Assertions.assertEquals(expected, actual, 0.2)
+            Assertions.assertTrue(actual.eq(other = expected, points = 0))
+            Assertions.assertNotEquals(expected, actual, 0.01)
+            Assertions.assertFalse(actual.eq(other = expected, points = 1))
+            Assertions.assertNotEquals(expected, actual, 0.00000001)
+            Assertions.assertFalse(actual.eq(other = expected, points = 8))
+        }
     }
 
     @Test
