@@ -31,4 +31,8 @@ interface Point {
      * The coordinate of the y-axis.
      */
     val y: Double
+
+    companion object {
+        val Center = pointOf(x = 0.0, y = 0.0)
+    }
 }

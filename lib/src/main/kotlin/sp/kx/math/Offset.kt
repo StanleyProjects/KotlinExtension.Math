@@ -33,8 +33,4 @@ interface Offset {
      * Offset along the y-axis.
      */
     val dY: Double
-
-    companion object {
-        val Center = pointOf(x = 0.0, y = 0.0)
-    }
 }
