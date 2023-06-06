@@ -152,6 +152,30 @@ class MutablePoint(
         y += dY
     }
 
+    /**
+     * Method for adding offset to [x] and [y] coordinates.
+     *
+     * Usage:
+     * ```
+     * val point = MutablePoint(x = 1.0, y = 2.0)
+     * val offset = offsetOf(dX = 2.0, dY = 1.0)
+     * point.append(offset)
+     *
+     *   ^
+     *   |
+     * y -   -   -   * new
+     *   |
+     * 2 -   * old   |
+     *   |
+     * 1 -   |       |
+     *   |
+     * 0 +---|---|---|---|--->
+     *   0   1   2   x   4
+     * ```
+     * @param offset The [Offset.dX] and [Offset.dY] from here will be added to the [x] and [y] coordinates respectively.
+     * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+     * @since 0.3.1
+     */
     fun append(offset: Offset) {
         x += offset.dX
         y += offset.dY
