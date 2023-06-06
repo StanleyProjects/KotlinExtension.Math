@@ -181,6 +181,57 @@ class MutablePoint(
         y += offset.dY
     }
 
+    /**
+     * The method changes the [x] and [y] coordinates of this point
+     * to the coordinates of a point that lies at a distance [length].
+     *
+     * Usage:
+     * ```
+     * val point = MutablePoint(x = 1.0, y = 2.0)
+     * point.move(length = 1.0, angle = kotlin.math.PI / 4)
+     *
+     *   ^
+     *   |
+     *   |             * new
+     *   |           /
+     *   |        /
+     *   |     /  PI/4
+     *   |   * old - - - - -
+     *   |
+     * 0 +------------------->
+     *   0
+     * ```
+     *
+     * Special cases:
+     * ```
+     * MutablePoint(x = 1.2, y = 3.4)
+     *     .move(length = 1.0, angle = 0.0)
+     *     .also { point: Point ->
+     *         assertEquals(2.2, point.x, 0.01)
+     *         assertEquals(3.4, point.y, 0.01)
+     *     }
+     * ```
+     * ```
+     * MutablePoint(x = 1.2, y = 3.4)
+     *     .move(length = 1.0, angle = kotlin.math.PI / 2)
+     *     .also { point: Point ->
+     *         assertEquals(1.2, point.x, 0.01)
+     *         assertEquals(4.4, point.y, 0.01)
+     *     }
+     * ```
+     * ```
+     * MutablePoint(x = 1.2, y = 3.4)
+     *     .move(length = 1.0, angle = kotlin.math.PI)
+     *     .also { point: Point ->
+     *         assertEquals(0.2, point.x, 0.01)
+     *         assertEquals(3.4, point.y, 0.01)
+     *     }
+     * ```
+     * @param length The coordinates will be shifted by this distance (taking into account the rotation [angle]).
+     * @param angle The angle of rotation around the [x] and [y] coordinates, given in radians.
+     * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+     * @since 0.3.1
+     */
     fun move(
         length: Double,
         angle: Double,
