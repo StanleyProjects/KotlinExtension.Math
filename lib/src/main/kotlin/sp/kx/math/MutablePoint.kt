@@ -240,6 +240,29 @@ class MutablePoint(
         y += length * kotlin.math.sin(angle)
     }
 
+    /**
+     * Special case of [move] method with zero angle.
+     *
+     * Usage:
+     * ```
+     * val point = MutablePoint(x = 1.0, y = 2.0)
+     * point.move(length = 3.0)
+     *
+     *   ^
+     *   |
+     * y -
+     *   |
+     * 2 -   * old   * new
+     *   |
+     * 1 -   |       |
+     *   |
+     * 0 +---|---|---|---|--->
+     *   0   1   2   3   x
+     * ```
+     * @param length The [x]-coordinate will be shifted by this distance.
+     * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+     * @since 0.3.1
+     */
     fun move(length: Double) {
         x += length
     }
