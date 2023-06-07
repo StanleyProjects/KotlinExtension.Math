@@ -246,7 +246,7 @@ class MutablePoint(
      * Usage:
      * ```
      * val point = MutablePoint(x = 1.0, y = 2.0)
-     * point.move(length = 3.0)
+     * point.move(length = 2.0)
      *
      *   ^
      *   |

@@ -220,6 +220,29 @@ fun Point.moved(
     )
 }
 
+/**
+ * Special case of [moved] method with zero angle.
+ *
+ * Usage:
+ * ```
+ * val foo = pointOf(x = 1.0, y = 2.0)
+ * val bar = foo.moved(length = 2.0)
+ *
+ *   ^
+ *   |
+ * y -
+ *   |
+ * 2 -   * foo   * bar
+ *   |
+ * 1 -   |       |
+ *   |
+ * 0 +---|---|---|---|--->
+ *   0   1   2   3   x
+ * ```
+ * @param length The receiver's [Point.x]-coordinate will be shifted by this distance.
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.3.1
+ */
 fun Point.moved(length: Double): Point {
     return pointOf(
         x = x + length,
