@@ -13,7 +13,7 @@ internal class PointAppendedTest {
         Assertions.assertEquals(3.4, foo.y)
         (5.6 to 7.8).also { (dX, dY) ->
             Assertions.assertNotEquals(dX, dY)
-            val bar = foo.appended(dX = dX, dY = dY)
+            val bar = foo.plus(dX = dX, dY = dY)
             Assertions.assertEquals(1.2, foo.x)
             Assertions.assertEquals(3.4, foo.y)
             Assertions.assertNotEquals(bar.x, bar.y)
@@ -24,7 +24,7 @@ internal class PointAppendedTest {
         }
         (-1.28 to -2.56).also { (dX, dY) ->
             Assertions.assertNotEquals(dX, dY)
-            val bar = foo.appended(dX = dX, dY = dY)
+            val bar = foo.plus(dX = dX, dY = dY)
             Assertions.assertEquals(1.2, foo.x)
             Assertions.assertEquals(3.4, foo.y)
             Assertions.assertNotEquals(bar.x, bar.y)
@@ -43,7 +43,7 @@ internal class PointAppendedTest {
         Assertions.assertEquals(3.4, foo.y)
         offsetOf(dX = 5.6, dY = 7.8).also { offset ->
             Assertions.assertNotEquals(offset.dX, offset.dY)
-            val bar = foo.appended(offset = offset)
+            val bar = foo + offset
             Assertions.assertEquals(1.2, foo.x)
             Assertions.assertEquals(3.4, foo.y)
             Assertions.assertNotEquals(bar.x, bar.y)
@@ -54,7 +54,7 @@ internal class PointAppendedTest {
         }
         offsetOf(dX = -1.28, dY = -2.56).also { offset ->
             Assertions.assertNotEquals(offset.dX, offset.dY)
-            val bar = foo.appended(offset = offset)
+            val bar = foo + offset
             Assertions.assertEquals(1.2, foo.x)
             Assertions.assertEquals(3.4, foo.y)
             Assertions.assertNotEquals(bar.x, bar.y)
