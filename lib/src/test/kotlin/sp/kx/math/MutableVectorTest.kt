@@ -153,4 +153,13 @@ internal class MutableVectorTest {
         }
         Assertions.assertFalse(actual.equals(Unit))
     }
+
+    @Test
+    fun hashCodeTest() {
+        @Suppress("IgnoredReturnValue")
+        MutableVector(
+            start = MutablePoint(x = 1.2, y = 3.4),
+            finish = MutablePoint(x = 5.6, y = 7.8),
+        ).hashCode()
+    }
 }
