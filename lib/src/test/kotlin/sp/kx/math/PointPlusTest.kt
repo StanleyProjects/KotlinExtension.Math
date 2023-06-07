@@ -4,9 +4,9 @@ import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
 @Suppress("MagicNumber")
-internal class PointAppendedTest {
+internal class PointPlusTest {
     @Test
-    fun appendedTest() {
+    fun plusTest() {
         val foo = pointOf(x = 1.2, y = 3.4)
         Assertions.assertNotEquals(foo.x, foo.y)
         Assertions.assertEquals(1.2, foo.x)
@@ -36,7 +36,7 @@ internal class PointAppendedTest {
     }
 
     @Test
-    fun appendedOffsetTest() {
+    fun plusOffsetTest() {
         val foo = pointOf(x = 1.2, y = 3.4)
         Assertions.assertNotEquals(foo.x, foo.y)
         Assertions.assertEquals(1.2, foo.x)
