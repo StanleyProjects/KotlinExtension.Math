@@ -39,4 +39,25 @@ internal class ImmutableVectorTest {
             Assertions.assertEquals("{x: 1.23, y: 3.46} -> {x: 5.68, y: 7.89}", actual.toString())
         }
     }
+
+    @Test
+    fun equalsTest() {
+        val foo = ImmutableVector(
+            start = pointOf(x = 1.2, y = 3.4),
+            finish = pointOf(x = 5.6, y = 7.8),
+        )
+        val bar = ImmutableVector(
+            start = pointOf(x = 1.2, y = 3.4),
+            finish = pointOf(x = 5.6, y = 7.8),
+        )
+        Assertions.assertEquals(foo, bar)
+        Assertions.assertFalse(foo === bar)
+        Assertions.assertTrue(foo == bar)
+        Assertions.assertFalse(foo.start === bar.start)
+        Assertions.assertTrue(foo.start == bar.start)
+        Assertions.assertEquals(foo.start, bar.start)
+        Assertions.assertFalse(foo.finish === bar.finish)
+        Assertions.assertTrue(foo.finish == bar.finish)
+        Assertions.assertEquals(foo.finish, bar.finish)
+    }
 }
