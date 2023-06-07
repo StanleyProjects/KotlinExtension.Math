@@ -4,6 +4,23 @@ import sp.kx.math.unsafe.toString
 import java.util.Locale
 import java.util.Objects
 
+/**
+ * A mutable implementation of the [Vector] type.
+ *
+ * Usage:
+ * ```
+ * val vector = MutableVector(
+ *     start = MutablePoint(x = 1.2, y = 3.4),
+ *     finish = MutablePoint(x = 5.6, y = 7.8),
+ * )
+ * vector.start.x = 2.0
+ * vector.finish.y = 3.0
+ * ```
+ * @property start The [MutablePoint] from which the beginning of the [MutableVector] can be counted.
+ * @property finish The [MutablePoint] up to which the direction of the [MutableVector] can be computed.
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.4.0
+ */
 class MutableVector(
     override val start: MutablePoint,
     override val finish: MutablePoint,
