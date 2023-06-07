@@ -44,19 +44,19 @@ internal class MutableVectorTest {
             start = MutablePoint(x = 1.2, y = 3.4),
             finish = MutablePoint(x = 5.6, y = 7.8),
         ).also { actual ->
-            Assertions.assertEquals("{start: {x: 1.20, y: 3.40}, finish: {x: 5.60, y: 7.80}}", actual.toString())
+            Assertions.assertEquals("{x: 1.20, y: 3.40} -> {x: 5.60, y: 7.80}", actual.toString())
         }
         MutableVector(
             start = MutablePoint(x = 1.23, y = 3.45),
             finish = MutablePoint(x = 5.67, y = 7.89),
         ).also { actual ->
-            Assertions.assertEquals("{start: {x: 1.23, y: 3.45}, finish: {x: 5.67, y: 7.89}}", actual.toString())
+            Assertions.assertEquals("{x: 1.23, y: 3.45} -> {x: 5.67, y: 7.89}", actual.toString())
         }
         MutableVector(
             start = MutablePoint(x = 1.234, y = 3.456),
             finish = MutablePoint(x = 5.678, y = 7.891),
         ).also { actual ->
-            Assertions.assertEquals("{start: {x: 1.23, y: 3.46}, finish: {x: 5.68, y: 7.89}}", actual.toString())
+            Assertions.assertEquals("{x: 1.23, y: 3.46} -> {x: 5.68, y: 7.89}", actual.toString())
         }
     }
 }
