@@ -23,6 +23,31 @@ internal class ImmutableVector(
     }
 }
 
+/**
+ * Usage:
+ * ```
+ * val vector = vectorOf(
+ *     startX = 1.0,
+ *     startY = 2.0,
+ *     finishX = 3.0,
+ *     finishY = 3.0,
+ * )
+ *
+ *   ^
+ *   |
+ * y -   -   -   * vector.finish
+ *   |
+ * 2 -   * vector.start
+ *   |
+ * 1 -   |       |
+ *   |
+ * 0 +---|---|---|---|--->
+ *   0   1   2   x   4
+ * ```
+ * @return An instance of [Vector] built from the [Double] values.
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.4.0
+ */
 fun vectorOf(
     startX: Double,
     startY: Double,
@@ -35,6 +60,33 @@ fun vectorOf(
     )
 }
 
+/**
+ * Usage:
+ * ```
+ * val vector = vectorOf(
+ *     startX = 1.0,
+ *     startY = 2.0,
+ *     finish = pointOf(x = 3.0, y = 3.0),
+ * )
+ *
+ *   ^
+ *   |
+ * y -   -   -   * vector.finish
+ *   |
+ * 2 -   * vector.start
+ *   |
+ * 1 -   |       |
+ *   |
+ * 0 +---|---|---|---|--->
+ *   0   1   2   x   4
+ * ```
+ * @param startX This value will become the x-coordinate of the [Vector.start] point.
+ * @param startY This value will become the y-coordinate of the [Vector.start] point.
+ * @param finish This [Point] will become the [Vector.finish] point.
+ * @return An instance of [Vector] built from the [Double] values and [Point].
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.4.0
+ */
 fun vectorOf(
     startX: Double,
     startY: Double,
