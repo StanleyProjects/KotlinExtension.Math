@@ -3,6 +3,7 @@ package sp.kx.math
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
+@Suppress("MagicNumber")
 internal class ImmutableVectorTest {
     @Test
     fun constructorTest() {
@@ -67,6 +68,15 @@ internal class ImmutableVectorTest {
             start = pointOf(x = 1.2, y = 3.4),
             finish = pointOf(x = 5.6, y = 7.8),
         )
+        Assertions.assertFalse(actual.equals(Unit))
+    }
+
+    @Test
+    fun equalsNotFinishTest() {
+        val actual = ImmutableVector(
+            start = pointOf(x = 1.2, y = 3.4),
+            finish = pointOf(x = 5.6, y = 7.8),
+        )
         ImmutableVector(
             start = pointOf(x = 1.2, y = 3.4),
             finish = pointOf(x = 5.6, y = 7.9),
@@ -99,6 +109,14 @@ internal class ImmutableVectorTest {
             Assertions.assertNotEquals(actual.finish.x, unexpected.finish.x)
             Assertions.assertEquals(actual.finish.y, unexpected.finish.y)
         }
+    }
+
+    @Test
+    fun equalsNotStartTest() {
+        val actual = ImmutableVector(
+            start = pointOf(x = 1.2, y = 3.4),
+            finish = pointOf(x = 5.6, y = 7.8),
+        )
         ImmutableVector(
             start = pointOf(x = 1.2, y = 3.5),
             finish = pointOf(x = 5.6, y = 7.8),
@@ -131,7 +149,6 @@ internal class ImmutableVectorTest {
             Assertions.assertTrue(actual.finish == unexpected.finish)
             Assertions.assertEquals(actual.finish, unexpected.finish)
         }
-        Assertions.assertFalse(actual.equals(Unit))
     }
 
     @Test

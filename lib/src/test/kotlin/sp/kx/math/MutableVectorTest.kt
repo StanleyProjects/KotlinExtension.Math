@@ -3,6 +3,7 @@ package sp.kx.math
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
+@Suppress("MagicNumber")
 internal class MutableVectorTest {
     @Test
     fun constructorTest() {
@@ -87,6 +88,15 @@ internal class MutableVectorTest {
             start = MutablePoint(x = 1.2, y = 3.4),
             finish = MutablePoint(x = 5.6, y = 7.8),
         )
+        Assertions.assertFalse(actual.equals(Unit))
+    }
+
+    @Test
+    fun equalsNotFinishTest() {
+        val actual = MutableVector(
+            start = MutablePoint(x = 1.2, y = 3.4),
+            finish = MutablePoint(x = 5.6, y = 7.8),
+        )
         MutableVector(
             start = MutablePoint(x = 1.2, y = 3.4),
             finish = MutablePoint(x = 5.6, y = 7.9),
@@ -119,6 +129,14 @@ internal class MutableVectorTest {
             Assertions.assertNotEquals(actual.finish.x, unexpected.finish.x)
             Assertions.assertEquals(actual.finish.y, unexpected.finish.y)
         }
+    }
+
+    @Test
+    fun equalsNotStartTest() {
+        val actual = MutableVector(
+            start = MutablePoint(x = 1.2, y = 3.4),
+            finish = MutablePoint(x = 5.6, y = 7.8),
+        )
         MutableVector(
             start = MutablePoint(x = 1.2, y = 3.5),
             finish = MutablePoint(x = 5.6, y = 7.8),
@@ -151,7 +169,6 @@ internal class MutableVectorTest {
             Assertions.assertTrue(actual.finish == unexpected.finish)
             Assertions.assertEquals(actual.finish, unexpected.finish)
         }
-        Assertions.assertFalse(actual.equals(Unit))
     }
 
     @Test
