@@ -166,6 +166,50 @@ operator fun Point.plus(offset: Offset): Point {
     )
 }
 
+/**
+ * Creates a new [Point] object with a copy of the coordinates of [this] receiver point at a distance of [length].
+ *
+ * Usage:
+ * ```
+ * val foo = pointOf(x = 1.0, y = 2.0)
+ * val bar = foo.moved(length = 1.0, angle = kotlin.math.PI / 4)
+ *
+ *   ^
+ *   |
+ *   |             * bar
+ *   |           /
+ *   |        /
+ *   |     /  PI/4
+ *   |   * foo - - - - -
+ *   |
+ * 0 +------------------->
+ *   0
+ * ```
+ *
+ * Special cases:
+ * ```
+ * val point = pointOf(x = 1.2, y = 3.4)
+ *     .moved(length = 1.0, angle = 0.0)
+ * assertEquals(2.2, point.x, 0.01)
+ * assertEquals(3.4, point.y, 0.01)
+ * ```
+ * ```
+ * val point = pointOf(x = 1.2, y = 3.4)
+ *     .moved(length = 1.0, angle = kotlin.math.PI / 2)
+ * assertEquals(1.2, point.x, 0.01)
+ * assertEquals(4.4, point.y, 0.01)
+ * ```
+ * ```
+ * val point = pointOf(x = 1.2, y = 3.4)
+ *     .moved(length = 1.0, angle = kotlin.math.PI)
+ * assertEquals(0.2, point.x, 0.01)
+ * assertEquals(3.4, point.y, 0.01)
+ * ```
+ * @param length The coordinates will be shifted by this distance (taking into account the rotation [angle]).
+ * @param angle The angle of rotation around the receiver's [Point.x] and [Point.y] coordinates, given in radians.
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.3.1
+ */
 fun Point.moved(
     length: Double,
     angle: Double,
