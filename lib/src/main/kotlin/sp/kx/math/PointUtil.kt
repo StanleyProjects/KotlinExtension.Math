@@ -250,7 +250,21 @@ fun Point.moved(length: Double): Point {
     )
 }
 
-fun Point.offset(
+/**
+ * Usage:
+ * ```
+ * val point = pointOf(x = 3.0, y = 3.0)
+ * val offset = point.minus(x = 2.0, y = 1.0)
+ * assertEquals(1.0, offset.x)
+ * assertEquals(2.0, offset.y)
+ * ```
+ * @return The difference between the coordinates of [this] receiver and the coordinates passed to the method, represented as an [Offset] object.
+ * @param x This coordinate will be subtracted from the [Point.x]-coordinate of [this] receiver.
+ * @param y This coordinate will be subtracted from the [Point.y]-coordinate of [this] receiver.
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.3.1
+ */
+fun Point.minus(
     x: Double,
     y: Double,
 ): Offset {
@@ -260,7 +274,31 @@ fun Point.offset(
     )
 }
 
-fun Point.offset(other: Point): Offset {
+/**
+ * Usage:
+ * ```
+ * val foo = pointOf(x = 3.0, y = 3.0)
+ * val bar = pointOf(x = 2.0, y = 1.0)
+ * val offset = foo - bar
+ * assertEquals(1.0, offset.x)
+ * assertEquals(2.0, offset.y)
+ *
+ *   ^
+ *   |
+ * y -   -   -   * foo
+ *   |
+ * 2 -   * bar   |
+ *   |
+ * 1 -   |       |
+ *   |
+ * 0 +---|---|---|---|--->
+ *   0   1   2   x   4
+ * ```
+ * @return The difference between the coordinates of [this] receiver and the [other] coordinates passed to the method, represented as an [Offset] object.
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.3.1
+ */
+operator fun Point.minus(other: Point): Offset {
     return offsetOf(
         dX = x - other.x,
         dY = y - other.y,
