@@ -15,4 +15,11 @@ internal class PointTest {
         Assertions.assertEquals(1.2, actual.x)
         Assertions.assertEquals(3.4, actual.y)
     }
+
+    @Test
+    fun centerTest() {
+        Assertions.assertEquals(Point.Center.x, Point.Center.y)
+        Assertions.assertEquals(0.0, Point.Center.x)
+        Assertions.assertEquals(0.0, Point.Center.y)
+    }
 }
