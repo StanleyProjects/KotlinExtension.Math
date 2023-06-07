@@ -101,7 +101,7 @@ fun Point.swapped(): Point {
     return pointOf(x = y, y = x)
 }
 
-fun Point.appended(
+fun Point.plus(
     dX: Double,
     dY: Double,
 ): Point {
@@ -111,7 +111,7 @@ fun Point.appended(
     )
 }
 
-fun Point.appended(offset: Offset): Point {
+operator fun Point.plus(offset: Offset): Point {
     return pointOf(
         x = x + offset.dX,
         y = y + offset.dY,

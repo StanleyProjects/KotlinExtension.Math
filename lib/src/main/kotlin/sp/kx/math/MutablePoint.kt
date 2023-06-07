@@ -126,7 +126,7 @@ class MutablePoint(
      * Usage:
      * ```
      * val point = MutablePoint(x = 1.0, y = 2.0)
-     * point.append(dX = 2.0, dY = 1.0)
+     * point.add(dX = 2.0, dY = 1.0)
      *
      *   ^
      *   |
@@ -144,7 +144,7 @@ class MutablePoint(
      * @author [Stanley Wintergreen](https://github.com/kepocnhh)
      * @since 0.3.1
      */
-    fun append(
+    fun add(
         dX: Double,
         dY: Double,
     ) {
@@ -159,7 +159,7 @@ class MutablePoint(
      * ```
      * val point = MutablePoint(x = 1.0, y = 2.0)
      * val offset = offsetOf(dX = 2.0, dY = 1.0)
-     * point.append(offset)
+     * point.add(offset)
      *
      *   ^
      *   |
@@ -176,7 +176,7 @@ class MutablePoint(
      * @author [Stanley Wintergreen](https://github.com/kepocnhh)
      * @since 0.3.1
      */
-    fun append(offset: Offset) {
+    fun add(offset: Offset) {
         x += offset.dX
         y += offset.dY
     }
