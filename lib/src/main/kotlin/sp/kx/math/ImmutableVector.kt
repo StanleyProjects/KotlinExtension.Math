@@ -14,7 +14,8 @@ internal class ImmutableVector(
 
     override fun equals(other: Any?): Boolean {
         if (other !is Vector) return false
-        return start.x == other.start.x && finish.x == other.finish.x && start.y == other.start.y && finish.y == other.finish.y
+        return start.x == other.start.x &&
+            finish.x == other.finish.x && start.y == other.start.y && finish.y == other.finish.y
     }
 
     override fun hashCode(): Int {
