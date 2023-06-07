@@ -98,6 +98,30 @@ fun vectorOf(
     )
 }
 
+/**
+ * Usage:
+ * ```
+ * val foo = pointOf(x = 1.0, y = 2.0)
+ * val bar = pointOf(x = 3.0, y = 3.0)
+ * val vector = foo + bar
+ *
+ *   ^
+ *   |
+ * y -   -   -   * vector.finish
+ *   |
+ * 2 -   * vector.start
+ *   |
+ * 1 -   |       |
+ *   |
+ * 0 +---|---|---|---|--->
+ *   0   1   2   x   4
+ * ```
+ * @receiver This [Point] will become the [Vector.start] point.
+ * @param finish This [Point] will become the [Vector.finish] point.
+ * @return An instance of [Vector] built from the two [Point]s passed to the method.
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.4.0
+ */
 operator fun Point.plus(finish: Point): Vector {
     return ImmutableVector(
         start = this,
@@ -105,12 +129,36 @@ operator fun Point.plus(finish: Point): Vector {
     )
 }
 
+/**
+ * Usage:
+ * ```
+ * val foo = pointOf(x = 1.0, y = 2.0)
+ * val vector = foo.toVector(x = 3.0, y = 3.0)
+ *
+ *   ^
+ *   |
+ * y -   -   -   * vector.finish
+ *   |
+ * 2 -   * vector.start
+ *   |
+ * 1 -   |       |
+ *   |
+ * 0 +---|---|---|---|--->
+ *   0   1   2   x   4
+ * ```
+ * @receiver This [Point] will become the [Vector.start] point.
+ * @param x This value will become the x-coordinate of the [Vector.finish] point.
+ * @param y This value will become the y-coordinate of the [Vector.finish] point.
+ * @return An instance of [Vector] built from the [Double] values and [Point].
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.4.0
+ */
 fun Point.toVector(
-    finishX: Double,
-    finishY: Double,
+    x: Double,
+    y: Double,
 ): Vector {
     return ImmutableVector(
         start = this,
-        finish = pointOf(x = finishX, y = finishY),
+        finish = pointOf(x = x, y = y),
     )
 }
