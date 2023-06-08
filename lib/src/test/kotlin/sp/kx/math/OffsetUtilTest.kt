@@ -26,13 +26,9 @@ internal class OffsetUtilTest {
     @Test
     fun eqTest() {
         val actual = offsetOf(dX = 1.234, dY = 5.67)
-        Assertions.assertTrue(actual.eq(other = offsetOf(dX = 1.0, dY = 5.0), points = 0))
-        Assertions.assertTrue(actual.eq(other = offsetOf(dX = 1.2, dY = 5.6), points = 0))
-        Assertions.assertTrue(actual.eq(other = offsetOf(dX = 1.23, dY = 5.67), points = 0))
         Assertions.assertTrue(actual.eq(other = offsetOf(dX = 1.2, dY = 5.6), points = 1))
         Assertions.assertTrue(actual.eq(other = offsetOf(dX = 1.23, dY = 5.67), points = 1))
         Assertions.assertTrue(actual.eq(other = offsetOf(dX = 1.23, dY = 5.67), points = 2))
-        Assertions.assertTrue(actual.eq(other = offsetOf(dX = 1.2356789, dY = 5.67891234), points = 0))
         Assertions.assertTrue(actual.eq(other = offsetOf(dX = 1.2356789, dY = 5.67891234), points = 1))
         Assertions.assertTrue(actual.eq(other = offsetOf(dX = 1.2356789, dY = 5.67891234), points = 2))
     }
@@ -40,8 +36,8 @@ internal class OffsetUtilTest {
     @Test
     fun eqNotTest() {
         val actual = offsetOf(dX = 1.234, dY = 5.67)
-        Assertions.assertFalse(actual.eq(other = offsetOf(dX = -1.23, dY = 5.67), points = 0))
-        Assertions.assertFalse(actual.eq(other = offsetOf(dX = 1.23, dY = -5.67), points = 0))
+        Assertions.assertFalse(actual.eq(other = offsetOf(dX = -1.23, dY = 5.67), points = 1))
+        Assertions.assertFalse(actual.eq(other = offsetOf(dX = 1.23, dY = -5.67), points = 1))
         Assertions.assertFalse(actual.eq(other = offsetOf(dX = 1.23, dY = 5.67891234), points = 3))
         Assertions.assertFalse(actual.eq(other = offsetOf(dX = 1.2356789, dY = 5.67), points = 3))
         Assertions.assertFalse(actual.eq(other = offsetOf(dX = 1.2356789, dY = 5.67891234), points = 3))
@@ -51,9 +47,13 @@ internal class OffsetUtilTest {
 
     @Test
     fun eqErrorTest() {
-        Assertions.assertThrows(IllegalStateException::class.java) {
+        Assertions.assertThrows(IllegalArgumentException::class.java) {
             @Suppress("IgnoredReturnValue")
             offsetOf(dX = 1.2, dY = 5.6).eq(other = offsetOf(dX = 1.2, dY = 5.6), points = -1)
+        }
+        Assertions.assertThrows(IllegalArgumentException::class.java) {
+            @Suppress("IgnoredReturnValue")
+            offsetOf(dX = 1.2, dY = 5.6).eq(other = offsetOf(dX = 1.2, dY = 5.6), points = 0)
         }
     }
 

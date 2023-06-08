@@ -10,6 +10,6 @@ fun Vector.toString(points: Int, locale: Locale = Locale.US): String {
 }
 
 fun Vector.eq(other: Vector, points: Int): Boolean {
-    if (points < 0) error("Points count is negative!")
+    require(points > 0)
     return eq(it = this, other = other, points = points)
 }

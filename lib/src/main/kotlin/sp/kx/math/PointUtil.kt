@@ -34,13 +34,13 @@ fun Point.toString(points: Int, locale: Locale = Locale.US): String {
  * @param other These coordinates will be compared with the coordinates of [this] receiver [Point].
  * @param points The number of decimal places to compare coordinates with.
  * @return `true` if [this] receiver's coordinates are equal to [other]'s coordinates to [points] decimal places; `false` otherwise
- * @throws IllegalStateException if [points] count is negative.
+ * @throws IllegalArgumentException if [points] lower than 1.
  * @author [Stanley Wintergreen](https://github.com/kepocnhh)
  * @since 0.2.1
  * @see Double.eq
  */
 fun Point.eq(other: Point, points: Int): Boolean {
-    if (points < 0) error("Points count is negative!")
+    require(points > 0)
     return eq(it = this, other = other, points = points)
 }
 

@@ -26,13 +26,9 @@ internal class PointUtilTest {
     @Test
     fun eqTest() {
         val actual = pointOf(x = 1.23, y = 5.67)
-        Assertions.assertTrue(actual.eq(other = pointOf(x = 1.0, y = 5.0), points = 0))
-        Assertions.assertTrue(actual.eq(other = pointOf(x = 1.2, y = 5.6), points = 0))
-        Assertions.assertTrue(actual.eq(other = pointOf(x = 1.23, y = 5.67), points = 0))
         Assertions.assertTrue(actual.eq(other = pointOf(x = 1.2, y = 5.6), points = 1))
         Assertions.assertTrue(actual.eq(other = pointOf(x = 1.23, y = 5.67), points = 1))
         Assertions.assertTrue(actual.eq(other = pointOf(x = 1.23, y = 5.67), points = 2))
-        Assertions.assertTrue(actual.eq(other = pointOf(x = 1.2356789, y = 5.67891234), points = 0))
         Assertions.assertTrue(actual.eq(other = pointOf(x = 1.2356789, y = 5.67891234), points = 1))
         Assertions.assertTrue(actual.eq(other = pointOf(x = 1.2356789, y = 5.67891234), points = 2))
     }
@@ -40,8 +36,8 @@ internal class PointUtilTest {
     @Test
     fun eqNotTest() {
         val actual = pointOf(x = 1.23, y = 5.67)
-        Assertions.assertFalse(actual.eq(other = pointOf(x = -1.23, y = 5.67), points = 0))
-        Assertions.assertFalse(actual.eq(other = pointOf(x = 1.23, y = -5.67), points = 0))
+        Assertions.assertFalse(actual.eq(other = pointOf(x = -1.23, y = 5.67), points = 1))
+        Assertions.assertFalse(actual.eq(other = pointOf(x = 1.23, y = -5.67), points = 1))
         Assertions.assertFalse(actual.eq(other = pointOf(x = 1.23, y = 5.67891234), points = 3))
         Assertions.assertFalse(actual.eq(other = pointOf(x = 1.2356789, y = 5.67), points = 3))
         Assertions.assertFalse(actual.eq(other = pointOf(x = 1.2356789, y = 5.67891234), points = 3))
@@ -51,9 +47,13 @@ internal class PointUtilTest {
 
     @Test
     fun eqErrorTest() {
-        Assertions.assertThrows(IllegalStateException::class.java) {
+        Assertions.assertThrows(IllegalArgumentException::class.java) {
             @Suppress("IgnoredReturnValue")
             pointOf(x = 1.2, y = 5.6).eq(other = pointOf(x = 1.2, y = 5.6), points = -1)
+        }
+        Assertions.assertThrows(IllegalArgumentException::class.java) {
+            @Suppress("IgnoredReturnValue")
+            pointOf(x = 1.2, y = 5.6).eq(other = pointOf(x = 1.2, y = 5.6), points = 0)
         }
     }
 
