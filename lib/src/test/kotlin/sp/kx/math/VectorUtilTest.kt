@@ -3,6 +3,7 @@ package sp.kx.math
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
+@Suppress("MagicNumber")
 internal class VectorUtilTest {
     @Test
     fun toStringTest() {
@@ -11,7 +12,8 @@ internal class VectorUtilTest {
         Assertions.assertEquals("{x: 1.2, y: 4.6} -> {x: 7.9, y: 10.1}", actual.toString(points = 1))
         Assertions.assertEquals("{x: 1.23, y: 4.56} -> {x: 7.89, y: 10.10}", actual.toString(points = 2))
         Assertions.assertEquals("{x: 1.230, y: 4.560} -> {x: 7.890, y: 10.100}", actual.toString(points = 3))
-        Assertions.assertEquals("{x: 1.23000000, y: 4.56000000} -> {x: 7.89000000, y: 10.10000000}", actual.toString(points = 8))
+        val expected = "{x: 1.23000000, y: 4.56000000} -> {x: 7.89000000, y: 10.10000000}"
+        Assertions.assertEquals(expected, actual.toString(points = 8))
     }
 
     @Test
