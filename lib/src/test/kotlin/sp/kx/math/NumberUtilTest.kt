@@ -2,8 +2,6 @@ package sp.kx.math
 
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
-import kotlin.math.absoluteValue
-import kotlin.math.pow
 
 @Suppress("MagicNumber")
 internal class NumberUtilTest {

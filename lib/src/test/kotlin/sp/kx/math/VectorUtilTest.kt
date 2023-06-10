@@ -175,7 +175,7 @@ internal class VectorUtilTest {
         val pi2 = kotlin.math.PI * 2
         Assertions.assertEquals(
             expected - pi2 * floor((expected + kotlin.math.PI) / pi2),
-            actual - pi2 * floor((actual + kotlin.math.PI) / pi2)
+            actual - pi2 * floor((actual + kotlin.math.PI) / pi2),
         )
     }
 
@@ -207,7 +207,7 @@ internal class VectorUtilTest {
             assertRadians(kotlin.math.PI + kotlin.math.PI / 4, vector.angle())
         }
         (pointOf(x = 1, y = 1) + pointOf(x = 4, y = -2)).also { vector: Vector ->
-            assertRadians(- kotlin.math.PI / 4, vector.angle())
+            assertRadians(-kotlin.math.PI / 4, vector.angle())
         }
     }
 
