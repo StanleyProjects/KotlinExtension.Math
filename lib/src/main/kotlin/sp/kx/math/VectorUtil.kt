@@ -46,6 +46,30 @@ fun Vector.eq(other: Vector, points: Int): Boolean {
     return eq(it = this, other = other, points = points)
 }
 
+/**
+ * Creates a new [Vector] object with a copy of [this] receiver's points or the [start] and [finish] passed in.
+ *
+ * Usage:
+ * ```
+ * val foo = pointOf(1, 1) + pointOf(3, 1)
+ * val bar = foo.copy(finish = pointOf(1, 3))
+ *
+ *   ^
+ *   |
+ * 3 -   ^ bar
+ *   |   |
+ * 2 -   |
+ *   |   |
+ * 1 -   * - - - > foo
+ *   |
+ * 0 +---|---|---|---|--->
+ *   0   1   2   3   4
+ * ```
+ * @param start This value will be set as the [Vector.start] point. Default is [Vector.start] point of [this] receiver.
+ * @param finish This value will be set as the [Vector.finish] point. Default is [Vector.finish] point of [this] receiver.
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.4.1
+ */
 fun Vector.copy(
     start: Point = this.start,
     finish: Point = this.finish,
