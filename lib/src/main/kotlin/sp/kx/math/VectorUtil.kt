@@ -77,8 +77,27 @@ fun Vector.copy(
     return start + finish
 }
 
-// todo get center Point
-// todo is empty
+fun Vector.length(): Double {
+    return distanceOf(a = start, b = finish)
+}
+
+fun Vector.angle(): Double {
+    return angleOf(a = start, b = finish)
+}
+
+fun Vector.center(): Point {
+    return centerOf(a = start, b = finish)
+}
+
+fun Vector.isEmpty(points: Int): Boolean {
+    require(points > 0)
+    return eq(it = start, other = finish, points = points)
+}
+
+fun Vector.isEmpty(): Boolean {
+    return start == finish
+}
+
 // todo of length + angle
 // todo of points + offset
 // todo of point + offset
