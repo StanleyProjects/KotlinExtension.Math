@@ -62,4 +62,34 @@ internal class PointMinusTest {
             Assertions.assertEquals(5.96, offset.dY)
         }
     }
+
+    @Test
+    fun minusOffsetTest() {
+        val foo = pointOf(x = 1.2, y = 3.4)
+        Assertions.assertNotEquals(foo.x, foo.y)
+        Assertions.assertEquals(1.2, foo.x)
+        Assertions.assertEquals(3.4, foo.y)
+        offsetOf(dX = 5.6, dY = 7.8).also { offset ->
+            Assertions.assertNotEquals(offset.dX, offset.dY)
+            val bar = foo - offset
+            Assertions.assertEquals(1.2, foo.x)
+            Assertions.assertEquals(3.4, foo.y)
+            Assertions.assertNotEquals(bar.x, bar.y)
+            Assertions.assertEquals(1.2 - offset.dX, bar.x)
+            Assertions.assertEquals(3.4 - offset.dY, bar.y)
+            Assertions.assertEquals(foo.x - offset.dX, bar.x)
+            Assertions.assertEquals(foo.y - offset.dY, bar.y)
+        }
+        offsetOf(dX = -1.28, dY = -2.56).also { offset ->
+            Assertions.assertNotEquals(offset.dX, offset.dY)
+            val bar = foo - offset
+            Assertions.assertEquals(1.2, foo.x)
+            Assertions.assertEquals(3.4, foo.y)
+            Assertions.assertNotEquals(bar.x, bar.y)
+            Assertions.assertEquals(1.2 - offset.dX, bar.x)
+            Assertions.assertEquals(3.4 - offset.dY, bar.y)
+            Assertions.assertEquals(foo.x - offset.dX, bar.x)
+            Assertions.assertEquals(foo.y - offset.dY, bar.y)
+        }
+    }
 }

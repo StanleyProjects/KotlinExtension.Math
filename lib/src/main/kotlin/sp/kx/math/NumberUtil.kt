@@ -34,11 +34,11 @@ fun Double.toString(points: Int, locale: Locale = Locale.US): String {
  * @param other The value of this number will be compared with the value of [this] receiver's number.
  * @param points The number of decimal places to compare.
  * @return `true` if [this] receiver is equal to [other] to [points] decimal places; `false` otherwise
- * @throws IllegalStateException if [points] count is negative.
+ * @throws IllegalArgumentException if [points] lower than 1.
  * @author [Stanley Wintergreen](https://github.com/kepocnhh)
  * @since 0.2.1
  */
 fun Double.eq(other: Double, points: Int): Boolean {
-    if (points < 0) error("Points count is negative!")
+    require(points > 0)
     return eq(it = this, other = other, points = points)
 }

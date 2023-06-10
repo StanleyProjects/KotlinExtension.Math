@@ -34,14 +34,46 @@ fun Point.toString(points: Int, locale: Locale = Locale.US): String {
  * @param other These coordinates will be compared with the coordinates of [this] receiver [Point].
  * @param points The number of decimal places to compare coordinates with.
  * @return `true` if [this] receiver's coordinates are equal to [other]'s coordinates to [points] decimal places; `false` otherwise
- * @throws IllegalStateException if [points] count is negative.
+ * @throws IllegalArgumentException if [points] lower than 1.
  * @author [Stanley Wintergreen](https://github.com/kepocnhh)
  * @since 0.2.1
  * @see Double.eq
  */
 fun Point.eq(other: Point, points: Int): Boolean {
-    if (points < 0) error("Points count is negative!")
+    require(points > 0)
     return eq(it = this, other = other, points = points)
+}
+
+/**
+ * An integer version of the `pointOf` method with [Double]s.
+ *
+ * Usage:
+ * ```
+ * val point = pointOf(x = 3, y = 2)
+ *
+ *   ^
+ *   |
+ * 3 -
+ *   |
+ * y -   -   -   *
+ *   |
+ * 1 -           |
+ *   |
+ * 0 +---|---|---|---|--->
+ *   0   1   2   x   4
+ * ```
+ * @return An instance of [Point] built from the [Int] values [x] and [y].
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.4.1
+ */
+fun pointOf(
+    x: Int,
+    y: Int,
+): Point {
+    return pointOf(
+        x = x.toDouble(),
+        y = y.toDouble(),
+    )
 }
 
 /**
@@ -132,37 +164,6 @@ fun Point.plus(
     return pointOf(
         x = x + dX,
         y = y + dY,
-    )
-}
-
-/**
- * Creates a new [Point] object with a copy of [this] receiver's coordinates with [offset]'s values added to them.
- *
- * Usage:
- * ```
- * val foo = pointOf(x = 1.0, y = 2.0)
- * val offset = offsetOf(dX = 2.0, dY = 1.0)
- * val bar = foo + offset
- *
- *   ^
- *   |
- * y -   -   -   * bar
- *   |
- * 2 -   * foo   |
- *   |
- * 1 -   |       |
- *   |
- * 0 +---|---|---|---|--->
- *   0   1   2   x   4
- * ```
- * @param offset This values will be added to receiver's [Point.x] and [Point.y] coordinates.
- * @author [Stanley Wintergreen](https://github.com/kepocnhh)
- * @since 0.3.1
- */
-operator fun Point.plus(offset: Offset): Point {
-    return pointOf(
-        x = x + offset.dX,
-        y = y + offset.dY,
     )
 }
 
@@ -271,36 +272,5 @@ fun Point.minus(
     return offsetOf(
         dX = this.x - x,
         dY = this.y - y,
-    )
-}
-
-/**
- * Usage:
- * ```
- * val foo = pointOf(x = 3.0, y = 3.0)
- * val bar = pointOf(x = 2.0, y = 1.0)
- * val offset = foo - bar
- * assertEquals(1.0, offset.x)
- * assertEquals(2.0, offset.y)
- *
- *   ^
- *   |
- * y -   -   -   * foo
- *   |
- * 2 -   * bar   |
- *   |
- * 1 -   |       |
- *   |
- * 0 +---|---|---|---|--->
- *   0   1   2   x   4
- * ```
- * @return The difference between the coordinates of [this] receiver and the [other] coordinates passed to the method, represented as an [Offset] object.
- * @author [Stanley Wintergreen](https://github.com/kepocnhh)
- * @since 0.3.1
- */
-operator fun Point.minus(other: Point): Offset {
-    return offsetOf(
-        dX = x - other.x,
-        dY = y - other.y,
     )
 }

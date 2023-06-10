@@ -179,4 +179,70 @@ internal class MutableVectorTest {
             finish = MutablePoint(x = 5.6, y = 7.8),
         ).hashCode()
     }
+
+    @Test
+    fun setTest() {
+        val actual = MutableVector(
+            start = MutablePoint(x = 1.2, y = 3.4),
+            finish = MutablePoint(x = 5.6, y = 7.8),
+        )
+        Assertions.assertNotEquals(actual.start.x, actual.start.y)
+        Assertions.assertEquals(1.2, actual.start.x)
+        Assertions.assertEquals(3.4, actual.start.y)
+        Assertions.assertNotEquals(actual.finish.x, actual.finish.y)
+        Assertions.assertEquals(5.6, actual.finish.x)
+        Assertions.assertEquals(7.8, actual.finish.y)
+        actual.set(
+            start = pointOf(x = 9.1, y = -11.12),
+            finish = pointOf(x = -13.14, y = 15.16),
+        )
+        Assertions.assertNotEquals(actual.start.x, actual.start.y)
+        Assertions.assertEquals(9.1, actual.start.x)
+        Assertions.assertEquals(-11.12, actual.start.y)
+        Assertions.assertNotEquals(actual.finish.x, actual.finish.y)
+        Assertions.assertEquals(-13.14, actual.finish.x)
+        Assertions.assertEquals(15.16, actual.finish.y)
+    }
+
+    @Test
+    fun setVectorTest() {
+        val actual = MutableVector(
+            start = MutablePoint(x = 1.2, y = 3.4),
+            finish = MutablePoint(x = 5.6, y = 7.8),
+        )
+        Assertions.assertNotEquals(actual.start.x, actual.start.y)
+        Assertions.assertEquals(1.2, actual.start.x)
+        Assertions.assertEquals(3.4, actual.start.y)
+        Assertions.assertNotEquals(actual.finish.x, actual.finish.y)
+        Assertions.assertEquals(5.6, actual.finish.x)
+        Assertions.assertEquals(7.8, actual.finish.y)
+        actual.set(other = pointOf(x = 9.1, y = -11.12) + pointOf(x = -13.14, y = 15.16))
+        Assertions.assertNotEquals(actual.start.x, actual.start.y)
+        Assertions.assertEquals(9.1, actual.start.x)
+        Assertions.assertEquals(-11.12, actual.start.y)
+        Assertions.assertNotEquals(actual.finish.x, actual.finish.y)
+        Assertions.assertEquals(-13.14, actual.finish.x)
+        Assertions.assertEquals(15.16, actual.finish.y)
+    }
+
+    @Test
+    fun swapTest() {
+        val actual = MutableVector(
+            start = MutablePoint(x = 1.2, y = 3.4),
+            finish = MutablePoint(x = 5.6, y = 7.8),
+        )
+        Assertions.assertNotEquals(actual.start.x, actual.start.y)
+        Assertions.assertEquals(1.2, actual.start.x)
+        Assertions.assertEquals(3.4, actual.start.y)
+        Assertions.assertNotEquals(actual.finish.x, actual.finish.y)
+        Assertions.assertEquals(5.6, actual.finish.x)
+        Assertions.assertEquals(7.8, actual.finish.y)
+        actual.swap()
+        Assertions.assertNotEquals(actual.start.x, actual.start.y)
+        Assertions.assertEquals(5.6, actual.start.x)
+        Assertions.assertEquals(7.8, actual.start.y)
+        Assertions.assertNotEquals(actual.finish.x, actual.finish.y)
+        Assertions.assertEquals(1.2, actual.finish.x)
+        Assertions.assertEquals(3.4, actual.finish.y)
+    }
 }
