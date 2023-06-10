@@ -77,6 +77,10 @@ fun Vector.copy(
     return start + finish
 }
 
+fun Vector.swapped(): Vector {
+    return finish + start
+}
+
 fun Vector.length(): Double {
     return distanceOf(a = start, b = finish)
 }
