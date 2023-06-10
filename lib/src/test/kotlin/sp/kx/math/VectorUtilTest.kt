@@ -94,4 +94,45 @@ internal class VectorUtilTest {
             foo.eq(other = bar, points = 0)
         }
     }
+
+    @Test
+    fun copyTest() {
+        val foo = pointOf(x = 1.2, y = 3.4) + pointOf(x = 5.6, y = 7.8)
+        Assertions.assertNotEquals(foo.start.x, foo.start.y)
+        Assertions.assertEquals(1.2, foo.start.x)
+        Assertions.assertEquals(3.4, foo.start.y)
+        Assertions.assertNotEquals(foo.finish.x, foo.finish.y)
+        Assertions.assertEquals(5.6, foo.finish.x)
+        Assertions.assertEquals(7.8, foo.finish.y)
+        foo.copy().also { bar ->
+            Assertions.assertFalse(foo === bar)
+            Assertions.assertEquals(foo, bar)
+        }
+        foo.copy(start = pointOf(x = 128.256, y = 512.1024)).also { bar ->
+            Assertions.assertFalse(foo === bar)
+            Assertions.assertNotEquals(foo.start, bar.start)
+            Assertions.assertEquals(128.256, bar.start.x)
+            Assertions.assertEquals(512.1024, bar.start.y)
+            Assertions.assertEquals(foo.finish, bar.finish)
+        }
+        foo.copy(finish = pointOf(x = 128.256, y = 512.1024)).also { bar ->
+            Assertions.assertFalse(foo === bar)
+            Assertions.assertNotEquals(foo.finish, bar.finish)
+            Assertions.assertEquals(128.256, bar.finish.x)
+            Assertions.assertEquals(512.1024, bar.finish.y)
+            Assertions.assertEquals(foo.start, bar.start)
+        }
+        foo.copy(
+            start = pointOf(x = 128.256, y = -512.1024),
+            finish = pointOf(x = -42.43, y = 54.55),
+        ).also { bar ->
+            Assertions.assertFalse(foo === bar)
+            Assertions.assertNotEquals(foo.start, bar.start)
+            Assertions.assertEquals(128.256, bar.start.x)
+            Assertions.assertEquals(-512.1024, bar.start.y)
+            Assertions.assertNotEquals(foo.finish, bar.finish)
+            Assertions.assertEquals(-42.43, bar.finish.x)
+            Assertions.assertEquals(54.55, bar.finish.y)
+        }
+    }
 }
