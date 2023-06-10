@@ -6,9 +6,7 @@ fun distanceOf(
     bX: Double,
     bY: Double,
 ): Double {
-    val dX = bX - aX
-    val dY = bY - aY
-    return kotlin.math.sqrt(dY * dY + dX * dX)
+    return kotlin.math.hypot(x = bX - aX, y = bY - aY)
 }
 
 fun angleOf(

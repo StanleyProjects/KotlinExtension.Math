@@ -283,7 +283,7 @@ fun distanceOf(
         aX = a.x,
         aY = a.y,
         bX = b.x,
-        bY = b.x,
+        bY = b.y,
     )
 }
 
@@ -295,7 +295,7 @@ fun angleOf(
         aX = a.x,
         aY = a.y,
         bX = b.x,
-        bY = b.x,
+        bY = b.y,
     )
 }
 
@@ -319,6 +319,6 @@ fun centerOf(
         aX = a.x,
         aY = a.y,
         bX = b.x,
-        bY = b.x,
+        bY = b.y,
     )
 }
