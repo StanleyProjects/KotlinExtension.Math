@@ -39,6 +39,28 @@ class MutableVector(
         return Objects.hash(start.x, start.y, finish.x, finish.y)
     }
 
+    /**
+     * Method for setting both [start] and [finish] points.
+     *
+     * Usage:
+     * ```
+     * val vector = MutableVector(start = MutablePoint(1.0, 1.0), finish = MutablePoint(3.0, 1.0))
+     * vector.set(start = pointOf(1.0, 2.0), finish = pointOf(3.0, 2.0))
+     *
+     *   ^
+     *   |
+     * 3 -
+     *   |
+     * 2 -   * - - - > new
+     *   |
+     * 1 -   * - - - > old
+     *   |
+     * 0 +---|---|---|---|--->
+     *   0   1   2   3   4
+     * ```
+     * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+     * @since 0.4.1
+     */
     fun set(
         start: Point,
         finish: Point,
@@ -47,11 +69,64 @@ class MutableVector(
         this.finish.set(finish)
     }
 
+    /**
+     * Method for setting both [start] and [finish] points from [other] object.
+     *
+     * Usage:
+     * ```
+     * val vector = MutableVector(start = MutablePoint(1.0, 1.0), finish = MutablePoint(3.0, 1.0))
+     * vector.set(pointOf(1.0, 2.0) + pointOf(3.0, 2.0))
+     *
+     *   ^
+     *   |
+     * 3 -
+     *   |
+     * 2 -   * - - - > new
+     *   |
+     * 1 -   * - - - > old
+     *   |
+     * 0 +---|---|---|---|--->
+     *   0   1   2   3   4
+     * ```
+     * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+     * @since 0.4.1
+     */
     fun set(other: Vector) {
         this.start.set(other.start)
         this.finish.set(other.finish)
     }
 
+    /**
+     * Swaps [start] and [finish] points.
+     *
+     * Usage:
+     * ```
+     * val vector = MutableVector(start = MutablePoint(1.0, 1.0), finish = MutablePoint(3.0, 1.0))
+     * vector.swap()
+     * ```
+     * ```
+     *   ^
+     *   |
+     * 2 -
+     *   |
+     * 1 -   * - - - > old
+     *   |
+     * 0 +---|---|---|---|--->
+     *   0   1   2   3   4
+     * ```
+     * ```
+     *   ^
+     *   |
+     * 2 -
+     *   |
+     * 1 -   < - - - * new
+     *   |
+     * 0 +---|---|---|---|--->
+     *   0   1   2   3   4
+     * ```
+     * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+     * @since 0.4.1
+     */
     fun swap() {
         val x = start.x
         val y = start.y
