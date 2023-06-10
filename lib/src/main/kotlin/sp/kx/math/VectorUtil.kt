@@ -52,3 +52,9 @@ fun Vector.copy(
 ): Vector {
     return start + finish
 }
+
+// todo get center Point
+// todo is empty
+// todo of length + angle
+// todo of points + offset
+// todo of point + offset
