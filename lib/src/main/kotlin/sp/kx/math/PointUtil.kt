@@ -44,6 +44,16 @@ fun Point.eq(other: Point, points: Int): Boolean {
     return eq(it = this, other = other, points = points)
 }
 
+fun pointOf(
+    x: Int,
+    y: Int,
+): Point {
+    return pointOf(
+        x = x.toDouble(),
+        y = y.toDouble(),
+    )
+}
+
 /**
  * Creates a new [Point] object with a copy of [this] receiver's coordinates or the values [x] and [y] passed in.
  *
@@ -163,6 +173,13 @@ operator fun Point.plus(offset: Offset): Point {
     return pointOf(
         x = x + offset.dX,
         y = y + offset.dY,
+    )
+}
+
+operator fun Point.minus(offset: Offset): Point {
+    return pointOf(
+        x = x - offset.dX,
+        y = y - offset.dY,
     )
 }
 
@@ -306,4 +323,3 @@ operator fun Point.minus(other: Point): Offset {
 }
 
 // todo of ints
-// todo minus offset
