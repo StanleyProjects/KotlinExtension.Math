@@ -38,4 +38,24 @@ class MutableVector(
     override fun hashCode(): Int {
         return Objects.hash(start.x, start.y, finish.x, finish.y)
     }
+
+    fun set(
+        start: Point,
+        finish: Point,
+    ) {
+        this.start.set(start)
+        this.finish.set(finish)
+    }
+
+    fun set(other: Vector) {
+        this.start.set(other.start)
+        this.finish.set(other.finish)
+    }
+
+    fun swap() {
+        val x = start.x
+        val y = start.y
+        start.set(finish)
+        finish.set(x = x, y = y)
+    }
 }

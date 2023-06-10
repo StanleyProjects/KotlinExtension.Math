@@ -45,3 +45,10 @@ fun Vector.eq(other: Vector, points: Int): Boolean {
     require(points > 0)
     return eq(it = this, other = other, points = points)
 }
+
+fun Vector.copy(
+    start: Point = this.start,
+    finish: Point = this.finish,
+): Vector {
+    return start + finish
+}
