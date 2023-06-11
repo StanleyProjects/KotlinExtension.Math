@@ -187,3 +187,13 @@ fun vectorOf(
         finish = start.moved(length = length, angle = angle),
     )
 }
+
+fun vectorOf(
+    start: Point,
+    length: Double,
+): Vector {
+    return ImmutableVector(
+        start = start,
+        finish = start.moved(length = length),
+    )
+}
