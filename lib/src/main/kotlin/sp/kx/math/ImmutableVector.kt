@@ -4,7 +4,7 @@ import sp.kx.math.unsafe.toString
 import java.util.Locale
 import java.util.Objects
 
-internal class ImmutableVector(
+private class ImmutableVector(
     override val start: Point,
     override val finish: Point,
 ) : Vector {
@@ -160,5 +160,30 @@ fun Point.toVector(
     return ImmutableVector(
         start = this,
         finish = pointOf(x = x, y = y),
+    )
+}
+
+fun Point.toVector(offset: Offset): Vector {
+    return ImmutableVector(
+        start = this,
+        finish = this + offset,
+    )
+}
+
+fun Point.toVector(finish: Point, offset: Offset): Vector {
+    return ImmutableVector(
+        start = this + offset,
+        finish = finish + offset,
+    )
+}
+
+fun vectorOf(
+    start: Point,
+    length: Double,
+    angle: Double,
+): Vector {
+    return ImmutableVector(
+        start = start,
+        finish = start.moved(length = length, angle = angle),
     )
 }

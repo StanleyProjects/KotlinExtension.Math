@@ -216,7 +216,3 @@ fun Vector.isEmpty(points: Int): Boolean {
 fun Vector.isEmpty(): Boolean {
     return start == finish
 }
-
-// todo of length + angle
-// todo of points + offset
-// todo of point + offset
