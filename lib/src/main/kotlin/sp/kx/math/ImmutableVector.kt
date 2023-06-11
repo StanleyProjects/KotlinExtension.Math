@@ -4,7 +4,7 @@ import sp.kx.math.unsafe.toString
 import java.util.Locale
 import java.util.Objects
 
-private class ImmutableVector(
+internal class ImmutableVector(
     override val start: Point,
     override val finish: Point,
 ) : Vector {
