@@ -77,27 +77,142 @@ fun Vector.copy(
     return start + finish
 }
 
+/**
+ * Creates a new [Vector] object with a copy of [this] receiver's swapped points.
+ *
+ * Usage:
+ * ```
+ * val foo = pointOf(1, 1) + pointOf(3, 1)
+ * val bar = foo.swapped()
+ * ```
+ * ```
+ *   ^
+ *   |
+ * 2 -
+ *   |
+ * 1 -   * - - - > foo
+ *   |
+ * 0 +---|---|---|---|--->
+ *   0   1   2   3   4
+ * ```
+ * ```
+ *   ^
+ *   |
+ * 2 -
+ *   |
+ * 1 -   < - - - * bar
+ *   |
+ * 0 +---|---|---|---|--->
+ *   0   1   2   3   4
+ * ```
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.4.2
+ */
 fun Vector.swapped(): Vector {
     return finish + start
 }
 
+/**
+ * Usage:
+ * ```
+ * val vector = pointOf(1, 1) + pointOf(3, 1)
+ * assertEquals(2.0, vector.length())
+ *
+ *   ^
+ *   |
+ * 2 -
+ *   |    a       b
+ * 1 -   * - - - *
+ *   |
+ * 0 +---|---|---|---|--->
+ *   0   1   2   3   4
+ * ```
+ * @return Distance between point [Vector.start] and point [Vector.finish].
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.4.2
+ */
 fun Vector.length(): Double {
     return distanceOf(a = start, b = finish)
 }
 
+/**
+ * Usage:
+ * ```
+ * val vector = pointOf(1, 1) + pointOf(3, 3)
+ * assertEquals(PI / 4, vector.angle())
+ *
+ *   ^
+ *   |
+ * 3 -           * b
+ *   |         /
+ * 2 -       /
+ *   |     /
+ * 1 -   * a
+ *   |
+ * 0 +---|---|---|---|--->
+ *   0   1   2   3   4
+ * ```
+ * @return The angle in radians between the x-axis and the straight line containing point [Vector.start] and point [Vector.finish].
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.4.2
+ */
 fun Vector.angle(): Double {
     return angleOf(a = start, b = finish)
 }
 
+/**
+ * Usage:
+ * ```
+ * val vector = pointOf(1, 1) + pointOf(3, 1)
+ * val point = vector.center()
+ * assertEquals(2.0, point.x)
+ * assertEquals(1.0, point.y)
+ *
+ *   ^
+ *   |
+ * 2 -
+ *   |
+ * 1 -   * - x - *
+ *   |
+ * 0 +---|---|---|---|--->
+ *   0   1   2   3   4
+ * ```
+ * @return A [Point] that is the center of the segment between point [Vector.start] and point [Vector.finish].
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.4.2
+ */
 fun Vector.center(): Point {
     return centerOf(a = start, b = finish)
 }
 
+/**
+ * Usage:
+ * ```
+ * assertTrue((pointOf(1, 12) + pointOf(1, 1)).isEmpty(points = 1))
+ * assertFalse((pointOf(1, 12) + pointOf(1, 1)).isEmpty(points = 2))
+ * ```
+ * @param points The number of decimal places to compare coordinates with.
+ * @return `true` if [this] receiver's [Vector.start] are equal to [this] receiver's [Vector.finish] to [points] decimal places; `false` otherwise
+ * @throws IllegalArgumentException if [points] lower than 1.
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.4.2
+ * @see Point.eq
+ */
 fun Vector.isEmpty(points: Int): Boolean {
     require(points > 0)
     return eq(it = start, other = finish, points = points)
 }
 
+/**
+ * Usage:
+ * ```
+ * assertTrue((pointOf(1, 1) + pointOf(1, 1)).isEmpty())
+ * assertFalse((pointOf(1, 1) + pointOf(1, 2)).isEmpty())
+ * ```
+ * @return `true` if [this] receiver's [Vector.start] are equal to [this] receiver's [Vector.finish]; `false` otherwise
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.4.2
+ */
 fun Vector.isEmpty(): Boolean {
     return start == finish
 }
