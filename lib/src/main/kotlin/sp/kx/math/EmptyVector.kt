@@ -22,6 +22,18 @@ internal class EmptyVector(override val start: Point) : Vector {
     }
 }
 
+/**
+ * Usage:
+ * ```
+ * val vector = pointOf(x = 1.0, y = 2.0).toVector()
+ * assertEquals(vector.start, vector.finish)
+ * assertTrue(vector.isEmpty())
+ * ```
+ * @receiver This [Point] will become the [Vector.start] and the [Vector.finish] point.
+ * @return An instance of [Vector] built from the [Point] passed to the method.
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.4.3
+ */
 fun Point.toVector(): Vector {
     return EmptyVector(this)
 }
