@@ -135,4 +135,83 @@ internal class VectorUtilTest {
             Assertions.assertEquals(54.55, bar.finish.y)
         }
     }
+
+    @Test
+    fun swappedTest() {
+        val foo = pointOf(x = 1.2, y = 3.4) + pointOf(x = 5.6, y = 7.8)
+        Assertions.assertNotEquals(foo.start.x, foo.start.y)
+        Assertions.assertEquals(1.2, foo.start.x)
+        Assertions.assertEquals(3.4, foo.start.y)
+        Assertions.assertNotEquals(foo.finish.x, foo.finish.y)
+        Assertions.assertEquals(5.6, foo.finish.x)
+        Assertions.assertEquals(7.8, foo.finish.y)
+        foo.swapped().also { bar ->
+            Assertions.assertFalse(foo === bar)
+            Assertions.assertNotEquals(foo, bar)
+            Assertions.assertNotEquals(bar.start, foo.start)
+            Assertions.assertNotEquals(bar.finish, foo.finish)
+            Assertions.assertEquals(bar.start, foo.finish)
+        }
+    }
+
+    @Test
+    fun isEmptyTest() {
+        (pointOf(x = 1, y = 1) + pointOf(x = 3, y = 1)).also { vector: Vector ->
+            Assertions.assertFalse(vector.isEmpty())
+        }
+        (pointOf(x = 1, y = 1) + pointOf(x = 1.1, y = 1.0)).also { vector: Vector ->
+            Assertions.assertFalse(vector.isEmpty())
+        }
+        (pointOf(x = 1, y = 1) + pointOf(x = 1, y = 1)).also { vector: Vector ->
+            Assertions.assertTrue(vector.isEmpty())
+        }
+        (pointOf(x = -1, y = -1) + pointOf(x = -1.0, y = -1.0)).also { vector: Vector ->
+            Assertions.assertTrue(vector.isEmpty())
+        }
+    }
+
+    @Test
+    fun isEmptyPointsTest() {
+        (pointOf(x = 1.2, y = 3.4) + pointOf(x = 1.25, y = 3.46)).also { vector: Vector ->
+            Assertions.assertTrue(vector.isEmpty(points = 1))
+            Assertions.assertFalse(vector.isEmpty(points = 2))
+        }
+        (pointOf(x = 1.01, y = 1.0) + pointOf(x = 1.0, y = 1.0)).also { vector: Vector ->
+            Assertions.assertTrue(vector.isEmpty(points = 1))
+            Assertions.assertFalse(vector.isEmpty(points = 2))
+            Assertions.assertFalse(vector.isEmpty(points = 4))
+            Assertions.assertFalse(vector.isEmpty(points = 8))
+            Assertions.assertFalse(vector.isEmpty(points = 16))
+        }
+        (pointOf(x = 1.001, y = 1.0) + pointOf(x = 1.0, y = 1.0)).also { vector: Vector ->
+            Assertions.assertTrue(vector.isEmpty(points = 1))
+            Assertions.assertTrue(vector.isEmpty(points = 2))
+            Assertions.assertTrue(vector.isEmpty(points = 3))
+            Assertions.assertFalse(vector.isEmpty(points = 4))
+            Assertions.assertFalse(vector.isEmpty(points = 8))
+            Assertions.assertFalse(vector.isEmpty(points = 16))
+        }
+        (pointOf(x = 1.00000001, y = 1.0) + pointOf(x = 1.0, y = 1.0)).also { vector: Vector ->
+            Assertions.assertTrue(vector.isEmpty(points = 1))
+            Assertions.assertTrue(vector.isEmpty(points = 2))
+            Assertions.assertTrue(vector.isEmpty(points = 3))
+            Assertions.assertTrue(vector.isEmpty(points = 4))
+            Assertions.assertTrue(vector.isEmpty(points = 8))
+            Assertions.assertFalse(vector.isEmpty(points = 16))
+        }
+    }
+
+    @Test
+    fun isEmptyErrorTest() {
+        Assertions.assertThrows(IllegalArgumentException::class.java) {
+            val foo = pointOf(x = 1.23, y = 4.56) + pointOf(x = 7.89, y = 10.1)
+            @Suppress("IgnoredReturnValue")
+            foo.isEmpty(points = 0)
+        }
+        Assertions.assertThrows(IllegalArgumentException::class.java) {
+            val foo = pointOf(x = 1.23, y = 4.56) + pointOf(x = 7.89, y = 10.1)
+            @Suppress("IgnoredReturnValue")
+            foo.isEmpty(points = -1)
+        }
+    }
 }
