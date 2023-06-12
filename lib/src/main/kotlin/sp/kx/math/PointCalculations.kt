@@ -64,6 +64,11 @@ fun angleOf(
     )
 }
 
+// todo angle of point and x/y
+// todo angle of x/y and point
+// todo angle of point and offset
+// todo angle of points and offset
+
 /**
  * Usage:
  * ```
