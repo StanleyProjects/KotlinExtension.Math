@@ -203,7 +203,7 @@ internal class NumberUtilTest {
 
     @Test
     fun ctNegativeTest() {
-        val actual = - kotlin.math.PI / 3
+        val actual = -kotlin.math.PI / 3
         Assertions.assertTrue(actual < 0)
         val delta = 0.00000000000001
         Assertions.assertEquals(kotlin.math.PI * 2 - kotlin.math.PI / 3, actual.ct(), delta)
