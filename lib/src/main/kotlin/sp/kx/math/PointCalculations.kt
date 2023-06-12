@@ -96,7 +96,7 @@ fun angleOf(
 ): Double {
     return angleOf(
         a = a,
-        b = a + offset
+        b = a + offset,
     )
 }
 
@@ -107,7 +107,7 @@ fun angleOf(
 ): Double {
     return angleOf(
         a = a + offset,
-        b = b + offset
+        b = b + offset,
     )
 }
 

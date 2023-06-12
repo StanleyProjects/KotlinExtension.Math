@@ -9,7 +9,7 @@ internal fun toString(number: Double, points: Int, locale: Locale): String {
 }
 
 internal fun toString(number: Double, integer: Int, fractional: Int, locale: Locale): String {
-    return String.format(locale, "%${integer}.${fractional}f", number)
+    return String.format(locale, "%$integer.${fractional}f", number)
 }
 
 internal fun eq(it: Double, other: Double, points: Int): Boolean {
