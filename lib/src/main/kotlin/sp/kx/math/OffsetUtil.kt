@@ -84,4 +84,11 @@ fun Offset.swapped(): Offset {
     return offsetOf(dX = dY, dY = dX)
 }
 
-// todo is empty
+fun Offset.isEmpty(points: Int): Boolean {
+    require(points > 0)
+    return eq(it = dX, other = 0.0, points = points) && eq(it = dY, other = 0.0, points = points)
+}
+
+fun Offset.isEmpty(): Boolean {
+    return dX == 0.0 && dY == 0.0
+}
