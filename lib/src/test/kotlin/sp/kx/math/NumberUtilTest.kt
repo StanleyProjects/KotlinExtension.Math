@@ -144,4 +144,48 @@ internal class NumberUtilTest {
             1.2.eq(other = 3.4, points = 0)
         }
     }
+
+    @Test
+    fun ctTest() {
+        val actual = kotlin.math.PI * 2 + kotlin.math.PI / 3
+        Assertions.assertTrue(actual > kotlin.math.PI * 2)
+        val delta = 0.00000000000001
+        Assertions.assertEquals(kotlin.math.PI / 3, actual.ct(), delta)
+        Assertions.assertEquals(kotlin.math.PI / 3, (kotlin.math.PI * 2 + actual).ct(), delta)
+        Assertions.assertEquals(kotlin.math.PI / 3, (kotlin.math.PI * 4 + actual).ct(), delta)
+    }
+
+    @Test
+    fun ctNegativeTest() {
+        val actual = - kotlin.math.PI / 3
+        Assertions.assertTrue(actual < 0)
+        val delta = 0.00000000000001
+        Assertions.assertEquals(kotlin.math.PI * 2 - kotlin.math.PI / 3, actual.ct(), delta)
+        Assertions.assertEquals(kotlin.math.PI * 2 - kotlin.math.PI / 3, (kotlin.math.PI * 2 + actual).ct(), delta)
+        Assertions.assertEquals(kotlin.math.PI * 2 - kotlin.math.PI / 3, (kotlin.math.PI * 4 + actual).ct(), delta)
+    }
+
+    @Test
+    fun ctKTest() {
+        val k = 128.0
+        val value = 42.0
+        val actual = k + k + value
+        Assertions.assertEquals(value, actual.ct(k = k))
+        Assertions.assertEquals(value, (k + actual).ct(k = k))
+        Assertions.assertEquals(value, (k * 2 + actual).ct(k = k))
+        Assertions.assertEquals(value, (k * 3 + actual).ct(k = k))
+        Assertions.assertEquals(value, (k * 4 + actual).ct(k = k))
+    }
+
+    @Test
+    fun ctKNegativeTest() {
+        val k = 128.0
+        val value = 42.0
+        val actual = -value
+        Assertions.assertEquals(k - value, actual.ct(k = k))
+        Assertions.assertEquals(k - value, (k + actual).ct(k = k))
+        Assertions.assertEquals(k - value, (k * 2 + actual).ct(k = k))
+        Assertions.assertEquals(k - value, (k * 3 + actual).ct(k = k))
+        Assertions.assertEquals(k - value, (k * 4 + actual).ct(k = k))
+    }
 }
