@@ -64,10 +64,52 @@ fun angleOf(
     )
 }
 
-// todo angle of point and x/y
-// todo angle of x/y and point
-// todo angle of point and offset
-// todo angle of points and offset
+fun angleOf(
+    a: Point,
+    bX: Double,
+    bY: Double,
+): Double {
+    return angleOf(
+        aX = a.x,
+        aY = a.y,
+        bX = bX,
+        bY = bY,
+    )
+}
+
+fun angleOf(
+    aX: Double,
+    aY: Double,
+    b: Point,
+): Double {
+    return angleOf(
+        aX = aX,
+        aY = aY,
+        bX = b.x,
+        bY = b.y,
+    )
+}
+
+fun angleOf(
+    a: Point,
+    offset: Offset,
+): Double {
+    return angleOf(
+        a = a,
+        b = a + offset
+    )
+}
+
+fun angleOf(
+    a: Point,
+    b: Point,
+    offset: Offset,
+): Double {
+    return angleOf(
+        a = a + offset,
+        b = b + offset
+    )
+}
 
 /**
  * Usage:
