@@ -39,9 +39,6 @@ internal class VectorCalculationsTest {
         (pointOf(x = 1, y = 1) + pointOf(x = 4, y = 4)).also { vector: Vector ->
             Assertions.assertEquals((kotlin.math.PI / 4).ct(), vector.angle().ct())
         }
-        (pointOf(x = 1, y = 1) + pointOf(x = 4, y = 4)).also { vector: Vector ->
-            Assertions.assertEquals((kotlin.math.PI / 4).ct(), vector.angle().ct())
-        }
         (pointOf(x = 1, y = 1) + pointOf(x = -2, y = 4)).also { vector: Vector ->
             Assertions.assertEquals((kotlin.math.PI / 2 + kotlin.math.PI / 4).ct(), vector.angle().ct())
         }
