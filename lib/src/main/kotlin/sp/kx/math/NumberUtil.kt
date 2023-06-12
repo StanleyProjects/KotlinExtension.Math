@@ -22,8 +22,11 @@ fun Double.toString(points: Int, locale: Locale = Locale.US): String {
     return toString(number = this, points, locale)
 }
 
-// todo to string integer and fractional part
-// fun Double.toString(integer: Int, fractional: Int, locale: Locale = Locale.US): String
+fun Double.toString(integer: Int, fractional: Int, locale: Locale = Locale.US): String {
+    require(integer > 0) { "Integer count is not positive!" }
+    if (fractional < 0) error("Fractional count is negative!")
+    return toString(number = this, integer = integer, fractional = fractional, locale)
+}
 
 /**
  * Compares [this] object [Double] with the specified [other] object [Double].
@@ -46,4 +49,6 @@ fun Double.eq(other: Double, points: Int): Boolean {
     return eq(it = this, other = other, points = points)
 }
 
-// todo Double normalize
+fun Double.ct(k: Double = kotlin.math.PI * 2): Double {
+    return (this % k + k) % k
+}
