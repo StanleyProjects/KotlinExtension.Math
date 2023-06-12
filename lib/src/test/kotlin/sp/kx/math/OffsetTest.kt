@@ -32,4 +32,11 @@ internal class OffsetTest {
             Assertions.assertEquals(7.8, actual.dY)
         }
     }
+
+    @Test
+    fun emptyTest() {
+        Assertions.assertEquals(Offset.Empty.dX, Offset.Empty.dY)
+        Assertions.assertEquals(0.0, Offset.Empty.dX)
+        Assertions.assertEquals(0.0, Offset.Empty.dY)
+    }
 }
