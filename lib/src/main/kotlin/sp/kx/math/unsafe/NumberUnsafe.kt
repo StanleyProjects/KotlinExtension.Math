@@ -8,8 +8,8 @@ internal fun toString(number: Double, points: Int, locale: Locale): String {
     return String.format(locale, "%.${points}f", number)
 }
 
-internal fun toString(number: Double, integer: Int, fractional: Int, locale: Locale): String {
-    return String.format(locale, "%$integer.${fractional}f", number)
+internal fun toString(number: Double, total: Int, points: Int, locale: Locale): String {
+    return String.format(locale, "%0$total.${points}f", number)
 }
 
 internal fun eq(it: Double, other: Double, points: Int): Boolean {
