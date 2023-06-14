@@ -97,5 +97,4 @@ fun Double.ct(k: Double = kotlin.math.PI * 2): Double {
     return (this % k + k) % k
 }
 
-// todo time interval  | a: Duration b: Duration
 // todo actual/expected
