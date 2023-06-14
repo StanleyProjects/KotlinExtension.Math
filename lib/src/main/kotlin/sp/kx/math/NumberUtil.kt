@@ -98,7 +98,6 @@ fun Double.ct(k: Double = kotlin.math.PI * 2): Double {
 }
 
 // todo velocity/speed | 60 km/h
-// todo size           | w: 1024 h: 768
 // todo time interval  | a: Duration b: Duration
 // todo measure        | 5 units = 5 * 2 pixel / unit
 // todo actual/expected

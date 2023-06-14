@@ -9,21 +9,22 @@ interface Measure<T : Any, U : Any> {
 
 private class MeasureUnit(var raw: Int) : Measure<Double, Int> {
     override fun transform(units: Double): Int {
+        1.. 2
         return (units * raw).toInt()
     }
 }
 
-interface Speed {
-    fun per(timeUnit: TimeUnit): Double
-    fun length(duration: Duration): Double
+interface Interval<T : Comparable<T>> {
+    val a: T
+    val b: T
+    fun getDiff(): T
 }
 
-private class MutableSpeed(var raw: Double) : Speed {
-    override fun per(timeUnit: TimeUnit): Double {
-        return raw * timeUnit.toNanos(1)
-    }
-
-    override fun length(duration: Duration): Double {
-        return raw * duration.inWholeNanoseconds
-    }
-}
+//class MutableInterval<T : Comparable<T>>(
+//    override var a: T,
+//    override var b: T,
+//) : Interval<T> {
+//    override fun getDiff(): T {
+//        return b - a
+//    }
+//}
