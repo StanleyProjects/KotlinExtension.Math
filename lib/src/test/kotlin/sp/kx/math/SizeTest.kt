@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test
 
 internal class SizeTest {
     @Test
-    fun pointOfTest() {
+    fun sizeOfTest() {
         val foo: Size = sizeOf(
             width = 1.2,
             height = 3.4,
