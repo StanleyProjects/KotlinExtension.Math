@@ -83,3 +83,35 @@ fun Offset.copy(
 fun Offset.swapped(): Offset {
     return offsetOf(dX = dY, dY = dX)
 }
+
+/**
+ * Usage:
+ * ```
+ * assertTrue(offsetOf(0.0, 0.01)).isEmpty(points = 1))
+ * assertFalse(offsetOf(0.0, 0.01)).isEmpty(points = 2))
+ * ```
+ * @param points The number of decimal places to compare coordinates with.
+ * @return `true` if [this] receiver's [Offset.dX] and [Offset.dY] are equals `0.0` to [points] decimal places; `false` otherwise
+ * @throws IllegalArgumentException if [points] lower than 1.
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.4.4
+ * @see Double.eq
+ */
+fun Offset.isEmpty(points: Int): Boolean {
+    require(points > 0)
+    return eq(it = dX, other = 0.0, points = points) && eq(it = dY, other = 0.0, points = points)
+}
+
+/**
+ * Usage:
+ * ```
+ * assertTrue(offsetOf(0.0, 0.0)).isEmpty())
+ * assertFalse(offsetOf(0.0, 0.1)).isEmpty())
+ * ```
+ * @return `true` if [this] receiver's [Offset.dX] and [Offset.dY] are equals `0.0`; `false` otherwise
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.4.4
+ */
+fun Offset.isEmpty(): Boolean {
+    return dX == 0.0 && dY == 0.0
+}

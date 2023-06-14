@@ -33,4 +33,18 @@ interface Offset {
      * Offset along the y-axis.
      */
     val dY: Double
+
+    companion object {
+        /**
+         * A special case of a [Offset] with zeroes.
+         *
+         * Usage:
+         * ```
+         * val point = pointOf(1, 2)
+         * assertEquals(point, point + Offset.Empty)
+         * ```
+         * @since 0.4.4
+         */
+        val Empty = offsetOf(dX = 0.0, dY = 0.0)
+    }
 }

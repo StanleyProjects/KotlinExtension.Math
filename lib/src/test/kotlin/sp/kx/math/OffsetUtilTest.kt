@@ -102,4 +102,59 @@ internal class OffsetUtilTest {
             Assertions.assertEquals(foo.dY, bar.dX)
         }
     }
+
+    @Test
+    fun isEmptyTest() {
+        Assertions.assertFalse(offsetOf(dX = 0.0, dY = 0.1).isEmpty())
+        Assertions.assertFalse(offsetOf(dX = 0.1, dY = 0.0).isEmpty())
+        Assertions.assertTrue(offsetOf(dX = 0.0, dY = 0.0).isEmpty())
+        Assertions.assertTrue(Offset.Empty.isEmpty())
+    }
+
+    @Test
+    fun isEmptyPointsTest() {
+        offsetOf(dX = 0.0, dY = 0.01).also { offset: Offset ->
+            Assertions.assertTrue(offset.isEmpty(points = 1))
+            Assertions.assertFalse(offset.isEmpty(points = 2))
+        }
+        offsetOf(dX = 0.0, dY = 0.001).also { offset: Offset ->
+            Assertions.assertTrue(offset.isEmpty(points = 1))
+            Assertions.assertTrue(offset.isEmpty(points = 2))
+            Assertions.assertFalse(offset.isEmpty(points = 3))
+            Assertions.assertFalse(offset.isEmpty(points = 4))
+            Assertions.assertFalse(offset.isEmpty(points = 8))
+            Assertions.assertFalse(offset.isEmpty(points = 16))
+        }
+        offsetOf(dX = 0.0001, dY = 0.0).also { offset: Offset ->
+            Assertions.assertTrue(offset.isEmpty(points = 1))
+            Assertions.assertTrue(offset.isEmpty(points = 2))
+            Assertions.assertTrue(offset.isEmpty(points = 3))
+            Assertions.assertFalse(offset.isEmpty(points = 4))
+            Assertions.assertFalse(offset.isEmpty(points = 8))
+            Assertions.assertFalse(offset.isEmpty(points = 16))
+        }
+        offsetOf(dX = 0.0, dY = 0.00001).also { offset: Offset ->
+            Assertions.assertTrue(offset.isEmpty(points = 1))
+            Assertions.assertTrue(offset.isEmpty(points = 2))
+            Assertions.assertTrue(offset.isEmpty(points = 3))
+            Assertions.assertTrue(offset.isEmpty(points = 4))
+            Assertions.assertFalse(offset.isEmpty(points = 5))
+            Assertions.assertFalse(offset.isEmpty(points = 8))
+            Assertions.assertFalse(offset.isEmpty(points = 16))
+        }
+    }
+
+    @Test
+    fun isEmptyErrorTest() {
+        Assertions.assertThrows(IllegalArgumentException::class.java) {
+            val foo = offsetOf(dX = 0.0, dY = 0.0)
+            @Suppress("IgnoredReturnValue")
+            foo.isEmpty(points = 0)
+        }
+        Assertions.assertThrows(IllegalArgumentException::class.java) {
+            val foo = offsetOf(dX = 0.0, dY = 0.0)
+            @Suppress("IgnoredReturnValue")
+            foo.isEmpty(points = -1)
+        }
+    }
 }
