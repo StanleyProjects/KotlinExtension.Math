@@ -1,4 +1,4 @@
-package sp.kx.math
+package sp.kx.math.measure
 
 import java.util.concurrent.TimeUnit
 import kotlin.time.Duration
