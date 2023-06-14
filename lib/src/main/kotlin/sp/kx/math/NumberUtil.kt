@@ -19,13 +19,13 @@ import java.util.Locale
  */
 fun Double.toString(points: Int, locale: Locale = Locale.US): String {
     if (points < 0) error("Points count is negative!")
-    return toString(number = this, points, locale)
+    return toString(number = this, points = points, locale = locale)
 }
 
 fun Double.toString(total: Int, points: Int, locale: Locale = Locale.US): String {
     require(total > 0) { "Total count is not positive!" }
     if (points < 0) error("Points count is negative!")
-    return toString(number = this, total = total, points = points, locale)
+    return toString(number = this, total = total, points = points, locale = locale)
 }
 
 /**
