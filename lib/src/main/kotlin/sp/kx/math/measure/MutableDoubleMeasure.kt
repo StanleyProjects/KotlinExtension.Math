@@ -20,6 +20,6 @@ class MutableDoubleMeasure(var magnitude: Double) : Measure<Double, Double> {
     }
 }
 
-fun measureOf(magnitude: Double) : Measure<Double, Double> {
+fun measureOf(magnitude: Double): Measure<Double, Double> {
     return MutableDoubleMeasure(magnitude = magnitude)
 }

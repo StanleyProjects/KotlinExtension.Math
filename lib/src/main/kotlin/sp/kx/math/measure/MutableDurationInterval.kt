@@ -5,7 +5,7 @@ import kotlin.time.Duration
 
 class MutableDurationInterval(
     override var a: Duration,
-    override var b: Duration
+    override var b: Duration,
 ) : Interval<Duration> {
     override fun toString(): String {
         return super.toString()

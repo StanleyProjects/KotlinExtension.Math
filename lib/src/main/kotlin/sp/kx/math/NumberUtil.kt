@@ -96,5 +96,3 @@ fun Double.eq(other: Double, points: Int): Boolean {
 fun Double.ct(k: Double = kotlin.math.PI * 2): Double {
     return (this % k + k) % k
 }
-
-// todo actual/expected
