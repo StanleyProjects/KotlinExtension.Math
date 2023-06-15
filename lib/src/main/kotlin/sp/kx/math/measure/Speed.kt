@@ -6,4 +6,8 @@ import kotlin.time.Duration
 interface Speed {
     fun per(timeUnit: TimeUnit): Double
     fun length(duration: Duration): Double
+
+    companion object {
+        val Zero : Speed = ZeroSpeed
+    }
 }
