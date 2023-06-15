@@ -81,9 +81,4 @@ internal class MutableSizeTest {
             height = 3.4,
         ).hashCode()
     }
-
-    @Test
-    fun sizeOfTest() {
-
-    }
 }
