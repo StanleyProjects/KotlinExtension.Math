@@ -5,7 +5,7 @@ import kotlin.time.Duration
 
 internal object ZeroSpeed : Speed {
     override fun toString(): String {
-        return "{speed: 0.0 per SECONDS}"
+        return "{speed: 0.00 per SECONDS}"
     }
 
     override fun equals(other: Any?): Boolean {
