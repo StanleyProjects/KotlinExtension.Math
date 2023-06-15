@@ -9,6 +9,7 @@ import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Duration.Companion.minutes
 import kotlin.time.Duration.Companion.seconds
 
+@Suppress("MagicNumber")
 internal class MutableSpeedTest {
     @Test
     fun constructorTest() {
@@ -23,7 +24,7 @@ internal class MutableSpeedTest {
     }
 
     @Test
-    fun toStringTest() {
+    fun toStringSecondsTest() {
         MutableSpeed(magnitude = 1.2, TimeUnit.SECONDS).also { speed ->
             Assertions.assertEquals("{speed: 1.20 per SECONDS}", speed.toString())
         }
@@ -42,32 +43,37 @@ internal class MutableSpeedTest {
         MutableSpeed(magnitude = 5.678, TimeUnit.SECONDS).also { speed ->
             Assertions.assertEquals("{speed: 5.68 per SECONDS}", speed.toString())
         }
+    }
+
+    @Test
+    fun toStringTest() {
+        val expected = "{speed: 1.00 per SECONDS}"
         MutableSpeed(magnitude = 1.0 / 1_000, TimeUnit.MILLISECONDS).also { speed ->
-            Assertions.assertEquals("{speed: 1.00 per SECONDS}", speed.toString())
+            Assertions.assertEquals(expected, speed.toString())
         }
         MutableSpeed(magnitude = 60.0, TimeUnit.MINUTES).also { speed ->
-            Assertions.assertEquals("{speed: 1.00 per SECONDS}", speed.toString())
+            Assertions.assertEquals(expected, speed.toString())
         }
         MutableSpeed(magnitude = 60.0 * 60.0, TimeUnit.HOURS).also { speed ->
-            Assertions.assertEquals("{speed: 1.00 per SECONDS}", speed.toString())
+            Assertions.assertEquals(expected, speed.toString())
         }
         MutableSpeed(magnitude = 60.0 * 60.0 * 24.0, TimeUnit.DAYS).also { speed ->
-            Assertions.assertEquals("{speed: 1.00 per SECONDS}", speed.toString())
+            Assertions.assertEquals(expected, speed.toString())
         }
         MutableSpeed(magnitude = 1.0, 1.seconds).also { speed ->
-            Assertions.assertEquals("{speed: 1.00 per SECONDS}", speed.toString())
+            Assertions.assertEquals(expected, speed.toString())
         }
         MutableSpeed(magnitude = 60.0, 1.minutes).also { speed ->
-            Assertions.assertEquals("{speed: 1.00 per SECONDS}", speed.toString())
+            Assertions.assertEquals(expected, speed.toString())
         }
         MutableSpeed(magnitude = 60.0 * 2, 2.minutes).also { speed ->
-            Assertions.assertEquals("{speed: 1.00 per SECONDS}", speed.toString())
+            Assertions.assertEquals(expected, speed.toString())
         }
         MutableSpeed(magnitude = 60.0 * 60.0 * 2, 2.hours).also { speed ->
-            Assertions.assertEquals("{speed: 1.00 per SECONDS}", speed.toString())
+            Assertions.assertEquals(expected, speed.toString())
         }
         MutableSpeed(magnitude = 60.0 * 60.0 * 24.0 * 4, 4.days).also { speed ->
-            Assertions.assertEquals("{speed: 1.00 per SECONDS}", speed.toString())
+            Assertions.assertEquals(expected, speed.toString())
         }
     }
 

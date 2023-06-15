@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import java.util.concurrent.TimeUnit
 
+@Suppress("MagicNumber")
 internal class SpeedUtilTest {
     @Test
     fun isEmptyTest() {

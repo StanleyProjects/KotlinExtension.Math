@@ -10,6 +10,7 @@ import kotlin.time.Duration.Companion.minutes
 import kotlin.time.Duration.Companion.nanoseconds
 import kotlin.time.Duration.Companion.seconds
 
+@Suppress("MagicNumber")
 internal class ZeroSpeedTest {
     @Test
     fun toStringTest() {

@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import kotlin.time.Duration.Companion.seconds
 
+@Suppress("MagicNumber")
 internal class MutableDurationIntervalTest {
     @Test
     fun constructorTest() {
