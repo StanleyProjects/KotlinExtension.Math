@@ -27,3 +27,13 @@ class MutableDurationInterval(
         return Objects.hash(a, b)
     }
 }
+
+fun intervalOf(
+    a: Duration,
+    b: Duration,
+): Interval<Duration> {
+    return MutableDurationInterval(
+        a = a,
+        b = b,
+    )
+}
