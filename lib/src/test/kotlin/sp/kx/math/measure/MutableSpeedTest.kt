@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test
 import java.util.concurrent.TimeUnit
 import kotlin.time.Duration.Companion.days
 import kotlin.time.Duration.Companion.hours
+import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Duration.Companion.minutes
 import kotlin.time.Duration.Companion.seconds
 
@@ -100,5 +101,48 @@ internal class MutableSpeedTest {
         val speed = MutableSpeed(magnitude = 1.2, timeUnit = TimeUnit.SECONDS)
         @Suppress("IgnoredReturnValue")
         speed.hashCode()
+    }
+
+    @Test
+    fun setTest() {
+        val speed = MutableSpeed(magnitude = 1.2, timeUnit = TimeUnit.SECONDS)
+        Assertions.assertEquals(1.2, speed.per(timeUnit = TimeUnit.SECONDS))
+        speed.set(magnitude = 60.0 * 2, timeUnit = TimeUnit.MINUTES)
+        Assertions.assertEquals(2.0, speed.per(timeUnit = TimeUnit.SECONDS))
+        speed.set(magnitude = 60.0 * 60.0 * 3, timeUnit = TimeUnit.HOURS)
+        Assertions.assertEquals(3.0, speed.per(timeUnit = TimeUnit.SECONDS))
+        speed.set(magnitude = 60.0 * 60.0 * 24 * 4, timeUnit = TimeUnit.DAYS)
+        Assertions.assertEquals(4.0, speed.per(timeUnit = TimeUnit.SECONDS))
+    }
+
+    @Test
+    fun setDurationTest() {
+        val speed = MutableSpeed(magnitude = 1.2, timeUnit = TimeUnit.SECONDS)
+        Assertions.assertEquals(1.2, speed.per(timeUnit = TimeUnit.SECONDS))
+        speed.set(magnitude = 3600.0 / 1_000, time = 60.milliseconds)
+        Assertions.assertEquals(60.0, speed.per(timeUnit = TimeUnit.SECONDS), 0.0000001)
+        Assertions.assertEquals(60.0 * 60.0, speed.per(timeUnit = TimeUnit.MINUTES), 0.0000001)
+        speed.set(magnitude = 25.0, time = 5.seconds)
+        Assertions.assertEquals(5.0 * 60 * 60, speed.per(timeUnit = TimeUnit.HOURS))
+        Assertions.assertEquals(5.0 * 60, speed.per(timeUnit = TimeUnit.MINUTES))
+        Assertions.assertEquals(5.0, speed.per(timeUnit = TimeUnit.SECONDS))
+        Assertions.assertEquals(5.0 / 1_000, speed.per(timeUnit = TimeUnit.MILLISECONDS))
+        speed.set(magnitude = 60.0 * 2 * 2, time = 2.minutes)
+        Assertions.assertEquals(2.0, speed.per(timeUnit = TimeUnit.SECONDS))
+        speed.set(magnitude = 60.0 * 60.0 * 3 * 3, time = 3.hours)
+        Assertions.assertEquals(3.0, speed.per(timeUnit = TimeUnit.SECONDS))
+        speed.set(magnitude = 60.0 * 60.0 * 24 * 4 * 4, time = 4.days)
+        Assertions.assertEquals(4.0, speed.per(timeUnit = TimeUnit.SECONDS))
+    }
+
+    @Test
+    fun lengthTest() {
+        val speed = MutableSpeed(magnitude = 1.2, timeUnit = TimeUnit.SECONDS)
+        Assertions.assertEquals(1.2, speed.length(1.seconds))
+        Assertions.assertEquals(1.2 * 2, speed.length(2.seconds))
+        Assertions.assertEquals(1.2 * 60, speed.length(1.minutes))
+        Assertions.assertEquals(1.2 * 60 * 5.6, speed.length(5.6.minutes))
+        Assertions.assertEquals(1.2 * 60 * 60 * 12.8, speed.length(12.8.hours))
+        Assertions.assertEquals(1.2 * 60 * 60 * 24 * 25.6, speed.length(25.6.days))
     }
 }
