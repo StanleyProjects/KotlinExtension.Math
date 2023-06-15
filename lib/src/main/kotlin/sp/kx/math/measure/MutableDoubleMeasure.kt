@@ -4,9 +4,7 @@ import sp.kx.math.unsafe.toString
 import java.util.Locale
 import java.util.Objects
 
-class MutableDoubleMeasure(
-    override var magnitude: Double
-) : Measure<Double, Double> {
+class MutableDoubleMeasure(override var magnitude: Double) : Measure<Double, Double> {
     override fun toString(): String {
         return toString(measure = this, points = 2, locale = Locale.US)
     }

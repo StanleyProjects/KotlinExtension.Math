@@ -8,6 +8,6 @@ interface Speed {
     fun length(duration: Duration): Double
 
     companion object {
-        val Zero : Speed = ZeroSpeed
+        val Zero: Speed = ZeroSpeed
     }
 }
