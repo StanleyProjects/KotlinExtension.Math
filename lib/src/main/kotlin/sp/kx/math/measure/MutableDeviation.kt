@@ -9,6 +9,7 @@ package sp.kx.math.measure
  * deviation.actual = 2.0
  * deviation.expected = 3.0
  * ```
+ * @param T The type to compare values.
  * @property actual Actual value.
  * @property expected Expected value.
  * @author [Stanley Wintergreen](https://github.com/kepocnhh)
