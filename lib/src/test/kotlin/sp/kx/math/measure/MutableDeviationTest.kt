@@ -3,6 +3,7 @@ package sp.kx.math.measure
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
+@Suppress("MagicNumber")
 internal class MutableDeviationTest {
     @Test
     fun constructorTest() {
