@@ -6,6 +6,21 @@ import java.util.Objects
 import java.util.concurrent.TimeUnit
 import kotlin.time.Duration
 
+/**
+ * A mutable implementation of the [Speed] type.
+ *
+ * Usage:
+ * ```
+ * val speed = MutableSpeed(magnitude = 60.0, timeUnit = TimeUnit.HOURS)
+ * assertEquals(60.0, speed.per(TimeUnit.HOURS))
+ * assertEquals(120.0, speed.length(2.hours))
+ * speed.set(magnitude = 50.0, timeUnit = TimeUnit.HOURS)
+ * assertEquals(50.0, speed.per(TimeUnit.HOURS))
+ * assertEquals(100.0, speed.length(2.hours))
+ * ```
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.5.0
+ */
 class MutableSpeed : Speed {
     private var raw: Double
 
