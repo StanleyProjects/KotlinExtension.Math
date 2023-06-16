@@ -6,6 +6,20 @@ import java.util.Objects
 import kotlin.time.Duration
 import kotlin.time.DurationUnit
 
+/**
+ * A mutable implementation of the [Interval] type with [Duration]s.
+ *
+ * Usage:
+ * ```
+ * val interval = MutableDurationInterval(a = 1.hours, b = 3.hours)
+ * interval.a = 2.hours
+ * interval.b = 7.hours
+ * ```
+ * @property a Start of interval value.
+ * @property b End of interval value.
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.5.0
+ */
 class MutableDurationInterval(
     override var a: Duration,
     override var b: Duration,
