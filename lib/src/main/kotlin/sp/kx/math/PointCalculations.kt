@@ -231,6 +231,7 @@ fun centerOf(
     )
 }
 
+@Suppress("MagicNumber")
 fun centerOf(
     x: Double,
     y: Double,
@@ -241,6 +242,7 @@ fun centerOf(
     )
 }
 
+@Suppress("MagicNumber")
 fun centerOf(offset: Offset): Point {
     return pointOf(
         x = offset.dX * 0.5,
