@@ -45,10 +45,36 @@ class MutableSpeed : Speed {
         return Objects.hash(raw)
     }
 
+    /**
+     * The method changes the magnitude to a new one, taking into the [TimeUnit].
+     *
+     * Usage:
+     * ```
+     * val speed = MutableSpeed(magnitude = 70.0, timeUnit = TimeUnit.HOURS)
+     * assertEquals(140.0, speed.length(2.hours))
+     * speed.set(magnitude = 60.0, timeUnit = TimeUnit.HOURS)
+     * assertEquals(120.0, speed.length(2.hours))
+     * ```
+     * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+     * @since 0.5.0
+     */
     fun set(magnitude: Double, timeUnit: TimeUnit) {
         raw = magnitude / timeUnit.toNanos(1)
     }
 
+    /**
+     * The method changes the magnitude to a new one, taking into the [Duration].
+     *
+     * Usage:
+     * ```
+     * val speed = MutableSpeed(magnitude = 70.0, timeUnit = TimeUnit.HOURS)
+     * assertEquals(140.0, speed.length(2.hours))
+     * speed.set(magnitude = 240.0, time = 4.hours)
+     * assertEquals(120.0, speed.length(2.hours))
+     * ```
+     * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+     * @since 0.5.0
+     */
     fun set(magnitude: Double, time: Duration) {
         raw = magnitude / time.inWholeNanoseconds
     }
