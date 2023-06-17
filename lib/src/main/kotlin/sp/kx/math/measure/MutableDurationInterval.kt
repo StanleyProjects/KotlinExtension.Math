@@ -42,6 +42,21 @@ class MutableDurationInterval(
     }
 }
 
+/**
+ * Usage:
+ * ```
+ * val interval = intervalOf(a = 1.minutes, b = 3.minutes)
+ * assertEquals(2.minutes, interval.b - interval.a)
+ *
+ *       * a     * b
+ *
+ *   +---|---|---|---|--->
+ *   0   1   2   3   4
+ * ```
+ * @return An instance of [Interval] built from [a] and [b] durations.
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.5.0
+ */
 fun intervalOf(
     a: Duration,
     b: Duration,
