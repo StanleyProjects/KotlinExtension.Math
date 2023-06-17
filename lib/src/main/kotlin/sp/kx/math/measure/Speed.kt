@@ -16,10 +16,27 @@ import kotlin.time.Duration
  * @since 0.5.0
  */
 interface Speed {
+    /**
+     * @return Speed value in [TimeUnit].
+     */
     fun per(timeUnit: TimeUnit): Double
+
+    /**
+     * Calculates the distance given the elapsed time.
+     */
     fun length(duration: Duration): Double
 
     companion object {
+        /**
+         * A special case of a [Speed] with zero magnitude.
+         *
+         * Usage:
+         * ```
+         * assertEquals(0.0, Speed.Zero.per(TimeUnit.HOURS))
+         * assertEquals(0.0, Speed.Zero.length(2.hours))
+         * ```
+         * @since 0.5.0
+         */
         val Zero: Speed = ZeroSpeed
     }
 }
