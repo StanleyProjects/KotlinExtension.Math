@@ -13,6 +13,13 @@ package sp.kx.math.measure
  * @since 0.5.0
  */
 interface Measure<T : Comparable<T>, U : Comparable<U>> {
+    /**
+     * This value will be used for transformations.
+     */
     val magnitude: U
+
+    /**
+     * Transform [units] using [magnitude].
+     */
     fun transform(units: T): U
 }
