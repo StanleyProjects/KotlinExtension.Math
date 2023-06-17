@@ -16,6 +16,8 @@ internal class SpeedUtilTest {
 
     @Test
     fun isEmptyPointsTest() {
+        Assertions.assertFalse(speedOf(0.01, TimeUnit.SECONDS).isEmpty(points = 1, timeUnit = TimeUnit.MINUTES))
+        Assertions.assertTrue(speedOf(0.01, TimeUnit.SECONDS).isEmpty(points = 1, timeUnit = TimeUnit.SECONDS))
         speedOf(magnitude = 0.01, timeUnit = TimeUnit.NANOSECONDS).also { speed: Speed ->
             Assertions.assertTrue(speed.isEmpty(points = 1))
             Assertions.assertFalse(speed.isEmpty(points = 2))
