@@ -37,6 +37,16 @@ class MutableDoubleMeasure(override var magnitude: Double) : Measure<Double, Dou
     }
 }
 
+/**
+ * Usage:
+ * ```
+ * val measure = measureOf(magnitude = 2.0)
+ * assertEquals(6.0, measure.transform(3.0))
+ * ```
+ * @return An instance of [Measure] built from the [Double] values of [magnitude].
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.5.0
+ */
 fun measureOf(magnitude: Double): Measure<Double, Double> {
     return MutableDoubleMeasure(magnitude = magnitude)
 }
