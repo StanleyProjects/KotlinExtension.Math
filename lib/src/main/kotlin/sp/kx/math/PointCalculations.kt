@@ -234,6 +234,72 @@ fun centerOf(
 /**
  * Usage:
  * ```
+ * val x = 2.0
+ * val y = 2.0
+ * val point = centerOf(x = x, y = y)
+ * assertEquals(centerOf(aX = 0.0, aY = 0.0, bX = x, bY = y), point)
+ * assertEquals(1.0, point.x)
+ * assertEquals(1.0, point.y)
+ *
+ *   ^
+ *   |
+ * 2 -       *
+ *   |     /
+ * 1 -   x
+ *   | /
+ * 0 *---|---|---|---|--->
+ *   0   1   2   3   4
+ * ```
+ * @return A [Point] that is the center of the segment
+ * between point with x-coordinate `0` and y-coordinate `0` and point with [x] and [y] coordinates.
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.5.0
+ */
+@Suppress("MagicNumber")
+fun centerOf(
+    x: Double,
+    y: Double,
+): Point {
+    return pointOf(
+        x = x * 0.5,
+        y = y * 0.5,
+    )
+}
+
+/**
+ * Usage:
+ * ```
+ * val offset = offsetOf(dX = 2.0, dY = 2.0)
+ * val point = centerOf(offset)
+ * assertEquals(centerOf(aX = 0.0, aY = 0.0, bX = offset.dX, bY = offset.dY), point)
+ * assertEquals(1.0, point.x)
+ * assertEquals(1.0, point.y)
+ *
+ *   ^
+ *   |
+ * 2 -       *
+ *   |     /
+ * 1 -   x
+ *   | /
+ * 0 *---|---|---|---|--->
+ *   0   1   2   3   4
+ * ```
+ * @return A [Point] that is the center of the segment
+ * between point with x-coordinate `0` and y-coordinate `0` and point with [Offset.dX] and [Offset.dY] offset.
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.5.0
+ */
+@Suppress("MagicNumber")
+fun centerOf(offset: Offset): Point {
+    return pointOf(
+        x = offset.dX * 0.5,
+        y = offset.dY * 0.5,
+    )
+}
+
+/**
+ * Usage:
+ * ```
  * val point = centerOf(a = pointOf(1, 1), b = pointOf(3, 1))
  * assertEquals(2.0, point.x)
  * assertEquals(1.0, point.y)
