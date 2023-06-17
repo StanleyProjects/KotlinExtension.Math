@@ -28,6 +28,13 @@ fun distanceOf(
     return kotlin.math.hypot(x = bX - aX, y = bY - aY)
 }
 
+fun distanceOf(
+    x: Double,
+    y: Double,
+): Double {
+    return kotlin.math.hypot(x = x, y = y)
+}
+
 /**
  * Usage:
  * ```
@@ -57,4 +64,11 @@ fun angleOf(
     bY: Double,
 ): Double {
     return kotlin.math.atan2(y = bY - aY, x = bX - aX)
+}
+
+fun angleOf(
+    x: Double,
+    y: Double,
+): Double {
+    return kotlin.math.atan2(y = y, x = x)
 }

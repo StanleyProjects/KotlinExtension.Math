@@ -231,6 +231,23 @@ fun centerOf(
     )
 }
 
+fun centerOf(
+    x: Double,
+    y: Double,
+): Point {
+    return pointOf(
+        x = x * 0.5,
+        y = y * 0.5,
+    )
+}
+
+fun centerOf(offset: Offset): Point {
+    return pointOf(
+        x = offset.dX * 0.5,
+        y = offset.dY * 0.5,
+    )
+}
+
 /**
  * Usage:
  * ```
