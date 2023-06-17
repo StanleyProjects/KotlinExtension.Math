@@ -62,10 +62,34 @@ class MutableSpeed : Speed {
     }
 }
 
+/**
+ * Usage:
+ * ```
+ * val speed = speedOf(magnitude = 60.0, timeUnit = TimeUnit.HOURS)
+ * assertEquals(120.0, speed.length(2.hours))
+ * ```
+ * @param magnitude This number of [Double]s will pass through `1` unit of time in [timeUnit].
+ * @param timeUnit After `1` unit of time in such [TimeUnit] the transferred [magnitude] will pass. Default is [TimeUnit.SECONDS].
+ * @return An instance of [Speed] built from [magnitude] and [TimeUnit].
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.5.0
+ */
 fun speedOf(magnitude: Double, timeUnit: TimeUnit = TimeUnit.SECONDS): Speed {
     return MutableSpeed(magnitude = magnitude, timeUnit = timeUnit)
 }
 
+/**
+ * Usage:
+ * ```
+ * val speed = speedOf(magnitude = 240.0, time = 4.hours)
+ * assertEquals(120.0, speed.length(2.hours))
+ * ```
+ * @param magnitude This number of [Double]s will pass through [time].
+ * @param time After this [Duration] the transferred [magnitude] will pass.
+ * @return An instance of [Speed] built from [magnitude] and [Duration].
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.5.0
+ */
 fun speedOf(magnitude: Double, time: Duration): Speed {
     return MutableSpeed(magnitude = magnitude, time = time)
 }
