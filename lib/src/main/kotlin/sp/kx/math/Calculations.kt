@@ -28,6 +28,26 @@ fun distanceOf(
     return kotlin.math.hypot(x = bX - aX, y = bY - aY)
 }
 
+/**
+ * Special case of [distanceOf] method.
+ *
+ * Usage:
+ * ```
+ * val x = 3.0
+ * val y = 0.0
+ * val distance = distanceOf(x = x, y = y)
+ * assertEquals(distanceOf(aX = 0.0, aY = 0.0, bX = x, bY = y), distance)
+ * assertEquals(3.0, distance)
+ *
+ *   ^
+ *   |
+ * 0 *---|---|---*---|--->
+ *   0   1   2   3   4
+ * ```
+ * @return Distance between point with x-coordinate `0` and y-coordinate `0` and point with [x] and [y] coordinates.
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.5.0
+ */
 fun distanceOf(
     x: Double,
     y: Double,
@@ -66,6 +86,31 @@ fun angleOf(
     return kotlin.math.atan2(y = bY - aY, x = bX - aX)
 }
 
+/**
+ * Special case of [angleOf] method.
+ *
+ * Usage:
+ * ```
+ * val angle = angleOf(x = 3.0, y = 3.0)
+ * assertEquals(angleOf(aX = 0.0, aY = 0.0, bX = 3.0, bY = 3.0), angle)
+ * assertEquals(PI / 4, angle)
+ *
+ *   ^
+ *   |
+ * 3 -           *
+ *   |         /
+ * 2 -       /
+ *   |     /
+ * 1 -   /
+ *   | /
+ * 0 *---|---|---|---|--->
+ *   0   1   2   3   4
+ * ```
+ * @return The angle in radians between the x-axis and the straight line
+ * containing point with x-coordinate `0` and y-coordinate `0` and point with [x] and [y] coordinates.
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.5.0
+ */
 fun angleOf(
     x: Double,
     y: Double,
