@@ -152,4 +152,62 @@ internal class PointCalculationsTest {
             Assertions.assertEquals((-kotlin.math.PI / 4).ct(), angle.ct())
         }
     }
+
+    @Test
+    fun centerOfTest() {
+        (12.8 to 0.0).also { (x: Double, y: Double) ->
+            val point: Point = centerOf(x = x, y = y)
+            Assertions.assertEquals(12.8 / 2, point.x)
+            Assertions.assertEquals(0.0, point.y)
+        }
+        (0.0 to 25.6).also { (x: Double, y: Double) ->
+            val point: Point = centerOf(x = x, y = y)
+            Assertions.assertEquals(0.0, point.x)
+            Assertions.assertEquals(25.6 / 2, point.y)
+        }
+        (-51.2 to 0.0).also { (x: Double, y: Double) ->
+            val point: Point = centerOf(x = x, y = y)
+            Assertions.assertEquals(-51.2 / 2, point.x)
+            Assertions.assertEquals(0.0, point.y)
+        }
+        (0.0 to -10.24).also { (x: Double, y: Double) ->
+            val point: Point = centerOf(x = x, y = y)
+            Assertions.assertEquals(0.0, point.x)
+            Assertions.assertEquals(-10.24 / 2, point.y)
+        }
+        (12.34 to 56.78).also { (x: Double, y: Double) ->
+            val point: Point = centerOf(x = x, y = y)
+            Assertions.assertEquals(12.34 / 2, point.x)
+            Assertions.assertEquals(56.78 / 2, point.y)
+        }
+    }
+
+    @Test
+    fun centerOfOffsetTest() {
+        offsetOf(dX = 12.8, dY = 0.0).also { offset: Offset ->
+            val point: Point = centerOf(offset)
+            Assertions.assertEquals(12.8 / 2, point.x)
+            Assertions.assertEquals(0.0, point.y)
+        }
+        offsetOf(dX = 0.0, dY = 25.6).also { offset: Offset ->
+            val point: Point = centerOf(offset)
+            Assertions.assertEquals(0.0, point.x)
+            Assertions.assertEquals(25.6 / 2, point.y)
+        }
+        offsetOf(dX = -51.2, dY = 0.0).also { offset: Offset ->
+            val point: Point = centerOf(offset)
+            Assertions.assertEquals(-51.2 / 2, point.x)
+            Assertions.assertEquals(0.0, point.y)
+        }
+        offsetOf(dX = 0.0, dY = -10.24).also { offset: Offset ->
+            val point: Point = centerOf(offset)
+            Assertions.assertEquals(0.0, point.x)
+            Assertions.assertEquals(-10.24 / 2, point.y)
+        }
+        offsetOf(dX = 12.34, dY = 56.78).also { offset: Offset ->
+            val point: Point = centerOf(offset)
+            Assertions.assertEquals(12.34 / 2, point.x)
+            Assertions.assertEquals(56.78 / 2, point.y)
+        }
+    }
 }
