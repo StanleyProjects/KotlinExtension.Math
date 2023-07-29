@@ -39,6 +39,10 @@ class MutableDoubleMeasure(override var magnitude: Double) : Measure<Double, Dou
     override fun units(value: Double): Double {
         return value / magnitude
     }
+
+    override fun value(): Double {
+        return magnitude
+    }
 }
 
 /**
@@ -54,6 +58,3 @@ class MutableDoubleMeasure(override var magnitude: Double) : Measure<Double, Dou
 fun measureOf(magnitude: Double): Measure<Double, Double> {
     return MutableDoubleMeasure(magnitude = magnitude)
 }
-
-// todo transform int
-// todo one

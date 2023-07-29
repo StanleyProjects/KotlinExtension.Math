@@ -24,4 +24,6 @@ interface Measure<T : Comparable<T>, U : Comparable<U>> {
     fun transform(units: T): U
 
     fun units(value: U): T
+
+    fun value(): U
 }
