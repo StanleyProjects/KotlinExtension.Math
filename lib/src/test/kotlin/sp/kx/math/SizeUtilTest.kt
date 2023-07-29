@@ -156,4 +156,15 @@ internal class SizeUtilTest {
             sizeOf(width = 1.2, height = 4.3).isEmpty(points = -1)
         }
     }
+
+    @Test
+    fun sizeOfTest() {
+        val foo: Size = sizeOf(
+            width = 1,
+            height = 2,
+        )
+        Assertions.assertNotEquals(foo.width, foo.height)
+        Assertions.assertEquals(1.0, foo.width)
+        Assertions.assertEquals(2.0, foo.height)
+    }
 }
