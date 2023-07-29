@@ -19,3 +19,5 @@ class MutableDeviation<T : Comparable<T>>(
     override var actual: T,
     override var expected: T,
 ) : Deviation<T>
+
+// todo actual = expected

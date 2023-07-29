@@ -7,3 +7,5 @@ import java.util.concurrent.TimeUnit
 internal fun toString(speed: Speed, timeUnit: TimeUnit, points: Int, locale: Locale): String {
     return "{speed: ${toString(number = speed.per(timeUnit), points, locale)} per ${timeUnit.name}}"
 }
+
+// todo to string slash 5.00/SECONDS

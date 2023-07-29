@@ -216,3 +216,6 @@ fun Vector.isEmpty(points: Int): Boolean {
 fun Vector.isEmpty(): Boolean {
     return start == finish
 }
+
+// todo times Double
+// todo map lambda

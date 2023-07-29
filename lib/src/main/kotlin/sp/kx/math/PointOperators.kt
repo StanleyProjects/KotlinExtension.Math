@@ -92,3 +92,5 @@ operator fun Point.minus(other: Point): Offset {
         dY = y - other.y,
     )
 }
+
+// todo times Double

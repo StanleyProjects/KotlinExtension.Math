@@ -274,3 +274,5 @@ fun Point.minus(
         dY = this.y - y,
     )
 }
+
+// todo map lambda

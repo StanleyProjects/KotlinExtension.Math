@@ -60,6 +60,9 @@ fun vectorOf(
     )
 }
 
+// todo vectorOf x y x y offset
+// todo vectorOf x y x y lambda
+
 /**
  * Usage:
  * ```

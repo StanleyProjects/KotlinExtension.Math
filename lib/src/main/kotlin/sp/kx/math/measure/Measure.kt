@@ -23,3 +23,5 @@ interface Measure<T : Comparable<T>, U : Comparable<U>> {
      */
     fun transform(units: T): U
 }
+
+// todo reverse

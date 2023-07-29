@@ -24,3 +24,5 @@ interface Deviation<T : Comparable<T>> {
      */
     val expected: T
 }
+
+// todo diff

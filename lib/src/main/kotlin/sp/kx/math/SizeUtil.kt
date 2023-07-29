@@ -119,3 +119,5 @@ fun Size.isEmpty(points: Int): Boolean {
 fun Size.isEmpty(): Boolean {
     return width == 0.0 && height == 0.0
 }
+
+// todo sizeOf ints

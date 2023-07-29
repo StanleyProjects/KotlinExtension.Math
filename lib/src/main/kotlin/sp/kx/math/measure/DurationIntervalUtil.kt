@@ -46,3 +46,5 @@ fun Interval<Duration>.toString(
 fun Interval<Duration>.diff(): Duration {
     return b - a
 }
+
+// todo duration util frequency
