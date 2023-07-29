@@ -62,6 +62,14 @@ internal class MutableDoubleMeasureTest {
         object : Measure<String, String> {
             override val magnitude: String = "foo"
 
+            override fun value(): String {
+                TODO("value")
+            }
+
+            override fun units(value: String): String {
+                TODO("units")
+            }
+
             override fun transform(units: String): String {
                 error("foo")
             }

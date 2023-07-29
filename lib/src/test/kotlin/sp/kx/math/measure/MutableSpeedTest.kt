@@ -26,28 +26,28 @@ internal class MutableSpeedTest {
     @Test
     fun toStringSecondsTest() {
         MutableSpeed(magnitude = 1.2, TimeUnit.SECONDS).also { speed ->
-            Assertions.assertEquals("{speed: 1.20 per SECONDS}", speed.toString())
+            Assertions.assertEquals("{speed: 1.20/SECONDS}", speed.toString())
         }
         MutableSpeed(magnitude = 1.23, TimeUnit.SECONDS).also { speed ->
-            Assertions.assertEquals("{speed: 1.23 per SECONDS}", speed.toString())
+            Assertions.assertEquals("{speed: 1.23/SECONDS}", speed.toString())
         }
         MutableSpeed(magnitude = 1.234, TimeUnit.SECONDS).also { speed ->
-            Assertions.assertEquals("{speed: 1.23 per SECONDS}", speed.toString())
+            Assertions.assertEquals("{speed: 1.23/SECONDS}", speed.toString())
         }
         MutableSpeed(magnitude = 5.6, TimeUnit.SECONDS).also { speed ->
-            Assertions.assertEquals("{speed: 5.60 per SECONDS}", speed.toString())
+            Assertions.assertEquals("{speed: 5.60/SECONDS}", speed.toString())
         }
         MutableSpeed(magnitude = 5.67, TimeUnit.SECONDS).also { speed ->
-            Assertions.assertEquals("{speed: 5.67 per SECONDS}", speed.toString())
+            Assertions.assertEquals("{speed: 5.67/SECONDS}", speed.toString())
         }
         MutableSpeed(magnitude = 5.678, TimeUnit.SECONDS).also { speed ->
-            Assertions.assertEquals("{speed: 5.68 per SECONDS}", speed.toString())
+            Assertions.assertEquals("{speed: 5.68/SECONDS}", speed.toString())
         }
     }
 
     @Test
     fun toStringTest() {
-        val expected = "{speed: 1.00 per SECONDS}"
+        val expected = "{speed: 1.00/SECONDS}"
         MutableSpeed(magnitude = 1.0 / 1_000, TimeUnit.MILLISECONDS).also { speed ->
             Assertions.assertEquals(expected, speed.toString())
         }

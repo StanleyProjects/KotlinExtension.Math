@@ -24,29 +24,29 @@ internal class VectorCalculationsTest {
     @Test
     fun angleTest() {
         (pointOf(x = 1, y = 1) + pointOf(x = 3, y = 1)).also { vector: Vector ->
-            Assertions.assertEquals(0.0.ct(), vector.angle().ct())
-            Assertions.assertEquals((kotlin.math.PI + kotlin.math.PI).ct(), vector.angle().ct())
+            Assertions.assertEquals(0.0.radians(), vector.angle().radians())
+            Assertions.assertEquals((kotlin.math.PI + kotlin.math.PI).radians(), vector.angle().radians())
         }
         (pointOf(x = 1, y = 1) + pointOf(x = 1, y = 3)).also { actual: Vector ->
-            Assertions.assertEquals((kotlin.math.PI / 2).ct(), actual.angle().ct())
+            Assertions.assertEquals((kotlin.math.PI / 2).radians(), actual.angle().radians())
         }
         (pointOf(x = 1, y = 1) + pointOf(x = -1, y = 1)).also { actual: Vector ->
-            Assertions.assertEquals(kotlin.math.PI.ct(), actual.angle().ct())
+            Assertions.assertEquals(kotlin.math.PI.radians(), actual.angle().radians())
         }
         (pointOf(x = 1, y = 1) + pointOf(x = 1, y = -1)).also { vector: Vector ->
-            Assertions.assertEquals((kotlin.math.PI + kotlin.math.PI / 2).ct(), vector.angle().ct())
+            Assertions.assertEquals((kotlin.math.PI + kotlin.math.PI / 2).radians(), vector.angle().radians())
         }
         (pointOf(x = 1, y = 1) + pointOf(x = 4, y = 4)).also { vector: Vector ->
-            Assertions.assertEquals((kotlin.math.PI / 4).ct(), vector.angle().ct())
+            Assertions.assertEquals((kotlin.math.PI / 4).radians(), vector.angle().radians())
         }
         (pointOf(x = 1, y = 1) + pointOf(x = -2, y = 4)).also { vector: Vector ->
-            Assertions.assertEquals((kotlin.math.PI / 2 + kotlin.math.PI / 4).ct(), vector.angle().ct())
+            Assertions.assertEquals((kotlin.math.PI / 2 + kotlin.math.PI / 4).radians(), vector.angle().radians())
         }
         (pointOf(x = 1, y = 1) + pointOf(x = -2, y = -2)).also { vector: Vector ->
-            Assertions.assertEquals((kotlin.math.PI + kotlin.math.PI / 4).ct(), vector.angle().ct(), 0.00000000000001)
+            Assertions.assertEquals((kotlin.math.PI + kotlin.math.PI / 4).radians(), vector.angle().radians(), 0.00000000000001)
         }
         (pointOf(x = 1, y = 1) + pointOf(x = 4, y = -2)).also { vector: Vector ->
-            Assertions.assertEquals((-kotlin.math.PI / 4).ct(), vector.angle().ct())
+            Assertions.assertEquals((-kotlin.math.PI / 4).radians(), vector.angle().radians())
         }
     }
 

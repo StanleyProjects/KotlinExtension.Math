@@ -9,36 +9,36 @@ internal class OffsetCalculationsTest {
     fun angleOfTest() {
         offsetOf(dX = 3.0, dY = 0.0).also { offset: Offset ->
             val angle = angleOf(offset)
-            Assertions.assertEquals(0.0.ct(), angle.ct())
-            Assertions.assertEquals((kotlin.math.PI + kotlin.math.PI).ct(), angle.ct())
+            Assertions.assertEquals(0.0.radians(), angle.radians())
+            Assertions.assertEquals((kotlin.math.PI + kotlin.math.PI).radians(), angle.radians())
         }
         offsetOf(dX = 0.0, dY = 3.0).also { offset: Offset ->
             val angle = angleOf(offset)
-            Assertions.assertEquals((kotlin.math.PI / 2).ct(), angle.ct())
+            Assertions.assertEquals((kotlin.math.PI / 2).radians(), angle.radians())
         }
         offsetOf(dX = -1.0, dY = 0.0).also { offset: Offset ->
             val angle = angleOf(offset)
-            Assertions.assertEquals(kotlin.math.PI.ct(), angle.ct())
+            Assertions.assertEquals(kotlin.math.PI.radians(), angle.radians())
         }
         offsetOf(dX = 0.0, dY = -1.0).also { offset: Offset ->
             val angle = angleOf(offset)
-            Assertions.assertEquals((kotlin.math.PI + kotlin.math.PI / 2).ct(), angle.ct())
+            Assertions.assertEquals((kotlin.math.PI + kotlin.math.PI / 2).radians(), angle.radians())
         }
         offsetOf(dX = 4.0, dY = 4.0).also { offset: Offset ->
             val angle = angleOf(offset)
-            Assertions.assertEquals((kotlin.math.PI / 4).ct(), angle.ct())
+            Assertions.assertEquals((kotlin.math.PI / 4).radians(), angle.radians())
         }
         offsetOf(dX = -4.0, dY = 4.0).also { offset: Offset ->
             val angle = angleOf(offset)
-            Assertions.assertEquals((kotlin.math.PI / 2 + kotlin.math.PI / 4).ct(), angle.ct())
+            Assertions.assertEquals((kotlin.math.PI / 2 + kotlin.math.PI / 4).radians(), angle.radians())
         }
         offsetOf(dX = -2.0, dY = -2.0).also { offset: Offset ->
             val angle = angleOf(offset)
-            Assertions.assertEquals((kotlin.math.PI + kotlin.math.PI / 4).ct(), angle.ct(), 0.00000000000001)
+            Assertions.assertEquals((kotlin.math.PI + kotlin.math.PI / 4).radians(), angle.radians(), 0.00000000000001)
         }
         offsetOf(dX = 4.0, dY = -4.0).also { offset: Offset ->
             val angle = angleOf(offset)
-            Assertions.assertEquals((-kotlin.math.PI / 4).ct(), angle.ct())
+            Assertions.assertEquals((-kotlin.math.PI / 4).radians(), angle.radians())
         }
     }
 

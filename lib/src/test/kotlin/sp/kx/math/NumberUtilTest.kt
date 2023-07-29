@@ -74,23 +74,23 @@ internal class NumberUtilTest {
     }
 
     @Test
-    fun ctTest() {
+    fun radiansTest() {
         val actual = kotlin.math.PI * 2 + kotlin.math.PI / 3
         Assertions.assertTrue(actual > kotlin.math.PI * 2)
         val delta = 0.00000000000001
-        Assertions.assertEquals(kotlin.math.PI / 3, actual.ct(), delta)
-        Assertions.assertEquals(kotlin.math.PI / 3, (kotlin.math.PI * 2 + actual).ct(), delta)
-        Assertions.assertEquals(kotlin.math.PI / 3, (kotlin.math.PI * 4 + actual).ct(), delta)
+        Assertions.assertEquals(kotlin.math.PI / 3, actual.radians(), delta)
+        Assertions.assertEquals(kotlin.math.PI / 3, (kotlin.math.PI * 2 + actual).radians(), delta)
+        Assertions.assertEquals(kotlin.math.PI / 3, (kotlin.math.PI * 4 + actual).radians(), delta)
     }
 
     @Test
-    fun ctNegativeTest() {
+    fun radiansNegativeTest() {
         val actual = -kotlin.math.PI / 3
         Assertions.assertTrue(actual < 0)
         val delta = 0.00000000000001
-        Assertions.assertEquals(kotlin.math.PI * 2 - kotlin.math.PI / 3, actual.ct(), delta)
-        Assertions.assertEquals(kotlin.math.PI * 2 - kotlin.math.PI / 3, (kotlin.math.PI * 2 + actual).ct(), delta)
-        Assertions.assertEquals(kotlin.math.PI * 2 - kotlin.math.PI / 3, (kotlin.math.PI * 4 + actual).ct(), delta)
+        Assertions.assertEquals(kotlin.math.PI * 2 - kotlin.math.PI / 3, actual.radians(), delta)
+        Assertions.assertEquals(kotlin.math.PI * 2 - kotlin.math.PI / 3, (kotlin.math.PI * 2 + actual).radians(), delta)
+        Assertions.assertEquals(kotlin.math.PI * 2 - kotlin.math.PI / 3, (kotlin.math.PI * 4 + actual).radians(), delta)
     }
 
     @Test
