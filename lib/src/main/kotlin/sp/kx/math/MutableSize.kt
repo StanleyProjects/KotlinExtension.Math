@@ -22,7 +22,18 @@ class MutableSize(
     override var width: Double,
     override var height: Double,
 ) : Size {
-    // todo set from Size
+    fun set(
+        width: Double,
+        height: Double,
+    ) {
+        this.width = width
+        this.height = height
+    }
+
+    fun set(other: Size) {
+        width = other.width
+        height = other.height
+    }
 
     override fun toString(): String {
         return toString(size = this, points = 2, locale = Locale.US)
