@@ -3,6 +3,7 @@ package sp.kx.math
 import sp.kx.math.unsafe.eq
 import sp.kx.math.unsafe.toString
 import java.util.Locale
+import kotlin.math.absoluteValue
 
 /**
  * Decryption:
@@ -101,6 +102,16 @@ fun Double.radians(): Double {
     return ct(k = kotlin.math.PI * 2)
 }
 
-// todo div abs
-// todo or null
-// todo or ...
+fun Double.divAbs(): Double {
+    return div(absoluteValue)
+}
+
+fun Double.orNull(): Double? {
+    if (isNaN()) return null
+    return this
+}
+
+fun Double.orDefault(other: Double = 0.0): Double {
+    if (isNaN()) return other
+    return this
+}
