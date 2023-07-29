@@ -93,9 +93,9 @@ operator fun Point.minus(other: Point): Offset {
     )
 }
 
-operator fun Point.times(other: Double): Point {
+operator fun Point.times(value: Double): Point {
     return pointOf(
-        x = x * other,
-        y = y * other,
+        x = x * value,
+        y = y * value,
     )
 }
