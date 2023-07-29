@@ -88,16 +88,19 @@ fun Double.eq(other: Double, points: Int): Boolean {
  * assertEquals(1.0, 129.0.ct(k = 128.0))
  * ```
  * @receiver This [Double] will be converted to a coterminal [Double].
- * @param k The coefficient which is used in the coterminal transformation. Default is `kotlin.math.PI * 2`.
+ * @param k The coefficient which is used in the coterminal transformation.
  * @return The coterminal [Double] relative to [this] receiver given the [k] coefficient.
  * @author [Stanley Wintergreen](https://github.com/kepocnhh)
  * @since 0.4.4
  */
-fun Double.ct(k: Double = kotlin.math.PI * 2): Double {
+fun Double.ct(k: Double): Double {
     return (this % k + k) % k
 }
 
-// todo ct -> radians
+fun Double.radians(): Double {
+    return ct(k = kotlin.math.PI * 2)
+}
+
 // todo div abs
 // todo or null
 // todo or ...
