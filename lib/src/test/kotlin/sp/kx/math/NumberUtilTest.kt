@@ -116,4 +116,52 @@ internal class NumberUtilTest {
         Assertions.assertEquals(k - value, (k * 3 + actual).ct(k = k))
         Assertions.assertEquals(k - value, (k * 4 + actual).ct(k = k))
     }
+
+    @Test
+    fun divAbsTest() {
+        Assertions.assertEquals(1.0, 1.0.divAbs())
+        Assertions.assertEquals(-1.0, (-1.0).divAbs())
+        Assertions.assertEquals(1.0, 5.0.divAbs())
+        Assertions.assertEquals(-1.0, (-42.0).divAbs())
+        Assertions.assertEquals(1.0, Double.MAX_VALUE.divAbs())
+        Assertions.assertEquals(1.0, Double.MIN_VALUE.divAbs())
+        Assertions.assertEquals(-1.0, (-Double.MIN_VALUE).divAbs())
+        Assertions.assertEquals(-1.0, (-Double.MAX_VALUE).divAbs())
+        Assertions.assertTrue(Double.NaN.divAbs().isNaN())
+        Assertions.assertTrue(Double.POSITIVE_INFINITY.divAbs().isNaN())
+        Assertions.assertTrue(Double.NEGATIVE_INFINITY.divAbs().isNaN())
+    }
+
+    @Test
+    fun orNullTest() {
+        Assertions.assertNotNull(Double.NEGATIVE_INFINITY.orNull())
+        Assertions.assertNotNull(0.0.orNull())
+        Assertions.assertNotNull(Double.MIN_VALUE.orNull())
+        Assertions.assertNotNull(1.0.orNull())
+        Assertions.assertNotNull(42.0.orNull())
+        Assertions.assertNotNull(Double.MAX_VALUE.orNull())
+        Assertions.assertNotNull(Double.POSITIVE_INFINITY.orNull())
+        Assertions.assertNull(Double.NaN.orNull())
+    }
+
+    @Test
+    fun orDefaultTest() {
+        Assertions.assertEquals(Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY.orDefault())
+        Assertions.assertEquals(0.0, 0.0.orDefault())
+        Assertions.assertEquals(Double.MIN_VALUE, Double.MIN_VALUE.orDefault())
+        Assertions.assertEquals(1.0, 1.0.orDefault())
+        Assertions.assertEquals(42.0, 42.0.orDefault())
+        Assertions.assertEquals(Double.MAX_VALUE, Double.MAX_VALUE.orDefault())
+        Assertions.assertEquals(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY.orDefault())
+        Assertions.assertEquals(Double.NEGATIVE_INFINITY, Double.NaN.orDefault(Double.NEGATIVE_INFINITY))
+        Assertions.assertEquals(-1.0, Double.NaN.orDefault(-1.0))
+        Assertions.assertEquals(0.0, Double.NaN.orDefault())
+        Assertions.assertEquals(0.0, Double.NaN.orDefault(0.0))
+        Assertions.assertEquals(Double.MIN_VALUE, Double.NaN.orDefault(Double.MIN_VALUE))
+        Assertions.assertEquals(1.0, Double.NaN.orDefault(1.0))
+        Assertions.assertEquals(42.0, Double.NaN.orDefault(42.0))
+        Assertions.assertEquals(Double.MAX_VALUE, Double.NaN.orDefault(Double.MAX_VALUE))
+        Assertions.assertEquals(Double.POSITIVE_INFINITY, Double.NaN.orDefault(Double.POSITIVE_INFINITY))
+        Assertions.assertTrue(Double.NaN.orDefault(Double.NaN).isNaN())
+    }
 }
