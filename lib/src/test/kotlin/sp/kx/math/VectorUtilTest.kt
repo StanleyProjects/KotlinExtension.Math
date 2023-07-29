@@ -214,4 +214,44 @@ internal class VectorUtilTest {
             foo.isEmpty(points = -1)
         }
     }
+
+    @Test
+    fun timesTest() {
+        val foo = vectorOf(
+            startX = 1.2,
+            startY = 3.4,
+            finishX = 5.6,
+            finishY = 7.8,
+        )
+        Assertions.assertFalse(foo.isEmpty())
+        Assertions.assertNotEquals(foo.start.x, foo.start.y)
+        Assertions.assertNotEquals(foo.finish.x, foo.finish.y)
+        Assertions.assertEquals(1.2, foo.start.x)
+        Assertions.assertEquals(3.4, foo.start.y)
+        Assertions.assertEquals(5.6, foo.finish.x)
+        Assertions.assertEquals(7.8, foo.finish.y)
+
+        foo.times(5.6).also { bar: Vector ->
+            val value = 5.6
+            Assertions.assertEquals(1.2, foo.start.x)
+            Assertions.assertEquals(3.4, foo.start.y)
+            Assertions.assertEquals(5.6, foo.finish.x)
+            Assertions.assertEquals(7.8, foo.finish.y)
+            Assertions.assertEquals(1.2 * value, bar.start.x)
+            Assertions.assertEquals(3.4 * value, bar.start.y)
+            Assertions.assertEquals(5.6 * value, bar.finish.x)
+            Assertions.assertEquals(7.8 * value, bar.finish.y)
+        }
+        foo.times(-7.8).also { bar: Vector ->
+            val value = -7.8
+            Assertions.assertEquals(1.2, foo.start.x)
+            Assertions.assertEquals(3.4, foo.start.y)
+            Assertions.assertEquals(5.6, foo.finish.x)
+            Assertions.assertEquals(7.8, foo.finish.y)
+            Assertions.assertEquals(1.2 * value, bar.start.x)
+            Assertions.assertEquals(3.4 * value, bar.start.y)
+            Assertions.assertEquals(5.6 * value, bar.finish.x)
+            Assertions.assertEquals(7.8 * value, bar.finish.y)
+        }
+    }
 }
