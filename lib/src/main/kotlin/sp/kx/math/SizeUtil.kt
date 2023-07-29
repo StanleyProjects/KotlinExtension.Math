@@ -120,4 +120,12 @@ fun Size.isEmpty(): Boolean {
     return width == 0.0 && height == 0.0
 }
 
-// todo sizeOf ints
+fun sizeOf(
+    width: Int,
+    height: Int,
+): Size {
+    return MutableSize(
+        width = width.toDouble(),
+        height = height.toDouble(),
+    )
+}
