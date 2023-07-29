@@ -63,11 +63,11 @@ internal class MutableDoubleMeasureTest {
             override val magnitude: String = "foo"
 
             override fun value(): String {
-                TODO("value")
+                error("foo")
             }
 
             override fun units(value: String): String {
-                TODO("units")
+                error("foo")
             }
 
             override fun transform(units: String): String {
@@ -103,6 +103,30 @@ internal class MutableDoubleMeasureTest {
         (-1.2).also { magnitude: Double ->
             val measure = MutableDoubleMeasure(magnitude = magnitude)
             Assertions.assertEquals(-2.4, measure.transform(units = 2.0))
+        }
+    }
+
+    @Test
+    fun unitsTest() {
+        1.0.also { magnitude: Double ->
+            val measure = MutableDoubleMeasure(magnitude = magnitude)
+            Assertions.assertEquals(2.0, measure.units(value = 2.0))
+        }
+        1.2.also { magnitude: Double ->
+            val measure = MutableDoubleMeasure(magnitude = magnitude)
+            Assertions.assertEquals(2.0, measure.units(value = 2.4))
+        }
+        (-1.2).also { magnitude: Double ->
+            val measure = MutableDoubleMeasure(magnitude = magnitude)
+            Assertions.assertEquals(2.0, measure.units(value = -2.4))
+        }
+    }
+
+    @Test
+    fun valueTest() {
+        setOf(1.0, 1.2, -1.2, 42.0).forEach { magnitude: Double ->
+            val measure = MutableDoubleMeasure(magnitude = magnitude)
+            Assertions.assertEquals(magnitude, measure.value())
         }
     }
 }
