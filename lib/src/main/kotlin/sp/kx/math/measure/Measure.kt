@@ -22,6 +22,6 @@ interface Measure<T : Comparable<T>, U : Comparable<U>> {
      * Transform [units] using [magnitude].
      */
     fun transform(units: T): U
-}
 
-// todo reverse
+    fun units(value: U): T
+}
