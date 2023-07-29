@@ -35,3 +35,12 @@ fun Point.toVector(
         finish = pointOf(x = transform(x), y = transform(y)),
     )
 }
+
+fun Vector.map(
+    transform: (Double) -> Double,
+): Vector {
+    return ImmutableVector(
+        start = pointOf(x = transform(start.x), y = transform(start.y)),
+        finish = pointOf(x = transform(finish.x), y = transform(finish.y)),
+    )
+}

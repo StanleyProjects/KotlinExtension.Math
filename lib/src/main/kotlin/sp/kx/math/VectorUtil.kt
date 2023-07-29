@@ -225,5 +225,3 @@ operator fun Vector.times(other: Double): Vector {
         finishY = finish.y * other,
     )
 }
-
-// todo map lambda
