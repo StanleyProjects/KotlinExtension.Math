@@ -2,6 +2,9 @@ package sp.kx.math.measure
 
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
+import kotlin.time.Duration
+import kotlin.time.Duration.Companion.milliseconds
+import kotlin.time.Duration.Companion.nanoseconds
 import kotlin.time.Duration.Companion.seconds
 
 @Suppress("MagicNumber")
@@ -29,6 +32,13 @@ internal class MutableDurationIntervalTest {
         }
         MutableDurationInterval(a = 1.234.seconds, b = 5.678.seconds).also { interval ->
             Assertions.assertEquals("{1.23s..5.68s}", interval.toString())
+        }
+    }
+
+    @Test
+    fun toStringErrorTest() {
+        Assertions.assertThrows(IllegalStateException::class.java) {
+            MutableDurationInterval(a = 1.2.seconds, b = 5.6.seconds).toString(points = -1)
         }
     }
 
@@ -82,5 +92,12 @@ internal class MutableDurationIntervalTest {
     fun hashCodeTest() {
         @Suppress("IgnoredReturnValue")
         MutableDurationInterval(a = 1.2.seconds, b = 3.4.seconds).hashCode()
+    }
+
+    @Test
+    fun frequencyTest() {
+        val interval: Interval<Duration> = intervalOf(a = Duration.ZERO, b = (1_000_000_000 / 60).nanoseconds)
+        Assertions.assertEquals(60.0, interval.frequency(), 0.00001)
+        Assertions.assertEquals(120.0, interval.frequency(2.seconds), 0.00001)
     }
 }
