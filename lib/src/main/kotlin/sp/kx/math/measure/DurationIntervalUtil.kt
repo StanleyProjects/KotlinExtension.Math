@@ -3,6 +3,7 @@ package sp.kx.math.measure
 import sp.kx.math.unsafe.toString
 import java.util.Locale
 import kotlin.time.Duration
+import kotlin.time.Duration.Companion.seconds
 import kotlin.time.DurationUnit
 
 /**
@@ -47,4 +48,6 @@ fun Interval<Duration>.diff(): Duration {
     return b - a
 }
 
-// todo duration util frequency
+fun Interval<Duration>.frequency(value: Duration = 1.seconds): Double {
+    return value / (b - a)
+}
