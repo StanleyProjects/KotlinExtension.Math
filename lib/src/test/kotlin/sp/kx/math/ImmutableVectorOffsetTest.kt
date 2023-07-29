@@ -125,5 +125,4 @@ internal class ImmutableVectorOffsetTest {
         Assertions.assertEquals(bar.x + offset.dX, actual.finish.x)
         Assertions.assertEquals(bar.y + offset.dY, actual.finish.y)
     }
-
 }
