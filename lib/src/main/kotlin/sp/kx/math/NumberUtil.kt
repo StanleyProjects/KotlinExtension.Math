@@ -97,6 +97,7 @@ fun Double.ct(k: Double = kotlin.math.PI * 2): Double {
     return (this % k + k) % k
 }
 
+// todo ct -> radians
 // todo div abs
 // todo or null
 // todo or ...
