@@ -43,7 +43,8 @@ internal class VectorCalculationsTest {
             Assertions.assertEquals((kotlin.math.PI / 2 + kotlin.math.PI / 4).radians(), vector.angle().radians())
         }
         (pointOf(x = 1, y = 1) + pointOf(x = -2, y = -2)).also { vector: Vector ->
-            Assertions.assertEquals((kotlin.math.PI + kotlin.math.PI / 4).radians(), vector.angle().radians(), 0.00000000000001)
+            val delta = 0.00000000000001
+            Assertions.assertEquals((kotlin.math.PI + kotlin.math.PI / 4).radians(), vector.angle().radians(), delta)
         }
         (pointOf(x = 1, y = 1) + pointOf(x = 4, y = -2)).also { vector: Vector ->
             Assertions.assertEquals((-kotlin.math.PI / 4).radians(), vector.angle().radians())

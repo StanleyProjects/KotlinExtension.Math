@@ -37,6 +37,7 @@ internal class MutableDurationIntervalTest {
     @Test
     fun toStringErrorTest() {
         Assertions.assertThrows(IllegalStateException::class.java) {
+            @Suppress("IgnoredReturnValue")
             MutableDurationInterval(a = 1.2.seconds, b = 5.6.seconds).toString(points = -1)
         }
     }
