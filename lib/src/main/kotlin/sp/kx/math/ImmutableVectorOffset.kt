@@ -1,5 +1,6 @@
 package sp.kx.math
 
+@Suppress("LongParameterList")
 fun vectorOf(
     startX: Double,
     startY: Double,
