@@ -30,7 +30,6 @@ internal class SizeUtilTest {
         Assertions.assertEquals(width, size.width)
         Assertions.assertEquals(height, size.height)
         val offset: Offset = size.center()
-        Assertions.assertFalse(offset === size)
         Assertions.assertNotEquals(width, offset.dX)
         Assertions.assertNotEquals(height, offset.dY)
         Assertions.assertNotEquals(size.width, offset.dX)
@@ -39,6 +38,25 @@ internal class SizeUtilTest {
         Assertions.assertEquals(height / 2, offset.dY)
         Assertions.assertEquals(size.width / 2, offset.dX)
         Assertions.assertEquals(size.height / 2, offset.dY)
+    }
+
+    @Test
+    fun centerPointTest() {
+        val width = 1.2
+        val height = 3.4
+        val size: Size = sizeOf(width = width, height = height)
+        Assertions.assertNotEquals(size.width, size.height)
+        Assertions.assertEquals(width, size.width)
+        Assertions.assertEquals(height, size.height)
+        val point: Point = size.centerPoint()
+        Assertions.assertNotEquals(width, point.x)
+        Assertions.assertNotEquals(height, point.y)
+        Assertions.assertNotEquals(size.width, point.x)
+        Assertions.assertNotEquals(size.height, point.y)
+        Assertions.assertEquals(width / 2, point.x)
+        Assertions.assertEquals(height / 2, point.y)
+        Assertions.assertEquals(size.width / 2, point.x)
+        Assertions.assertEquals(size.height / 2, point.y)
     }
 
     @Test
