@@ -136,11 +136,37 @@ fun Double.sign(): Double {
     return div(absoluteValue)
 }
 
+/**
+ * Usage:
+ * ```
+ * val value = getUnknownDouble().orNull() ?: 0.0
+ * assertFalse(value.isNaN())
+ * assertNotNull(1.0.orNull())
+ * assertNull(Double.NaN.orNull())
+ * ```
+ * @return [this] receiver if it is not [Double.NaN] or `null` otherwise.
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.6.0
+ */
 fun Double.orNull(): Double? {
     if (isNaN()) return null
     return this
 }
 
+/**
+ * Usage:
+ * ```
+ * val value = getUnknownDouble().orDefault()
+ * assertFalse(value.isNaN())
+ * assertEquals(0.0, Double.NaN.orDefault())
+ * assertEquals(1.0, Double.NaN.orDefault(1.0))
+ * assertEquals(42.0, 42.0.orDefault())
+ * ```
+ * @param other Returns this if [this] receiver is [Double.NaN]. Default is `0.0`.
+ * @return [this] receiver if it is not [Double.NaN] or [other] otherwise.
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.6.0
+ */
 fun Double.orDefault(other: Double = 0.0): Double {
     if (isNaN()) return other
     return this
