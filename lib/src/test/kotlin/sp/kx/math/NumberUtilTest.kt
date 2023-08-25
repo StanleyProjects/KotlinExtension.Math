@@ -59,6 +59,7 @@ internal class NumberUtilTest {
         Assertions.assertEquals(1.0, Double.MIN_VALUE.sign())
         Assertions.assertEquals(-1.0, (-Double.MIN_VALUE).sign())
         Assertions.assertEquals(-1.0, (-Double.MAX_VALUE).sign())
+        Assertions.assertTrue(0.0.sign().isNaN())
         Assertions.assertTrue(Double.NaN.sign().isNaN())
         Assertions.assertTrue(Double.POSITIVE_INFINITY.sign().isNaN())
         Assertions.assertTrue(Double.NEGATIVE_INFINITY.sign().isNaN())

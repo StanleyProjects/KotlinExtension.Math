@@ -84,7 +84,6 @@ fun Double.eq(other: Double, points: Int): Boolean {
  *
  * Usage:
  * ```
- * assertEquals(kotlin.math.PI / 4, (kotlin.math.PI * 2 + kotlin.math.PI / 4).ct())
  * assertEquals(63.0, (-1.0).ct(k = 64.0))
  * assertEquals(1.0, 129.0.ct(k = 128.0))
  * ```
@@ -98,10 +97,41 @@ fun Double.ct(k: Double): Double {
     return (this % k + k) % k
 }
 
+/**
+ * A special case of a [Double.ct] with `kotlin.math.PI * 2` coefficient.
+ *
+ * Usage:
+ * ```
+ * assertEquals(kotlin.math.PI / 4, (kotlin.math.PI * 2 + kotlin.math.PI / 4).radians())
+ * ```
+ * @return The coterminal [Double] relative to [this] receiver given the `kotlin.math.PI * 2` coefficient.
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.6.0
+ */
 fun Double.radians(): Double {
     return ct(k = kotlin.math.PI * 2)
 }
 
+/**
+ * Usage:
+ * ```
+ * assertEquals(1.0, 1.0.sign())
+ * assertEquals(1.0, 42.0.sign())
+ * assertEquals(-1.0, -1.0.sign())
+ * assertEquals(-1.0, -42.0.sign())
+ * ```
+ *
+ * Special cases:
+ * ```
+ * assertTrue(0.0.sign().isNan())
+ * assertTrue(Double.NaN.sign().isNaN())
+ * assertTrue(Double.POSITIVE_INFINITY.sign().isNaN())
+ * assertTrue(Double.NEGATIVE_INFINITY.sign().isNaN())
+ * ```
+ * @return [this] receiver is divided by the absolute value of itself.
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.6.0
+ */
 fun Double.sign(): Double {
     return div(absoluteValue)
 }
