@@ -19,6 +19,21 @@ class MutableDeviation<T : Comparable<T>>(
     override var actual: T,
     override var expected: T,
 ) : Deviation<T> {
+    /**
+     * Sets [expected] value to [actual] variable.
+     *
+     * Usage:
+     * ```
+     * val deviation = MutableDeviation(actual = 1.0, expected = 2.0)
+     * assertNotEquals(deviation.actual, deviation.expected)
+     * assertEquals(deviation.actual, 1.0)
+     * assertEquals(deviation.expected, 2.0)
+     * deviation.commit()
+     * assertEquals(deviation.actual, deviation.expected)
+     * ```
+     * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+     * @since 0.6.0
+     */
     fun commit() {
         actual = expected
     }
