@@ -22,6 +22,21 @@ class MutableSize(
     override var width: Double,
     override var height: Double,
 ) : Size {
+    /**
+     * Method for setting both [width] and [height] values.
+     *
+     * Usage:
+     * ```
+     * val size = MutableSize(width = 3.0, height = 2.0)
+     * assertEquals(size.width, 3.0)
+     * assertEquals(size.height, 2.0)
+     * size.set(width = 2.0, height = 3.0)
+     * assertEquals(size.width, 2.0)
+     * assertEquals(size.height, 3.0)
+     * ```
+     * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+     * @since 0.6.0
+     */
     fun set(
         width: Double,
         height: Double,
@@ -30,6 +45,21 @@ class MutableSize(
         this.height = height
     }
 
+    /**
+     * Method for setting both [width] and [height] values from [other] object.
+     *
+     * Usage:
+     * ```
+     * val size = MutableSize(width = 3.0, height = 2.0)
+     * assertEquals(size.width, 3.0)
+     * assertEquals(size.height, 2.0)
+     * size.set(sizeOf(width = 2.0, height = 3.0))
+     * assertEquals(size.width, 2.0)
+     * assertEquals(size.height, 3.0)
+     * ```
+     * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+     * @since 0.6.0
+     */
     fun set(other: Size) {
         width = other.width
         height = other.height
