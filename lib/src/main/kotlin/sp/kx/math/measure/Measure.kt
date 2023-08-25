@@ -23,7 +23,13 @@ interface Measure<T : Comparable<T>, U : Comparable<U>> {
      */
     fun transform(units: T): U
 
+    /**
+     * Returns the original units by transformed [value].
+     */
     fun units(value: U): T
 
+    /**
+     * Transform `1` unit using [magnitude].
+     */
     fun value(): U
 }
