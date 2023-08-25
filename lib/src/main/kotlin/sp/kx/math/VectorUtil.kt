@@ -216,12 +216,3 @@ fun Vector.isEmpty(points: Int): Boolean {
 fun Vector.isEmpty(): Boolean {
     return start == finish
 }
-
-operator fun Vector.times(other: Double): Vector {
-    return vectorOf(
-        startX = start.x * other,
-        startY = start.y * other,
-        finishX = finish.x * other,
-        finishY = finish.y * other,
-    )
-}

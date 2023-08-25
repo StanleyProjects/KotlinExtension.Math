@@ -1,5 +1,7 @@
 package sp.kx.math
 
+import sp.kx.math.measure.Measure
+
 /**
  * Creates a new [Point] object with a copy of [this] receiver's coordinates with [offset]'s values added to them.
  *
@@ -97,5 +99,14 @@ operator fun Point.times(value: Double): Point {
     return pointOf(
         x = x * value,
         y = y * value,
+    )
+}
+
+operator fun Point.plus(
+    measure: Measure<Double, Double>,
+): Point {
+    return pointOf(
+        x = measure.transform(x),
+        y = measure.transform(y),
     )
 }
