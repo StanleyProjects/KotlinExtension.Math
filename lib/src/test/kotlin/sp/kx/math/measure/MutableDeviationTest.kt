@@ -21,4 +21,19 @@ internal class MutableDeviationTest {
         Assertions.assertEquals(5.6, deviation.actual)
         Assertions.assertEquals(7.8, deviation.expected)
     }
+
+    @Test
+    fun commitTest() {
+        val deviation = MutableDeviation(
+            actual = 1.2,
+            expected = 3.4,
+        )
+        Assertions.assertNotEquals(deviation.actual, deviation.expected)
+        Assertions.assertEquals(1.2, deviation.actual)
+        Assertions.assertEquals(3.4, deviation.expected)
+        deviation.commit()
+        Assertions.assertEquals(deviation.expected, deviation.actual)
+        Assertions.assertEquals(3.4, deviation.actual)
+        Assertions.assertEquals(3.4, deviation.expected)
+    }
 }

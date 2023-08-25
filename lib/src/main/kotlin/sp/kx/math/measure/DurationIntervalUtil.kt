@@ -3,6 +3,7 @@ package sp.kx.math.measure
 import sp.kx.math.unsafe.toString
 import java.util.Locale
 import kotlin.time.Duration
+import kotlin.time.Duration.Companion.seconds
 import kotlin.time.DurationUnit
 
 /**
@@ -45,4 +46,20 @@ fun Interval<Duration>.toString(
  */
 fun Interval<Duration>.diff(): Duration {
     return b - a
+}
+
+/**
+ * Usage:
+ * ```
+ * val interval = intervalOf(a = Duration.ZERO, b = (1_000_000_000 / 60).nanoseconds)
+ * assertEquals(16.milliseconds, interval.diff())
+ * assertEquals(60.0, interval.frequency()) // 60 frames per second
+ * ```
+ * @param value Time for which events will be counted. Default is `1` second.
+ * @return The number of events for the specified [value] time.
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.6.0
+ */
+fun Interval<Duration>.frequency(value: Duration = 1.seconds): Double {
+    return value / (b - a)
 }

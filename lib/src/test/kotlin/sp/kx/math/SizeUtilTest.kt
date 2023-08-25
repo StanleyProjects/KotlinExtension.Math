@@ -30,7 +30,6 @@ internal class SizeUtilTest {
         Assertions.assertEquals(width, size.width)
         Assertions.assertEquals(height, size.height)
         val offset: Offset = size.center()
-        Assertions.assertFalse(offset === size)
         Assertions.assertNotEquals(width, offset.dX)
         Assertions.assertNotEquals(height, offset.dY)
         Assertions.assertNotEquals(size.width, offset.dX)
@@ -39,6 +38,25 @@ internal class SizeUtilTest {
         Assertions.assertEquals(height / 2, offset.dY)
         Assertions.assertEquals(size.width / 2, offset.dX)
         Assertions.assertEquals(size.height / 2, offset.dY)
+    }
+
+    @Test
+    fun centerPointTest() {
+        val width = 1.2
+        val height = 3.4
+        val size: Size = sizeOf(width = width, height = height)
+        Assertions.assertNotEquals(size.width, size.height)
+        Assertions.assertEquals(width, size.width)
+        Assertions.assertEquals(height, size.height)
+        val point: Point = size.centerPoint()
+        Assertions.assertNotEquals(width, point.x)
+        Assertions.assertNotEquals(height, point.y)
+        Assertions.assertNotEquals(size.width, point.x)
+        Assertions.assertNotEquals(size.height, point.y)
+        Assertions.assertEquals(width / 2, point.x)
+        Assertions.assertEquals(height / 2, point.y)
+        Assertions.assertEquals(size.width / 2, point.x)
+        Assertions.assertEquals(size.height / 2, point.y)
     }
 
     @Test
@@ -94,66 +112,13 @@ internal class SizeUtilTest {
     }
 
     @Test
-    fun isEmptyTest() {
-        sizeOf(width = 1.2, height = 4.3).also { size: Size ->
-            Assertions.assertFalse(size.isEmpty())
-        }
-        sizeOf(width = -1.2, height = 4.3).also { size: Size ->
-            Assertions.assertFalse(size.isEmpty())
-        }
-        sizeOf(width = 1.2, height = -4.3).also { size: Size ->
-            Assertions.assertFalse(size.isEmpty())
-        }
-        sizeOf(width = -1.2, height = -4.3).also { size: Size ->
-            Assertions.assertFalse(size.isEmpty())
-        }
-        sizeOf(width = 0.0, height = 4.3).also { size: Size ->
-            Assertions.assertFalse(size.isEmpty())
-        }
-        sizeOf(width = 1.2, height = 0.0).also { size: Size ->
-            Assertions.assertFalse(size.isEmpty())
-        }
-        sizeOf(width = 0.0, height = 0.0).also { size: Size ->
-            Assertions.assertTrue(size.isEmpty())
-        }
-    }
-
-    @Test
-    fun isEmptyPointsTest() {
-        sizeOf(width = 0.0, height = 0.01).also { size: Size ->
-            Assertions.assertTrue(size.isEmpty(points = 1))
-            Assertions.assertFalse(size.isEmpty(points = 2))
-            Assertions.assertFalse(size.isEmpty(points = 4))
-            Assertions.assertFalse(size.isEmpty(points = 8))
-            Assertions.assertFalse(size.isEmpty(points = 16))
-        }
-        sizeOf(width = 0.001, height = 0.0).also { size: Size ->
-            Assertions.assertTrue(size.isEmpty(points = 1))
-            Assertions.assertTrue(size.isEmpty(points = 2))
-            Assertions.assertFalse(size.isEmpty(points = 3))
-            Assertions.assertFalse(size.isEmpty(points = 4))
-            Assertions.assertFalse(size.isEmpty(points = 8))
-            Assertions.assertFalse(size.isEmpty(points = 16))
-        }
-        sizeOf(width = 0.0, height = 0.00000001).also { size: Size ->
-            Assertions.assertTrue(size.isEmpty(points = 1))
-            Assertions.assertTrue(size.isEmpty(points = 2))
-            Assertions.assertTrue(size.isEmpty(points = 3))
-            Assertions.assertTrue(size.isEmpty(points = 4))
-            Assertions.assertFalse(size.isEmpty(points = 8))
-            Assertions.assertFalse(size.isEmpty(points = 16))
-        }
-    }
-
-    @Test
-    fun isEmptyErrorTest() {
-        Assertions.assertThrows(IllegalArgumentException::class.java) {
-            @Suppress("IgnoredReturnValue")
-            sizeOf(width = 1.2, height = 4.3).isEmpty(points = 0)
-        }
-        Assertions.assertThrows(IllegalArgumentException::class.java) {
-            @Suppress("IgnoredReturnValue")
-            sizeOf(width = 1.2, height = 4.3).isEmpty(points = -1)
-        }
+    fun sizeOfTest() {
+        val foo: Size = sizeOf(
+            width = 1,
+            height = 2,
+        )
+        Assertions.assertNotEquals(foo.width, foo.height)
+        Assertions.assertEquals(1.0, foo.width)
+        Assertions.assertEquals(2.0, foo.height)
     }
 }

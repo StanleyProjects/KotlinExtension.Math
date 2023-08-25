@@ -82,4 +82,36 @@ internal class MutableSizeTest {
             height = 3.4,
         ).hashCode()
     }
+
+    @Test
+    fun setTest() {
+        val actual = MutableSize(
+            width = 1.2,
+            height = 3.4,
+        )
+        Assertions.assertNotEquals(actual.width, actual.height)
+        Assertions.assertEquals(1.2, actual.width)
+        Assertions.assertEquals(3.4, actual.height)
+        actual.set(width = 5.6, height = 7.8)
+        Assertions.assertNotEquals(actual.width, actual.height)
+        Assertions.assertEquals(5.6, actual.width)
+        Assertions.assertEquals(7.8, actual.height)
+    }
+
+    @Test
+    fun setSizeTest() {
+        val foo = MutableSize(
+            width = 1.2,
+            height = 3.4,
+        )
+        Assertions.assertNotEquals(foo.width, foo.height)
+        Assertions.assertEquals(1.2, foo.width)
+        Assertions.assertEquals(3.4, foo.height)
+        val bar = sizeOf(width = 5.6, height = 7.8)
+        Assertions.assertNotEquals(foo, bar)
+        foo.set(bar)
+        Assertions.assertEquals(5.6, foo.width)
+        Assertions.assertEquals(7.8, foo.height)
+        Assertions.assertEquals(foo, bar)
+    }
 }

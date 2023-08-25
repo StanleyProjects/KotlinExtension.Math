@@ -90,6 +90,26 @@ fun Size.center(): Offset {
 /**
  * Usage:
  * ```
+ * val size: Size = sizeOf(width = 1.2, height = 3.4)
+ * val point: Point = size.centerPoint()
+ * assertEquals(0.6, point.x)
+ * assertEquals(1.7, point.y)
+ * ```
+ * @receiver The values of this [Size] divided by `2` will be passed to the result [Point].
+ * @return An [Point] that is the copy of the [Size.width] and the [Size.height] divided by `2`.
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.6.0
+ */
+fun Size.centerPoint(): Point {
+    return pointOf(
+        x = width / 2,
+        y = height / 2,
+    )
+}
+
+/**
+ * Usage:
+ * ```
  * assertTrue(sizeOf(width = 0.0, height = 0.01).isEmpty(points = 1))
  * assertFalse(sizeOf(width = 0.0, height = 0.01).isEmpty(points = 2))
  * ```
@@ -118,4 +138,38 @@ fun Size.isEmpty(points: Int): Boolean {
  */
 fun Size.isEmpty(): Boolean {
     return width == 0.0 && height == 0.0
+}
+
+/**
+ * An integer version of the `sizeOf` method with [Double]s.
+ *
+ * Usage:
+ * ```
+ * val size = sizeOf(width = 2, height = 1)
+ * val foo = pointOf(1, 1)
+ * val bar = pointOf(x = foo.x + size.width, y = foo.y + size.height)
+ *
+ *   ^
+ *   |
+ * 3 -
+ *   |
+ * 2 -            * bar
+ *   |
+ * 1 -   * foo
+ *   |
+ * 0 +---|---|---|---|--->
+ *   0   1   2   3   4
+ * ```
+ * @return An instance of [Size] built from the [Int] values [width] and [height].
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.6.0
+ */
+fun sizeOf(
+    width: Int,
+    height: Int,
+): Size {
+    return MutableSize(
+        width = width.toDouble(),
+        height = height.toDouble(),
+    )
 }
