@@ -1,5 +1,32 @@
 package sp.kx.math
 
+/**
+ * Usage:
+ * ```
+ * val vector = vectorOf(
+ *     startX = 0.0,
+ *     startY = 0.0,
+ *     finishX = 2.0,
+ *     finishY = 1.0,
+ *     dX = 1.0,
+ *     dY = 2.0,
+ * )
+ *
+ *   ^
+ *   |
+ * y -   -   -   * vector.finish
+ *   |
+ * 2 -   * vector.start
+ *   |
+ * 1 -   |       |
+ *   |
+ * 0 +---|---|---|---|--->
+ *   0   1   2   x   4
+ * ```
+ * @return An instance of [Vector] built from the [Double] values and offset [Double] values.
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.6.0
+ */
 @Suppress("LongParameterList")
 fun vectorOf(
     startX: Double,
@@ -15,6 +42,32 @@ fun vectorOf(
     )
 }
 
+/**
+ * Usage:
+ * ```
+ * val vector = vectorOf(
+ *     startX = 0.0,
+ *     startY = 0.0,
+ *     finishX = 2.0,
+ *     finishY = 1.0,
+ *     offset = offsetOf(dX = 1.0, dY = 2.0),
+ * )
+ *
+ *   ^
+ *   |
+ * y -   -   -   * vector.finish
+ *   |
+ * 2 -   * vector.start
+ *   |
+ * 1 -   |       |
+ *   |
+ * 0 +---|---|---|---|--->
+ *   0   1   2   x   4
+ * ```
+ * @return An instance of [Vector] built from the [Double] values and [Offset].
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.6.0
+ */
 fun vectorOf(
     startX: Double,
     startY: Double,
@@ -28,6 +81,32 @@ fun vectorOf(
     )
 }
 
+/**
+ * Usage:
+ * ```
+ * val vector = vectorOf(
+ *     startX = 0.0,
+ *     startY = 0.0,
+ *     finish = pointOf(x = 2.0, y = 1.0),
+ *     dX = 1.0,
+ *     dY = 2.0,
+ * )
+ *
+ *   ^
+ *   |
+ * y -   -   -   * vector.finish
+ *   |
+ * 2 -   * vector.start
+ *   |
+ * 1 -   |       |
+ *   |
+ * 0 +---|---|---|---|--->
+ *   0   1   2   x   4
+ * ```
+ * @return An instance of [Vector] built from the [Double] values, [Point] and offset [Double] values.
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.6.0
+ */
 fun vectorOf(
     startX: Double,
     startY: Double,
@@ -41,6 +120,31 @@ fun vectorOf(
     )
 }
 
+/**
+ * Usage:
+ * ```
+ * val vector = vectorOf(
+ *     startX = 0.0,
+ *     startY = 0.0,
+ *     finish = pointOf(x = 2.0, y = 1.0),
+ *     offset = offsetOf(dX = 1.0, dY = 2.0),
+ * )
+ *
+ *   ^
+ *   |
+ * y -   -   -   * vector.finish
+ *   |
+ * 2 -   * vector.start
+ *   |
+ * 1 -   |       |
+ *   |
+ * 0 +---|---|---|---|--->
+ *   0   1   2   x   4
+ * ```
+ * @return An instance of [Vector] built from the [Double] values, [Point] and [Offset].
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.6.0
+ */
 fun vectorOf(
     startX: Double,
     startY: Double,
