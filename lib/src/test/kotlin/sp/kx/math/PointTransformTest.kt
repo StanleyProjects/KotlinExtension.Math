@@ -38,7 +38,7 @@ internal class PointTransformTest {
         Assertions.assertNotEquals(foo.x, foo.y)
         Assertions.assertEquals(1.2, foo.x)
         Assertions.assertEquals(3.4, foo.y)
-        val bar = foo.map(measureOf(magnitude = 2.0))
+        val bar = foo + measureOf(magnitude = 2.0)
         Assertions.assertEquals(1.2, foo.x)
         Assertions.assertEquals(3.4, foo.y)
         Assertions.assertEquals(1.2 * 2, bar.x)
