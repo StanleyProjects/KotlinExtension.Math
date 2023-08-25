@@ -102,7 +102,7 @@ fun Double.radians(): Double {
     return ct(k = kotlin.math.PI * 2)
 }
 
-fun Double.divAbs(): Double {
+fun Double.sign(): Double {
     return div(absoluteValue)
 }
 
