@@ -145,7 +145,7 @@ operator fun Point.times(value: Double): Point {
  * 0 +---|---|---|---|--->
  *   0   1   2   3   4
  * ```
- * @return A new [Point] object with [this] receiver's coordinates multiplied by the [value].
+ * @return A new [Point] object with [this] receiver's coordinates transformed by the [measure].
  * @author [Stanley Wintergreen](https://github.com/kepocnhh)
  * @since 0.6.0
  */
