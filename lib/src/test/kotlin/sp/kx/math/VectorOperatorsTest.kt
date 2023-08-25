@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test
 import sp.kx.math.measure.Measure
 import sp.kx.math.measure.measureOf
 
+@Suppress("MagicNumber")
 internal class VectorOperatorsTest {
     @Test
     fun plusOffsetTest() {
