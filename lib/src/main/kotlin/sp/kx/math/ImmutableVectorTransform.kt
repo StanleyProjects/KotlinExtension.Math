@@ -100,6 +100,7 @@ fun vectorOf(
  * @receiver This [Point] will become the [Vector.start] point transformed by the [transform] function.
  * @param x This value will become the x-coordinate of the [Vector.finish] point transformed by the [transform] function.
  * @param y This value will become the y-coordinate of the [Vector.finish] point transformed by the [transform] function.
+ * @param transform This function will transform all original coordinates.
  * @return An instance of [Vector] built from the [Double] values, [Point] and the [transform] function.
  * @author [Stanley Wintergreen](https://github.com/kepocnhh)
  * @since 0.6.0
