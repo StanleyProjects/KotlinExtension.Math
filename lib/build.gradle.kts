@@ -64,20 +64,29 @@ val taskUnitTest = task<Test>("checkUnitTest") {
     useJUnitPlatform()
     testClassesDirs = sourceSets.test.get().output.classesDirs
     classpath = sourceSets.test.get().runtimeClasspath
+    val executionData = layout.buildDirectory.get()
+        .dir("jacoco")
+        .file("$name.exec")
+    doLast {
+        executionData.existing().file().filled()
+    }
 }
 
 val taskCoverageReport = task<JacocoReport>("assembleCoverageReport") {
     dependsOn(taskUnitTest)
     reports {
-        csv.required.set(false)
-        html.required.set(true)
-        xml.required.set(false)
+        html.required = true
+        csv.required = false
+        xml.required = false
     }
     sourceDirectories.setFrom(file("src/main/kotlin"))
     classDirectories.setFrom(sourceSets.main.get().output.classesDirs)
     executionData(taskUnitTest)
     doLast {
-        val report = buildDir.resolve("reports/jacoco/$name/html/index.html")
+        val report = layout.buildDirectory.get()
+            .dir("reports/jacoco/$name/html")
+            .file("index.html")
+            .asFile
         if (report.exists()) {
             println("Coverage report: ${report.absolutePath}")
         }
