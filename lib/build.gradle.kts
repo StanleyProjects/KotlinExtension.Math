@@ -13,6 +13,7 @@ import sp.gx.core.kebabCase
 import sp.gx.core.resolve
 import java.net.URL
 import io.gitlab.arturbosch.detekt.Detekt
+import org.jetbrains.dokka.gradle.DokkaTask
 
 version = "0.7.0"
 
@@ -177,18 +178,25 @@ task<Detekt>("checkDocumentation") {
     jvmTarget = Version.jvmTarget
     source = sourceSets.main.get().allSource
     config.setFrom(configs)
+    val report = layout.buildDirectory.get()
+        .dir("reports/analysis/documentation/html")
+        .file("index.html")
+        .asFile
     reports {
         html {
-            required.set(true)
-            outputLocation.set(buildDir.resolve("reports/analysis/documentation/html/index.html"))
+            required = true
+            outputLocation = report
         }
-        md.required.set(false)
-        sarif.required.set(false)
-        txt.required.set(false)
-        xml.required.set(false)
+        md.required = false
+        sarif.required = false
+        txt.required = false
+        xml.required = false
     }
     val detektTask = tasks.getByName<Detekt>("detektMain")
     classpath.setFrom(detektTask.classpath)
+    doFirst {
+        println("Analysis report: ${report.absolutePath}")
+    }
 }
 
 "snapshot".also { variant ->
@@ -228,19 +236,27 @@ task<Detekt>("checkDocumentation") {
             )
         }
     }
-    task<org.jetbrains.dokka.gradle.DokkaTask>(camelCase("assemble", variant, "Documentation")) {
-        outputDirectory.set(buildDir.resolve("documentation/$variant"))
-        moduleName.set(gh.name)
-        moduleVersion.set(version)
+    task<DokkaTask>(camelCase("assemble", variant, "Documentation")) {
+        outputDirectory = layout.buildDirectory.dir("documentation/$variant")
+        moduleName = gh.name
+        moduleVersion = version
         dokkaSourceSets.getByName("main") {
             val path = "src/$name/kotlin"
-            reportUndocumented.set(false)
+            reportUndocumented = false
             sourceLink {
-                localDirectory.set(file(path))
-                val url = GitHub.url(gh.owner, gh.name)
-                remoteUrl.set(URL("$url/tree/${moduleVersion.get()}/lib/$path"))
+                localDirectory = file(path)
+                remoteUrl = GitHub.url(gh.owner, gh.name).resolve("tree/${moduleVersion.get()}/lib/$path")
             }
             jdkVersion.set(Version.jvmTarget.toInt())
+        }
+        doLast {
+            val index = outputDirectory.get()
+                .file("index.html")
+                .asFile
+                .existing()
+                .file()
+                .filled()
+            println("Documentation: ${index.absolutePath}")
         }
     }
     task(camelCase("assemble", variant, "Metadata")) {
