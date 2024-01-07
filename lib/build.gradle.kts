@@ -12,6 +12,7 @@ import sp.gx.core.filled
 import sp.gx.core.kebabCase
 import sp.gx.core.resolve
 import java.net.URL
+import io.gitlab.arturbosch.detekt.Detekt
 
 version = "0.7.0"
 
@@ -131,27 +132,39 @@ setOf("main", "test").also { types ->
             .filled()
     }
     types.forEach { type ->
-        task<io.gitlab.arturbosch.detekt.Detekt>(camelCase("check", "CodeQuality", type)) {
+        val postfix = when (type) {
+            "main" -> ""
+            "test" -> "UnitTest"
+            else -> error("Type \"$type\" is not supported!")
+        }
+        task<Detekt>(camelCase("check", "CodeQuality", postfix)) {
             jvmTarget = Version.jvmTarget
             source = sourceSets.getByName(type).allSource
             config.setFrom(configs)
+            val report = layout.buildDirectory.get()
+                .dir("reports/analysis/code/quality/$type/html")
+                .file("index.html")
+                .asFile
             reports {
                 html {
-                    required.set(true)
-                    outputLocation.set(buildDir.resolve("reports/analysis/code/quality/$type/html/index.html"))
+                    required = true
+                    outputLocation = report
                 }
-                md.required.set(false)
-                sarif.required.set(false)
-                txt.required.set(false)
-                xml.required.set(false)
+                md.required = false
+                sarif.required = false
+                txt.required = false
+                xml.required = false
             }
-            val detektTask = tasks.getByName<io.gitlab.arturbosch.detekt.Detekt>(camelCase("detekt", type))
+            val detektTask = tasks.getByName<Detekt>(camelCase("detekt", type))
             classpath.setFrom(detektTask.classpath)
+            doFirst {
+                println("Analysis report: ${report.absolutePath}")
+            }
         }
     }
 }
 
-task<io.gitlab.arturbosch.detekt.Detekt>("checkDocumentation") {
+task<Detekt>("checkDocumentation") {
     val configs = setOf(
         "common",
         "documentation",
@@ -174,7 +187,7 @@ task<io.gitlab.arturbosch.detekt.Detekt>("checkDocumentation") {
         txt.required.set(false)
         xml.required.set(false)
     }
-    val detektTask = tasks.getByName<io.gitlab.arturbosch.detekt.Detekt>("detektMain")
+    val detektTask = tasks.getByName<Detekt>("detektMain")
     classpath.setFrom(detektTask.classpath)
 }
 
