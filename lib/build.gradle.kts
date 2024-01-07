@@ -1,3 +1,5 @@
+import io.gitlab.arturbosch.detekt.Detekt
+import org.jetbrains.dokka.gradle.DokkaTask
 import sp.gx.core.Badge
 import sp.gx.core.GitHub
 import sp.gx.core.Markdown
@@ -11,9 +13,7 @@ import sp.gx.core.file
 import sp.gx.core.filled
 import sp.gx.core.kebabCase
 import sp.gx.core.resolve
-import java.net.URL
-import io.gitlab.arturbosch.detekt.Detekt
-import org.jetbrains.dokka.gradle.DokkaTask
+import java.util.Locale
 
 version = "0.7.0"
 
@@ -200,40 +200,48 @@ task<Detekt>("checkDocumentation") {
 }
 
 "snapshot".also { variant ->
-    val version = kebabCase(version.toString(), variant.toUpperCase())
+    val version = kebabCase(version.toString(), variant.uppercase(Locale.US))
     task<Jar>(camelCase("assemble", variant, "Jar")) {
         dependsOn(compileKotlinTask)
-        archiveBaseName.set(maven.id)
-        archiveVersion.set(version)
+        archiveBaseName = maven.id
+        archiveVersion = version
         from(compileKotlinTask.destinationDirectory.asFileTree)
     }
     task<Jar>(camelCase("assemble", variant, "Source")) {
-        archiveBaseName.set(maven.id)
-        archiveVersion.set(version)
-        archiveClassifier.set("sources")
+        archiveBaseName = maven.id
+        archiveVersion = version
+        archiveClassifier = "sources"
         from(sourceSets.main.get().allSource)
     }
     task(camelCase("assemble", variant, "Pom")) {
         doLast {
-            buildDir.resolve("libs/${kebabCase(maven.id, version)}.pom").assemble(
+            val file = layout.buildDirectory.get()
+                .dir("libs")
+                .file("${kebabCase(maven.id, version)}.pom")
+                .asFile
+            file.assemble(
                 Maven.pom(
-                    groupId = maven.group,
-                    artifactId = maven.id,
+                    artifact = maven,
                     version = version,
                     packaging = "jar",
                 ),
             )
+            println("POM: ${file.absolutePath}")
         }
     }
     task(camelCase("assemble", variant, "MavenMetadata")) {
         doLast {
-            buildDir.resolve("xml/maven-metadata.xml").assemble(
+            val file = layout.buildDirectory.get()
+                .dir("xml")
+                .file("maven-metadata.xml")
+                .asFile
+            file.assemble(
                 Maven.metadata(
-                    groupId = maven.group,
-                    artifactId = maven.id,
+                    artifact = maven,
                     version = version,
                 ),
             )
+            println("Maven metadata: ${file.absolutePath}")
         }
     }
     task<DokkaTask>(camelCase("assemble", variant, "Documentation")) {
@@ -245,7 +253,7 @@ task<Detekt>("checkDocumentation") {
             reportUndocumented = false
             sourceLink {
                 localDirectory = file(path)
-                remoteUrl = GitHub.url(gh.owner, gh.name).resolve("tree/${moduleVersion.get()}/lib/$path")
+                remoteUrl = gh.url().resolve("tree/${moduleVersion.get()}/lib/$path")
             }
             jdkVersion.set(Version.jvmTarget.toInt())
         }
@@ -261,7 +269,11 @@ task<Detekt>("checkDocumentation") {
     }
     task(camelCase("assemble", variant, "Metadata")) {
         doLast {
-            buildDir.resolve("yml/metadata.yml").assemble(
+            val file = layout.buildDirectory.get()
+                .dir("yml")
+                .file("metadata.yml")
+                .asFile
+            file.assemble(
                 """
                     repository:
                      owner: '${gh.owner}'
@@ -269,6 +281,7 @@ task<Detekt>("checkDocumentation") {
                     version: '$version'
                 """.trimIndent(),
             )
+            println("Metadata: ${file.absolutePath}")
         }
     }
     task(camelCase("check", variant, "Readme")) {
@@ -283,13 +296,17 @@ task<Detekt>("checkDocumentation") {
             )
             val expected = setOf(
                 badge,
-                Markdown.link("Maven", Maven.Snapshot.url(maven.group, maven.id, version)),
-                Markdown.link("Documentation", GitHub.pages(gh.owner, gh.name).resolve("doc").resolve(version)),
-                "implementation(\"${maven.group}:${maven.id}:$version\")",
+                Markdown.link("Maven", Maven.Snapshot.url(maven, version)),
+                Markdown.link("Documentation", gh.pages().resolve("doc").resolve(version)),
+                "implementation(\"${colonCase(maven.group, maven.id, version)}\")",
             )
+            val report = layout.buildDirectory.get()
+                .dir("reports/analysis/readme")
+                .file("index.html")
+                .asFile
             rootDir.resolve("README.md").check(
                 expected = expected,
-                report = buildDir.resolve("reports/analysis/readme/index.html"),
+                report = report,
             )
         }
     }
