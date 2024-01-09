@@ -88,8 +88,8 @@ internal class NumberUtilTest {
 
     @Test
     fun whcTest() {
-        Assertions.assertEquals(-1.0, ((kotlin.math.PI / 2) * 1).whc())
-        Assertions.assertEquals(1.0, ((kotlin.math.PI / 2) * 3).whc())
+        Assertions.assertEquals(-1.0, (kotlin.math.PI / 2).whc())
+        Assertions.assertEquals(1.0, (kotlin.math.PI / 2 * 3).whc())
         Assertions.assertEquals(-1.0, 1.0.whc())
         Assertions.assertEquals(1.0, 4.0.whc())
         Assertions.assertEquals(1.0, (-1.0).whc())
