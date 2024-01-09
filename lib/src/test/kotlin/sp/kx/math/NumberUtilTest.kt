@@ -50,19 +50,19 @@ internal class NumberUtilTest {
     }
 
     @Test
-    fun signTest() {
-        Assertions.assertEquals(1.0, 1.0.sign())
-        Assertions.assertEquals(-1.0, (-1.0).sign())
-        Assertions.assertEquals(1.0, 5.0.sign())
-        Assertions.assertEquals(-1.0, (-42.0).sign())
-        Assertions.assertEquals(1.0, Double.MAX_VALUE.sign())
-        Assertions.assertEquals(1.0, Double.MIN_VALUE.sign())
-        Assertions.assertEquals(-1.0, (-Double.MIN_VALUE).sign())
-        Assertions.assertEquals(-1.0, (-Double.MAX_VALUE).sign())
-        Assertions.assertTrue(0.0.sign().isNaN())
-        Assertions.assertTrue(Double.NaN.sign().isNaN())
-        Assertions.assertTrue(Double.POSITIVE_INFINITY.sign().isNaN())
-        Assertions.assertTrue(Double.NEGATIVE_INFINITY.sign().isNaN())
+    fun divideByYourselfTest() {
+        Assertions.assertEquals(1.0, 1.0.dby())
+        Assertions.assertEquals(-1.0, (-1.0).dby())
+        Assertions.assertEquals(1.0, 5.0.dby())
+        Assertions.assertEquals(-1.0, (-42.0).dby())
+        Assertions.assertEquals(1.0, Double.MAX_VALUE.dby())
+        Assertions.assertEquals(1.0, Double.MIN_VALUE.dby())
+        Assertions.assertEquals(-1.0, (-Double.MIN_VALUE).dby())
+        Assertions.assertEquals(-1.0, (-Double.MAX_VALUE).dby())
+        Assertions.assertTrue(0.0.dby().isNaN())
+        Assertions.assertTrue(Double.NaN.dby().isNaN())
+        Assertions.assertTrue(Double.POSITIVE_INFINITY.dby().isNaN())
+        Assertions.assertTrue(Double.NEGATIVE_INFINITY.dby().isNaN())
     }
 
     @Test
