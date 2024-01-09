@@ -154,5 +154,27 @@ fun Double.ifNaN(other: Double): Double {
     return if (isNaN()) other else this
 }
 
+/**
+ * A special case of a [Double.dby]. The method answers the question: "Which half of the circle?".
+ *
+ * Usage:
+ * ```
+ * assertEquals(-1, ((kotlin.math.PI / 4) * 1).whc())
+ * assertEquals(1, ((kotlin.math.PI / 4) * 3).whc())
+ * ```
+ *
+ * Special cases:
+ * ```
+ * assertTrue(kotlin.math.PI.whc().isNan())
+ * assertTrue((kotlin.math.PI * 3).whc().isNan())
+ * ```
+ * @return -1 if [this] receiver is in `0 until 180` or 1 if `180 until 360`.
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.7.1
+ */
+fun Double.whc(): Double {
+    return (kotlin.math.PI - radians()).dby()
+}
+
 // todo which half of the circle
 // angle.whc() == (kotlin.math.PI - angle).dby()
