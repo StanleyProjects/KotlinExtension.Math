@@ -132,6 +132,7 @@ fun Double.radians(): Double {
  * @author [Stanley Wintergreen](https://github.com/kepocnhh)
  * @since 0.6.0
  */
+@Deprecated(message = "replace with 'divide by yourself'", level = DeprecationLevel.ERROR)
 fun Double.sign(): Double {
     return div(absoluteValue)
 }
@@ -148,6 +149,7 @@ fun Double.sign(): Double {
  * @author [Stanley Wintergreen](https://github.com/kepocnhh)
  * @since 0.6.0
  */
+@Deprecated(message = "replace with 'ifNaN'", level = DeprecationLevel.ERROR)
 fun Double.orNull(): Double? {
     if (isNaN()) return null
     return this
@@ -167,7 +169,11 @@ fun Double.orNull(): Double? {
  * @author [Stanley Wintergreen](https://github.com/kepocnhh)
  * @since 0.6.0
  */
+@Deprecated(message = "replace with 'ifNaN'", level = DeprecationLevel.ERROR)
 fun Double.orDefault(other: Double = 0.0): Double {
     if (isNaN()) return other
     return this
 }
+
+// todo which half of the circle
+// angle.whc() == (kotlin.math.PI - angle).dby()
