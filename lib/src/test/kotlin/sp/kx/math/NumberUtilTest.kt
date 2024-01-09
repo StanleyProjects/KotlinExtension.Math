@@ -50,51 +50,52 @@ internal class NumberUtilTest {
     }
 
     @Test
-    fun signTest() {
-        Assertions.assertEquals(1.0, 1.0.sign())
-        Assertions.assertEquals(-1.0, (-1.0).sign())
-        Assertions.assertEquals(1.0, 5.0.sign())
-        Assertions.assertEquals(-1.0, (-42.0).sign())
-        Assertions.assertEquals(1.0, Double.MAX_VALUE.sign())
-        Assertions.assertEquals(1.0, Double.MIN_VALUE.sign())
-        Assertions.assertEquals(-1.0, (-Double.MIN_VALUE).sign())
-        Assertions.assertEquals(-1.0, (-Double.MAX_VALUE).sign())
-        Assertions.assertTrue(0.0.sign().isNaN())
-        Assertions.assertTrue(Double.NaN.sign().isNaN())
-        Assertions.assertTrue(Double.POSITIVE_INFINITY.sign().isNaN())
-        Assertions.assertTrue(Double.NEGATIVE_INFINITY.sign().isNaN())
+    fun divideByYourselfTest() {
+        Assertions.assertEquals(1.0, 1.0.dby())
+        Assertions.assertEquals(-1.0, (-1.0).dby())
+        Assertions.assertEquals(1.0, 5.0.dby())
+        Assertions.assertEquals(-1.0, (-42.0).dby())
+        Assertions.assertEquals(1.0, Double.MAX_VALUE.dby())
+        Assertions.assertEquals(1.0, Double.MIN_VALUE.dby())
+        Assertions.assertEquals(-1.0, (-Double.MIN_VALUE).dby())
+        Assertions.assertEquals(-1.0, (-Double.MAX_VALUE).dby())
+        Assertions.assertTrue(0.0.dby().isNaN())
+        Assertions.assertTrue(Double.NaN.dby().isNaN())
+        Assertions.assertTrue(Double.POSITIVE_INFINITY.dby().isNaN())
+        Assertions.assertTrue(Double.NEGATIVE_INFINITY.dby().isNaN())
     }
 
     @Test
-    fun orNullTest() {
-        Assertions.assertNotNull(Double.NEGATIVE_INFINITY.orNull())
-        Assertions.assertNotNull(0.0.orNull())
-        Assertions.assertNotNull(Double.MIN_VALUE.orNull())
-        Assertions.assertNotNull(1.0.orNull())
-        Assertions.assertNotNull(42.0.orNull())
-        Assertions.assertNotNull(Double.MAX_VALUE.orNull())
-        Assertions.assertNotNull(Double.POSITIVE_INFINITY.orNull())
-        Assertions.assertNull(Double.NaN.orNull())
+    fun ifNaNTest() {
+        Assertions.assertEquals(Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY.ifNaN(other = 0.0))
+        Assertions.assertEquals(0.0, 0.0.ifNaN(other = 0.0))
+        Assertions.assertEquals(Double.MIN_VALUE, Double.MIN_VALUE.ifNaN(other = 0.0))
+        Assertions.assertEquals(1.0, 1.0.ifNaN(other = 0.0))
+        Assertions.assertEquals(42.0, 42.0.ifNaN(other = 0.0))
+        Assertions.assertEquals(Double.MAX_VALUE, Double.MAX_VALUE.ifNaN(other = 0.0))
+        Assertions.assertEquals(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY.ifNaN(other = 0.0))
+        Assertions.assertEquals(Double.NEGATIVE_INFINITY, Double.NaN.ifNaN(Double.NEGATIVE_INFINITY))
+        Assertions.assertEquals(-1.0, Double.NaN.ifNaN(-1.0))
+        Assertions.assertEquals(0.0, Double.NaN.ifNaN(other = 0.0))
+        Assertions.assertEquals(0.0, Double.NaN.ifNaN(0.0))
+        Assertions.assertEquals(Double.MIN_VALUE, Double.NaN.ifNaN(Double.MIN_VALUE))
+        Assertions.assertEquals(1.0, Double.NaN.ifNaN(1.0))
+        Assertions.assertEquals(42.0, Double.NaN.ifNaN(42.0))
+        Assertions.assertEquals(Double.MAX_VALUE, Double.NaN.ifNaN(Double.MAX_VALUE))
+        Assertions.assertEquals(Double.POSITIVE_INFINITY, Double.NaN.ifNaN(Double.POSITIVE_INFINITY))
+        Assertions.assertTrue(Double.NaN.ifNaN(Double.NaN).isNaN())
     }
 
     @Test
-    fun orDefaultTest() {
-        Assertions.assertEquals(Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY.orDefault())
-        Assertions.assertEquals(0.0, 0.0.orDefault())
-        Assertions.assertEquals(Double.MIN_VALUE, Double.MIN_VALUE.orDefault())
-        Assertions.assertEquals(1.0, 1.0.orDefault())
-        Assertions.assertEquals(42.0, 42.0.orDefault())
-        Assertions.assertEquals(Double.MAX_VALUE, Double.MAX_VALUE.orDefault())
-        Assertions.assertEquals(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY.orDefault())
-        Assertions.assertEquals(Double.NEGATIVE_INFINITY, Double.NaN.orDefault(Double.NEGATIVE_INFINITY))
-        Assertions.assertEquals(-1.0, Double.NaN.orDefault(-1.0))
-        Assertions.assertEquals(0.0, Double.NaN.orDefault())
-        Assertions.assertEquals(0.0, Double.NaN.orDefault(0.0))
-        Assertions.assertEquals(Double.MIN_VALUE, Double.NaN.orDefault(Double.MIN_VALUE))
-        Assertions.assertEquals(1.0, Double.NaN.orDefault(1.0))
-        Assertions.assertEquals(42.0, Double.NaN.orDefault(42.0))
-        Assertions.assertEquals(Double.MAX_VALUE, Double.NaN.orDefault(Double.MAX_VALUE))
-        Assertions.assertEquals(Double.POSITIVE_INFINITY, Double.NaN.orDefault(Double.POSITIVE_INFINITY))
-        Assertions.assertTrue(Double.NaN.orDefault(Double.NaN).isNaN())
+    fun whcTest() {
+        Assertions.assertEquals(-1.0, (kotlin.math.PI / 2).whc())
+        Assertions.assertEquals(1.0, (kotlin.math.PI / 2 * 3).whc())
+        Assertions.assertEquals(-1.0, 1.0.whc())
+        Assertions.assertEquals(1.0, 4.0.whc())
+        Assertions.assertEquals(1.0, (-1.0).whc())
+        Assertions.assertEquals(-1.0, (-4.0).whc())
+        Assertions.assertTrue(kotlin.math.PI.whc().isNaN())
+        Assertions.assertTrue((kotlin.math.PI * 1).whc().isNaN())
+        Assertions.assertTrue((kotlin.math.PI * 3).whc().isNaN())
     }
 }

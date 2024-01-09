@@ -115,59 +115,63 @@ fun Double.radians(): Double {
 /**
  * Usage:
  * ```
- * assertEquals(1.0, 1.0.sign())
- * assertEquals(1.0, 42.0.sign())
- * assertEquals(-1.0, -1.0.sign())
- * assertEquals(-1.0, -42.0.sign())
+ * assertEquals(1.0, 1.0.dby())
+ * assertEquals(1.0, 42.0.dby())
+ * assertEquals(-1.0, -1.0.dby())
+ * assertEquals(-1.0, -42.0.dby())
  * ```
  *
  * Special cases:
  * ```
- * assertTrue(0.0.sign().isNan())
- * assertTrue(Double.NaN.sign().isNaN())
- * assertTrue(Double.POSITIVE_INFINITY.sign().isNaN())
- * assertTrue(Double.NEGATIVE_INFINITY.sign().isNaN())
+ * assertTrue(0.0.dby().isNan())
+ * assertTrue(Double.NaN.dby().isNaN())
+ * assertTrue(Double.POSITIVE_INFINITY.dby().isNaN())
+ * assertTrue(Double.NEGATIVE_INFINITY.dby().isNaN())
  * ```
  * @return [this] receiver is divided by the absolute value of itself.
  * @author [Stanley Wintergreen](https://github.com/kepocnhh)
- * @since 0.6.0
+ * @since 0.7.1
  */
-fun Double.sign(): Double {
+fun Double.dby(): Double {
     return div(absoluteValue)
 }
 
 /**
  * Usage:
  * ```
- * val value = getUnknownDouble().orNull() ?: 0.0
+ * val value = getUnknownDouble().ifNaN(other = 0.0)
  * assertFalse(value.isNaN())
- * assertNotNull(1.0.orNull())
- * assertNull(Double.NaN.orNull())
- * ```
- * @return [this] receiver if it is not [Double.NaN] or `null` otherwise.
- * @author [Stanley Wintergreen](https://github.com/kepocnhh)
- * @since 0.6.0
- */
-fun Double.orNull(): Double? {
-    if (isNaN()) return null
-    return this
-}
-
-/**
- * Usage:
- * ```
- * val value = getUnknownDouble().orDefault()
- * assertFalse(value.isNaN())
- * assertEquals(0.0, Double.NaN.orDefault())
- * assertEquals(1.0, Double.NaN.orDefault(1.0))
- * assertEquals(42.0, 42.0.orDefault())
+ * assertEquals(0.0, Double.NaN.ifNaN(0.0))
+ * assertEquals(1.0, Double.NaN.ifNaN(1.0))
+ * assertEquals(42.0, 42.0.ifNaN(0.0))
  * ```
  * @param other Returns this if [this] receiver is [Double.NaN]. Default is `0.0`.
  * @return [this] receiver if it is not [Double.NaN] or [other] otherwise.
  * @author [Stanley Wintergreen](https://github.com/kepocnhh)
- * @since 0.6.0
+ * @since 0.7.1
  */
-fun Double.orDefault(other: Double = 0.0): Double {
-    if (isNaN()) return other
-    return this
+fun Double.ifNaN(other: Double): Double {
+    return if (isNaN()) other else this
+}
+
+/**
+ * A special case of a [Double.dby]. The method answers the question: "Which half of the circle?".
+ *
+ * Usage:
+ * ```
+ * assertEquals(-1, ((kotlin.math.PI / 2) * 1).whc())
+ * assertEquals(1, ((kotlin.math.PI / 2) * 3).whc())
+ * ```
+ *
+ * Special cases:
+ * ```
+ * assertTrue(kotlin.math.PI.whc().isNan())
+ * assertTrue((kotlin.math.PI * 3).whc().isNan())
+ * ```
+ * @return -1 if [this] receiver is in `0 until 180` or 1 if `180 until 360`.
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.7.1
+ */
+fun Double.whc(): Double {
+    return (radians() - kotlin.math.PI).dby()
 }
