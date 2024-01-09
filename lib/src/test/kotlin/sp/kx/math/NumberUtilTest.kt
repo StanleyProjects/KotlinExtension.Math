@@ -85,4 +85,17 @@ internal class NumberUtilTest {
         Assertions.assertEquals(Double.POSITIVE_INFINITY, Double.NaN.ifNaN(Double.POSITIVE_INFINITY))
         Assertions.assertTrue(Double.NaN.ifNaN(Double.NaN).isNaN())
     }
+
+    @Test
+    fun whcTest() {
+        Assertions.assertEquals(-1.0, ((kotlin.math.PI / 2) * 1).whc())
+        Assertions.assertEquals(1.0, ((kotlin.math.PI / 2) * 3).whc())
+        Assertions.assertEquals(-1.0, 1.0.whc())
+        Assertions.assertEquals(1.0, 4.0.whc())
+        Assertions.assertEquals(1.0, (-1.0).whc())
+        Assertions.assertEquals(-1.0, (-4.0).whc())
+        Assertions.assertTrue(kotlin.math.PI.whc().isNaN())
+        Assertions.assertTrue((kotlin.math.PI * 1).whc().isNaN())
+        Assertions.assertTrue((kotlin.math.PI * 3).whc().isNaN())
+    }
 }

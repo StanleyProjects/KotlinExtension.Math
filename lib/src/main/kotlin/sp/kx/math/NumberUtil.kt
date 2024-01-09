@@ -159,8 +159,8 @@ fun Double.ifNaN(other: Double): Double {
  *
  * Usage:
  * ```
- * assertEquals(-1, ((kotlin.math.PI / 4) * 1).whc())
- * assertEquals(1, ((kotlin.math.PI / 4) * 3).whc())
+ * assertEquals(-1, ((kotlin.math.PI / 2) * 1).whc())
+ * assertEquals(1, ((kotlin.math.PI / 2) * 3).whc())
  * ```
  *
  * Special cases:
@@ -173,8 +173,5 @@ fun Double.ifNaN(other: Double): Double {
  * @since 0.7.1
  */
 fun Double.whc(): Double {
-    return (kotlin.math.PI - radians()).dby()
+    return (radians() - kotlin.math.PI).dby()
 }
-
-// todo which half of the circle
-// angle.whc() == (kotlin.math.PI - angle).dby()
