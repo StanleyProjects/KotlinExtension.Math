@@ -151,8 +151,7 @@ fun Double.dby(): Double {
  * @since 0.7.1
  */
 fun Double.ifNaN(other: Double): Double {
-    if (isNaN()) return other
-    return this
+    return if (isNaN()) other else this
 }
 
 // todo which half of the circle
