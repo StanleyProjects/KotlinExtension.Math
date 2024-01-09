@@ -139,37 +139,18 @@ fun Double.dby(): Double {
 /**
  * Usage:
  * ```
- * val value = getUnknownDouble().orNull() ?: 0.0
+ * val value = getUnknownDouble().ifNaN(other = 0.0)
  * assertFalse(value.isNaN())
- * assertNotNull(1.0.orNull())
- * assertNull(Double.NaN.orNull())
- * ```
- * @return [this] receiver if it is not [Double.NaN] or `null` otherwise.
- * @author [Stanley Wintergreen](https://github.com/kepocnhh)
- * @since 0.6.0
- */
-@Deprecated(message = "replace with 'ifNaN'", level = DeprecationLevel.ERROR)
-fun Double.orNull(): Double? {
-    if (isNaN()) return null
-    return this
-}
-
-/**
- * Usage:
- * ```
- * val value = getUnknownDouble().orDefault()
- * assertFalse(value.isNaN())
- * assertEquals(0.0, Double.NaN.orDefault())
- * assertEquals(1.0, Double.NaN.orDefault(1.0))
- * assertEquals(42.0, 42.0.orDefault())
+ * assertEquals(0.0, Double.NaN.ifNaN(0.0))
+ * assertEquals(1.0, Double.NaN.ifNaN(1.0))
+ * assertEquals(42.0, 42.0.ifNaN(0.0))
  * ```
  * @param other Returns this if [this] receiver is [Double.NaN]. Default is `0.0`.
  * @return [this] receiver if it is not [Double.NaN] or [other] otherwise.
  * @author [Stanley Wintergreen](https://github.com/kepocnhh)
- * @since 0.6.0
+ * @since 0.7.1
  */
-@Deprecated(message = "replace with 'ifNaN'", level = DeprecationLevel.ERROR)
-fun Double.orDefault(other: Double = 0.0): Double {
+fun Double.ifNaN(other: Double): Double {
     if (isNaN()) return other
     return this
 }
