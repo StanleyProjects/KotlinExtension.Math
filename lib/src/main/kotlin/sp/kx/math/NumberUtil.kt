@@ -115,25 +115,24 @@ fun Double.radians(): Double {
 /**
  * Usage:
  * ```
- * assertEquals(1.0, 1.0.sign())
- * assertEquals(1.0, 42.0.sign())
- * assertEquals(-1.0, -1.0.sign())
- * assertEquals(-1.0, -42.0.sign())
+ * assertEquals(1.0, 1.0.dby())
+ * assertEquals(1.0, 42.0.dby())
+ * assertEquals(-1.0, -1.0.dby())
+ * assertEquals(-1.0, -42.0.dby())
  * ```
  *
  * Special cases:
  * ```
- * assertTrue(0.0.sign().isNan())
- * assertTrue(Double.NaN.sign().isNaN())
- * assertTrue(Double.POSITIVE_INFINITY.sign().isNaN())
- * assertTrue(Double.NEGATIVE_INFINITY.sign().isNaN())
+ * assertTrue(0.0.dby().isNan())
+ * assertTrue(Double.NaN.dby().isNaN())
+ * assertTrue(Double.POSITIVE_INFINITY.dby().isNaN())
+ * assertTrue(Double.NEGATIVE_INFINITY.dby().isNaN())
  * ```
  * @return [this] receiver is divided by the absolute value of itself.
  * @author [Stanley Wintergreen](https://github.com/kepocnhh)
- * @since 0.6.0
+ * @since 0.7.1
  */
-@Deprecated(message = "replace with 'divide by yourself'", level = DeprecationLevel.ERROR)
-fun Double.sign(): Double {
+fun Double.dby(): Double {
     return div(absoluteValue)
 }
 
