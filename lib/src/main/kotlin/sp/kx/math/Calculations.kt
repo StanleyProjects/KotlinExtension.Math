@@ -1,5 +1,7 @@
 package sp.kx.math
 
+import kotlin.math.absoluteValue
+
 /**
  * Usage:
  * ```
@@ -174,4 +176,55 @@ fun getPerpendicular(
     )
 }
 
-// todo get shortest
+/**
+ * The function calculates the shortest distance from point to segment.
+ * It is up to the segment, and not the length of the perpendicular to the straight line!
+ *
+ * Usage:
+ * ```
+ * val a = pointOf(x = 2, y = 3)
+ * val b = pointOf(x = 1, y = 1)
+ * val c = pointOf(x = 3, y = 1)
+ * val value = getShortest(
+ *     xStart = b.x,
+ *     yStart = b.y,
+ *     xFinish = c.x,
+ *     yFinish = c.y,
+ *     xTarget = a.x,
+ *     yTarget = a.y,
+ * )
+ * assertEquals(2.0, value)
+ *
+ *   ^
+ *   |        a
+ * 3 -       *
+ *   |
+ * 2 -
+ *   |    b       c
+ * 1 -   *-------*
+ *   |
+ * 0 *---|---|---|---|--->
+ *   0   1   2   3   4
+ * ```
+ * @return The shortest distance from the coordinates [xTarget] and [yTarget] to the segment described by the coordinates [xStart], [yStart] and [xFinish], [yFinish].
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.7.2
+ */
+fun getShortest(
+    xStart: Double,
+    yStart: Double,
+    xFinish: Double,
+    yFinish: Double,
+    xTarget: Double,
+    yTarget: Double
+): Double {
+    val dX = xFinish - xStart
+    val dY = yFinish - yStart
+    val d = kotlin.math.sqrt(dY * dY + dX * dX)
+    val dS = kotlin.math.sqrt((yStart - yTarget) * (yStart - yTarget) + (xStart - xTarget) * (xStart - xTarget))
+    val dF = kotlin.math.sqrt((yFinish - yTarget) * (yFinish - yTarget) + (xFinish - xTarget) * (xFinish - xTarget))
+    val shortest = (dY * xTarget - dX * yTarget + xFinish * yStart - yFinish * xStart).absoluteValue / d
+    if (kotlin.math.sqrt(dS * dS - shortest * shortest) > d) return dF
+    if (kotlin.math.sqrt(dF * dF - shortest * shortest) > d) return dS
+    return shortest
+}
