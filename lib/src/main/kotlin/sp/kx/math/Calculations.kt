@@ -221,10 +221,28 @@ fun getShortest(
     val dX = xFinish - xStart
     val dY = yFinish - yStart
     val d = kotlin.math.sqrt(dY * dY + dX * dX)
-    val dS = kotlin.math.sqrt((yStart - yTarget) * (yStart - yTarget) + (xStart - xTarget) * (xStart - xTarget))
-    val dF = kotlin.math.sqrt((yFinish - yTarget) * (yFinish - yTarget) + (xFinish - xTarget) * (xFinish - xTarget))
     val shortest = (dY * xTarget - dX * yTarget + xFinish * yStart - yFinish * xStart).absoluteValue / d
+//    val dS = kotlin.math.sqrt((yStart - yTarget) * (yStart - yTarget) + (xStart - xTarget) * (xStart - xTarget))
+    val dS = distanceOf(aX = xStart, aY = yStart, bX = xTarget, bY = yTarget)
+//    val dF = kotlin.math.sqrt((yFinish - yTarget) * (yFinish - yTarget) + (xFinish - xTarget) * (xFinish - xTarget))
+    val dF = distanceOf(aX = xFinish, aY = yFinish, bX = xTarget, bY = yTarget)
+    val message = """
+        ---
+        xStart: $xStart
+        yStart: $yStart
+        xFinish: $xFinish
+        yFinish: $yFinish
+        xTarget: $xTarget
+        yTarget: $yTarget
+        ---
+        shortest: $shortest
+        dS: $dS
+        dF: $dF
+    """.trimIndent() // todo
+//    if (xTarget == 3.0) error(message) // todo
     if (kotlin.math.sqrt(dS * dS - shortest * shortest) > d) return dF
     if (kotlin.math.sqrt(dF * dF - shortest * shortest) > d) return dS
+//    if (shortest > dS) return dS
+//    if (shortest > dF) return dF
     return shortest
 }
