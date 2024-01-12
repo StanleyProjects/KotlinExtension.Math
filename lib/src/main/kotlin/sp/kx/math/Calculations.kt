@@ -117,3 +117,6 @@ fun angleOf(
 ): Double {
     return kotlin.math.atan2(y = y, x = x)
 }
+
+// todo get perpendicular
+// todo get shortest
