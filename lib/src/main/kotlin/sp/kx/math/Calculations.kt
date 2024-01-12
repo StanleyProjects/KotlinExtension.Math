@@ -118,5 +118,60 @@ fun angleOf(
     return kotlin.math.atan2(y = y, x = x)
 }
 
-// todo get perpendicular
+/**
+ * Usage:
+ * ```
+ * val a = pointOf(x = 2, y = 3)
+ * val b = pointOf(x = 1, y = 1)
+ * val c = pointOf(x = 3, y = 1)
+ * val p = getPerpendicular(
+ *     aX = a.x,
+ *     aY = a.y,
+ *     bX = b.x,
+ *     bY = b.y,
+ *     cX = c.x,
+ *     cY = c.y,
+ * )
+ * assertEquals(p.x, a.x)
+ * assertEquals(p.y, b.y)
+ * assertEquals(p.y, c.y)
+ * assertEquals(p.x, 2)
+ * assertEquals(p.y, 1)
+ *
+ *   ^
+ *   |        a
+ * 3 -       *
+ *   |       |
+ * 2 -       |
+ *   |    b  |    c
+ * 1 -   *---*---*
+ *   |
+ * 0 *---|---|---|---|--->
+ *   0   1   2   3   4
+ * ```
+ * @return The point of intersection of the perpendicular dropped the [aX] and [aY] coordinates to the line described by the [bX], [bY] and [cX], [cY] coordinates.
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.7.2
+ */
+fun getPerpendicular(
+    aX: Double,
+    aY: Double,
+    bX: Double,
+    bY: Double,
+    cX: Double,
+    cY: Double
+): Point {
+    if (bX == cX) return pointOf(x = bX, y = aY)
+    if (bY == cY) return pointOf(x = aX, y = bY)
+    val b = (bY * cX - bX * cY) / (cX - bX)
+    val k = (bY - b) / bX
+    val kH = -1 / k
+    val bH = aY - kH * aX
+    val hX = (b - bH) / (kH - k)
+    return pointOf(
+        x = hX,
+        y = k * hX + b,
+    )
+}
+
 // todo get shortest
