@@ -147,8 +147,3 @@ fun Vector.map(
         finish = pointOf(x = transform(finish.x), y = transform(finish.y)),
     )
 }
-
-// todo map measure
-// todo map measure + offset
-// todo vectorOf start.x + start.y + finish.x + finish.y + Measure + Offset
-// todo Point toVector Point + Measure + Offset

@@ -64,3 +64,5 @@ fun Point.map(
         y = transform(y),
     )
 }
+
+// todo Point.map(Measure<Double, Double>)
