@@ -328,3 +328,33 @@ fun centerOf(
         bY = b.y,
     )
 }
+
+fun getPerpendicular(
+    a: Point,
+    b: Point,
+    c: Point,
+): Point {
+    return getPerpendicular(
+        aX = a.x,
+        aY = a.y,
+        bX = b.x,
+        bY = b.y,
+        cX = c.x,
+        cY = c.y,
+    )
+}
+
+fun getShortest(
+    start: Point,
+    finish: Point,
+    target: Point,
+): Double {
+    return getShortest(
+        xStart = start.x,
+        yStart = start.y,
+        xFinish = finish.x,
+        yFinish = finish.y,
+        xTarget = target.x,
+        yTarget = target.y,
+    )
+}

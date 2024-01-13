@@ -161,7 +161,7 @@ fun getPerpendicular(
     bX: Double,
     bY: Double,
     cX: Double,
-    cY: Double
+    cY: Double,
 ): Point {
     if (bX == cX) return pointOf(x = bX, y = aY)
     if (bY == cY) return pointOf(x = aX, y = bY)
@@ -216,7 +216,7 @@ fun getShortest(
     xFinish: Double,
     yFinish: Double,
     xTarget: Double,
-    yTarget: Double
+    yTarget: Double,
 ): Double {
     val dX = xFinish - xStart
     val dY = yFinish - yStart

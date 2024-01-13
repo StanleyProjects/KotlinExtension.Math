@@ -274,5 +274,3 @@ fun Point.minus(
         dY = this.y - y,
     )
 }
-
-// todo toOffsetMeasured Point.toOffsetMeasured(other: Point, measure: Measure<Double, Double>): Offset
