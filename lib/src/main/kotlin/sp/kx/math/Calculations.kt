@@ -1,6 +1,7 @@
 package sp.kx.math
 
 import kotlin.math.absoluteValue
+import kotlin.math.pow
 
 /**
  * Usage:
@@ -164,16 +165,25 @@ fun getPerpendicular(
     cY: Double,
 ): Point {
     if (bX == cX) return pointOf(x = bX, y = aY)
-    if (bY == cY) return pointOf(x = aX, y = bY)
-    val b = (bY * cX - bX * cY) / (cX - bX)
-    val k = (bY - b) / bX
-    val kH = -1 / k
-    val bH = aY - kH * aX
-    val hX = (b - bH) / (kH - k)
+//    if (bY == cY) return pointOf(x = aX, y = bY)
+    // y = k * x + b
+    // k = (y - b) / x
+    val kY = (cY - bY) * (aX - bX) - (cX - bX) * (aY - bY)
+    val kX = (cY - bY).pow(2) + (cX - bX).pow(2)
+    val k = kY / kX
     return pointOf(
-        x = hX,
-        y = k * hX + b,
+        x = aX - k * (cY - bY),
+        y = aY + k * (cX - bX),
     )
+//    val b = (bY * cX - bX * cY) / (cX - bX)
+//    val k = (bY - b) / bX
+//    val kH = -1 / k
+//    val bH = aY - kH * aX
+//    val hX = (b - bH) / (kH - k)
+//    return pointOf(
+//        x = hX,
+//        y = k * hX + b,
+//    )
 }
 
 /**
