@@ -186,6 +186,21 @@ fun getPerpendicular(
 //    )
 }
 
+private fun contains(
+    xStart: Double,
+    yStart: Double,
+    xFinish: Double,
+    yFinish: Double,
+    xTarget: Double,
+    yTarget: Double,
+): Boolean {
+    val d = distanceOf(aX = xStart, aY = yStart, bX = xFinish, bY = xFinish)
+    val dS = distanceOf(aX = xStart, aY = yStart, bX = xTarget, bY = yTarget)
+    val dF = distanceOf(aX = xFinish, aY = yFinish, bX = xTarget, bY = yTarget)
+    // todo delta
+    return d == dS + dF
+}
+
 /**
  * The function calculates the shortest distance from point to segment.
  * It is up to the segment, and not the length of the perpendicular to the straight line!
@@ -228,6 +243,28 @@ fun getShortest(
     xTarget: Double,
     yTarget: Double,
 ): Double {
+    val p = getPerpendicular(
+        aX = xTarget,
+        aY = yTarget,
+        bX = xStart,
+        bY = yStart,
+        cX = xFinish,
+        cY = yFinish,
+    )
+    val contains = contains(
+        xStart = xStart,
+        yStart = yStart,
+        xFinish = xFinish,
+        yFinish = yFinish,
+        xTarget = p.x,
+        yTarget = p.y,
+    )
+    if (contains) return distanceOf(aX = xTarget, aY = yTarget, bX = p.x, bY = p.y)
+    return kotlin.math.min(
+        distanceOf(aX = xStart, aY = yStart, bX = xTarget, bY = yTarget),
+        distanceOf(aX = xFinish, aY = yFinish, bX = xTarget, bY = yTarget),
+    )
+    // todo
     val dX = xFinish - xStart
     val dY = yFinish - yStart
     val d = kotlin.math.sqrt(dY * dY + dX * dX)
@@ -250,6 +287,7 @@ fun getShortest(
         dF: $dF
     """.trimIndent() // todo
 //    if (xTarget == 3.0) error(message) // todo
+    error(message) // todo
     if (kotlin.math.sqrt(dS * dS - shortest * shortest) > d) return dF
     if (kotlin.math.sqrt(dF * dF - shortest * shortest) > d) return dS
 //    if (shortest > dS) return dS

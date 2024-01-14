@@ -31,6 +31,8 @@ fun distanceOf(
     )
 }
 
+// todo distanceOf(Point, Double, Double)
+
 /**
  * Usage:
  * ```
