@@ -46,6 +46,8 @@ fun Vector.eq(other: Vector, points: Int): Boolean {
     return eq(it = this, other = other, points = points)
 }
 
+// todo vectorOf(Int,Int,Int,Int)
+
 /**
  * Creates a new [Vector] object with a copy of [this] receiver's points or the [start] and [finish] passed in.
  *
