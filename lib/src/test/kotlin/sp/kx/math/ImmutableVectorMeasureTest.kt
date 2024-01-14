@@ -52,21 +52,145 @@ internal class ImmutableVectorMeasureTest {
 
     @Test
     fun vectorOfPointTest() {
-        TODO("${this::class.java.name}:vectorOfPointTest")
+        val issues = listOf(
+            DataSet(
+                actual = vectorOf(startX = 2.0, startY = 2.0, finishX = 2.0, finishY = 4.0),
+                expected = vectorOf(startX = -4.0, startY = -4.0, finishX = -4.0, finishY = -8.0),
+                magnitude = -2.0,
+            ),
+            DataSet(
+                actual = vectorOf(startX = 2.0, startY = 2.0, finishX = 2.0, finishY = 4.0),
+                expected = vectorOf(startX = 1.0, startY = 1.0, finishX = 1.0, finishY = 2.0),
+                magnitude = 0.5,
+            ),
+            DataSet(
+                actual = vectorOf(startX = 2.0, startY = 2.0, finishX = 2.0, finishY = 4.0),
+                expected = vectorOf(startX = 2.0, startY = 2.0, finishX = 2.0, finishY = 4.0),
+                magnitude = 1.0,
+            ),
+            DataSet(
+                actual = vectorOf(startX = 2.0, startY = 2.0, finishX = 2.0, finishY = 4.0),
+                expected = vectorOf(startX = 4.0, startY = 4.0, finishX = 4.0, finishY = 8.0),
+                magnitude = 2.0,
+            ),
+        )
+        check(issues.size == 4)
+        check(issues.toSet().size == issues.size)
+        issues.forEach {
+            val measure = measureOf(magnitude = it.magnitude)
+            val actual = vectorOf(
+                startX = it.actual.start.x,
+                startY = it.actual.start.y,
+                finish = it.actual.finish,
+                measure = measure,
+            )
+            Assertions.assertEquals(it.expected, actual)
+        }
     }
 
     @Test
     fun toVectorTest() {
-        TODO("${this::class.java.name}:toVectorTest")
+        val issues = listOf(
+            DataSet(
+                actual = vectorOf(startX = 2.0, startY = 2.0, finishX = 2.0, finishY = 4.0),
+                expected = vectorOf(startX = -4.0, startY = -4.0, finishX = -4.0, finishY = -8.0),
+                magnitude = -2.0,
+            ),
+            DataSet(
+                actual = vectorOf(startX = 2.0, startY = 2.0, finishX = 2.0, finishY = 4.0),
+                expected = vectorOf(startX = 1.0, startY = 1.0, finishX = 1.0, finishY = 2.0),
+                magnitude = 0.5,
+            ),
+            DataSet(
+                actual = vectorOf(startX = 2.0, startY = 2.0, finishX = 2.0, finishY = 4.0),
+                expected = vectorOf(startX = 2.0, startY = 2.0, finishX = 2.0, finishY = 4.0),
+                magnitude = 1.0,
+            ),
+            DataSet(
+                actual = vectorOf(startX = 2.0, startY = 2.0, finishX = 2.0, finishY = 4.0),
+                expected = vectorOf(startX = 4.0, startY = 4.0, finishX = 4.0, finishY = 8.0),
+                magnitude = 2.0,
+            ),
+        )
+        check(issues.size == 4)
+        check(issues.toSet().size == issues.size)
+        issues.forEach {
+            val measure = measureOf(magnitude = it.magnitude)
+            val actual = it.actual.start.toVector(
+                x = it.actual.finish.x,
+                y = it.actual.finish.y,
+                measure = measure,
+            )
+            Assertions.assertEquals(it.expected, actual)
+        }
     }
 
     @Test
     fun toVectorPointTest() {
-        TODO("${this::class.java.name}:toVectorPointTest")
+        val issues = listOf(
+            DataSet(
+                actual = vectorOf(startX = 2.0, startY = 2.0, finishX = 2.0, finishY = 4.0),
+                expected = vectorOf(startX = -4.0, startY = -4.0, finishX = -4.0, finishY = -8.0),
+                magnitude = -2.0,
+            ),
+            DataSet(
+                actual = vectorOf(startX = 2.0, startY = 2.0, finishX = 2.0, finishY = 4.0),
+                expected = vectorOf(startX = 1.0, startY = 1.0, finishX = 1.0, finishY = 2.0),
+                magnitude = 0.5,
+            ),
+            DataSet(
+                actual = vectorOf(startX = 2.0, startY = 2.0, finishX = 2.0, finishY = 4.0),
+                expected = vectorOf(startX = 2.0, startY = 2.0, finishX = 2.0, finishY = 4.0),
+                magnitude = 1.0,
+            ),
+            DataSet(
+                actual = vectorOf(startX = 2.0, startY = 2.0, finishX = 2.0, finishY = 4.0),
+                expected = vectorOf(startX = 4.0, startY = 4.0, finishX = 4.0, finishY = 8.0),
+                magnitude = 2.0,
+            ),
+        )
+        check(issues.size == 4)
+        check(issues.toSet().size == issues.size)
+        issues.forEach {
+            val measure = measureOf(magnitude = it.magnitude)
+            val actual = it.actual.start.toVector(
+                finish = it.actual.finish,
+                measure = measure,
+            )
+            Assertions.assertEquals(it.expected, actual)
+        }
     }
 
     @Test
     fun mapTest() {
-        TODO("${this::class.java.name}:mapTest")
+        val issues = listOf(
+            DataSet(
+                actual = vectorOf(startX = 2.0, startY = 2.0, finishX = 2.0, finishY = 4.0),
+                expected = vectorOf(startX = -4.0, startY = -4.0, finishX = -4.0, finishY = -8.0),
+                magnitude = -2.0,
+            ),
+            DataSet(
+                actual = vectorOf(startX = 2.0, startY = 2.0, finishX = 2.0, finishY = 4.0),
+                expected = vectorOf(startX = 1.0, startY = 1.0, finishX = 1.0, finishY = 2.0),
+                magnitude = 0.5,
+            ),
+            DataSet(
+                actual = vectorOf(startX = 2.0, startY = 2.0, finishX = 2.0, finishY = 4.0),
+                expected = vectorOf(startX = 2.0, startY = 2.0, finishX = 2.0, finishY = 4.0),
+                magnitude = 1.0,
+            ),
+            DataSet(
+                actual = vectorOf(startX = 2.0, startY = 2.0, finishX = 2.0, finishY = 4.0),
+                expected = vectorOf(startX = 4.0, startY = 4.0, finishX = 4.0, finishY = 8.0),
+                magnitude = 2.0,
+            ),
+        )
+        check(issues.size == 4)
+        check(issues.toSet().size == issues.size)
+        issues.forEach {
+            val measure = measureOf(magnitude = it.magnitude)
+            val actual = it.actual.map(measure = measure)
+            Assertions.assertEquals(it.expected, actual)
+        }
     }
 }
