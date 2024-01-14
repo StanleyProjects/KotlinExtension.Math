@@ -5,6 +5,27 @@ import org.junit.jupiter.api.Test
 
 internal class CalculationsDistanceTest {
     @Test
+    fun distanceOfABTest() {
+        val a = pointOf(x = 3, y = 3)
+        val b = pointOf(x = 5, y = 3)
+        val ab = distanceOf(
+            aX = a.x,
+            aY = a.y,
+            bX = b.x,
+            bY = b.y,
+        )
+        val ba = distanceOf(
+            aX = b.x,
+            aY = b.y,
+            bX = a.x,
+            bY = a.y,
+        )
+        Assertions.assertEquals(ab, 2.0)
+        Assertions.assertEquals(ba, 2.0)
+        Assertions.assertEquals(ab, ba)
+    }
+
+    @Test
     fun distanceOfTest() {
         val targets = listOf(
             pointOf(x = 1, y = 3),

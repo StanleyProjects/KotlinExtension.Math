@@ -194,10 +194,25 @@ private fun contains(
     xTarget: Double,
     yTarget: Double,
 ): Boolean {
-    val d = distanceOf(aX = xStart, aY = yStart, bX = xFinish, bY = xFinish)
+    val d = distanceOf(aX = xStart, aY = yStart, bX = xFinish, bY = yFinish)
     val dS = distanceOf(aX = xStart, aY = yStart, bX = xTarget, bY = yTarget)
     val dF = distanceOf(aX = xFinish, aY = yFinish, bX = xTarget, bY = yTarget)
     // todo delta
+//    val message = """
+//        ---
+//        xStart: $xStart
+//        yStart: $yStart
+//        xFinish: $xFinish
+//        yFinish: $yFinish
+//        xTarget: $xTarget
+//        yTarget: $yTarget
+//        ---
+//        d: $d
+//        dS: $dS
+//        dF: $dF
+//    """.trimIndent() // todo
+//    error(message) // todo
+//    return d.eq(other = dS + dF, points = 12) // todo
     return d == dS + dF
 }
 
