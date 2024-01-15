@@ -2,6 +2,7 @@ package sp.kx.math
 
 import sp.kx.math.measure.Measure
 
+@Suppress("LongParameterList")
 fun vectorOf(
     startX: Double,
     startY: Double,
@@ -17,6 +18,7 @@ fun vectorOf(
     )
 }
 
+@Suppress("LongParameterList")
 fun vectorOf(
     startX: Double,
     startY: Double,

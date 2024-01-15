@@ -1,6 +1,5 @@
 package sp.kx.math
 
-import kotlin.math.absoluteValue
 import kotlin.math.pow
 
 /**
@@ -156,6 +155,7 @@ fun angleOf(
  * @author [Stanley Wintergreen](https://github.com/kepocnhh)
  * @since 0.7.2
  */
+@Suppress("LongParameterList")
 fun getPerpendicular(
     aX: Double,
     aY: Double,
@@ -187,6 +187,7 @@ fun getPerpendicular(
 }
 
 // todo
+@Suppress("LongParameterList")
 private fun contains(
     xStart: Double,
     yStart: Double,
@@ -251,6 +252,7 @@ private fun contains(
  * @author [Stanley Wintergreen](https://github.com/kepocnhh)
  * @since 0.7.2
  */
+@Suppress("LongParameterList")
 fun getShortest(
     xStart: Double,
     yStart: Double,
@@ -280,33 +282,4 @@ fun getShortest(
         distanceOf(aX = xStart, aY = yStart, bX = xTarget, bY = yTarget),
         distanceOf(aX = xFinish, aY = yFinish, bX = xTarget, bY = yTarget),
     )
-    // todo
-    val dX = xFinish - xStart
-    val dY = yFinish - yStart
-    val d = kotlin.math.sqrt(dY * dY + dX * dX)
-    val shortest = (dY * xTarget - dX * yTarget + xFinish * yStart - yFinish * xStart).absoluteValue / d
-//    val dS = kotlin.math.sqrt((yStart - yTarget) * (yStart - yTarget) + (xStart - xTarget) * (xStart - xTarget))
-    val dS = distanceOf(aX = xStart, aY = yStart, bX = xTarget, bY = yTarget)
-//    val dF = kotlin.math.sqrt((yFinish - yTarget) * (yFinish - yTarget) + (xFinish - xTarget) * (xFinish - xTarget))
-    val dF = distanceOf(aX = xFinish, aY = yFinish, bX = xTarget, bY = yTarget)
-    val message = """
-        ---
-        xStart: $xStart
-        yStart: $yStart
-        xFinish: $xFinish
-        yFinish: $yFinish
-        xTarget: $xTarget
-        yTarget: $yTarget
-        ---
-        shortest: $shortest
-        dS: $dS
-        dF: $dF
-    """.trimIndent() // todo
-//    if (xTarget == 3.0) error(message) // todo
-    error(message) // todo
-    if (kotlin.math.sqrt(dS * dS - shortest * shortest) > d) return dF
-    if (kotlin.math.sqrt(dF * dF - shortest * shortest) > d) return dS
-//    if (shortest > dS) return dS
-//    if (shortest > dF) return dF
-    return shortest
 }
