@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import sp.kx.math.measure.measureOf
 
+@Suppress("MagicNumber")
 internal class ImmutableVectorMeasureTest {
     private data class DataSet(
         val actual: Vector,
@@ -37,16 +38,16 @@ internal class ImmutableVectorMeasureTest {
         )
         check(issues.size == 4)
         check(issues.toSet().size == issues.size)
-        issues.forEach {
-            val measure = measureOf(magnitude = it.magnitude)
+        issues.forEach { value ->
+            val measure = measureOf(magnitude = value.magnitude)
             val actual = vectorOf(
-                startX = it.actual.start.x,
-                startY = it.actual.start.y,
-                finishX = it.actual.finish.x,
-                finishY = it.actual.finish.y,
+                startX = value.actual.start.x,
+                startY = value.actual.start.y,
+                finishX = value.actual.finish.x,
+                finishY = value.actual.finish.y,
                 measure = measure,
             )
-            Assertions.assertEquals(it.expected, actual)
+            Assertions.assertEquals(value.expected, actual)
         }
     }
 
@@ -76,15 +77,15 @@ internal class ImmutableVectorMeasureTest {
         )
         check(issues.size == 4)
         check(issues.toSet().size == issues.size)
-        issues.forEach {
-            val measure = measureOf(magnitude = it.magnitude)
+        issues.forEach { value ->
+            val measure = measureOf(magnitude = value.magnitude)
             val actual = vectorOf(
-                startX = it.actual.start.x,
-                startY = it.actual.start.y,
-                finish = it.actual.finish,
+                startX = value.actual.start.x,
+                startY = value.actual.start.y,
+                finish = value.actual.finish,
                 measure = measure,
             )
-            Assertions.assertEquals(it.expected, actual)
+            Assertions.assertEquals(value.expected, actual)
         }
     }
 
@@ -114,14 +115,14 @@ internal class ImmutableVectorMeasureTest {
         )
         check(issues.size == 4)
         check(issues.toSet().size == issues.size)
-        issues.forEach {
-            val measure = measureOf(magnitude = it.magnitude)
-            val actual = it.actual.start.toVector(
-                x = it.actual.finish.x,
-                y = it.actual.finish.y,
+        issues.forEach { value ->
+            val measure = measureOf(magnitude = value.magnitude)
+            val actual = value.actual.start.toVector(
+                x = value.actual.finish.x,
+                y = value.actual.finish.y,
                 measure = measure,
             )
-            Assertions.assertEquals(it.expected, actual)
+            Assertions.assertEquals(value.expected, actual)
         }
     }
 
@@ -151,13 +152,13 @@ internal class ImmutableVectorMeasureTest {
         )
         check(issues.size == 4)
         check(issues.toSet().size == issues.size)
-        issues.forEach {
-            val measure = measureOf(magnitude = it.magnitude)
-            val actual = it.actual.start.toVector(
-                finish = it.actual.finish,
+        issues.forEach { value ->
+            val measure = measureOf(magnitude = value.magnitude)
+            val actual = value.actual.start.toVector(
+                finish = value.actual.finish,
                 measure = measure,
             )
-            Assertions.assertEquals(it.expected, actual)
+            Assertions.assertEquals(value.expected, actual)
         }
     }
 
@@ -187,10 +188,10 @@ internal class ImmutableVectorMeasureTest {
         )
         check(issues.size == 4)
         check(issues.toSet().size == issues.size)
-        issues.forEach {
-            val measure = measureOf(magnitude = it.magnitude)
-            val actual = it.actual.map(measure = measure)
-            Assertions.assertEquals(it.expected, actual)
+        issues.forEach { value ->
+            val measure = measureOf(magnitude = value.magnitude)
+            val actual = value.actual.map(measure = measure)
+            Assertions.assertEquals(value.expected, actual)
         }
     }
 }

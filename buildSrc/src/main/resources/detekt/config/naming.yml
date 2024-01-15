@@ -4,7 +4,7 @@ naming:
   active: true
   BooleanPropertyNaming:
     active: true
-    allowedPattern: '^(is|has|are)[A-Z]\w+|loading|exists|contains|\w+Exists$|\w+ed$'
+    allowedPattern: '^(is|has|are)[A-Z]\w+|loading|exists|contains|actual|\w+Exists$|\w+ed$'
   ClassNaming:
     active: true
     classPattern: '[A-Z][a-zA-Z0-9]*'

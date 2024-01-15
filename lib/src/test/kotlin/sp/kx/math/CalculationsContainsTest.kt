@@ -3,6 +3,7 @@ package sp.kx.math
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
+@Suppress("MagicNumber")
 internal class CalculationsContainsTest {
     @Test
     fun containsTest() {
@@ -58,26 +59,26 @@ internal class CalculationsContainsTest {
         )
         check(vectors.size == 8)
         check(vectors.toSet().size == vectors.size)
-        vectors.forEach {
+        vectors.forEach { v1 ->
             val contains = contains(
-                xStart = it.start.x,
-                yStart = it.start.y,
-                xFinish = it.finish.x,
-                yFinish = it.finish.y,
+                xStart = v1.start.x,
+                yStart = v1.start.y,
+                xFinish = v1.finish.x,
+                yFinish = v1.finish.y,
                 xTarget = 0.0,
                 yTarget = 0.0,
             )
-            Assertions.assertTrue(contains) { "vector: $it" }
-            val vector = it + offsetOf(dX = 0.0001, dY = 0.0002)
+            Assertions.assertTrue(contains) { "vector: $v1" }
+            val v2 = v1 + offsetOf(dX = 0.0001, dY = 0.0002)
             val actual = contains(
-                xStart = vector.start.x,
-                yStart = vector.start.y,
-                xFinish = vector.finish.x,
-                yFinish = vector.finish.y,
+                xStart = v2.start.x,
+                yStart = v2.start.y,
+                xFinish = v2.finish.x,
+                yFinish = v2.finish.y,
                 xTarget = 0.0,
                 yTarget = 0.0,
             )
-            Assertions.assertFalse(actual) { "vector: ($it) ${vector.toString(points = 4)}" }
+            Assertions.assertFalse(actual) { "vector: ($v1) ${v2.toString(points = 4)}" }
         }
     }
 }

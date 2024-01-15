@@ -4,6 +4,10 @@ import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import sp.kx.math.measure.measureOf
 
+@Suppress(
+    "MagicNumber",
+    "StringLiteralDuplication",
+)
 internal class ImmutableVectorOffsetMeasureTest {
     private data class DataSet(
         val actual: Vector,
@@ -42,19 +46,19 @@ internal class ImmutableVectorOffsetMeasureTest {
         )
         check(issues.size == 4)
         check(issues.toSet().size == issues.size)
-        issues.forEach {
-            val measure = measureOf(magnitude = it.magnitude)
+        issues.forEach { value ->
+            val measure = measureOf(magnitude = value.magnitude)
             val actual = vectorOf(
-                startX = it.actual.start.x,
-                startY = it.actual.start.y,
-                finishX = it.actual.finish.x,
-                finishY = it.actual.finish.y,
-                dX = it.offset.dX,
-                dY = it.offset.dY,
+                startX = value.actual.start.x,
+                startY = value.actual.start.y,
+                finishX = value.actual.finish.x,
+                finishY = value.actual.finish.y,
+                dX = value.offset.dX,
+                dY = value.offset.dY,
                 measure = measure,
             )
-            Assertions.assertEquals(it.expected, actual) {
-                "actual: $actual\noffset: ${it.offset}"
+            Assertions.assertEquals(value.expected, actual) {
+                "actual: $actual\noffset: ${value.offset}"
             }
         }
     }
@@ -89,18 +93,18 @@ internal class ImmutableVectorOffsetMeasureTest {
         )
         check(issues.size == 4)
         check(issues.toSet().size == issues.size)
-        issues.forEach {
-            val measure = measureOf(magnitude = it.magnitude)
+        issues.forEach { value ->
+            val measure = measureOf(magnitude = value.magnitude)
             val actual = vectorOf(
-                startX = it.actual.start.x,
-                startY = it.actual.start.y,
-                finishX = it.actual.finish.x,
-                finishY = it.actual.finish.y,
-                offset = it.offset,
+                startX = value.actual.start.x,
+                startY = value.actual.start.y,
+                finishX = value.actual.finish.x,
+                finishY = value.actual.finish.y,
+                offset = value.offset,
                 measure = measure,
             )
-            Assertions.assertEquals(it.expected, actual) {
-                "actual: $actual\noffset: ${it.offset}"
+            Assertions.assertEquals(value.expected, actual) {
+                "actual: $actual\noffset: ${value.offset}"
             }
         }
     }
@@ -135,17 +139,17 @@ internal class ImmutableVectorOffsetMeasureTest {
         )
         check(issues.size == 4)
         check(issues.toSet().size == issues.size)
-        issues.forEach {
-            val measure = measureOf(magnitude = it.magnitude)
+        issues.forEach { value ->
+            val measure = measureOf(magnitude = value.magnitude)
             val actual = vectorOf(
-                startX = it.actual.start.x,
-                startY = it.actual.start.y,
-                finish = it.actual.finish,
-                offset = it.offset,
+                startX = value.actual.start.x,
+                startY = value.actual.start.y,
+                finish = value.actual.finish,
+                offset = value.offset,
                 measure = measure,
             )
-            Assertions.assertEquals(it.expected, actual) {
-                "actual: $actual\noffset: ${it.offset}"
+            Assertions.assertEquals(value.expected, actual) {
+                "actual: $actual\noffset: ${value.offset}"
             }
         }
     }
@@ -180,15 +184,15 @@ internal class ImmutableVectorOffsetMeasureTest {
         )
         check(issues.size == 4)
         check(issues.toSet().size == issues.size)
-        issues.forEach {
-            val measure = measureOf(magnitude = it.magnitude)
-            val actual = it.actual.start.toVector(
-                finish = it.actual.finish,
-                offset = it.offset,
+        issues.forEach { value ->
+            val measure = measureOf(magnitude = value.magnitude)
+            val actual = value.actual.start.toVector(
+                finish = value.actual.finish,
+                offset = value.offset,
                 measure = measure,
             )
-            Assertions.assertEquals(it.expected, actual) {
-                "actual: $actual\noffset: ${it.offset}"
+            Assertions.assertEquals(value.expected, actual) {
+                "actual: $actual\noffset: ${value.offset}"
             }
         }
     }
