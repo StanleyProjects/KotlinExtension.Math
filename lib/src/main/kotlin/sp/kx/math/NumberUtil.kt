@@ -113,6 +113,8 @@ fun Double.radians(): Double {
 }
 
 /**
+ * The method follows the instruction: "Divide by yourself.".
+ *
  * Usage:
  * ```
  * assertEquals(1.0, 1.0.dby())
