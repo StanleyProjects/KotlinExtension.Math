@@ -31,7 +31,18 @@ fun distanceOf(
     )
 }
 
-// todo distanceOf(Point, Double, Double)
+fun distanceOf(
+    a: Point,
+    bX: Double,
+    bY: Double,
+): Double {
+    return distanceOf(
+        aX = a.x,
+        aY = a.y,
+        bX = bX,
+        bY = bY,
+    )
+}
 
 /**
  * Usage:
