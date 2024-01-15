@@ -169,7 +169,6 @@ internal class VectorUtilTest {
         Assertions.assertEquals(3.4, foo.start.y)
         Assertions.assertEquals(5.6, foo.finish.x)
         Assertions.assertEquals(7.8, foo.finish.y)
-
         foo.times(5.6).also { bar: Vector ->
             val value = 5.6
             Assertions.assertEquals(1.2, foo.start.x)
@@ -192,5 +191,22 @@ internal class VectorUtilTest {
             Assertions.assertEquals(5.6 * value, bar.finish.x)
             Assertions.assertEquals(7.8 * value, bar.finish.y)
         }
+    }
+
+    @Test
+    fun vectorOfTest() {
+        val foo = vectorOf(
+            startX = 1,
+            startY = 2,
+            finishX = 3,
+            finishY = 4,
+        )
+        Assertions.assertFalse(foo.isEmpty())
+        Assertions.assertNotEquals(foo.start.x, foo.start.y)
+        Assertions.assertNotEquals(foo.finish.x, foo.finish.y)
+        Assertions.assertEquals(1.0, foo.start.x)
+        Assertions.assertEquals(2.0, foo.start.y)
+        Assertions.assertEquals(3.0, foo.finish.x)
+        Assertions.assertEquals(4.0, foo.finish.y)
     }
 }
