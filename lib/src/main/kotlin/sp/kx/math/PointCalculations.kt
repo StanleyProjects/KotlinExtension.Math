@@ -209,8 +209,8 @@ fun centerOf(
  * assertEquals(p.x, a.x)
  * assertEquals(p.y, b.y)
  * assertEquals(p.y, c.y)
- * assertEquals(p.x, 2)
- * assertEquals(p.y, 1)
+ * assertEquals(p.x, 2.0)
+ * assertEquals(p.y, 1.0)
  *
  *   ^
  *   |        a
