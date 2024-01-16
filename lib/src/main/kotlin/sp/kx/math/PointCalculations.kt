@@ -31,6 +31,25 @@ fun distanceOf(
     )
 }
 
+/**
+ * Usage:
+ * ```
+ * val distance = distanceOf(a = pointOf(1, 1), bX = 3.0, bY = 1.0)
+ * assertEquals(2.0, distance)
+ *
+ *   ^
+ *   |
+ * 2 -
+ *   |    a       b
+ * 1 -   * - - - *
+ *   |
+ * 0 +---|---|---|---|--->
+ *   0   1   2   3   4
+ * ```
+ * @return Distance between point [a] and point by coordinates [[bX], [bY]].
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.7.2
+ */
 fun distanceOf(
     a: Point,
     bX: Double,
@@ -176,6 +195,38 @@ fun centerOf(
     )
 }
 
+/**
+ * Usage:
+ * ```
+ * val a = pointOf(x = 2, y = 3)
+ * val b = pointOf(x = 1, y = 1)
+ * val c = pointOf(x = 3, y = 1)
+ * val p = getPerpendicular(
+ *     a = a,
+ *     b = b,
+ *     c = c,
+ * )
+ * assertEquals(p.x, a.x)
+ * assertEquals(p.y, b.y)
+ * assertEquals(p.y, c.y)
+ * assertEquals(p.x, 2)
+ * assertEquals(p.y, 1)
+ *
+ *   ^
+ *   |        a
+ * 3 -       *
+ *   |       |
+ * 2 -       |
+ *   |    b  |    c
+ * 1 -   *---*---*
+ *   |
+ * 0 *---|---|---|---|--->
+ *   0   1   2   3   4
+ * ```
+ * @return The point of intersection of the perpendicular dropped the [a] point to the line described by the [b] and [c] points.
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.7.2
+ */
 fun getPerpendicular(
     a: Point,
     b: Point,
@@ -191,6 +242,37 @@ fun getPerpendicular(
     )
 }
 
+/**
+ * The function calculates the shortest distance from point to segment.
+ * It is up to the segment, and not the length of the perpendicular to the straight line!
+ *
+ * Usage:
+ * ```
+ * val a = pointOf(x = 2, y = 3)
+ * val b = pointOf(x = 1, y = 1)
+ * val c = pointOf(x = 3, y = 1)
+ * val value = getShortest(
+ *     start = b,
+ *     finish = c,
+ *     target = a,
+ * )
+ * assertEquals(2.0, value)
+ *
+ *   ^
+ *   |        a
+ * 3 -       *
+ *   |
+ * 2 -
+ *   |    b       c
+ * 1 -   *-------*
+ *   |
+ * 0 *---|---|---|---|--->
+ *   0   1   2   3   4
+ * ```
+ * @return The shortest distance from the [target] point to the segment described by the [start] and [finish] points.
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.7.2
+ */
 fun getShortest(
     start: Point,
     finish: Point,
