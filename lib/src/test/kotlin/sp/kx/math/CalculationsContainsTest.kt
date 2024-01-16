@@ -6,6 +6,33 @@ import org.junit.jupiter.api.Test
 @Suppress("MagicNumber")
 internal class CalculationsContainsTest {
     @Test
+    fun containsEmptyTest() {
+        val issues = listOf(
+            Triple(pointOf(x = 0, y = 0), pointOf(x = 0, y = 0), true),
+            Triple(pointOf(x = 0, y = 0), pointOf(x = 0.001, y = 0.0), false),
+            Triple(pointOf(x = 1, y = 0), pointOf(x = 1, y = 0), true),
+            Triple(pointOf(x = 0, y = 1), pointOf(x = 0, y = 1), true),
+            Triple(pointOf(x = 2, y = 1), pointOf(x = 2, y = 1), true),
+            Triple(pointOf(x = 2, y = 1), pointOf(x = 1, y = 2), false),
+        )
+        check(issues.size == 6)
+        check(issues.toSet().size == issues.size)
+        issues.forEach { (point, target, expected) ->
+            val vector = point.toVector()
+            check(vector.isEmpty())
+            val actual = contains(
+                xStart = vector.start.x,
+                yStart = vector.start.y,
+                xFinish = vector.finish.x,
+                yFinish = vector.finish.y,
+                xTarget = target.x,
+                yTarget = target.y,
+            )
+            Assertions.assertEquals(expected, actual)
+        }
+    }
+
+    @Test
     fun containsTest() {
         val actual = contains(
             xStart = -2.0,
