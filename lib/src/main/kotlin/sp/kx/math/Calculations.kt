@@ -187,6 +187,34 @@ fun getPerpendicular(
 //    )
 }
 
+/**
+ * Usage:
+ * ```
+ * val vector = pointOf(x = 1, y = 1) + pointOf(x = 3, y = 1)
+ * val target = pointOf(x = 2, y = 1)
+ * val contains = contains(
+ *     xStart = vector.start.x,
+ *     yStart = vector.start.y,
+ *     xFinish = vector.finish.x,
+ *     yFinish = vector.finish.y,
+ *     xTarget = target.x,
+ *     yTarget = target.y,
+ * )
+ * assertTrue(contains)
+ *
+ *   ^
+ *   |
+ * 2 -
+ *   |    s   t   f
+ * 1 -   *---*---*
+ *   |
+ * 0 *---|---|---|---|--->
+ *   0   1   2   3   4
+ * ```
+ * @return Returns `true` if the point by coordinates [[xTarget], [yTarget]] lies on the segment by coordinates [[xStart], [yStart]] and [[xFinish], [yFinish]] or `false` otherwise.
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.7.2
+ */
 @Suppress("LongParameterList")
 fun contains(
     xStart: Double,
