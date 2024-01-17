@@ -329,9 +329,33 @@ fun getSlope(
     return (bY - aY) / (bX - aX)
 }
 
+fun isParallel(
+    aX: Double,
+    aY: Double,
+    bX: Double,
+    bY: Double,
+    cX: Double,
+    cY: Double,
+    dX: Double,
+    dY: Double,
+): Boolean {
+    val slope1 = getSlope(
+        aX = aX,
+        aY = aY,
+        bX = bX,
+        bY = bY,
+    )
+    val slope2 = getSlope(
+        aX = cX,
+        aY = cY,
+        bX = dX,
+        bY = dY,
+    )
+    return slope1 == slope2
+}
+
 // todo getShortestPoint(Point,Point,Point)
 // todo getShortestPoint(Vector,Point)
-// todo getSlope
 // todo isParallel
 // todo isCollinear
 // todo getIntersectionPointOrNull
