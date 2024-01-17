@@ -230,6 +230,9 @@ fun contains(
     return eq(it = dSF, other = dST + dFT, points = 12)
 }
 
+// todo contains(Point,Point,Point)
+// todo contains(Vector,Point)
+
 /**
  * The function calculates the shortest distance from point to segment.
  * It is up to the segment, and not the length of the perpendicular to the straight line!
@@ -264,6 +267,7 @@ fun contains(
  * @author [Stanley Wintergreen](https://github.com/kepocnhh)
  * @since 0.7.2
  */
+@Deprecated(message = "getShortest -> getShortestDistance", level = DeprecationLevel.ERROR)
 @Suppress("LongParameterList")
 fun getShortest(
     xStart: Double,
@@ -295,3 +299,12 @@ fun getShortest(
         distanceOf(aX = xFinish, aY = yFinish, bX = xTarget, bY = yTarget),
     )
 }
+
+// todo getShortest -> getShortestDistance
+// todo getShortestPoint(Double,Double,Double,Double,Double,Double)
+// todo getShortestPoint(Point,Point,Point)
+// todo getShortestPoint(Vector,Point)
+// todo getSlope
+// todo isParallel
+// todo isCollinear
+// todo getIntersectionPointOrNull
