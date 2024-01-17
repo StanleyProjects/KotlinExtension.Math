@@ -318,6 +318,8 @@ fun getShortestPoint(
     return pointOf(x = xFinish, y = yFinish)
 }
 
+// todo Zero slope
+// todo Undefined(Infinite,NaN) slope
 fun getSlope(
     aX: Double,
     aY: Double,
