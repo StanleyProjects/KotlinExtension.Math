@@ -287,7 +287,37 @@ fun getShortestDistance(
     )
 }
 
-// todo getShortestPoint(Double,Double,Double,Double,Double,Double)
+fun getShortestPoint(
+    xStart: Double,
+    yStart: Double,
+    xFinish: Double,
+    yFinish: Double,
+    xTarget: Double,
+    yTarget: Double,
+): Point {
+    val perpendicular = getPerpendicular(
+        aX = xTarget,
+        aY = yTarget,
+        bX = xStart,
+        bY = yStart,
+        cX = xFinish,
+        cY = yFinish,
+    )
+    val contains = contains(
+        xStart = xStart,
+        yStart = yStart,
+        xFinish = xFinish,
+        yFinish = yFinish,
+        xTarget = perpendicular.x,
+        yTarget = perpendicular.y,
+    )
+    if (contains) return perpendicular
+    val dS = distanceOf(aX = xStart, aY = yStart, bX = xTarget, bY = yTarget)
+    val dF = distanceOf(aX = xFinish, aY = yFinish, bX = xTarget, bY = yTarget)
+    if (dS < dF) return pointOf(x = xStart, y = yStart)
+    return pointOf(x = xFinish, y = yFinish)
+}
+
 // todo getShortestPoint(Point,Point,Point)
 // todo getShortestPoint(Vector,Point)
 // todo getSlope
