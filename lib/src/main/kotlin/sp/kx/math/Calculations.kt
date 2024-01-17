@@ -318,6 +318,15 @@ fun getShortestPoint(
     return pointOf(x = xFinish, y = yFinish)
 }
 
+fun getSlope(
+    aX: Double,
+    aY: Double,
+    bX: Double,
+    bY: Double,
+): Double {
+    return (bY - aY) / (bX - aX)
+}
+
 // todo getShortestPoint(Point,Point,Point)
 // todo getShortestPoint(Vector,Point)
 // todo getSlope
