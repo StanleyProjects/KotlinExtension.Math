@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test
     "MagicNumber",
     "StringLiteralDuplication",
 )
-internal class PointCalculationsShortestTest {
+internal class CalculationsShortestDistanceTest {
     @Test
     fun getShortestZeroTest() {
         val expected = 1.0
@@ -20,17 +20,14 @@ internal class PointCalculationsShortestTest {
         )
         check(targets.size == 4)
         check(targets.toSet().size == targets.size)
-        val start = Point.Center
-        val finish = Point.Center
-        check(start.x == 0.0)
-        check(start.y == 0.0)
-        check(finish.x == 0.0)
-        check(finish.y == 0.0)
         targets.forEach { target ->
-            val actual = getShortest(
-                start = start,
-                finish = finish,
-                target = target,
+            val actual = getShortestDistance(
+                xStart = 0.0,
+                yStart = 0.0,
+                xFinish = 0.0,
+                yFinish = 0.0,
+                xTarget = target.x,
+                yTarget = target.y,
             )
             Assertions.assertEquals(expected, actual, 0.000000000000001) {
                 "target: $target"
@@ -54,15 +51,14 @@ internal class PointCalculationsShortestTest {
         )
         check(targets.size == 8)
         check(targets.toSet().size == targets.size)
-        val start = pointOf(x = -2, y = 0)
-        val finish = Point.Center
-        check(finish.x == 0.0)
-        check(finish.y == 0.0)
         targets.forEach { target ->
-            val actual = getShortest(
-                start = start,
-                finish = finish,
-                target = target,
+            val actual = getShortestDistance(
+                xStart = -2.0,
+                yStart = 0.0,
+                xFinish = 0.0,
+                yFinish = 0.0,
+                xTarget = target.x,
+                yTarget = target.y,
             )
             Assertions.assertEquals(expected, actual, 0.000000000000001) {
                 "target: $target"
@@ -86,15 +82,14 @@ internal class PointCalculationsShortestTest {
         )
         check(targets.size == 8)
         check(targets.toSet().size == targets.size)
-        val start = Point.Center
-        val finish = pointOf(x = 2, y = 0)
-        check(start.x == 0.0)
-        check(start.y == 0.0)
         targets.forEach { target ->
-            val actual = getShortest(
-                start = start,
-                finish = finish,
-                target = target,
+            val actual = getShortestDistance(
+                xStart = 0.0,
+                yStart = 0.0,
+                xFinish = 2.0,
+                yFinish = 0.0,
+                xTarget = target.x,
+                yTarget = target.y,
             )
             Assertions.assertEquals(expected, actual, 0.000000000000001) {
                 "target: $target"
@@ -116,13 +111,14 @@ internal class PointCalculationsShortestTest {
         )
         check(targets.size == 8)
         check(targets.toSet().size == targets.size)
-        val start = pointOf(x = 3, y = 3)
-        val finish = pointOf(x = 3, y = 5)
         targets.forEach { target ->
-            val actual = getShortest(
-                start = start,
-                finish = finish,
-                target = target,
+            val actual = getShortestDistance(
+                xStart = 3.0,
+                yStart = 3.0,
+                xFinish = 3.0,
+                yFinish = 5.0,
+                xTarget = target.x,
+                yTarget = target.y,
             )
             Assertions.assertEquals(2.0, actual) {
                 "target: $target"
@@ -144,13 +140,14 @@ internal class PointCalculationsShortestTest {
         )
         check(targets.size == 8)
         check(targets.toSet().size == targets.size)
-        val start = pointOf(x = 3, y = 3)
-        val finish = pointOf(x = 5, y = 3)
         targets.forEach { target ->
-            val actual = getShortest(
-                start = start,
-                finish = finish,
-                target = target,
+            val actual = getShortestDistance(
+                xStart = 3.0,
+                yStart = 3.0,
+                xFinish = 5.0,
+                yFinish = 3.0,
+                xTarget = target.x,
+                yTarget = target.y,
             )
             Assertions.assertEquals(2.0, actual) {
                 "target: $target"
@@ -174,13 +171,14 @@ internal class PointCalculationsShortestTest {
         )
         check(targets.size == 8)
         check(targets.toSet().size == targets.size)
-        val start = pointOf(x = 3, y = 3)
-        val finish = pointOf(x = 5, y = 5)
         targets.forEach { target ->
-            val actual = getShortest(
-                start = start,
-                finish = finish,
-                target = target,
+            val actual = getShortestDistance(
+                xStart = 3.0,
+                yStart = 3.0,
+                xFinish = 5.0,
+                yFinish = 5.0,
+                xTarget = target.x,
+                yTarget = target.y,
             )
             Assertions.assertEquals(expected, actual, 0.000000000000001) {
                 "target: $target"

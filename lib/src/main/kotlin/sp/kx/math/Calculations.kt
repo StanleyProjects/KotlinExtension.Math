@@ -166,9 +166,6 @@ fun getPerpendicular(
     cY: Double,
 ): Point {
     if (bX == cX) return pointOf(x = bX, y = aY)
-//    if (bY == cY) return pointOf(x = aX, y = bY)
-    // y = k * x + b
-    // k = (y - b) / x
     val kY = (cY - bY) * (aX - bX) - (cX - bX) * (aY - bY)
     val kX = (cY - bY).pow(2) + (cX - bX).pow(2)
     val k = kY / kX
@@ -176,15 +173,6 @@ fun getPerpendicular(
         x = aX - k * (cY - bY),
         y = aY + k * (cX - bX),
     )
-//    val b = (bY * cX - bX * cY) / (cX - bX)
-//    val k = (bY - b) / bX
-//    val kH = -1 / k
-//    val bH = aY - kH * aX
-//    val hX = (b - bH) / (kH - k)
-//    return pointOf(
-//        x = hX,
-//        y = k * hX + b,
-//    )
 }
 
 /**
@@ -267,9 +255,8 @@ fun contains(
  * @author [Stanley Wintergreen](https://github.com/kepocnhh)
  * @since 0.7.2
  */
-@Deprecated(message = "getShortest -> getShortestDistance", level = DeprecationLevel.ERROR)
 @Suppress("LongParameterList")
-fun getShortest(
+fun getShortestDistance(
     xStart: Double,
     yStart: Double,
     xFinish: Double,
@@ -300,7 +287,6 @@ fun getShortest(
     )
 }
 
-// todo getShortest -> getShortestDistance
 // todo getShortestPoint(Double,Double,Double,Double,Double,Double)
 // todo getShortestPoint(Point,Point,Point)
 // todo getShortestPoint(Vector,Point)

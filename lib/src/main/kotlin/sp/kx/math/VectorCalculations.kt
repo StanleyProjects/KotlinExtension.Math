@@ -70,10 +70,8 @@ fun Vector.getPerpendicular(
  * @author [Stanley Wintergreen](https://github.com/kepocnhh)
  * @since 0.7.2
  */
-fun Vector.getShortest(
-    target: Point,
-): Double {
-    return getShortest(
+fun Vector.getShortestDistance(target: Point): Double {
+    return getShortestDistance(
         xStart = start.x,
         yStart = start.y,
         xFinish = finish.x,

@@ -273,12 +273,12 @@ fun getPerpendicular(
  * @author [Stanley Wintergreen](https://github.com/kepocnhh)
  * @since 0.7.2
  */
-fun getShortest(
+fun getShortestDistance(
     start: Point,
     finish: Point,
     target: Point,
 ): Double {
-    return getShortest(
+    return getShortestDistance(
         xStart = start.x,
         yStart = start.y,
         xFinish = finish.x,
