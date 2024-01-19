@@ -344,8 +344,18 @@ fun isParallel(
     return if (abx == 0.0) cdx == 0.0 else (bY - aY) / abx == (dY - cY) / cdx
 }
 
+fun isCollinear(
+    aX: Double,
+    aY: Double,
+    bX: Double,
+    bY: Double,
+    cX: Double,
+    cY: Double,
+): Boolean {
+    return (bY - aY) * (cX - bX) - (bX - aX) * (cY - bY) == 0.0
+}
+
 // todo getShortestPoint(Point,Point,Point)
 // todo getShortestPoint(Vector,Point)
-// todo isParallel
 // todo isCollinear
 // todo getIntersectionPointOrNull
