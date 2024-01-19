@@ -339,19 +339,9 @@ fun isParallel(
     dX: Double,
     dY: Double,
 ): Boolean {
-    val slope1 = getSlope(
-        aX = aX,
-        aY = aY,
-        bX = bX,
-        bY = bY,
-    )
-    val slope2 = getSlope(
-        aX = cX,
-        aY = cY,
-        bX = dX,
-        bY = dY,
-    )
-    return slope1 == slope2
+    val abx = bX - aX
+    val cdx = dX - cX
+    return if (abx == 0.0) cdx == 0.0 else (bY - aY) / abx == (dY - cY) / cdx
 }
 
 // todo getShortestPoint(Point,Point,Point)
