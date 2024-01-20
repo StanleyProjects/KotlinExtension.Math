@@ -80,3 +80,14 @@ fun Vector.getShortestDistance(target: Point): Double {
         yTarget = target.y,
     )
 }
+
+operator fun Vector.contains(target: Point): Boolean {
+    return contains(
+        xStart = start.x,
+        yStart = start.y,
+        xFinish = finish.x,
+        yFinish = finish.y,
+        xTarget = target.x,
+        yTarget = target.y,
+    )
+}
