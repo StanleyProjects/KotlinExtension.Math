@@ -302,3 +302,18 @@ fun contains(
         yTarget = target.y,
     )
 }
+
+fun isCollinear(
+    a: Point,
+    b: Point,
+    c: Point,
+): Boolean {
+    return isCollinear(
+        aX = a.x,
+        aY = a.y,
+        bX = b.x,
+        bY = b.y,
+        cX = c.x,
+        cY = c.y,
+    )
+}
