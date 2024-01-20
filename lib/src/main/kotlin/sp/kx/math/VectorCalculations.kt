@@ -29,9 +29,7 @@ package sp.kx.math
  * @author [Stanley Wintergreen](https://github.com/kepocnhh)
  * @since 0.7.2
  */
-fun Vector.getPerpendicular(
-    target: Point,
-): Point {
+fun Vector.getPerpendicular(target: Point): Point {
     return getPerpendicular(
         aX = target.x,
         aY = target.y,
@@ -89,5 +87,16 @@ operator fun Vector.contains(target: Point): Boolean {
         yFinish = finish.y,
         xTarget = target.x,
         yTarget = target.y,
+    )
+}
+
+fun Vector.isCollinear(target: Point): Boolean {
+    return isCollinear(
+        aX = start.x,
+        aY = start.y,
+        bX = finish.x,
+        bY = finish.y,
+        cX = target.x,
+        cY = target.y,
     )
 }
