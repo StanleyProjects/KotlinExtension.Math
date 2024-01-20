@@ -37,7 +37,7 @@ internal class CalculationsIntersectionTest {
             dY = cd.finish.y,
         )
         check(!isParallel)
-        val expected = Intersection.One(point = pointOf(x = 3, y = 2))
+        val expected = pointOf(x = 3, y = 2)
         val actual = getIntersection(
             aX = ab.start.x,
             aY = ab.start.y,
