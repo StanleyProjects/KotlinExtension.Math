@@ -21,21 +21,8 @@ internal class CalculationsIntersectionTest {
         check(ab.finish !in cd)
         check(cd.start !in ab)
         check(cd.finish !in ab)
-        val abc = isCollinear(
-            a = ab.start,
-            b = ab.finish,
-            c = cd.start,
-        )
-        check(!abc)
-        val abd = isCollinear(
-            aX = ab.start.x,
-            aY = ab.start.y,
-            bX = ab.finish.x,
-            bY = ab.finish.y,
-            cX = cd.finish.x,
-            cY = cd.finish.y,
-        )
-        check(!abd)
+        check(!ab.isCollinear(cd.start))
+        check(!ab.isCollinear(cd.finish))
         val isParallel = isParallel(
             aX = ab.start.x,
             aY = ab.start.y,
