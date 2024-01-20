@@ -23,13 +23,7 @@ internal class CalculationsIntersectionTest {
         check(cd.finish !in ab)
         check(!ab.isCollinear(cd.start))
         check(!ab.isCollinear(cd.finish))
-        val isParallel = isParallel(
-            a = ab.start,
-            b = ab.finish,
-            c = cd.start,
-            d = cd.finish,
-        )
-        check(!isParallel)
+        check(!ab.isParallel(cd))
         val expected = pointOf(x = 3, y = 2)
         val actual = getIntersection(
             aX = ab.start.x,
@@ -44,23 +38,7 @@ internal class CalculationsIntersectionTest {
         Assertions.assertNotNull(actual)
         checkNotNull(actual)
         Assertions.assertEquals(expected, actual)
-        val abi = contains(
-            xStart = ab.start.x,
-            yStart = ab.start.y,
-            xFinish = ab.finish.x,
-            yFinish = ab.finish.y,
-            xTarget = actual.x,
-            yTarget = actual.y,
-        )
-        Assertions.assertTrue(abi)
-        val cdi = contains(
-            xStart = cd.start.x,
-            yStart = cd.start.y,
-            xFinish = cd.finish.x,
-            yFinish = cd.finish.y,
-            xTarget = actual.x,
-            yTarget = actual.y,
-        )
-        Assertions.assertTrue(cdi)
+        Assertions.assertTrue(actual in ab)
+        Assertions.assertTrue(actual in cd)
     }
 }
