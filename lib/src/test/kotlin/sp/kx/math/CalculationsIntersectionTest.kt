@@ -24,14 +24,10 @@ internal class CalculationsIntersectionTest {
         check(!ab.isCollinear(cd.start))
         check(!ab.isCollinear(cd.finish))
         val isParallel = isParallel(
-            aX = ab.start.x,
-            aY = ab.start.y,
-            bX = ab.finish.x,
-            bY = ab.finish.y,
-            cX = cd.start.x,
-            cY = cd.start.y,
-            dX = cd.finish.x,
-            dY = cd.finish.y,
+            a = ab.start,
+            b = ab.finish,
+            c = cd.start,
+            d = cd.finish,
         )
         check(!isParallel)
         val expected = pointOf(x = 3, y = 2)
