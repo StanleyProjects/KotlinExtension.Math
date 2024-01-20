@@ -4,10 +4,38 @@ import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
 internal class CalculationsIntersectionTest {
+    // todo 1.1) i !in ab && i !in cd
+    // todo 1.2) i in ab && i !in cd
+    // todo 1.3) i !in ab && i in cd
+    // todo 1.4) i in ab && i in cd
+    // todo 2) collinear
+    // todo 3) parallel
+    /**
+     * i in ab && i in cd
+     */
     @Test
     fun getIntersectionTest() {
         val ab = vectorOf(startX = 1, startY = 1, finishX = 3, finishY = 2)
         val cd = vectorOf(startX = 2, startY = 4, finishX = 4, finishY = 0)
+        val cda = contains(
+            xStart = cd.start.x,
+            yStart = cd.start.y,
+            xFinish = cd.finish.x,
+            yFinish = cd.finish.y,
+            xTarget = ab.start.x,
+            yTarget = ab.start.y,
+        )
+        check(!cda)
+        val cdb = contains(
+            xStart = cd.start.x,
+            yStart = cd.start.y,
+            xFinish = cd.finish.x,
+            yFinish = cd.finish.y,
+            xTarget = ab.finish.x,
+            yTarget = ab.finish.y,
+        )
+        check(!cdb)
+        // todo contains...
         val abc = isCollinear(
             aX = ab.start.x,
             aY = ab.start.y,
@@ -48,6 +76,26 @@ internal class CalculationsIntersectionTest {
             dX = cd.finish.x,
             dY = cd.finish.y,
         )
+        Assertions.assertNotNull(actual)
+        checkNotNull(actual)
         Assertions.assertEquals(expected, actual)
+        val abi = contains(
+            xStart = ab.start.x,
+            yStart = ab.start.y,
+            xFinish = ab.finish.x,
+            yFinish = ab.finish.y,
+            xTarget = actual.x,
+            yTarget = actual.y,
+        )
+        Assertions.assertTrue(abi)
+        val cdi = contains(
+            xStart = cd.start.x,
+            yStart = cd.start.y,
+            xFinish = cd.finish.x,
+            yFinish = cd.finish.y,
+            xTarget = actual.x,
+            yTarget = actual.y,
+        )
+        Assertions.assertTrue(cdi)
     }
 }
