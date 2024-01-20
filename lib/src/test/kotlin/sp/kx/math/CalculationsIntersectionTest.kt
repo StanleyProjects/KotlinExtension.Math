@@ -15,19 +15,16 @@ internal class CalculationsIntersectionTest {
      */
     @Test
     fun getIntersectionTest() {
-        val ab = vectorOf(startX = 1, startY = 1, finishX = 3, finishY = 2)
+        val ab = vectorOf(startX = 1, startY = 1, finishX = 5, finishY = 3)
         val cd = vectorOf(startX = 2, startY = 4, finishX = 4, finishY = 0)
         check(ab.start !in cd)
         check(ab.finish !in cd)
         check(cd.start !in ab)
         check(cd.finish !in ab)
         val abc = isCollinear(
-            aX = ab.start.x,
-            aY = ab.start.y,
-            bX = ab.finish.x,
-            bY = ab.finish.y,
-            cX = cd.start.x,
-            cY = cd.start.y,
+            a = ab.start,
+            b = ab.finish,
+            c = cd.start,
         )
         check(!abc)
         val abd = isCollinear(
