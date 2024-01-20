@@ -4,19 +4,64 @@ import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
 internal class CalculationsIntersectionTest {
-    // todo 1.1) i !in ab && i !in cd
-    // todo 1.2) i in ab && i !in cd
-    // todo 1.3) i !in ab && i in cd
-    // todo 1.4) i in ab && i in cd
-    // todo 2) collinear
-    // todo 3) parallel
+    private data class DataSet(
+        val ab: Vector,
+        val cd: Vector,
+    )
+
+    /**
+     * i !in ab && i !in cd
+     */
+    @Test
+    fun getIntersectionInNoneTest() {
+        TODO("${this::class.java.name}:getIntersectionInNoneTest")
+    }
+
+    /**
+     * i in ab && i !in cd
+     */
+    @Test
+    fun getIntersectionInABTest() {
+        TODO("${this::class.java.name}:getIntersectionInABTest")
+    }
+
+    /**
+     * i !in ab && i in cd
+     */
+    @Test
+    fun getIntersectionInCDTest() {
+        TODO("${this::class.java.name}:getIntersectionInCDTest")
+    }
+
+    @Test
+    fun getIntersectionCollinearTest() {
+        TODO("${this::class.java.name}:getIntersectionCollinearTest")
+    }
+
+    @Test
+    fun getIntersectionParallelTest() {
+        TODO("${this::class.java.name}:getIntersectionParallelTest")
+    }
+
     /**
      * i in ab && i in cd
      */
     @Test
-    fun getIntersectionTest() {
-        val ab = vectorOf(startX = 1, startY = 1, finishX = 5, finishY = 3)
-        val cd = vectorOf(startX = 2, startY = 4, finishX = 4, finishY = 0)
+    fun getIntersectionInBothTest() {
+        val issues = listOf(
+            DataSet(
+                ab = vectorOf(startX = 1, startY = 1, finishX = 5, finishY = 3),
+                cd = vectorOf(startX = 2, startY = 4, finishX = 4, finishY = 0),
+            )
+        )
+//        check(issues.size == 9) // todo
+        check(issues.toSet().size == issues.size)
+        issues.forEach { issue ->
+            getIntersectionInBothTest(ab = issue.ab, cd = issue.cd)
+        }
+    }
+
+    private fun getIntersectionInBothTest(ab: Vector, cd: Vector) {
         check(ab.start !in cd)
         check(ab.finish !in cd)
         check(cd.start !in ab)
