@@ -51,14 +51,19 @@ internal class CalculationsIntersectionTest {
     fun getIntersectionInBothTest() {
         val issues = listOf(
             DataSet(
-                ab = vectorOf(startX = 1, startY = 1, finishX = 5, finishY = 3),
-                cd = vectorOf(startX = 2, startY = 4, finishX = 4, finishY = 0),
+                ab = pointOf(x = 1, y = 1).toVector(offsetOf(dX = 4, dY = 2)),
+                cd = pointOf(x = 2, y = 4).toVector(offsetOf(dX = 2, dY = -4)),
                 expected = pointOf(x = 3, y = 2),
             ),
             DataSet(
-                ab = pointOf(x = 0, y = 0).toVector(offsetOf(dX = 4.0, dY = 2.0)),
-                cd = pointOf(x = 1, y = 3).toVector(offsetOf(dX = 2.0, dY = -4.0)),
+                ab = pointOf(x = 0, y = 0).toVector(offsetOf(dX = 4, dY = 2)),
+                cd = pointOf(x = 1, y = 3).toVector(offsetOf(dX = 2, dY = -4)),
                 expected = pointOf(x = 2, y = 1),
+            ),
+            DataSet(
+                ab = pointOf(x = -1, y = -3).toVector(offsetOf(dX = 4, dY = 2)),
+                cd = pointOf(x = 0, y = 0).toVector(offsetOf(dX = 2, dY = -4)),
+                expected = pointOf(x = 1, y = -2),
             ),
         )
 //        check(issues.size == 9) // todo

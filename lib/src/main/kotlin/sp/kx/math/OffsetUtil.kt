@@ -115,3 +115,10 @@ fun Offset.isEmpty(points: Int): Boolean {
 fun Offset.isEmpty(): Boolean {
     return dX == 0.0 && dY == 0.0
 }
+
+fun offsetOf(
+    dX: Int,
+    dY: Int,
+): Offset {
+    return offsetOf(dX = dX.toDouble(), dY = dY.toDouble())
+}
