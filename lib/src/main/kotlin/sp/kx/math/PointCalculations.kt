@@ -287,3 +287,18 @@ fun getShortestDistance(
         yTarget = target.y,
     )
 }
+
+fun contains(
+    start: Point,
+    finish: Point,
+    target: Point,
+): Boolean {
+    return contains(
+        xStart = start.x,
+        yStart = start.y,
+        xFinish = finish.x,
+        yFinish = finish.y,
+        xTarget = target.x,
+        yTarget = target.y,
+    )
+}
