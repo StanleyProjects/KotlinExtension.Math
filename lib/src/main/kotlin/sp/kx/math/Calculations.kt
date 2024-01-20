@@ -355,10 +355,17 @@ fun isCollinear(
     return (bY - aY) * (cX - bX) - (bX - aX) * (cY - bY) == 0.0
 }
 
-sealed interface Intersection {
-    data class One(val point: Point) : Intersection
-    data object Collinear : Intersection
-    data object Parallel : Intersection
+fun isCollinear(
+    aX: Double,
+    aY: Double,
+    bX: Double,
+    bY: Double,
+    cX: Double,
+    cY: Double,
+    dX: Double,
+    dY: Double,
+): Boolean {
+    return (bY - aY) * (cX - bX) - (bX - aX) * (cY - bY) == 0.0 && (bY - aY) * (dX - bX) - (bX - aX) * (dY - bY) == 0.0
 }
 
 // todo 1.1) i !in ab && i !in cd
@@ -376,7 +383,7 @@ fun getIntersection(
     cY: Double,
     dX: Double,
     dY: Double,
-): Intersection {
+): Point? {
     val isCollinear = isCollinear(
         aX = aX,
         aY = aY,
@@ -384,15 +391,10 @@ fun getIntersection(
         bY = bY,
         cX = cX,
         cY = cY,
-    ) && isCollinear(
-        aX = aX,
-        aY = aY,
-        bX = bX,
-        bY = bY,
-        cX = dX,
-        cY = dY,
+        dX = dX,
+        dY = dY,
     )
-    if (isCollinear) return Intersection.Collinear
+    if (isCollinear) return null
     val isParallel = isParallel(
         aX = aX,
         aY = aY,
@@ -403,12 +405,12 @@ fun getIntersection(
         dX = dX,
         dY = dY,
     )
-    if (isParallel) return Intersection.Parallel
+    if (isParallel) return null
     val xT = (aX * bY - aY * bX) * (cX - dX) - (aX - bX) * (cX * dY - cY * dX)
     val xB = (aX - bX) * (cY - dY) - (aY - bY) * (cX - dX)
     val yT = (aX * bY - aY * bX) * (cY - dY) - (aY - bY) * (cX * dY - cY * dX)
     val yB = (aX - bX) * (cY - dY) - (aY - bY) * (cX - dX)
-    return Intersection.One(point = pointOf(x = xT / xB, y = yT / yB))
+    return pointOf(x = xT / xB, y = yT / yB)
 }
 
 // todo getShortestPoint(Point,Point,Point)
