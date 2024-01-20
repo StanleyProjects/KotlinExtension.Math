@@ -317,3 +317,21 @@ fun isCollinear(
         cY = c.y,
     )
 }
+
+fun isParallel(
+    a: Point,
+    b: Point,
+    c: Point,
+    d: Point,
+): Boolean {
+    return isParallel(
+        aX = a.x,
+        aY = a.y,
+        bX = b.x,
+        bY = b.y,
+        cX = c.x,
+        cY = c.y,
+        dX = d.x,
+        dY = d.y,
+    )
+}
