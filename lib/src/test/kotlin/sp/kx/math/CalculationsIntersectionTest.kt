@@ -18,12 +18,9 @@ internal class CalculationsIntersectionTest {
         val ab = vectorOf(startX = 1, startY = 1, finishX = 3, finishY = 2)
         val cd = vectorOf(startX = 2, startY = 4, finishX = 4, finishY = 0)
         val cda = contains(
-            xStart = cd.start.x,
-            yStart = cd.start.y,
-            xFinish = cd.finish.x,
-            yFinish = cd.finish.y,
-            xTarget = ab.start.x,
-            yTarget = ab.start.y,
+            start = cd.start,
+            finish = cd.finish,
+            target = ab.start,
         )
         check(!cda)
         val cdb = contains(
