@@ -70,16 +70,46 @@ internal class NumberUtilLessThanTest {
 
     @Test
     fun lessThanNotTest() {
-        TODO("${this::class.java.name}:lessThanNotTest")
-        val actual = 1.23
-        Assertions.assertFalse(actual.lt(other = 1.0, points = 1))
-        Assertions.assertFalse(actual.lt(other = 1.2, points = 2))
-        Assertions.assertFalse(actual.lt(other = -1.23, points = 2))
-        Assertions.assertFalse(actual.lt(other = 1.234, points = 3))
-        Assertions.assertFalse(actual.lt(other = 1.23456789, points = 3))
-        Assertions.assertFalse(actual.lt(other = 1.23456789, points = 4))
-        Assertions.assertFalse(actual.lt(other = 1.23456789, points = 8))
-        Assertions.assertFalse(actual.lt(other = 2.0, points = 1))
+        val issues = listOf(
+            DataSet(
+                value = 0.1235,
+                other = 0.1234,
+                points = 4,
+                isLessThan = false,
+                expected = false,
+            ),
+            DataSet(
+                value = 0.21,
+                other = 0.20,
+                points = 2,
+                isLessThan = false,
+                expected = false,
+            ),
+            DataSet(
+                value = 0.2,
+                other = 0.1,
+                points = 1,
+                isLessThan = false,
+                expected = false,
+            ),
+            DataSet(
+                value = 0.2,
+                other = 0.21,
+                points = 1,
+                isLessThan = true,
+                expected = false,
+            ),
+            DataSet(
+                value = 0.2,
+                other = 0.21,
+                points = 2,
+                isLessThan = true,
+                expected = true,
+            ),
+        )
+        check(issues.size == 5)
+        check(issues.toSet().size == issues.size)
+        issues.forEach(::assertIssue)
     }
 
     @Test
