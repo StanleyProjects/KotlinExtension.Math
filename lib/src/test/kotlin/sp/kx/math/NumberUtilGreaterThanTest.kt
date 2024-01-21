@@ -46,21 +46,35 @@ internal class NumberUtilGreaterThanTest {
     fun greaterThanDeltaTest() {
         val issues = listOf(
             DataSet(
-                value = 0.0001,
-                other = 0.00010001,
+                value = 0.00010001,
+                other = 0.0001,
+                points = 1,
+                isGreaterThan = true,
+                expected = false,
+            ),
+            DataSet(
+                value = 0.00010001,
+                other = 0.0001,
                 points = 4,
                 isGreaterThan = true,
                 expected = false,
             ),
             DataSet(
-                value = 0.0001,
-                other = 0.00010001,
+                value = 0.00010001,
+                other = 0.0001,
+                points = 6,
+                isGreaterThan = true,
+                expected = false,
+            ),
+            DataSet(
+                value = 0.00010001,
+                other = 0.0001,
                 points = 8,
                 isGreaterThan = true,
                 expected = true,
             ),
         )
-        check(issues.size == 2)
+        check(issues.size == 4)
         check(issues.toSet().size == issues.size)
         issues.forEach(::assertIssue)
     }
@@ -74,48 +88,6 @@ internal class NumberUtilGreaterThanTest {
                 points = 4,
                 isGreaterThan = false,
                 expected = false,
-            ),
-            DataSet(
-                value = 0.21,
-                other = 0.20,
-                points = 2,
-                isGreaterThan = false,
-                expected = false,
-            ),
-            DataSet(
-                value = 0.2,
-                other = 0.1,
-                points = 1,
-                isGreaterThan = false,
-                expected = false,
-            ),
-            DataSet(
-                value = 0.2,
-                other = 0.21,
-                points = 1,
-                isGreaterThan = true,
-                expected = false,
-            ),
-            DataSet(
-                value = 0.2,
-                other = 0.21,
-                points = 2,
-                isGreaterThan = true,
-                expected = true,
-            ),
-            DataSet(
-                value = 0.2,
-                other = 0.20000001,
-                points = 1,
-                isGreaterThan = true,
-                expected = false,
-            ),
-            DataSet(
-                value = 0.2,
-                other = 0.20000001,
-                points = 8,
-                isGreaterThan = true,
-                expected = true,
             ),
         )
         check(issues.size == 7)

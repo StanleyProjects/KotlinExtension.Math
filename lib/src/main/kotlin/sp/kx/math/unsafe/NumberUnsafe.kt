@@ -1,7 +1,6 @@
 package sp.kx.math.unsafe
 
 import java.util.Locale
-import kotlin.math.absoluteValue
 import kotlin.math.pow
 
 internal fun toString(number: Double, points: Int, locale: Locale): String {
@@ -23,6 +22,6 @@ internal fun lt(it: Double, other: Double, points: Int): Boolean {
 }
 
 internal fun gt(it: Double, other: Double, points: Int): Boolean {
-    val diff = other - it
-    return diff.absoluteValue > 10.0.pow(-points) && diff < 0
+    val delta = 10.0.pow(points)
+    return (it * delta).toInt() > (other * delta).toInt()
 }
