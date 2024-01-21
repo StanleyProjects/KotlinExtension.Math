@@ -154,7 +154,27 @@ internal class CalculationsIntersectionTest {
 
     @Test
     fun getIntersectionCollinearTest() {
-        TODO("${this::class.java.name}:getIntersectionCollinearTest")
+        val ab = pointOf(x = -3, y = -1).toVector(offsetOf(dX = 4, dY = 2))
+        val cd = pointOf(x = 3, y = 2).toVector(offsetOf(dX = 4, dY = 2))
+        check(ab.start !in cd) { "${ab.start} in $cd!" }
+        check(ab.finish !in cd) { "${ab.finish} in $cd!" }
+        check(cd.start !in ab)
+        check(cd.finish !in ab)
+        check(ab.isCollinear(cd.start))
+        check(ab.isCollinear(cd.finish))
+        check(cd.isCollinear(ab.start))
+        check(cd.isCollinear(ab.finish))
+        val actual = getIntersection(
+            aX = ab.start.x,
+            aY = ab.start.y,
+            bX = ab.finish.x,
+            bY = ab.finish.y,
+            cX = cd.start.x,
+            cY = cd.start.y,
+            dX = cd.finish.x,
+            dY = cd.finish.y,
+        )
+        Assertions.assertNull(actual)
     }
 
     @Test
