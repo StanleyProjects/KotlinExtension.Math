@@ -159,7 +159,28 @@ internal class CalculationsIntersectionTest {
 
     @Test
     fun getIntersectionParallelTest() {
-        TODO("${this::class.java.name}:getIntersectionParallelTest")
+        val ab = pointOf(x = 1, y = 1).toVector(offsetOf(dX = 4, dY = 2))
+        val cd = pointOf(x = 1, y = 2).toVector(offsetOf(dX = 4, dY = 2))
+        check(ab.start !in cd) { "${ab.start} in $cd!" }
+        check(ab.finish !in cd) { "${ab.finish} in $cd!" }
+        check(cd.start !in ab)
+        check(cd.finish !in ab)
+        check(!ab.isCollinear(cd.start))
+        check(!ab.isCollinear(cd.finish))
+        check(!cd.isCollinear(ab.start))
+        check(!cd.isCollinear(ab.finish))
+        check(ab.isParallel(cd))
+        val actual = getIntersection(
+            aX = ab.start.x,
+            aY = ab.start.y,
+            bX = ab.finish.x,
+            bY = ab.finish.y,
+            cX = cd.start.x,
+            cY = cd.start.y,
+            dX = cd.finish.x,
+            dY = cd.finish.y,
+        )
+        Assertions.assertNull(actual)
     }
 
     companion object {
@@ -176,6 +197,8 @@ internal class CalculationsIntersectionTest {
             check(cd.finish !in ab)
             check(!ab.isCollinear(cd.start))
             check(!ab.isCollinear(cd.finish))
+            check(!cd.isCollinear(ab.start))
+            check(!cd.isCollinear(ab.finish))
             check(!ab.isParallel(cd))
             val actual = getIntersection(
                 aX = ab.start.x,
