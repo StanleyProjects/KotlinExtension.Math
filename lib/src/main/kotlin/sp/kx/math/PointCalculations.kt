@@ -424,5 +424,4 @@ fun isParallel(
     )
 }
 
-// todo getShortestPoint(Point,Point,Point)
 // todo getIntersection(Point,Point,Point,Point)

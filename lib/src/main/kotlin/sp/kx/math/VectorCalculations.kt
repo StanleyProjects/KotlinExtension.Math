@@ -151,8 +151,31 @@ fun getSlope(vector: Vector): Double {
     return (vector.finish.y - vector.start.y) / (vector.finish.x - vector.start.x)
 }
 
-// todo getShortestPoint(Vector,Point)
-// todo getShortestPoint(Vector,Double,Double)
+fun Vector.getShortestPoint(target: Point): Point {
+    return getShortestPoint(
+        xStart = start.x,
+        yStart = start.y,
+        xFinish = finish.x,
+        yFinish = finish.y,
+        xTarget = target.x,
+        yTarget = target.y,
+    )
+}
+
+fun Vector.getShortestPoint(
+    xTarget: Double,
+    yTarget: Double,
+): Point {
+    return getShortestPoint(
+        xStart = start.x,
+        yStart = start.y,
+        xFinish = finish.x,
+        yFinish = finish.y,
+        xTarget = xTarget,
+        yTarget = yTarget,
+    )
+}
+
 // todo getIntersection(Vector,Vector)
 // todo getIntersection(Vector,Point,Point)
 // todo getIntersection(Point,Point,Vector)
