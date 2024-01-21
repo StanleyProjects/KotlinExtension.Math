@@ -145,17 +145,13 @@ internal class NumberUtilEqTest {
             other: Double,
             points: Int,
         ) {
-            val message = """
-                points: $points
-                value: ${value.toString(points = 32)}(${value.toString(points = points)})
-                other: ${other.toString(points = 32)}(${other.toString(points = points)})
-                value == other: ${value == other}
-            """.trimIndent()
-//            Assertions.assertNotEquals(other, value, 10.0.pow(-points)) {
-//                message
-//            }
             Assertions.assertFalse(value.eq(other = other, points = points)) {
-                message
+                """
+                    points: $points
+                    value: ${value.toString(points = 32)}(${value.toString(points = points)})
+                    other: ${other.toString(points = 32)}(${other.toString(points = points)})
+                    value == other: ${value == other}
+                """.trimIndent()
             }
         }
     }
