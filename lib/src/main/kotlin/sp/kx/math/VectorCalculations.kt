@@ -176,6 +176,48 @@ fun Vector.getShortestPoint(
     )
 }
 
-// todo getIntersection(Vector,Vector)
-// todo getIntersection(Vector,Point,Point)
-// todo getIntersection(Point,Point,Vector)
+fun Vector.getIntersection(other: Vector): Point? {
+    return getIntersection(
+        aX = start.x,
+        aY = start.y,
+        bX = finish.x,
+        bY = finish.y,
+        cX = other.start.x,
+        cY = other.start.y,
+        dX = other.finish.x,
+        dY = other.finish.y,
+    )
+}
+
+fun Vector.getIntersection(
+    c: Point,
+    d: Point,
+): Point? {
+    return getIntersection(
+        aX = start.x,
+        aY = start.y,
+        bX = finish.x,
+        bY = finish.y,
+        cX = c.x,
+        cY = c.y,
+        dX = d.x,
+        dY = d.y,
+    )
+}
+
+fun getIntersection(
+    a: Point,
+    b: Point,
+    cd: Vector,
+): Point? {
+    return getIntersection(
+        aX = a.x,
+        aY = a.y,
+        bX = b.x,
+        bY = b.y,
+        cX = cd.start.x,
+        cY = cd.start.y,
+        dX = cd.finish.x,
+        dY = cd.finish.y,
+    )
+}
