@@ -311,8 +311,7 @@ fun getShortestPoint(
     if (contains) return perpendicular
     val dS = distanceOf(aX = xStart, aY = yStart, bX = xTarget, bY = yTarget)
     val dF = distanceOf(aX = xFinish, aY = yFinish, bX = xTarget, bY = yTarget)
-    if (dS < dF) return pointOf(x = xStart, y = yStart)
-    return pointOf(x = xFinish, y = yFinish)
+    return if (dS < dF) pointOf(x = xStart, y = yStart) else pointOf(x = xFinish, y = yFinish)
 }
 
 /**
