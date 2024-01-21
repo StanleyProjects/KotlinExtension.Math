@@ -73,6 +73,53 @@ internal class CalculationsParallelTest {
     }
 
     @Test
+    fun isParallelXFalseTest() {
+        val targets = listOf(
+            pointOf(x = 1, y = 1),
+            pointOf(x = 1, y = 0),
+            pointOf(x = 1, y = -1),
+            pointOf(x = 0, y = -1),
+            pointOf(x = -1, y = -1),
+            pointOf(x = -1, y = 0),
+            pointOf(x = -1, y = 1),
+            pointOf(x = 0, y = 1),
+            pointOf(x = 0, y = 0),
+        )
+        check(targets.size == 9)
+        check(targets.toSet().size == targets.size)
+        targets.forEach { a ->
+            val ab = a.toVector(offsetOf(dX = 0, dY = 4))
+            val cd = ImmutableVector(
+                start = ab.start + offsetOf(dX = 1, dY = 2),
+                finish = ab.finish + offsetOf(dX = 2, dY = 2),
+            )
+            check(ab.start !in cd) { "${ab.start} in $cd!" }
+            check(ab.finish !in cd) { "${ab.finish} in $cd!" }
+            check(cd.start !in ab) { "${cd.start} in $ab!" }
+            check(cd.finish !in ab) { "${cd.finish} in $ab!" }
+            check(!ab.isCollinear(cd.start))
+            check(!ab.isCollinear(cd.finish))
+            check(!cd.isCollinear(ab.start))
+            check(!cd.isCollinear(ab.finish))
+            check(ab.start.x == ab.finish.x)
+            check(cd.start.x != cd.finish.x)
+            val actual = isParallel(
+                aX = ab.start.x,
+                aY = ab.start.y,
+                bX = ab.finish.x,
+                bY = ab.finish.y,
+                cX = cd.start.x,
+                cY = cd.start.y,
+                dX = cd.finish.x,
+                dY = cd.finish.y,
+            )
+            Assertions.assertFalse(actual) {
+                "ab: $ab, cd: $cd"
+            }
+        }
+    }
+
+    @Test
     fun isParallelXTest() {
         val targets = listOf(
             pointOf(x = 1, y = 1),
