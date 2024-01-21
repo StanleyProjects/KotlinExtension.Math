@@ -78,6 +78,9 @@ fun Double.eq(other: Double, points: Int): Boolean {
     return eq(it = this, other = other, points = points)
 }
 
+// todo lt
+// todo gt
+
 /**
  * Function for coterminal conversion of a [Double].
  * For example, it can be used to convert any radian value to a value between `0.0` and `kotlin.math.PI * 2`.
