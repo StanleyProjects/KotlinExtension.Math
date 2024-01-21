@@ -16,6 +16,27 @@ internal class NumberUtilGreaterThanTest {
     fun greaterThanTest() {
         val issues = listOf(
             DataSet(
+                value = 0.123456789,
+                other = 0.0,
+                points = 8,
+                isGreaterThan = true,
+                expected = true,
+            ),
+            DataSet(
+                value = 0.123456789,
+                other = 0.0,
+                points = 16,
+                isGreaterThan = true,
+                expected = true,
+            ),
+            DataSet(
+                value = 0.123456789,
+                other = 0.0,
+                points = 32,
+                isGreaterThan = true,
+                expected = true,
+            ),
+            DataSet(
                 value = 1.234,
                 other = 1.23,
                 points = 1,

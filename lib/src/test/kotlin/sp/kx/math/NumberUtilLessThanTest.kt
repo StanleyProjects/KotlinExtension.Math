@@ -16,6 +16,27 @@ internal class NumberUtilLessThanTest {
     fun lessThanTest() {
         val issues = listOf(
             DataSet(
+                value = 0.0,
+                other = 0.123456789,
+                points = 8,
+                isLessThan = true,
+                expected = true,
+            ),
+            DataSet(
+                value = 0.0,
+                other = 0.123456789,
+                points = 16,
+                isLessThan = true,
+                expected = true,
+            ),
+            DataSet(
+                value = 0.0,
+                other = 0.123456789,
+                points = 32,
+                isLessThan = true,
+                expected = true,
+            ),
+            DataSet(
                 value = 1.23,
                 other = 1.234,
                 points = 3,
@@ -37,7 +58,7 @@ internal class NumberUtilLessThanTest {
                 expected = false,
             ),
         )
-        check(issues.size == 3)
+        check(issues.size == 6)
         check(issues.toSet().size == issues.size)
         issues.forEach(::assertIssue)
     }
