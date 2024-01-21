@@ -288,6 +288,29 @@ fun getShortestDistance(
     )
 }
 
+fun getSlope(
+    a: Point,
+    bX: Double,
+    bY: Double,
+): Double {
+    return (bY - a.y) / (bX - a.x)
+}
+
+fun getSlope(
+    aX: Double,
+    aY: Double,
+    b: Point,
+): Double {
+    return (b.y - aY) / (b.x - aX)
+}
+
+fun getSlope(
+    a: Point,
+    b: Point,
+): Double {
+    return (b.y - a.y) / (b.x - a.x)
+}
+
 fun contains(
     start: Point,
     finish: Point,
@@ -336,7 +359,5 @@ fun isParallel(
     )
 }
 
-// todo getSlope(Point,Point)
-// todo getSlope(Point,Double,Double)
 // todo getShortestPoint(Point,Point,Point)
 // todo getIntersection(Point,Point,Point,Point)
