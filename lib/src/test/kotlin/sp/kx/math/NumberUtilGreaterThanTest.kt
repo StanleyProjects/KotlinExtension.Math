@@ -83,14 +83,42 @@ internal class NumberUtilGreaterThanTest {
     fun greaterThanNotTest() {
         val issues = listOf(
             DataSet(
-                value = 0.1235,
-                other = 0.1234,
-                points = 4,
+                value = 0.1,
+                other = 0.1,
+                points = 1,
+                isGreaterThan = false,
+                expected = false,
+            ),
+            DataSet(
+                value = 0.123456789,
+                other = 0.123456789,
+                points = 8,
+                isGreaterThan = false,
+                expected = false,
+            ),
+            DataSet(
+                value = 0.1,
+                other = 0.2,
+                points = 1,
+                isGreaterThan = false,
+                expected = false,
+            ),
+            DataSet(
+                value = 0.1,
+                other = 0.123456789,
+                points = 1,
+                isGreaterThan = false,
+                expected = false,
+            ),
+            DataSet(
+                value = 0.1,
+                other = 0.123456789,
+                points = 8,
                 isGreaterThan = false,
                 expected = false,
             ),
         )
-        check(issues.size == 7)
+        check(issues.size == 5)
         check(issues.toSet().size == issues.size)
         issues.forEach(::assertIssue)
     }
