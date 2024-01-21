@@ -335,3 +335,8 @@ fun isParallel(
         dY = d.y,
     )
 }
+
+// todo getSlope(Point,Point)
+// todo getSlope(Point,Double,Double)
+// todo getShortestPoint(Point,Point,Point)
+// todo getIntersection(Point,Point,Point,Point)

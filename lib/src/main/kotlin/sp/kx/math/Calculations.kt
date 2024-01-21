@@ -218,9 +218,6 @@ fun contains(
     return eq(it = dSF, other = dST + dFT, points = 12)
 }
 
-// todo contains(Point,Point,Point)
-// todo contains(Vector,Point)
-
 /**
  * The function calculates the shortest distance from point to segment.
  * It is up to the segment, and not the length of the perpendicular to the straight line!
@@ -318,8 +315,76 @@ fun getShortestPoint(
     return pointOf(x = xFinish, y = yFinish)
 }
 
-// todo Zero slope
-// todo Undefined(Infinite,NaN) slope
+/**
+ * A line's steepness is measured by the absolute value of its slope.
+ * The larger the value is, the steeper the line.
+ * Given a slope, it is possible to determine the direction of the line that a slope describes based on its sign and value.
+ *
+ * Usage:
+ * ```
+ * val a = pointOf(x = 1, y = 1)
+ * val b = pointOf(x = 3, y = 2)
+ * val value = getSlope(
+ *     aX = a.x,
+ *     aY = a.y,
+ *     bX = b.x,
+ *     bY = b.y,
+ * )
+ * assertEquals(0.5, value)
+ *
+ *   ^
+ *   |            b
+ * 2 -           *
+ *   |    a
+ * 1 -   *
+ *   |
+ * 0 *---|---|---|---|--->
+ *   0   1   2   3   4
+ * ```
+ *
+ * Special cases:
+ * ```
+ * val a = pointOf(x = 1, y = 0)
+ * val b = pointOf(x = 3, y = 0)
+ * check(a.x != b.x)
+ * check(a.y == b.y)
+ * val value = getSlope(
+ *     aX = a.x,
+ *     aY = a.y,
+ *     bX = b.x,
+ *     bY = b.y,
+ * )
+ * assertEquals(0.0, actual)
+ * ```
+ * ```
+ * val a = pointOf(x = 1, y = 3)
+ * val b = pointOf(x = 1, y = 0)
+ * check(a.x == b.x)
+ * check(a.y != b.y)
+ * val value = getSlope(
+ *     aX = a.x,
+ *     aY = a.y,
+ *     bX = b.x,
+ *     bY = b.y,
+ * )
+ * assertTrue(value.isInfinite())
+ * ```
+ * ```
+ * val a = pointOf(x = 1, y = 3)
+ * val b = pointOf(x = 1, y = 3)
+ * check(a == b)
+ * val value = getSlope(
+ *     aX = a.x,
+ *     aY = a.y,
+ *     bX = b.x,
+ *     bY = b.y,
+ * )
+ * assertTrue(value.isNaN())
+ * ```
+ * @return A number that measures the steepness and direction of the segment described by the coordinates [[aX], [aY]] and [[bX], [bY]].
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.7.3
+ */
 fun getSlope(
     aX: Double,
     aY: Double,
@@ -368,12 +433,6 @@ fun isCollinear(
     return (bY - aY) * (cX - bX) - (bX - aX) * (cY - bY) == 0.0 && (bY - aY) * (dX - bX) - (bX - aX) * (dY - bY) == 0.0
 }
 
-// todo 1.1) i !in ab && i !in cd
-// todo 1.2) i in ab && i !in cd
-// todo 1.3) i !in ab && i in cd
-// todo 1.4) i in ab && i in cd
-// todo 2) collinear
-// todo 3) parallel
 fun getIntersection(
     aX: Double,
     aY: Double,
@@ -412,7 +471,3 @@ fun getIntersection(
     val yB = (aX - bX) * (cY - dY) - (aY - bY) * (cX - dX)
     return pointOf(x = xT / xB, y = yT / yB)
 }
-
-// todo getShortestPoint(Point,Point,Point)
-// todo getShortestPoint(Vector,Point)
-// todo getIntersectionPointOrNull

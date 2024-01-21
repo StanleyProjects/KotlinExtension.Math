@@ -146,3 +146,10 @@ fun isParallel(
         dY = cd.finish.y,
     )
 }
+
+// todo getSlope(Vector)
+// todo getShortestPoint(Vector,Point)
+// todo getShortestPoint(Vector,Double,Double)
+// todo getIntersection(Vector,Vector)
+// todo getIntersection(Vector,Point,Point)
+// todo getIntersection(Point,Point,Vector)

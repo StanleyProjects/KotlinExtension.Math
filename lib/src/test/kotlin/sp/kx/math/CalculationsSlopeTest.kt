@@ -9,8 +9,9 @@ internal class CalculationsSlopeTest {
         val targets = listOf(
             pointOf(x = 0, y = 0) to pointOf(x = 0, y = 0),
             pointOf(x = 1, y = 1) to pointOf(x = 1, y = 1),
+            pointOf(x = 1, y = 3) to pointOf(x = 1, y = 3),
         )
-        check(targets.size == 2)
+        check(targets.size == 3)
         check(targets.toSet().size == targets.size)
         targets.forEach { (a, b) ->
             val actual = getSlope(
