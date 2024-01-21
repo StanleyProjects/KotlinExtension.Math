@@ -424,4 +424,20 @@ fun isParallel(
     )
 }
 
-// todo getIntersection(Point,Point,Point,Point)
+fun getIntersection(
+    a: Point,
+    b: Point,
+    c: Point,
+    d: Point,
+): Point? {
+    return getIntersection(
+        aX = a.x,
+        aY = a.y,
+        bX = b.x,
+        bY = b.y,
+        cX = c.x,
+        cY = c.y,
+        dX = d.x,
+        dY = d.y,
+    )
+}
