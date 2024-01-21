@@ -15,7 +15,36 @@ internal class CalculationsIntersectionTest {
      */
     @Test
     fun getIntersectionInNoneTest() {
-        TODO("${this::class.java.name}:getIntersectionInNoneTest")
+        val abOffset = offsetOf(dX = 4, dY = 2)
+        val cdOffset = offsetOf(dX = 2, dY = -4)
+        val issues = listOf(
+            DataSet(
+                ab = pointOf(x = -3, y = -1).toVector(abOffset),
+                cd = pointOf(x = 4, y = 0).toVector(cdOffset),
+                expected = pointOf(x = 3, y = 2),
+            ),
+            DataSet(
+                ab = pointOf(x = 0, y = 0).toVector(abOffset),
+                cd = pointOf(x = 7, y = 1).toVector(cdOffset),
+                expected = pointOf(x = 6, y = 3),
+            ),
+            DataSet(
+                ab = pointOf(x = 1, y = 3).toVector(abOffset),
+                cd = pointOf(x = 0, y = 0).toVector(cdOffset),
+                expected = pointOf(x = -1, y = 2),
+            ),
+        )
+        check(issues.size == 3)
+        check(issues.toSet().size == issues.size)
+        issues.forEach { issue ->
+            assertIntersection(
+                ab = issue.ab,
+                cd = issue.cd,
+                expected = issue.expected,
+                inAB = false,
+                inCD = false,
+            )
+        }
     }
 
     /**
