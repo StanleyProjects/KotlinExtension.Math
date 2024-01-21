@@ -15,3 +15,13 @@ internal fun toString(number: Double, total: Int, points: Int, locale: Locale): 
 internal fun eq(it: Double, other: Double, points: Int): Boolean {
     return (it - other).absoluteValue < 10.0.pow(-points)
 }
+
+internal fun lt(it: Double, other: Double, points: Int): Boolean {
+    val diff = it - other
+    return (diff).absoluteValue > 10.0.pow(-points) && diff < 0
+}
+
+internal fun gt(it: Double, other: Double, points: Int): Boolean {
+    val diff = other - it
+    return (diff).absoluteValue > 10.0.pow(-points) && diff < 0
+}

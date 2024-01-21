@@ -1,6 +1,8 @@
 package sp.kx.math
 
 import sp.kx.math.unsafe.eq
+import sp.kx.math.unsafe.lt
+import sp.kx.math.unsafe.gt
 import sp.kx.math.unsafe.toString
 import java.util.Locale
 import kotlin.math.absoluteValue
@@ -78,8 +80,15 @@ fun Double.eq(other: Double, points: Int): Boolean {
     return eq(it = this, other = other, points = points)
 }
 
-// todo lt
-// todo gt
+fun Double.lt(other: Double, points: Int): Boolean {
+    require(points > 0)
+    return lt(it = this, other = other, points = points)
+}
+
+fun Double.gt(other: Double, points: Int): Boolean {
+    require(points > 0)
+    return gt(it = this, other = other, points = points)
+}
 
 /**
  * Function for coterminal conversion of a [Double].
