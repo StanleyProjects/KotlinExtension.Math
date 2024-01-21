@@ -147,7 +147,10 @@ fun isParallel(
     )
 }
 
-// todo getSlope(Vector)
+fun getSlope(vector: Vector): Double {
+    return (vector.finish.y - vector.start.y) / (vector.finish.x - vector.start.x)
+}
+
 // todo getShortestPoint(Vector,Point)
 // todo getShortestPoint(Vector,Double,Double)
 // todo getIntersection(Vector,Vector)
