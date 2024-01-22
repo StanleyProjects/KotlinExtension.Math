@@ -17,6 +17,58 @@ internal class NumberUtilEqTest {
     }
 
     @Test
+    fun eqDeltaPointsTest() {
+        (1..4).forEach { points ->
+            assertDoubles(
+                value = 0.1234,
+                other = 0.123456789,
+                points = points,
+                equals = true,
+            )
+        }
+        (5..9).forEach { points ->
+            assertDoubles(
+                value = 0.1234,
+                other = 0.123456789,
+                points = points,
+                equals = false,
+            )
+        }
+        (1..5).forEach { points ->
+            assertDoubles(
+                value = 9.12345,
+                other = 9.123456789,
+                points = points,
+                equals = true,
+            )
+        }
+        (6..9).forEach { points ->
+            assertDoubles(
+                value = 9.12345,
+                other = 9.123456789,
+                points = points,
+                equals = false,
+            )
+        }
+        (1..6).forEach { points ->
+            assertDoubles(
+                value = 0.123456,
+                other = 0.123456789,
+                points = points,
+                equals = true,
+            )
+        }
+        (7..9).forEach { points ->
+            assertDoubles(
+                value = 0.123456,
+                other = 0.123456789,
+                points = points,
+                equals = false,
+            )
+        }
+    }
+
+    @Test
     fun eqDeltaTest() {
         0.00010001.also { other ->
             val value = 0.0001
@@ -142,6 +194,7 @@ internal class NumberUtilEqTest {
     companion object {
         private fun assertDoubles(value: Double, other: Double, points: Int, equals: Boolean) {
             Assertions.assertEquals(equals, value.eq(other = other, points = points)) {
+                // todo
                 val diff = (value - other).absoluteValue
                 val delta = 10.0.pow(points)
                 """
