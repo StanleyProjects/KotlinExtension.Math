@@ -9,6 +9,10 @@ import kotlin.math.pow
 import sp.kx.math.toString
 
 internal fun toString(number: Double, points: Int, locale: Locale): String {
+//    val df = DecimalFormat("#." + "#".repeat(points))
+//    df.roundingMode = RoundingMode.FLOOR
+//    return df.format(it)
+    // DecimalFormat ?
     return java.lang.String.format(locale, "%.${points}f", number)
 }
 
