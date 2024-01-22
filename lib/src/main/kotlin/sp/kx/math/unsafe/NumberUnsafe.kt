@@ -50,7 +50,11 @@ internal fun eq(it: Double, other: Double, points: Int): Boolean {
     val diff = bd1 - bd2
     val delta = BigDecimal(10).pow(points)
     val d = diff * delta
-    return d.setScale(1, RoundingMode.FLOOR).toLong() == 0L
+//    return d.setScale(1, RoundingMode.FLOOR).toLong() == 0L
+//    val scaled = d.setScale(1, RoundingMode.FLOOR)
+    val scaled = d.setScale(1, RoundingMode.HALF_EVEN)
+//    return scaled == BigDecimal.ZERO
+    return scaled.toLong() == 0L
 //    return s == BigDecimal.ZERO
 //    return diff * delta == BigDecimal.ZERO // todo
 ////    return (diff * delta).longValueExact() == 0L
@@ -69,11 +73,13 @@ internal fun eq(it: Double, other: Double, points: Int): Boolean {
 }
 
 internal fun lt(it: Double, other: Double, points: Int): Boolean {
+    TODO("BigDecimal:lt")
     val delta = 10.0.pow(points)
     return (it * delta).toInt() < (other * delta).toInt() // todo
 }
 
 internal fun gt(it: Double, other: Double, points: Int): Boolean {
+    TODO("BigDecimal:gt")
     val delta = 10.0.pow(points)
     return (it * delta).toInt() > (other * delta).toInt() // todo
 }
