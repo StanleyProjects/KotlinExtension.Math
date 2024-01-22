@@ -42,18 +42,38 @@ internal class OffsetUtilEqTest {
 
     @Test
     fun eqTest() {
-        assertOffsets(
-            value = offsetOf(dX = 9.1234567, dY = 9.123456789),
-            other = offsetOf(dX = 9.123456789, dY = 9.123456789),
-            points = 4,
-            equals = true,
-        )
-        assertOffsets(
-            value = offsetOf(dX = 9.12345, dY = 9.123456789),
-            other = offsetOf(dX = 9.123456789, dY = 9.123456789),
-            points = 6,
-            equals = false,
-        )
+        (1..5).forEach { points ->
+            assertOffsets(
+                value = offsetOf(dX = 9.12345, dY = 9.123456789),
+                other = offsetOf(dX = 9.123456789, dY = 9.123456789),
+                points = points,
+                equals = true,
+            )
+        }
+        (6..9).forEach { points ->
+            assertOffsets(
+                value = offsetOf(dX = 9.12345, dY = 9.123456789),
+                other = offsetOf(dX = 9.123456789, dY = 9.123456789),
+                points = points,
+                equals = false,
+            )
+        }
+        (1..7).forEach { points ->
+            assertOffsets(
+                value = offsetOf(dX = 9.1234567, dY = 9.123456789),
+                other = offsetOf(dX = 9.123456789, dY = 9.123456789),
+                points = points,
+                equals = true,
+            )
+        }
+        (8..9).forEach { points ->
+            assertOffsets(
+                value = offsetOf(dX = 9.1234567, dY = 9.123456789),
+                other = offsetOf(dX = 9.123456789, dY = 9.123456789),
+                points = points,
+                equals = false,
+            )
+        }
         assertOffsets(
             value = offsetOf(dX = 9.1234567, dY = 9.123456789),
             other = offsetOf(dX = 9.123456789, dY = 9.123456789),
