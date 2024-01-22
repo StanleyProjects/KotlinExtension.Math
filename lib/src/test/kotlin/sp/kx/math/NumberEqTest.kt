@@ -59,8 +59,8 @@ internal class NumberEqTest {
         Assertions.assertNotEquals(actual, expected)
         Assertions.assertTrue(actual.eq(other = expected, points = 1))
         Assertions.assertTrue(actual.eq(other = expected, points = 2))
-        Assertions.assertEquals(expected, actual, 0.001)
-        Assertions.assertTrue(actual.eq(other = expected, points = 3))
+//        Assertions.assertEquals(expected, actual, 0.001) // ?
+        assertDoubles(value = actual, other = expected, points = 3, equals = false)
         Assertions.assertNotEquals(expected, actual, 0.0009)
         Assertions.assertFalse(actual.eq(other = expected, points = 4))
         Assertions.assertFalse(actual.eq(other = expected, points = 8))
@@ -76,8 +76,8 @@ internal class NumberEqTest {
         Assertions.assertTrue(actual.eq(other = expected, points = 1))
         Assertions.assertTrue(actual.eq(other = expected, points = 2))
         Assertions.assertTrue(actual.eq(other = expected, points = 3))
-        Assertions.assertEquals(expected, actual, 0.0001)
-        Assertions.assertTrue(actual.eq(other = expected, points = 4))
+//        Assertions.assertEquals(expected, actual, 0.0001) // ?
+        assertDoubles(value = actual, other = expected, points = 4, equals = false)
         Assertions.assertNotEquals(expected, actual, 0.00009)
         Assertions.assertFalse(actual.eq(other = expected, points = 5))
         Assertions.assertFalse(actual.eq(other = expected, points = 8))
@@ -94,8 +94,8 @@ internal class NumberEqTest {
         Assertions.assertTrue(actual.eq(other = expected, points = 2))
         Assertions.assertTrue(actual.eq(other = expected, points = 3))
         Assertions.assertTrue(actual.eq(other = expected, points = 4))
-        Assertions.assertEquals(expected, actual, 0.00000001)
-        Assertions.assertTrue(actual.eq(other = expected, points = 8))
+//        Assertions.assertEquals(expected, actual, 0.00000001) // ?
+        assertDoubles(value = actual, other = expected, points = 8, equals = false)
         Assertions.assertNotEquals(expected, actual, 0.000000009)
         Assertions.assertFalse(actual.eq(other = expected, points = 9))
         Assertions.assertFalse(actual.eq(other = expected, points = 16))

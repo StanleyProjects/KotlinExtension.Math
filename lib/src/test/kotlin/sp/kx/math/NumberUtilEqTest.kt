@@ -10,7 +10,7 @@ internal class NumberUtilEqTest {
     @Test
     fun eqTest() {
         val actual = 1.23
-        Assertions.assertTrue(actual.eq(other = 1.2, points = 1))
+        assertDoubles(value = actual, other = 1.2, points = 1, equals = true)
         Assertions.assertTrue(actual.eq(other = 1.23, points = 2))
         Assertions.assertTrue(actual.eq(other = 1.234, points = 2))
         Assertions.assertTrue(actual.eq(other = 1.23456789, points = 2))
@@ -23,8 +23,8 @@ internal class NumberUtilEqTest {
             Assertions.assertTrue(value.eq(other = other, points = 1))
             Assertions.assertTrue(value.eq(other = other, points = 2))
             Assertions.assertTrue(value.eq(other = other, points = 4))
-            assertNotEquals(value = (value - other).absoluteValue, other = 10.0.pow(-4), points = 4)
-            assertNotEquals(value = value, other = other, points = 8)
+            assertDoubles(value = (value - other).absoluteValue, other = 10.0.pow(-4), points = 4, equals = false)
+            assertDoubles(value = value, other = other, points = 8, equals = false)
         }
         kotlin.math.cos(0.0).also { expected ->
             val actual = 1.0
@@ -140,17 +140,17 @@ internal class NumberUtilEqTest {
     }
 
     companion object {
-        private fun assertNotEquals(
-            value: Double,
-            other: Double,
-            points: Int,
-        ) {
-            Assertions.assertFalse(value.eq(other = other, points = points)) {
+        private fun assertDoubles(value: Double, other: Double, points: Int, equals: Boolean) {
+            Assertions.assertEquals(equals, value.eq(other = other, points = points)) {
+                val diff = (value - other).absoluteValue
+                val delta = 10.0.pow(points)
                 """
                     points: $points
                     value: ${value.toString(points = 32)}(${value.toString(points = points)})
                     other: ${other.toString(points = 32)}(${other.toString(points = points)})
-                    value == other: ${value == other}
+                    diff: ${diff.toString(points = 32)}
+                    10^$points: ${delta.toString(points = 32)}
+                    diff * 10^$points: ${(diff * delta).toString(points = 32)}(${(diff * delta).toInt()})
                 """.trimIndent()
             }
         }
