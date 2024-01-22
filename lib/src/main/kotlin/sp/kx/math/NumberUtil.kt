@@ -1,8 +1,8 @@
 package sp.kx.math
 
 import sp.kx.math.unsafe.eq
-import sp.kx.math.unsafe.lt
 import sp.kx.math.unsafe.gt
+import sp.kx.math.unsafe.lt
 import sp.kx.math.unsafe.toString
 import java.util.Locale
 import kotlin.math.absoluteValue

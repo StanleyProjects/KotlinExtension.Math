@@ -63,7 +63,7 @@ internal class VectorIsEmptyTest {
         )
         check(issues.size == 9)
         check(issues.toSet().size == issues.size)
-        for (index in 0..(issues.size-2)) {
+        for (index in 0..(issues.size - 2)) {
             val startX = issues[index]
             val finishX = issues[index + 1]
             val vector = vectorOf(startX = startX, startY = 1.0, finishX = finishX, finishY = 1.0)
@@ -94,7 +94,6 @@ internal class VectorIsEmptyTest {
 
     @Test
     fun isEmptyPointsTest() {
-
         (pointOf(x = 1.001, y = 1.0) + pointOf(x = 1, y = 1)).also { vector: Vector ->
             Assertions.assertTrue(vector.isEmpty(points = 1))
             Assertions.assertTrue(vector.isEmpty(points = 2))
