@@ -182,7 +182,7 @@ fun Double.ifNaN(other: Double): Double {
  * assertTrue(kotlin.math.PI.whc().isNan())
  * assertTrue((kotlin.math.PI * 3).whc().isNan())
  * ```
- * @return -1 if [this] receiver is in `0 until 180` or 1 if `180 until 360`.
+ * @return -1 if [this] receiver is in `0 until PI` radians or 1 if [this] receiver is in `PI until 2PI` radians.
  * @author [Stanley Wintergreen](https://github.com/kepocnhh)
  * @since 0.7.1
  */
