@@ -83,7 +83,7 @@ internal fun gt(it: Double, other: Double, points: Int): Boolean {
 }
 
 internal fun lt(it: Double, other: Double, points: Int): Boolean {
-    TODO("BigDecimal:lt")
-    val delta = 10.0.pow(points)
-    return (it * delta).toInt() < (other * delta).toInt() // todo
+    return BigDecimal((it - other) * 10.0.pow(points))
+        .setScale(1, RoundingMode.HALF_EVEN)
+        .toLong() < 0L
 }
