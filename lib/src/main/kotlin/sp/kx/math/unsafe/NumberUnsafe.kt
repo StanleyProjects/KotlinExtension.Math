@@ -77,13 +77,9 @@ internal fun eq(it: Double, other: Double, points: Int): Boolean {
 }
 
 internal fun gt(it: Double, other: Double, points: Int): Boolean {
-    val bd1 = BigDecimal(it)
-    val bd2 = BigDecimal(other)
-    val diff = bd1 - bd2
-    val delta = BigDecimal(10).pow(points)
-    val d = diff * delta
-    val scaled = d.setScale(1, RoundingMode.HALF_EVEN)
-    return scaled.toLong() > 0L
+    return BigDecimal((it - other) * 10.0.pow(points))
+        .setScale(1, RoundingMode.HALF_EVEN)
+        .toLong() > 0L
 }
 
 internal fun lt(it: Double, other: Double, points: Int): Boolean {
