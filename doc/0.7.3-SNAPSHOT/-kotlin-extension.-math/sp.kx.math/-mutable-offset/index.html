@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>MutableOffset</title>
+    <link href="../../../images/logo-icon.svg" rel="icon" type="image/svg">
+    <script>var pathToRoot = "../../../";</script>
+    <script>document.documentElement.classList.replace("no-js","js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+    if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    } else {
+        const savedDarkMode = JSON.parse(storage)
+        if(savedDarkMode === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    }
+    </script>
+<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async="async"></script>
+<link href="../../../styles/style.css" rel="Stylesheet">
+<link href="../../../styles/main.css" rel="Stylesheet">
+<link href="../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../styles/font-jb-sans-auto.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../scripts/clipboard.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="../../../scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/symbol-parameters-wrapper_deferred.js" defer="defer"></script>
+</head>
+<body>
+    <div class="root">
+<nav class="navigation" id="navigation-wrapper">
+    <div class="navigation--inner">
+        <div class="navigation-title">
+            <button class="menu-toggle" id="menu-toggle" type="button">toggle menu</button>
+            <div class="library-name">
+                    <a class="library-name--link" href="../../../index.html">
+                            KotlinExtension.Math
+                    </a>
+            </div>
+            <div class="library-version">
+0.7.3-SNAPSHOT            </div>
+        </div>
+        <div class="filter-section" id="filter-section">
+                <button class="platform-tag platform-selector jvm-like" data-active="" data-filter=":lib:assembleSnapshotDocumentation/main">jvm</button>
+        </div>
+    </div>
+    <div class="navigation-controls">
+        <button class="navigation-controls--btn navigation-controls--theme" id="theme-toggle-button" type="button">switch theme</button>
+        <div class="navigation-controls--btn navigation-controls--search" id="searchBar" role="button">search in API</div>
+    </div>
+</nav>
+        <div id="container">
+            <div class="sidebar" id="leftColumn">
+                <div class="sidebar--inner" id="sideMenu"></div>
+            </div>
+            <div id="main">
+<div class="main-content" data-page-type="classlike" id="content" pageIds="KotlinExtension.Math::sp.kx.math/MutableOffset///PointingToDeclaration//1439229917">
+  <div class="breadcrumbs"><a href="../../../index.html">KotlinExtension.Math</a><span class="delimiter">/</span><a href="../index.html">sp.kx.math</a><span class="delimiter">/</span><span class="current">MutableOffset</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span>Mutable</span><wbr></wbr><span><span>Offset</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":lib:assembleSnapshotDocumentation/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="index.html">MutableOffset</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">var </span>dX<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">var </span>dY<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span> : <a href="../-offset/index.html">Offset</a><span class="clearfix"><span class="floating-right">(<a href="https://github.com/StanleyProjects/KotlinExtension.Math/tree/0.7.3-SNAPSHOT/lib/src/main/kotlin/sp/kx/math/MutableOffset.kt#L21">source</a>)</span></span></div><p class="paragraph">A mutable implementation of the <a href="../-offset/index.html">Offset</a> type.</p><p class="paragraph">Usage:</p><div class="sample-container"><pre><code class="block lang-kotlin" theme="idea">val offset = MutableOffset(dX = 3.0, dY = 2.0)<br>offset.dX = 2.0<br>offset.dY = 3.0</code></pre><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><span class="kdoc-tag"><h4 class="">Author</h4><p class="paragraph"><a href="https://github.com/kepocnhh">Stanley Wintergreen</a></p></span><span class="kdoc-tag"><h4 class="">Since</h4><p class="paragraph">0.3.0</p></span></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button><button class="section-tab" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION,EXTENSION_PROPERTY,EXTENSION_FUNCTION">Members &amp; Extensions</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="CONSTRUCTOR">
+        <h2 class="">Constructors</h2>
+        <div class="table"><a data-name="1306348856%2FConstructors%2F1439229917" anchor-label="MutableOffset" id="1306348856%2FConstructors%2F1439229917" data-filterable-set=":lib:assembleSnapshotDocumentation/main"></a>
+          <div class="table-row" data-togglable="CONSTRUCTOR" data-filterable-current=":lib:assembleSnapshotDocumentation/main" data-filterable-set=":lib:assembleSnapshotDocumentation/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-mutable-offset.html"><span>Mutable</span><wbr></wbr><span><span>Offset</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1306348856%2FConstructors%2F1439229917"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":lib:assembleSnapshotDocumentation/main"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">dX<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">dY<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="PROPERTY">
+        <h2 class="">Properties</h2>
+        <div class="table"><a data-name="1823658748%2FProperties%2F1439229917" anchor-label="dX" id="1823658748%2FProperties%2F1439229917" data-filterable-set=":lib:assembleSnapshotDocumentation/main"></a>
+          <div class="table-row" data-filterable-current=":lib:assembleSnapshotDocumentation/main" data-filterable-set=":lib:assembleSnapshotDocumentation/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="d-x.html"><span>d</span><wbr></wbr><span><span>X</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1823658748%2FProperties%2F1439229917"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":lib:assembleSnapshotDocumentation/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="d-x.html">dX</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a></div><div class="brief "><p class="paragraph">Offset along the x-axis.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1854678555%2FProperties%2F1439229917" anchor-label="dY" id="1854678555%2FProperties%2F1439229917" data-filterable-set=":lib:assembleSnapshotDocumentation/main"></a>
+          <div class="table-row" data-filterable-current=":lib:assembleSnapshotDocumentation/main" data-filterable-set=":lib:assembleSnapshotDocumentation/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="d-y.html"><span>d</span><wbr></wbr><span><span>Y</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1854678555%2FProperties%2F1439229917"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":lib:assembleSnapshotDocumentation/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">var </span><a href="d-y.html">dY</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a></div><div class="brief "><p class="paragraph">Offset along the y-axis.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="FUNCTION">
+        <h2 class="">Functions</h2>
+        <div class="table"><a data-name="1449813396%2FFunctions%2F1439229917" anchor-label="copy" id="1449813396%2FFunctions%2F1439229917" data-filterable-set=":lib:assembleSnapshotDocumentation/main"></a>
+          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":lib:assembleSnapshotDocumentation/main" data-filterable-set=":lib:assembleSnapshotDocumentation/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../copy.html"><span><span>copy</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1449813396%2FFunctions%2F1439229917"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":lib:assembleSnapshotDocumentation/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="../-offset/index.html">Offset</a><span class="token punctuation">.</span><a href="../copy.html"><span class="token function">copy</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">dX<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a><span class="token operator"> = </span>this.dX<span class="token punctuation">, </span></span><span class="parameter ">dY<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a><span class="token operator"> = </span>this.dY</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-offset/index.html">Offset</a></div><div class="brief "><p class="paragraph">Creates a new <a href="../-offset/index.html">Offset</a> object with a copy of <span data-unresolved-link="sp.kx.math//&amp;lt;this&amp;gt;/#/PointingToCallableParameters(-1)/">this</span> receiver's values or the values <a href="../copy.html">dX</a> and <a href="../copy.html">dY</a> passed in.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-697909373%2FFunctions%2F1439229917" anchor-label="div" id="-697909373%2FFunctions%2F1439229917" data-filterable-set=":lib:assembleSnapshotDocumentation/main"></a>
+          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":lib:assembleSnapshotDocumentation/main" data-filterable-set=":lib:assembleSnapshotDocumentation/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../div.html"><span><span>div</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-697909373%2FFunctions%2F1439229917"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":lib:assembleSnapshotDocumentation/main"><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="../-offset/index.html">Offset</a><span class="token punctuation">.</span><a href="../div.html"><span class="token function">div</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-offset/index.html">Offset</a></div><div class="brief "><p class="paragraph">Creates a new <a href="../-offset/index.html">Offset</a> object with a copy of <span data-unresolved-link="sp.kx.math//&amp;lt;this&amp;gt;/#/PointingToCallableParameters(-1)/">this</span> receiver's divided by the <a href="../div.html">value</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1746423312%2FFunctions%2F1439229917" anchor-label="eq" id="1746423312%2FFunctions%2F1439229917" data-filterable-set=":lib:assembleSnapshotDocumentation/main"></a>
+          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":lib:assembleSnapshotDocumentation/main" data-filterable-set=":lib:assembleSnapshotDocumentation/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../eq.html"><span><span>eq</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1746423312%2FFunctions%2F1439229917"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":lib:assembleSnapshotDocumentation/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="../-offset/index.html">Offset</a><span class="token punctuation">.</span><a href="../eq.html"><span class="token function">eq</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="../-offset/index.html">Offset</a><span class="token punctuation">, </span></span><span class="parameter ">points<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Compares <span data-unresolved-link="sp.kx.math//&amp;lt;this&amp;gt;/#/PointingToCallableParameters(-1)/">this</span> object <a href="../-offset/index.html">Offset</a> with the specified <a href="../eq.html">other</a> object <a href="../-offset/index.html">Offset</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1216458449%2FFunctions%2F1439229917" anchor-label="equals" id="1216458449%2FFunctions%2F1439229917" data-filterable-set=":lib:assembleSnapshotDocumentation/main"></a>
+          <div class="table-row" data-filterable-current=":lib:assembleSnapshotDocumentation/main" data-filterable-set=":lib:assembleSnapshotDocumentation/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="equals.html"><span><span>equals</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1216458449%2FFunctions%2F1439229917"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":lib:assembleSnapshotDocumentation/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">operator override </span><span class="token keyword">fun </span><a href="equals.html"><span class="token function">equals</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html">Any</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1430758667%2FFunctions%2F1439229917" anchor-label="hashCode" id="-1430758667%2FFunctions%2F1439229917" data-filterable-set=":lib:assembleSnapshotDocumentation/main"></a>
+          <div class="table-row" data-filterable-current=":lib:assembleSnapshotDocumentation/main" data-filterable-set=":lib:assembleSnapshotDocumentation/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="hash-code.html"><span>hash</span><wbr></wbr><span><span>Code</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1430758667%2FFunctions%2F1439229917"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":lib:assembleSnapshotDocumentation/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="hash-code.html"><span class="token function">hashCode</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1935656118%2FFunctions%2F1439229917" anchor-label="isEmpty" id="-1935656118%2FFunctions%2F1439229917" data-filterable-set=":lib:assembleSnapshotDocumentation/main"></a>
+          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":lib:assembleSnapshotDocumentation/main" data-filterable-set=":lib:assembleSnapshotDocumentation/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../is-empty.html"><span>is</span><wbr></wbr><span><span>Empty</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1935656118%2FFunctions%2F1439229917"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":lib:assembleSnapshotDocumentation/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="../-offset/index.html">Offset</a><span class="token punctuation">.</span><a href="../is-empty.html"><span class="token function">isEmpty</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="../-offset/index.html">Offset</a><span class="token punctuation">.</span><a href="../is-empty.html"><span class="token function">isEmpty</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">points<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Usage:</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1079445030%2FFunctions%2F1439229917" anchor-label="set" id="1079445030%2FFunctions%2F1439229917" data-filterable-set=":lib:assembleSnapshotDocumentation/main"></a>
+          <div class="table-row" data-filterable-current=":lib:assembleSnapshotDocumentation/main" data-filterable-set=":lib:assembleSnapshotDocumentation/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="set.html"><span><span>set</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1079445030%2FFunctions%2F1439229917"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":lib:assembleSnapshotDocumentation/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="set.html"><span class="token function">set</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="../-offset/index.html">Offset</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Method for setting both <a href="d-x.html">dX</a> and <a href="d-y.html">dY</a> offsets from <a href="set.html">other</a> object.</p></div><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="set.html"><span class="token function">set</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">dX<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">dY<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Method for setting both <a href="set.html">dX</a> and <a href="set.html">dY</a> offsets.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1047395837%2FFunctions%2F1439229917" anchor-label="swap" id="1047395837%2FFunctions%2F1439229917" data-filterable-set=":lib:assembleSnapshotDocumentation/main"></a>
+          <div class="table-row" data-filterable-current=":lib:assembleSnapshotDocumentation/main" data-filterable-set=":lib:assembleSnapshotDocumentation/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="swap.html"><span><span>swap</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1047395837%2FFunctions%2F1439229917"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":lib:assembleSnapshotDocumentation/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="swap.html"><span class="token function">swap</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Swaps <a href="d-x.html">dX</a> and <a href="d-y.html">dY</a> offsets.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="554774444%2FFunctions%2F1439229917" anchor-label="swapped" id="554774444%2FFunctions%2F1439229917" data-filterable-set=":lib:assembleSnapshotDocumentation/main"></a>
+          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":lib:assembleSnapshotDocumentation/main" data-filterable-set=":lib:assembleSnapshotDocumentation/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../swapped.html"><span><span>swapped</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="554774444%2FFunctions%2F1439229917"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":lib:assembleSnapshotDocumentation/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="../-offset/index.html">Offset</a><span class="token punctuation">.</span><a href="../swapped.html"><span class="token function">swapped</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-offset/index.html">Offset</a></div><div class="brief "><p class="paragraph">Creates a new <a href="../-offset/index.html">Offset</a> object with a copy of <span data-unresolved-link="sp.kx.math//&amp;lt;this&amp;gt;/#/PointingToCallableParameters(-1)/">this</span> receiver's swapped values.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-453712082%2FFunctions%2F1439229917" anchor-label="times" id="-453712082%2FFunctions%2F1439229917" data-filterable-set=":lib:assembleSnapshotDocumentation/main"></a>
+          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":lib:assembleSnapshotDocumentation/main" data-filterable-set=":lib:assembleSnapshotDocumentation/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../times.html"><span><span>times</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-453712082%2FFunctions%2F1439229917"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":lib:assembleSnapshotDocumentation/main"><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="../-offset/index.html">Offset</a><span class="token punctuation">.</span><a href="../times.html"><span class="token function">times</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-offset/index.html">Offset</a></div><div class="brief "><p class="paragraph">Creates a new <a href="../-offset/index.html">Offset</a> object with a copy of <span data-unresolved-link="sp.kx.math//&amp;lt;this&amp;gt;/#/PointingToCallableParameters(-1)/">this</span> receiver's multiplied by the <a href="../times.html">value</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1608924732%2FFunctions%2F1439229917" anchor-label="toString" id="-1608924732%2FFunctions%2F1439229917" data-filterable-set=":lib:assembleSnapshotDocumentation/main"></a>
+          <div class="table-row" data-filterable-current=":lib:assembleSnapshotDocumentation/main" data-filterable-set=":lib:assembleSnapshotDocumentation/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="to-string.html"><span>to</span><wbr></wbr><span><span>String</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1608924732%2FFunctions%2F1439229917"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":lib:assembleSnapshotDocumentation/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="to-string.html"><span class="token function">toString</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-71360293%2FFunctions%2F1439229917" anchor-label="toString" id="-71360293%2FFunctions%2F1439229917" data-filterable-set=":lib:assembleSnapshotDocumentation/main"></a>
+          <div class="table-row" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":lib:assembleSnapshotDocumentation/main" data-filterable-set=":lib:assembleSnapshotDocumentation/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../to-string.html"><span>to</span><wbr></wbr><span><span>String</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-71360293%2FFunctions%2F1439229917"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":lib:assembleSnapshotDocumentation/main"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="../-offset/index.html">Offset</a><span class="token punctuation">.</span><a href="../to-string.html"><span class="token function">toString</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">points<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">locale<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Locale.html">Locale</a><span class="token operator"> = </span>Locale.US</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Usage:</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      <div class="footer">
+        <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2024 Copyright</span><span
+                class="pull-right"><span>Generated by </span><a
+                href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
+      </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
