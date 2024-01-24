@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test
     "MagicNumber",
     "StringLiteralDuplication",
 )
-internal class VectorCalculationsShortestTest {
+internal class PointCalculationsShortestDistanceTest {
     @Test
     fun getShortestZeroTest() {
         val expected = 1.0
@@ -26,9 +26,12 @@ internal class VectorCalculationsShortestTest {
         check(start.y == 0.0)
         check(finish.x == 0.0)
         check(finish.y == 0.0)
-        val vector = start + finish
         targets.forEach { target ->
-            val actual = vector.getShortest(target = target)
+            val actual = getShortestDistance(
+                start = start,
+                finish = finish,
+                target = target,
+            )
             Assertions.assertEquals(expected, actual, 0.000000000000001) {
                 "target: $target"
             }
@@ -55,9 +58,12 @@ internal class VectorCalculationsShortestTest {
         val finish = Point.Center
         check(finish.x == 0.0)
         check(finish.y == 0.0)
-        val vector = start + finish
         targets.forEach { target ->
-            val actual = vector.getShortest(target = target)
+            val actual = getShortestDistance(
+                start = start,
+                finish = finish,
+                target = target,
+            )
             Assertions.assertEquals(expected, actual, 0.000000000000001) {
                 "target: $target"
             }
@@ -84,9 +90,12 @@ internal class VectorCalculationsShortestTest {
         val finish = pointOf(x = 2, y = 0)
         check(start.x == 0.0)
         check(start.y == 0.0)
-        val vector = start + finish
         targets.forEach { target ->
-            val actual = vector.getShortest(target = target)
+            val actual = getShortestDistance(
+                start = start,
+                finish = finish,
+                target = target,
+            )
             Assertions.assertEquals(expected, actual, 0.000000000000001) {
                 "target: $target"
             }
@@ -109,9 +118,12 @@ internal class VectorCalculationsShortestTest {
         check(targets.toSet().size == targets.size)
         val start = pointOf(x = 3, y = 3)
         val finish = pointOf(x = 3, y = 5)
-        val vector = start + finish
         targets.forEach { target ->
-            val actual = vector.getShortest(target = target)
+            val actual = getShortestDistance(
+                start = start,
+                finish = finish,
+                target = target,
+            )
             Assertions.assertEquals(2.0, actual) {
                 "target: $target"
             }
@@ -134,9 +146,12 @@ internal class VectorCalculationsShortestTest {
         check(targets.toSet().size == targets.size)
         val start = pointOf(x = 3, y = 3)
         val finish = pointOf(x = 5, y = 3)
-        val vector = start + finish
         targets.forEach { target ->
-            val actual = vector.getShortest(target = target)
+            val actual = getShortestDistance(
+                start = start,
+                finish = finish,
+                target = target,
+            )
             Assertions.assertEquals(2.0, actual) {
                 "target: $target"
             }
@@ -161,9 +176,12 @@ internal class VectorCalculationsShortestTest {
         check(targets.toSet().size == targets.size)
         val start = pointOf(x = 3, y = 3)
         val finish = pointOf(x = 5, y = 5)
-        val vector = start + finish
         targets.forEach { target ->
-            val actual = vector.getShortest(target = target)
+            val actual = getShortestDistance(
+                start = start,
+                finish = finish,
+                target = target,
+            )
             Assertions.assertEquals(expected, actual, 0.000000000000001) {
                 "target: $target"
             }

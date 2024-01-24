@@ -213,4 +213,29 @@ internal class OffsetUtilTest {
             Assertions.assertNotEquals(foo.dY, offset.dY)
         }
     }
+
+    @Test
+    fun offsetOfIntsTest() {
+        offsetOf(dX = 0, dY = 0).also { actual: Offset ->
+            Assertions.assertEquals(actual.dX, actual.dY)
+            Assertions.assertEquals(0.0, actual.dX)
+            Assertions.assertEquals(0.0, actual.dY)
+            Assertions.assertEquals(Offset.Empty, actual)
+        }
+        offsetOf(dX = 1, dY = 1).also { actual: Offset ->
+            Assertions.assertEquals(actual.dX, actual.dY)
+            Assertions.assertEquals(1.0, actual.dX)
+            Assertions.assertEquals(1.0, actual.dY)
+        }
+        offsetOf(dX = 1, dY = 2).also { actual: Offset ->
+            Assertions.assertNotEquals(actual.dX, actual.dY)
+            Assertions.assertEquals(1.0, actual.dX)
+            Assertions.assertEquals(2.0, actual.dY)
+        }
+        offsetOf(dX = -3, dY = -4).also { actual: Offset ->
+            Assertions.assertNotEquals(actual.dX, actual.dY)
+            Assertions.assertEquals(-3.0, actual.dX)
+            Assertions.assertEquals(-4.0, actual.dY)
+        }
+    }
 }

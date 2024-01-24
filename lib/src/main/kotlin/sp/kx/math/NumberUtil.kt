@@ -1,6 +1,8 @@
 package sp.kx.math
 
 import sp.kx.math.unsafe.eq
+import sp.kx.math.unsafe.gt
+import sp.kx.math.unsafe.lt
 import sp.kx.math.unsafe.toString
 import java.util.Locale
 import kotlin.math.absoluteValue
@@ -76,6 +78,48 @@ fun Double.toString(total: Int, points: Int, locale: Locale = Locale.US): String
 fun Double.eq(other: Double, points: Int): Boolean {
     require(points > 0)
     return eq(it = this, other = other, points = points)
+}
+
+/**
+ * Compares [this] object [Double] with the specified [other] object [Double].
+ *
+ * Usage:
+ * ```
+ * assertFalse(1.2.lt(1.23, points = 1))
+ * assertTrue(1.2.lt(1.23, points = 2))
+ * ```
+ * @receiver [this] number will be compared with [other] number.
+ * @param other The value of this number will be compared with the value of [this] receiver's number.
+ * @param points The number of decimal places to compare.
+ * @return `true` if [this] receiver is less than [other] to [points] decimal places; `false` otherwise
+ * @throws IllegalArgumentException if [points] lower than 1.
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.7.3
+ */
+fun Double.lt(other: Double, points: Int): Boolean {
+    require(points > 0)
+    return lt(it = this, other = other, points = points)
+}
+
+/**
+ * Compares [this] object [Double] with the specified [other] object [Double].
+ *
+ * Usage:
+ * ```
+ * assertFalse(1.23.gt(1.2, points = 1))
+ * assertTrue(1.23.gt(1.2, points = 2))
+ * ```
+ * @receiver [this] number will be compared with [other] number.
+ * @param other The value of this number will be compared with the value of [this] receiver's number.
+ * @param points The number of decimal places to compare.
+ * @return `true` if [this] receiver is greater than [other] to [points] decimal places; `false` otherwise
+ * @throws IllegalArgumentException if [points] lower than 1.
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.7.3
+ */
+fun Double.gt(other: Double, points: Int): Boolean {
+    require(points > 0)
+    return gt(it = this, other = other, points = points)
 }
 
 /**
@@ -170,7 +214,7 @@ fun Double.ifNaN(other: Double): Double {
  * assertTrue(kotlin.math.PI.whc().isNan())
  * assertTrue((kotlin.math.PI * 3).whc().isNan())
  * ```
- * @return -1 if [this] receiver is in `0 until 180` or 1 if `180 until 360`.
+ * @return -1 if [this] receiver is in `0 until PI` radians or 1 if [this] receiver is in `PI until 2PI` radians.
  * @author [Stanley Wintergreen](https://github.com/kepocnhh)
  * @since 0.7.1
  */

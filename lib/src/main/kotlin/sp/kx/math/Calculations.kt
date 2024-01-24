@@ -6,124 +6,6 @@ import kotlin.math.pow
 /**
  * Usage:
  * ```
- * val distance = distanceOf(aX = 1.0, aY = 1.0, bX = 3.0, bY = 1.0)
- * assertEquals(2.0, distance)
- *
- *   ^
- *   |
- * 2 -
- *   |
- * y -   * - - - *
- *   |
- * 0 +---|---|---|---|--->
- *   0   aX  2   bX  4
- * ```
- * @return Distance between point `a` with [aX] and [aY] coordinates and point `b` with [bX] and [bY] coordinates.
- * @author [Stanley Wintergreen](https://github.com/kepocnhh)
- * @since 0.4.2
- */
-fun distanceOf(
-    aX: Double,
-    aY: Double,
-    bX: Double,
-    bY: Double,
-): Double {
-    return kotlin.math.hypot(x = bX - aX, y = bY - aY)
-}
-
-/**
- * Special case of [distanceOf] method.
- *
- * Usage:
- * ```
- * val x = 3.0
- * val y = 0.0
- * val distance = distanceOf(x = x, y = y)
- * assertEquals(distanceOf(aX = 0.0, aY = 0.0, bX = x, bY = y), distance)
- * assertEquals(3.0, distance)
- *
- *   ^
- *   |
- * 0 *---|---|---*---|--->
- *   0   1   2   3   4
- * ```
- * @return Distance between point with x-coordinate `0` and y-coordinate `0` and point with [x] and [y] coordinates.
- * @author [Stanley Wintergreen](https://github.com/kepocnhh)
- * @since 0.5.0
- */
-fun distanceOf(
-    x: Double,
-    y: Double,
-): Double {
-    return kotlin.math.hypot(x = x, y = y)
-}
-
-/**
- * Usage:
- * ```
- * val angle = angleOf(aX = 1.0, aY = 1.0, bX = 3.0, bY = 3.0)
- * assertEquals(PI / 4, angle)
- *
- *   ^
- *   |
- * bY-           *
- *   |         /
- * 2 -       /
- *   |     /
- * aY-   *
- *   |
- * 0 +---|---|---|---|--->
- *   0   aX  2   bX  4
- * ```
- * @return The angle in radians between the x-axis and the straight line
- * containing point `a` with [aX] and [aY] coordinates and point `b` with [bX] and [bY] coordinates.
- * @author [Stanley Wintergreen](https://github.com/kepocnhh)
- * @since 0.4.2
- */
-fun angleOf(
-    aX: Double,
-    aY: Double,
-    bX: Double,
-    bY: Double,
-): Double {
-    return kotlin.math.atan2(y = bY - aY, x = bX - aX)
-}
-
-/**
- * Special case of [angleOf] method.
- *
- * Usage:
- * ```
- * val angle = angleOf(x = 3.0, y = 3.0)
- * assertEquals(angleOf(aX = 0.0, aY = 0.0, bX = 3.0, bY = 3.0), angle)
- * assertEquals(PI / 4, angle)
- *
- *   ^
- *   |
- * 3 -           *
- *   |         /
- * 2 -       /
- *   |     /
- * 1 -   /
- *   | /
- * 0 *---|---|---|---|--->
- *   0   1   2   3   4
- * ```
- * @return The angle in radians between the x-axis and the straight line
- * containing point with x-coordinate `0` and y-coordinate `0` and point with [x] and [y] coordinates.
- * @author [Stanley Wintergreen](https://github.com/kepocnhh)
- * @since 0.5.0
- */
-fun angleOf(
-    x: Double,
-    y: Double,
-): Double {
-    return kotlin.math.atan2(y = y, x = x)
-}
-
-/**
- * Usage:
- * ```
  * val a = pointOf(x = 2, y = 3)
  * val b = pointOf(x = 1, y = 1)
  * val c = pointOf(x = 3, y = 1)
@@ -166,9 +48,6 @@ fun getPerpendicular(
     cY: Double,
 ): Point {
     if (bX == cX) return pointOf(x = bX, y = aY)
-//    if (bY == cY) return pointOf(x = aX, y = bY)
-    // y = k * x + b
-    // k = (y - b) / x
     val kY = (cY - bY) * (aX - bX) - (cX - bX) * (aY - bY)
     val kX = (cY - bY).pow(2) + (cX - bX).pow(2)
     val k = kY / kX
@@ -176,15 +55,6 @@ fun getPerpendicular(
         x = aX - k * (cY - bY),
         y = aY + k * (cX - bX),
     )
-//    val b = (bY * cX - bX * cY) / (cX - bX)
-//    val k = (bY - b) / bX
-//    val kH = -1 / k
-//    val bH = aY - kH * aX
-//    val hX = (b - bH) / (kH - k)
-//    return pointOf(
-//        x = hX,
-//        y = k * hX + b,
-//    )
 }
 
 /**
@@ -239,7 +109,7 @@ fun contains(
  * val a = pointOf(x = 2, y = 3)
  * val b = pointOf(x = 1, y = 1)
  * val c = pointOf(x = 3, y = 1)
- * val value = getShortest(
+ * val value = getShortestDistance(
  *     xStart = b.x,
  *     yStart = b.y,
  *     xFinish = c.x,
@@ -265,7 +135,7 @@ fun contains(
  * @since 0.7.2
  */
 @Suppress("LongParameterList")
-fun getShortest(
+fun getShortestDistance(
     xStart: Double,
     yStart: Double,
     xFinish: Double,
@@ -294,4 +164,542 @@ fun getShortest(
         distanceOf(aX = xStart, aY = yStart, bX = xTarget, bY = yTarget),
         distanceOf(aX = xFinish, aY = yFinish, bX = xTarget, bY = yTarget),
     )
+}
+
+/**
+ * The function calculates the shortest [Point] from point to segment.
+ * It is up to the segment, and not the [Point] of the perpendicular to the straight line!
+ *
+ * Usage:
+ * ```
+ * val a = pointOf(x = 2, y = 3)
+ * val b = pointOf(x = 1, y = 1)
+ * val c = pointOf(x = 3, y = 1)
+ * val s = getShortestPoint(
+ *     xStart = b.x,
+ *     yStart = b.y,
+ *     xFinish = c.x,
+ *     yFinish = c.y,
+ *     xTarget = a.x,
+ *     yTarget = a.y,
+ * )
+ * assertEquals(2.0, s.x)
+ * assertEquals(1.0, s.y)
+ *
+ *   ^
+ *   |        a
+ * 3 -       *
+ *   |
+ * 2 -
+ *   |    b   s   c
+ * 1 -   *---*---*
+ *   |
+ * 0 *---|---|---|---|--->
+ *   0   1   2   3   4
+ * ```
+ *
+ * Special cases:
+ * ```
+ * val a = pointOf(x = 4, y = 3)
+ * val b = pointOf(x = 1, y = 1)
+ * val c = pointOf(x = 3, y = 1)
+ * val s = getShortestPoint(
+ *     xStart = b.x,
+ *     yStart = b.y,
+ *     xFinish = c.x,
+ *     yFinish = c.y,
+ *     xTarget = a.x,
+ *     yTarget = a.y,
+ * )
+ * assertEquals(3.0, s.x)
+ * assertEquals(1.0, s.y)
+ * assertEquals(c, s)
+ *
+ *   ^
+ *   |                a
+ * 3 -               *
+ *   |
+ * 2 -
+ *   |    b       c
+ * 1 -   *-------*
+ *   |
+ * 0 *---|---|---|---|--->
+ *   0   1   2   3   4
+ * ```
+ * @return The shortest [Point] from the coordinates [xTarget] and [yTarget] to the segment described by the coordinates [xStart], [yStart] and [xFinish], [yFinish].
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.7.3
+ */
+@Suppress("LongParameterList")
+fun getShortestPoint(
+    xStart: Double,
+    yStart: Double,
+    xFinish: Double,
+    yFinish: Double,
+    xTarget: Double,
+    yTarget: Double,
+): Point {
+    val perpendicular = getPerpendicular(
+        aX = xTarget,
+        aY = yTarget,
+        bX = xStart,
+        bY = yStart,
+        cX = xFinish,
+        cY = yFinish,
+    )
+    val contains = contains(
+        xStart = xStart,
+        yStart = yStart,
+        xFinish = xFinish,
+        yFinish = yFinish,
+        xTarget = perpendicular.x,
+        yTarget = perpendicular.y,
+    )
+    if (contains) return perpendicular
+    val dS = distanceOf(aX = xStart, aY = yStart, bX = xTarget, bY = yTarget)
+    val dF = distanceOf(aX = xFinish, aY = yFinish, bX = xTarget, bY = yTarget)
+    return if (dS < dF) pointOf(x = xStart, y = yStart) else pointOf(x = xFinish, y = yFinish)
+}
+
+/**
+ * A line's steepness is measured by the absolute value of its slope.
+ * The larger the value is, the steeper the line.
+ * Given a slope, it is possible to determine the direction of the line that a slope describes based on its sign and value.
+ *
+ * Usage:
+ * ```
+ * val a = pointOf(x = 1, y = 1)
+ * val b = pointOf(x = 3, y = 2)
+ * val value = getSlope(
+ *     aX = a.x,
+ *     aY = a.y,
+ *     bX = b.x,
+ *     bY = b.y,
+ * )
+ * assertEquals(0.5, value)
+ *
+ *   ^
+ *   |            b
+ * 2 -           *
+ *   |    a
+ * 1 -   *
+ *   |
+ * 0 *---|---|---|---|--->
+ *   0   1   2   3   4
+ * ```
+ *
+ * Special cases:
+ * ```
+ * val a = pointOf(x = 1, y = 0)
+ * val b = pointOf(x = 3, y = 0)
+ * check(a.x != b.x)
+ * check(a.y == b.y)
+ * val value = getSlope(
+ *     aX = a.x,
+ *     aY = a.y,
+ *     bX = b.x,
+ *     bY = b.y,
+ * )
+ * assertEquals(0.0, actual)
+ * ```
+ * ```
+ * val a = pointOf(x = 1, y = 3)
+ * val b = pointOf(x = 1, y = 0)
+ * check(a.x == b.x)
+ * check(a.y != b.y)
+ * val value = getSlope(
+ *     aX = a.x,
+ *     aY = a.y,
+ *     bX = b.x,
+ *     bY = b.y,
+ * )
+ * assertTrue(value.isInfinite())
+ * ```
+ * ```
+ * val a = pointOf(x = 1, y = 3)
+ * val b = pointOf(x = 1, y = 3)
+ * check(a == b)
+ * val value = getSlope(
+ *     aX = a.x,
+ *     aY = a.y,
+ *     bX = b.x,
+ *     bY = b.y,
+ * )
+ * assertTrue(value.isNaN())
+ * ```
+ * @return A number that measures the steepness and direction of the segment described by the coordinates [[aX], [aY]] and [[bX], [bY]].
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.7.3
+ */
+fun getSlope(
+    aX: Double,
+    aY: Double,
+    bX: Double,
+    bY: Double,
+): Double {
+    return (bY - aY) / (bX - aX)
+}
+
+/**
+ * Usage:
+ * ```
+ * val a = pointOf(x = 2, y = 3)
+ * val b = pointOf(x = 4, y = 3)
+ * val c = pointOf(x = 1, y = 1)
+ * val d = pointOf(x = 3, y = 1)
+ * val isParallel = isParallel(
+ *     aX = a.x,
+ *     aY = a.y,
+ *     bX = b.x,
+ *     bY = b.y,
+ *     cX = c.x,
+ *     cY = c.y,
+ *     dX = d.x,
+ *     dY = d.y,
+ * )
+ * assertTrue(isParallel)
+ *
+ *   ^
+ *   |        a       b
+ * 3 -       *-------*
+ *   |
+ * 2 -
+ *   |    c       d
+ * 1 -   *-------*
+ *   |
+ * 0 *---|---|---|---|--->
+ *   0   1   2   3   4
+ * ```
+ *
+ * Or:
+ * ```
+ * val a = pointOf(x = 2, y = 2)
+ * val b = pointOf(x = 4, y = 3)
+ * val c = pointOf(x = 1, y = 1)
+ * val d = pointOf(x = 3, y = 1)
+ * val isParallel = isParallel(
+ *     aX = a.x,
+ *     aY = a.y,
+ *     bX = b.x,
+ *     bY = b.y,
+ *     cX = c.x,
+ *     cY = c.y,
+ *     dX = d.x,
+ *     dY = d.y,
+ * )
+ * assertFalse(isParallel)
+ *
+ *   ^
+ *   |                b
+ * 3 -               *
+ *   |        a
+ * 2 -       *
+ *   |    c       d
+ * 1 -   *-------*
+ *   |
+ * 0 *---|---|---|---|--->
+ *   0   1   2   3   4
+ * ```
+ * @return `true` if the segment described by the coordinates [[aX], [aY]] and [[bX], [bY]] is parallel to
+ * the segment described by the coordinates [[cX], [cY]] and [[dX], [dY]];
+ * `false` otherwise.
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.7.3
+ */
+@Suppress("LongParameterList")
+fun isParallel(
+    aX: Double,
+    aY: Double,
+    bX: Double,
+    bY: Double,
+    cX: Double,
+    cY: Double,
+    dX: Double,
+    dY: Double,
+): Boolean {
+    val abx = bX - aX
+    val cdx = dX - cX
+    return if (abx == 0.0) cdx == 0.0 else (bY - aY) / abx == (dY - cY) / cdx
+}
+
+/**
+ * Usage:
+ * ```
+ * val a = pointOf(x = 1, y = 1)
+ * val b = pointOf(x = 2, y = 1)
+ * val c = pointOf(x = 3, y = 1)
+ * val isCollinear = isCollinear(
+ *     aX = a.x,
+ *     aY = a.y,
+ *     bX = b.x,
+ *     bY = b.y,
+ *     cX = c.x,
+ *     cY = c.y,
+ * )
+ * assertTrue(isCollinear)
+ *
+ *   ^
+ *   |
+ * 2 -
+ *   |    a   b   c
+ * 1 -   *---*---*
+ *   |
+ * 0 *---|---|---|---|--->
+ *   0   1   2   3   4
+ * ```
+ *
+ * Or:
+ * ```
+ * val a = pointOf(x = 1, y = 1)
+ * val b = pointOf(x = 2, y = 1)
+ * val c = pointOf(x = 3, y = 2)
+ * val isCollinear = isCollinear(
+ *     aX = a.x,
+ *     aY = a.y,
+ *     bX = b.x,
+ *     bY = b.y,
+ *     cX = c.x,
+ *     cY = c.y,
+ * )
+ * assertFalse(isCollinear)
+ *
+ *   ^
+ *   |            c
+ * 2 -           *
+ *   |    a   b
+ * 1 -   *   *
+ *   |
+ * 0 *---|---|---|---|--->
+ *   0   1   2   3   4
+ * ```
+ * @return `true` if all three points ([[aX], [aY]], [[bX], [bY]], [[cX], [cY]]) lie on the same line;
+ * `false` otherwise.
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.7.3
+ */
+@Suppress("LongParameterList")
+fun isCollinear(
+    aX: Double,
+    aY: Double,
+    bX: Double,
+    bY: Double,
+    cX: Double,
+    cY: Double,
+): Boolean {
+    return (bY - aY) * (cX - bX) - (bX - aX) * (cY - bY) == 0.0
+}
+
+/**
+ * A special case of the [isCollinear] method for four points.
+ *
+ * Usage:
+ * ```
+ * val a = pointOf(x = 1, y = 1)
+ * val b = pointOf(x = 2, y = 1)
+ * val c = pointOf(x = 3, y = 1)
+ * val d = pointOf(x = 4, y = 1)
+ * val isCollinear = isCollinear(
+ *     aX = a.x,
+ *     aY = a.y,
+ *     bX = b.x,
+ *     bY = b.y,
+ *     cX = c.x,
+ *     cY = c.y,
+ *     dX = d.x,
+ *     dY = d.y,
+ * )
+ * assertTrue(isCollinear)
+ *
+ *   ^
+ *   |
+ * 2 -
+ *   |    a   b   c   d
+ * 1 -   *---*---*---*
+ *   |
+ * 0 *---|---|---|---|---|--->
+ *   0   1   2   3   4   5
+ * ```
+ *
+ * Or:
+ * ```
+ * val a = pointOf(x = 1, y = 1)
+ * val b = pointOf(x = 2, y = 1)
+ * val c = pointOf(x = 3, y = 1)
+ * val d = pointOf(x = 4, y = 2)
+ * val isCollinear = isCollinear(
+ *     aX = a.x,
+ *     aY = a.y,
+ *     bX = b.x,
+ *     bY = b.y,
+ *     cX = c.x,
+ *     cY = c.y,
+ *     dX = d.x,
+ *     dY = d.y,
+ * )
+ * assertFalse(isCollinear)
+ *
+ *   ^
+ *   |                d
+ * 2 -               *
+ *   |    a   b   c
+ * 1 -   *---*---*
+ *   |
+ * 0 *---|---|---|---|---|--->
+ *   0   1   2   3   4   5
+ * ```
+ * @return `true` if all four points ([[aX], [aY]], [[bX], [bY]], [[cX], [cY]], [[dX], [dY]]) lie on the same line;
+ * `false` otherwise.
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.7.3
+ */
+@Suppress("LongParameterList")
+fun isCollinear(
+    aX: Double,
+    aY: Double,
+    bX: Double,
+    bY: Double,
+    cX: Double,
+    cY: Double,
+    dX: Double,
+    dY: Double,
+): Boolean {
+    return (bY - aY) * (cX - bX) - (bX - aX) * (cY - bY) == 0.0 && (bY - aY) * (dX - bX) - (bX - aX) * (dY - bY) == 0.0
+}
+
+/**
+ * Usage:
+ * ```
+ * val a = pointOf(x = 1, y = 2)
+ * val b = pointOf(x = 3, y = 2)
+ * val c = pointOf(x = 2, y = 3)
+ * val d = pointOf(x = 2, y = 1)
+ * val i = getIntersection(
+ *     aX = a.x,
+ *     aY = a.y,
+ *     bX = b.x,
+ *     bY = b.y,
+ *     cX = c.x,
+ *     cY = c.y,
+ *     dX = d.x,
+ *     dY = d.y,
+ * )
+ * assertNotNull(i)
+ * assertEquals(2.0, i.x)
+ * assertEquals(2.0, i.y)
+ *
+ *   ^
+ *   |
+ * 4 -
+ *   |        c
+ * 3 -       *
+ *   |    a  |i   b
+ * 2 -   *---*---*
+ *   |       |d
+ * 1 -       *
+ *   |
+ * 0 *---|---|---|---|--->
+ *   0   1   2   3   4
+ * ```
+ *
+ * Special case:
+ * ```
+ * val a = pointOf(x = 2, y = 3)
+ * val b = pointOf(x = 4, y = 3)
+ * val c = pointOf(x = 1, y = 1)
+ * val d = pointOf(x = 3, y = 1)
+ * val i = getIntersection(
+ *     aX = a.x,
+ *     aY = a.y,
+ *     bX = b.x,
+ *     bY = b.y,
+ *     cX = c.x,
+ *     cY = c.y,
+ *     dX = d.x,
+ *     dY = d.y,
+ * )
+ * assertNull(i)
+ *
+ *   ^
+ *   |        a       b
+ * 3 -       *-------*
+ *   |
+ * 2 -
+ *   |    c       d
+ * 1 -   *-------*
+ *   |
+ * 0 *---|---|---|---|--->
+ *   0   1   2   3   4
+ * ```
+ *
+ * Special case:
+ * ```
+ * val a = pointOf(x = 1, y = 1)
+ * val b = pointOf(x = 2, y = 1)
+ * val c = pointOf(x = 3, y = 1)
+ * val d = pointOf(x = 4, y = 1)
+ * val i = getIntersection(
+ *     aX = a.x,
+ *     aY = a.y,
+ *     bX = b.x,
+ *     bY = b.y,
+ *     cX = c.x,
+ *     cY = c.y,
+ *     dX = d.x,
+ *     dY = d.y,
+ * )
+ * assertNull(i)
+ *
+ *   ^
+ *   |
+ * 2 -
+ *   |    a   b   c   d
+ * 1 -   *---*   *---*
+ *   |
+ * 0 *---|---|---|---|---|--->
+ *   0   1   2   3   4   5
+ * ```
+ * @return [Point] that is the intersection of two lines described by the ([[aX], [aY]] and [[bX], [bY]]) and ([[cX], [cY]] and [[dX], [dY]]) coordinates;
+ * `null` if the lines are parallel;
+ * `null` if the lines are collinear
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.7.3
+ */
+@Suppress("LongParameterList")
+fun getIntersection(
+    aX: Double,
+    aY: Double,
+    bX: Double,
+    bY: Double,
+    cX: Double,
+    cY: Double,
+    dX: Double,
+    dY: Double,
+): Point? {
+    val isCollinear = isCollinear(
+        aX = aX,
+        aY = aY,
+        bX = bX,
+        bY = bY,
+        cX = cX,
+        cY = cY,
+        dX = dX,
+        dY = dY,
+    )
+    if (isCollinear) return null
+    val isParallel = isParallel(
+        aX = aX,
+        aY = aY,
+        bX = bX,
+        bY = bY,
+        cX = cX,
+        cY = cY,
+        dX = dX,
+        dY = dY,
+    )
+    if (isParallel) return null
+    val xT = (aX * bY - aY * bX) * (cX - dX) - (aX - bX) * (cX * dY - cY * dX)
+    val xB = (aX - bX) * (cY - dY) - (aY - bY) * (cX - dX)
+    val yT = (aX * bY - aY * bX) * (cY - dY) - (aY - bY) * (cX * dY - cY * dX)
+    val yB = (aX - bX) * (cY - dY) - (aY - bY) * (cX - dX)
+    return pointOf(x = xT / xB, y = yT / yB)
 }
