@@ -658,7 +658,7 @@ fun isCollinear(
  * 0 *---|---|---|---|---|--->
  *   0   1   2   3   4   5
  * ```
- * @return [Point] that is the intersection of two lines described by x and y coordinates;
+ * @return [Point] that is the intersection of two lines described by the ([[aX], [aY]] and [[bX], [bY]]) and ([[cX], [cY]] and [[dX], [dY]]) coordinates;
  * `null` if the lines are parallel;
  * `null` if the lines are collinear
  * @author [Stanley Wintergreen](https://github.com/kepocnhh)
