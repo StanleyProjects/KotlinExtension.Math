@@ -109,7 +109,7 @@ fun contains(
  * val a = pointOf(x = 2, y = 3)
  * val b = pointOf(x = 1, y = 1)
  * val c = pointOf(x = 3, y = 1)
- * val value = getShortest(
+ * val value = getShortestDistance(
  *     xStart = b.x,
  *     yStart = b.y,
  *     xFinish = c.x,
@@ -166,6 +166,70 @@ fun getShortestDistance(
     )
 }
 
+/**
+ * The function calculates the shortest [Point] from point to segment.
+ * It is up to the segment, and not the [Point] of the perpendicular to the straight line!
+ *
+ * Usage:
+ * ```
+ * val a = pointOf(x = 2, y = 3)
+ * val b = pointOf(x = 1, y = 1)
+ * val c = pointOf(x = 3, y = 1)
+ * val s = getShortestPoint(
+ *     xStart = b.x,
+ *     yStart = b.y,
+ *     xFinish = c.x,
+ *     yFinish = c.y,
+ *     xTarget = a.x,
+ *     yTarget = a.y,
+ * )
+ * assertEquals(2.0, s.x)
+ * assertEquals(1.0, s.y)
+ *
+ *   ^
+ *   |        a
+ * 3 -       *
+ *   |
+ * 2 -
+ *   |    b   s   c
+ * 1 -   *---*---*
+ *   |
+ * 0 *---|---|---|---|--->
+ *   0   1   2   3   4
+ * ```
+ *
+ * Special cases:
+ * ```
+ * val a = pointOf(x = 4, y = 3)
+ * val b = pointOf(x = 1, y = 1)
+ * val c = pointOf(x = 3, y = 1)
+ * val s = getShortestPoint(
+ *     xStart = b.x,
+ *     yStart = b.y,
+ *     xFinish = c.x,
+ *     yFinish = c.y,
+ *     xTarget = a.x,
+ *     yTarget = a.y,
+ * )
+ * assertEquals(3.0, s.x)
+ * assertEquals(1.0, s.y)
+ * assertEquals(c, s)
+ *
+ *   ^
+ *   |                a
+ * 3 -               *
+ *   |
+ * 2 -
+ *   |    b       c
+ * 1 -   *-------*
+ *   |
+ * 0 *---|---|---|---|--->
+ *   0   1   2   3   4
+ * ```
+ * @return The shortest [Point] from the coordinates [xTarget] and [yTarget] to the segment described by the coordinates [xStart], [yStart] and [xFinish], [yFinish].
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.7.3
+ */
 @Suppress("LongParameterList")
 fun getShortestPoint(
     xStart: Double,
@@ -276,6 +340,72 @@ fun getSlope(
     return (bY - aY) / (bX - aX)
 }
 
+/**
+ * Usage:
+ * ```
+ * val a = pointOf(x = 2, y = 3)
+ * val b = pointOf(x = 4, y = 3)
+ * val c = pointOf(x = 1, y = 1)
+ * val d = pointOf(x = 3, y = 1)
+ * val isParallel = isParallel(
+ *     aX = a.x,
+ *     aY = a.y,
+ *     bX = b.x,
+ *     bY = b.y,
+ *     cX = c.x,
+ *     cY = c.y,
+ *     dX = d.x,
+ *     dY = d.y,
+ * )
+ * assertTrue(isParallel)
+ *
+ *   ^
+ *   |        a       b
+ * 3 -       *-------*
+ *   |
+ * 2 -
+ *   |    c       d
+ * 1 -   *-------*
+ *   |
+ * 0 *---|---|---|---|--->
+ *   0   1   2   3   4
+ * ```
+ *
+ * Or:
+ * ```
+ * val a = pointOf(x = 2, y = 2)
+ * val b = pointOf(x = 4, y = 3)
+ * val c = pointOf(x = 1, y = 1)
+ * val d = pointOf(x = 3, y = 1)
+ * val isParallel = isParallel(
+ *     aX = a.x,
+ *     aY = a.y,
+ *     bX = b.x,
+ *     bY = b.y,
+ *     cX = c.x,
+ *     cY = c.y,
+ *     dX = d.x,
+ *     dY = d.y,
+ * )
+ * assertFalse(isParallel)
+ *
+ *   ^
+ *   |                b
+ * 3 -               *
+ *   |        a
+ * 2 -       *
+ *   |    c       d
+ * 1 -   *-------*
+ *   |
+ * 0 *---|---|---|---|--->
+ *   0   1   2   3   4
+ * ```
+ * @return `true` if the segment described by the coordinates [[aX], [aY]] and [[bX], [bY]] is parallel to
+ * the segment described by the coordinates [[cX], [cY]] and [[dX], [dY]];
+ * `false` otherwise.
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.7.3
+ */
 @Suppress("LongParameterList")
 fun isParallel(
     aX: Double,
@@ -292,6 +422,61 @@ fun isParallel(
     return if (abx == 0.0) cdx == 0.0 else (bY - aY) / abx == (dY - cY) / cdx
 }
 
+/**
+ * Usage:
+ * ```
+ * val a = pointOf(x = 1, y = 1)
+ * val b = pointOf(x = 2, y = 1)
+ * val c = pointOf(x = 3, y = 1)
+ * val isCollinear = isCollinear(
+ *     aX = a.x,
+ *     aY = a.y,
+ *     bX = b.x,
+ *     bY = b.y,
+ *     cX = c.x,
+ *     cY = c.y,
+ * )
+ * assertTrue(isCollinear)
+ *
+ *   ^
+ *   |
+ * 2 -
+ *   |    a   b   c
+ * 1 -   *---*---*
+ *   |
+ * 0 *---|---|---|---|--->
+ *   0   1   2   3   4
+ * ```
+ *
+ * Or:
+ * ```
+ * val a = pointOf(x = 1, y = 1)
+ * val b = pointOf(x = 2, y = 1)
+ * val c = pointOf(x = 3, y = 2)
+ * val isCollinear = isCollinear(
+ *     aX = a.x,
+ *     aY = a.y,
+ *     bX = b.x,
+ *     bY = b.y,
+ *     cX = c.x,
+ *     cY = c.y,
+ * )
+ * assertFalse(isCollinear)
+ *
+ *   ^
+ *   |            c
+ * 2 -           *
+ *   |    a   b
+ * 1 -   *   *
+ *   |
+ * 0 *---|---|---|---|--->
+ *   0   1   2   3   4
+ * ```
+ * @return `true` if all three points ([[aX], [aY]], [[bX], [bY]], [[cX], [cY]]) lie on the same line;
+ * `false` otherwise.
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.7.3
+ */
 @Suppress("LongParameterList")
 fun isCollinear(
     aX: Double,
@@ -304,6 +489,69 @@ fun isCollinear(
     return (bY - aY) * (cX - bX) - (bX - aX) * (cY - bY) == 0.0
 }
 
+/**
+ * A special case of the [isCollinear] method for four points.
+ *
+ * Usage:
+ * ```
+ * val a = pointOf(x = 1, y = 1)
+ * val b = pointOf(x = 2, y = 1)
+ * val c = pointOf(x = 3, y = 1)
+ * val d = pointOf(x = 4, y = 1)
+ * val isCollinear = isCollinear(
+ *     aX = a.x,
+ *     aY = a.y,
+ *     bX = b.x,
+ *     bY = b.y,
+ *     cX = c.x,
+ *     cY = c.y,
+ *     dX = d.x,
+ *     dY = d.y,
+ * )
+ * assertTrue(isCollinear)
+ *
+ *   ^
+ *   |
+ * 2 -
+ *   |    a   b   c   d
+ * 1 -   *---*---*---*
+ *   |
+ * 0 *---|---|---|---|---|--->
+ *   0   1   2   3   4   5
+ * ```
+ *
+ * Or:
+ * ```
+ * val a = pointOf(x = 1, y = 1)
+ * val b = pointOf(x = 2, y = 1)
+ * val c = pointOf(x = 3, y = 1)
+ * val d = pointOf(x = 4, y = 2)
+ * val isCollinear = isCollinear(
+ *     aX = a.x,
+ *     aY = a.y,
+ *     bX = b.x,
+ *     bY = b.y,
+ *     cX = c.x,
+ *     cY = c.y,
+ *     dX = d.x,
+ *     dY = d.y,
+ * )
+ * assertFalse(isCollinear)
+ *
+ *   ^
+ *   |                d
+ * 2 -               *
+ *   |    a   b   c
+ * 1 -   *---*---*
+ *   |
+ * 0 *---|---|---|---|---|--->
+ *   0   1   2   3   4   5
+ * ```
+ * @return `true` if all four points ([[aX], [aY]], [[bX], [bY]], [[cX], [cY]], [[dX], [dY]]) lie on the same line;
+ * `false` otherwise.
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.7.3
+ */
 @Suppress("LongParameterList")
 fun isCollinear(
     aX: Double,
@@ -318,6 +566,104 @@ fun isCollinear(
     return (bY - aY) * (cX - bX) - (bX - aX) * (cY - bY) == 0.0 && (bY - aY) * (dX - bX) - (bX - aX) * (dY - bY) == 0.0
 }
 
+/**
+ * Usage:
+ * ```
+ * val a = pointOf(x = 1, y = 2)
+ * val b = pointOf(x = 3, y = 2)
+ * val c = pointOf(x = 2, y = 3)
+ * val d = pointOf(x = 2, y = 1)
+ * val i = getIntersection(
+ *     aX = a.x,
+ *     aY = a.y,
+ *     bX = b.x,
+ *     bY = b.y,
+ *     cX = c.x,
+ *     cY = c.y,
+ *     dX = d.x,
+ *     dY = d.y,
+ * )
+ * assertNotNull(i)
+ * assertEquals(2.0, i.x)
+ * assertEquals(2.0, i.y)
+ *
+ *   ^
+ *   |
+ * 4 -
+ *   |        c
+ * 3 -       *
+ *   |    a  |i   b
+ * 2 -   *---*---*
+ *   |       |d
+ * 1 -       *
+ *   |
+ * 0 *---|---|---|---|--->
+ *   0   1   2   3   4
+ * ```
+ *
+ * Special case:
+ * ```
+ * val a = pointOf(x = 2, y = 3)
+ * val b = pointOf(x = 4, y = 3)
+ * val c = pointOf(x = 1, y = 1)
+ * val d = pointOf(x = 3, y = 1)
+ * val i = getIntersection(
+ *     aX = a.x,
+ *     aY = a.y,
+ *     bX = b.x,
+ *     bY = b.y,
+ *     cX = c.x,
+ *     cY = c.y,
+ *     dX = d.x,
+ *     dY = d.y,
+ * )
+ * assertNull(i)
+ *
+ *   ^
+ *   |        a       b
+ * 3 -       *-------*
+ *   |
+ * 2 -
+ *   |    c       d
+ * 1 -   *-------*
+ *   |
+ * 0 *---|---|---|---|--->
+ *   0   1   2   3   4
+ * ```
+ *
+ * Special case:
+ * ```
+ * val a = pointOf(x = 1, y = 1)
+ * val b = pointOf(x = 2, y = 1)
+ * val c = pointOf(x = 3, y = 1)
+ * val d = pointOf(x = 4, y = 1)
+ * val i = getIntersection(
+ *     aX = a.x,
+ *     aY = a.y,
+ *     bX = b.x,
+ *     bY = b.y,
+ *     cX = c.x,
+ *     cY = c.y,
+ *     dX = d.x,
+ *     dY = d.y,
+ * )
+ * assertNull(i)
+ *
+ *   ^
+ *   |
+ * 2 -
+ *   |    a   b   c   d
+ * 1 -   *---*   *---*
+ *   |
+ * 0 *---|---|---|---|---|--->
+ *   0   1   2   3   4   5
+ * ```
+ * @return [Point] that is the intersection of two lines described by x and y coordinates;
+ * `null` if the lines are parallel;
+ * `null` if the lines are collinear
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.7.3
+ */
 @Suppress("LongParameterList")
 fun getIntersection(
     aX: Double,

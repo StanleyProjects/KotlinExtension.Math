@@ -56,7 +56,7 @@ fun getPerpendicular(
  * val a = pointOf(x = 2, y = 3)
  * val b = pointOf(x = 1, y = 1)
  * val c = pointOf(x = 3, y = 1)
- * val value = getShortest(
+ * val value = getShortestDistance(
  *     start = b,
  *     finish = c,
  *     target = a,

@@ -48,7 +48,7 @@ fun Vector.getPerpendicular(target: Point): Point {
  * ```
  * val target = pointOf(x = 2, y = 3)
  * val vector = pointOf(x = 1, y = 1) + pointOf(x = 3, y = 1)
- * val value = vector.getShortest(
+ * val value = vector.getShortestDistance(
  *     target = target,
  * )
  * assertEquals(2.0, value)
