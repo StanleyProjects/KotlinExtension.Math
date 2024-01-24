@@ -2,10 +2,6 @@ package sp.kx.math
 
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
-import java.math.BigDecimal
-import java.math.RoundingMode
-import kotlin.math.absoluteValue
-import kotlin.math.pow
 
 @Suppress("MagicNumber")
 internal class NumberEqTest {
@@ -105,33 +101,7 @@ internal class NumberEqTest {
 
     companion object {
         private fun assertDoubles(value: Double, other: Double, points: Int, equals: Boolean) {
-            Assertions.assertEquals(equals, value.eq(other = other, points = points)) {
-                val diff = (value - other).absoluteValue
-                val delta = 10.0.pow(points)
-                val bX1 = BigDecimal(value)
-                val bX2 = BigDecimal(other)
-                val bXDiff = bX1 - bX2
-                val bXDelta = BigDecimal(10).pow(points)
-                val bXD = bXDiff * bXDelta
-                """
-                    points: $points
-                    value: ${value.toString(points = 32)}(${value.toString(points = points)})
-                    other: ${other.toString(points = 32)}(${other.toString(points = points)})
-                    diff: ${diff.toString(points = 32)}
-                    10^$points: ${delta.toString(points = 32)}
-                    diff * 10^$points: ${(diff * delta).toString(points = 32)}(${(diff * delta).toInt()})
-                    ---
-                    bX1: $bX1
-                    bX2: $bX2
-                    bXDiff: $bXDiff
-                    bXDelta: $bXDelta
-                    bXDiff * bXDelta: $bXD (${bXD.toLong()}/${bXD == BigDecimal.ZERO})
-                    bXD/0: ${bXD.setScale(0, RoundingMode.FLOOR)}(${bXD.setScale(0, RoundingMode.FLOOR).toLong()})
-                    bXD/1: ${bXD.setScale(1, RoundingMode.FLOOR)}(${bXD.setScale(1, RoundingMode.FLOOR).toLong()})
-                    bXD/HALF_EVEN: ${bXD.setScale(1, RoundingMode.HALF_EVEN)}
-                    ---
-                """.trimIndent()
-            }
+            Assertions.assertEquals(equals, value.eq(other = other, points = points))
         }
     }
 }

@@ -19,6 +19,7 @@ internal class ImmutableVectorTest {
         Assertions.assertEquals(7.8, actual.finish.y)
     }
 
+    @Suppress("NullableToStringCall") // ?
     @Test
     fun toStringTest() {
         ImmutableVector(

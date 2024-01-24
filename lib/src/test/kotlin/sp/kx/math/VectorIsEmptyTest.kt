@@ -2,10 +2,6 @@ package sp.kx.math
 
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
-import java.math.BigDecimal
-import java.math.RoundingMode
-import kotlin.math.absoluteValue
-import kotlin.math.pow
 
 @Suppress("MagicNumber")
 internal class VectorIsEmptyTest {
@@ -27,8 +23,16 @@ internal class VectorIsEmptyTest {
 
     @Test
     fun isEmptyDeltaFalseTest() {
-        assertIsEmpty(vector = vectorOf(startX = 0.1, startY = 1.0, finishX = 0.1, finishY = 1.0), points = 1, isEmpty = true)
-        assertIsEmpty(vector = vectorOf(startX = 0.1, startY = 1.0, finishX = 0.2, finishY = 1.0), points = 1, isEmpty = false)
+        assertIsEmpty(
+            vector = vectorOf(startX = 0.1, startY = 1.0, finishX = 0.1, finishY = 1.0),
+            points = 1,
+            isEmpty = true,
+        )
+        assertIsEmpty(
+            vector = vectorOf(startX = 0.1, startY = 1.0, finishX = 0.2, finishY = 1.0),
+            points = 1,
+            isEmpty = false,
+        )
         val issues = listOf(
             0.12 to 0.13,
             0.123 to 0.124,
@@ -63,7 +67,7 @@ internal class VectorIsEmptyTest {
         )
         check(issues.size == 9)
         check(issues.toSet().size == issues.size)
-        for (index in 0..(issues.size - 2)) {
+        for (index in 0..issues.size - 2) {
             val startX = issues[index]
             val finishX = issues[index + 1]
             val vector = vectorOf(startX = startX, startY = 1.0, finishX = finishX, finishY = 1.0)
@@ -147,35 +151,7 @@ internal class VectorIsEmptyTest {
 
     companion object {
         private fun assertIsEmpty(vector: Vector, points: Int, isEmpty: Boolean) {
-            Assertions.assertEquals(isEmpty, vector.isEmpty(points = points)) {
-                val delta = 10.0.pow(points)
-                val value = vector.start.x
-                val other = vector.finish.x
-                val diff = (value - other).absoluteValue
-                val bX1 = BigDecimal(value)
-                val bX2 = BigDecimal(other)
-                val bXDiff = bX1 - bX2
-                val bXDelta = BigDecimal(10).pow(points)
-                val bXD = bXDiff * bXDelta
-                """
-                    points: $points
-                    value: ${value.toString(points = 32)}(${value.toString(points = points)})
-                    other: ${other.toString(points = 32)}(${other.toString(points = points)})
-                    diff: ${diff.toString(points = 32)}
-                    10^$points: ${delta.toString(points = 32)}
-                    diff * 10^$points: ${(diff * delta).toString(points = 32)}(${(diff * delta).toInt()})
-                    ---
-                    bX1: $bX1
-                    bX2: $bX2
-                    bXDiff: $bXDiff
-                    bXDelta: $bXDelta
-                    bXDiff * bXDelta: $bXD (${bXD.toLong()}/${bXD == BigDecimal.ZERO})
-                    bXD/0: ${bXD.setScale(0, RoundingMode.FLOOR)}(${bXD.setScale(0, RoundingMode.FLOOR).toLong()})
-                    bXD/1: ${bXD.setScale(1, RoundingMode.FLOOR)}(${bXD.setScale(1, RoundingMode.FLOOR).toLong()})
-                    bXD/HALF_EVEN: ${bXD.setScale(1, RoundingMode.HALF_EVEN)}
-                    ---
-                """.trimIndent()
-            }
+            Assertions.assertEquals(isEmpty, vector.isEmpty(points = points))
         }
     }
 }

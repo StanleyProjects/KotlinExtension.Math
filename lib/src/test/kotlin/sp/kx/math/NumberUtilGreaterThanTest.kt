@@ -2,11 +2,11 @@ package sp.kx.math
 
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
-import java.math.BigDecimal
-import java.math.RoundingMode
-import kotlin.math.absoluteValue
-import kotlin.math.pow
 
+@Suppress(
+    "ForEachOnRange",
+    "MagicNumber",
+)
 internal class NumberUtilGreaterThanTest {
     private data class DataSet(
         val value: Double,
@@ -67,6 +67,7 @@ internal class NumberUtilGreaterThanTest {
         issues.forEach(::assertIssue)
     }
 
+    @Suppress("FunctionMaxLength")
     @Test
     fun greaterThanDeltaPointsFalseTest() {
         val issues = listOf(
@@ -209,9 +210,11 @@ internal class NumberUtilGreaterThanTest {
     @Test
     fun greaterThanErrorTest() {
         Assertions.assertThrows(IllegalArgumentException::class.java) {
+            @Suppress("IgnoredReturnValue")
             1.2.gt(other = 3.4, points = -1)
         }
         Assertions.assertThrows(IllegalArgumentException::class.java) {
+            @Suppress("IgnoredReturnValue")
             1.2.gt(other = 3.4, points = 0)
         }
     }
@@ -220,34 +223,7 @@ internal class NumberUtilGreaterThanTest {
         private fun assertIssue(issue: DataSet) {
             check(issue.value > issue.other == issue.isGreaterThan)
             val actual = issue.value.gt(other = issue.other, points = issue.points)
-            Assertions.assertEquals(issue.expected, actual) {
-                // todo
-                val value = issue.value
-                val other = issue.other
-                val points = issue.points
-                val diff = (value - other).absoluteValue
-                val delta = 10.0.pow(points)
-                val bd1 = BigDecimal(value)
-                val bd2 = BigDecimal(other)
-                val bDiff = bd1 - bd2
-                val bDelta = BigDecimal(10).pow(points)
-                val bScaled1 = (bDiff * bDelta).setScale(1, RoundingMode.HALF_EVEN)
-                """
-                    points: $points
-                    value: ${value.toString(points = 32)}(${value.toString(points = points)})
-                    other: ${other.toString(points = 32)}(${other.toString(points = points)})
-                    diff: ${diff.toString(points = 32)}
-                    ---
-                    bd1: $bd1
-                    bd2: $bd2
-                    bDiff: $bDiff
-                    bDelta: $bDelta
-                    scaled(1): $bScaled1
-                    ---
-                    10^$points: ${delta.toString(points = 32)}
-                    diff * 10^$points: ${(diff * delta).toString(points = 32)}(${(diff * delta).toInt()})
-                """.trimIndent()
-            }
+            Assertions.assertEquals(issue.expected, actual)
         }
     }
 }

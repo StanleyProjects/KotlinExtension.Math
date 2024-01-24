@@ -5,7 +5,10 @@ import org.junit.jupiter.api.Test
 import kotlin.math.absoluteValue
 import kotlin.math.pow
 
-@Suppress("MagicNumber")
+@Suppress(
+    "ForEachOnRange",
+    "MagicNumber",
+)
 internal class NumberUtilEqTest {
     @Test
     fun eqTest() {
@@ -193,19 +196,7 @@ internal class NumberUtilEqTest {
 
     companion object {
         private fun assertDoubles(value: Double, other: Double, points: Int, equals: Boolean) {
-            Assertions.assertEquals(equals, value.eq(other = other, points = points)) {
-                // todo
-                val diff = (value - other).absoluteValue
-                val delta = 10.0.pow(points)
-                """
-                    points: $points
-                    value: ${value.toString(points = 32)}(${value.toString(points = points)})
-                    other: ${other.toString(points = 32)}(${other.toString(points = points)})
-                    diff: ${diff.toString(points = 32)}
-                    10^$points: ${delta.toString(points = 32)}
-                    diff * 10^$points: ${(diff * delta).toString(points = 32)}(${(diff * delta).toInt()})
-                """.trimIndent()
-            }
+            Assertions.assertEquals(equals, value.eq(other = other, points = points))
         }
     }
 }

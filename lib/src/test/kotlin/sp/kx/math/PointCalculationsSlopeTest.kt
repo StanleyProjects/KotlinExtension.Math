@@ -3,6 +3,7 @@ package sp.kx.math
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
+@Suppress("MagicNumber")
 internal class PointCalculationsSlopeTest {
     @Test
     fun getSlopeNaNTest() {
