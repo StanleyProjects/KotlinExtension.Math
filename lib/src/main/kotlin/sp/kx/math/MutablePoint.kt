@@ -297,3 +297,7 @@ fun pointOf(
         y = y,
     )
 }
+
+fun Point.mut(): MutablePoint {
+    return MutablePoint(x = x, y = y)
+}

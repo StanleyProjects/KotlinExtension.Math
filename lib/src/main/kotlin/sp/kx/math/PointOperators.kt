@@ -157,3 +157,10 @@ operator fun Point.plus(
         y = measure.transform(y),
     )
 }
+
+operator fun Point.minus(measure: Measure<Double, Double>): Point {
+    return pointOf(
+        x = measure.units(x),
+        y = measure.units(y),
+    )
+}

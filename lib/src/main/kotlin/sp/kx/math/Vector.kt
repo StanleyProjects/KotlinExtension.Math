@@ -32,3 +32,6 @@ interface Vector {
      */
     val finish: Point
 }
+
+// todo angle vector x perpendicular
+// todo angle vector x vector
