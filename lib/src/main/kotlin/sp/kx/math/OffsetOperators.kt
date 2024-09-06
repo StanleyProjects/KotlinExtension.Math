@@ -1,5 +1,7 @@
 package sp.kx.math
 
+import sp.kx.math.measure.Measure
+
 /**
  * Creates a new [Offset] object with a copy of [this] receiver's multiplied by the [value].
  *
@@ -41,5 +43,33 @@ operator fun Offset.div(value: Double): Offset {
     return offsetOf(
         dX = dX / value,
         dY = dY / value,
+    )
+}
+
+operator fun Offset.plus(other: Offset): Offset {
+    return offsetOf(
+        dX = dX + other.dX,
+        dY = dY + other.dY,
+    )
+}
+
+operator fun Offset.minus(other: Offset): Offset {
+    return offsetOf(
+        dX = dX - other.dX,
+        dY = dY - other.dY,
+    )
+}
+
+operator fun Offset.plus(measure: Measure<Double, Double>): Offset {
+    return offsetOf(
+        dX = measure.transform(dX),
+        dY = measure.transform(dY),
+    )
+}
+
+operator fun Offset.minus(measure: Measure<Double, Double>): Offset {
+    return offsetOf(
+        dX = measure.units(dX),
+        dY = measure.units(dY),
     )
 }

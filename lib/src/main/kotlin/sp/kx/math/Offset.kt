@@ -48,3 +48,5 @@ interface Offset {
         val Empty = offsetOf(dX = 0.0, dY = 0.0)
     }
 }
+
+// todo offsetOf(1, 1)

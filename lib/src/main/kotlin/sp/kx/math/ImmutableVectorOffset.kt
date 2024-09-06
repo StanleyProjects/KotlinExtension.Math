@@ -215,3 +215,10 @@ fun Point.toVector(finish: Point, offset: Offset): Vector {
         finish = finish + offset,
     )
 }
+
+fun Vector.toOffset(): Offset {
+    return offsetOf(
+        dX = finish.x - start.x,
+        dY = finish.y - start.y,
+    )
+}

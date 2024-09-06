@@ -134,3 +134,10 @@ class MutableVector(
         finish.set(x = x, y = y)
     }
 }
+
+fun Vector.mut(): MutableVector {
+    return MutableVector(
+        start = start.mut(),
+        finish = finish.mut(),
+    )
+}

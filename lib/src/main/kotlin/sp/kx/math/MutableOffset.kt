@@ -116,3 +116,17 @@ fun offsetOf(
 ): Offset {
     return MutableOffset(dX = dX, dY = dY)
 }
+
+fun Offset.mut(): MutableOffset {
+    return MutableOffset(
+        dX = dX,
+        dY = dY,
+    )
+}
+
+fun MutableOffset.add(dX: Double, dY: Double) {
+    set(
+        dX = this.dX + dX,
+        dY = this.dY + dY,
+    )
+}

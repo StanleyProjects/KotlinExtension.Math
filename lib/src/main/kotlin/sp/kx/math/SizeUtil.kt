@@ -173,3 +173,18 @@ fun sizeOf(
         height = height.toDouble(),
     )
 }
+
+fun Size.diagonal(): Double {
+    return kotlin.math.sqrt(width * width + height * height)
+}
+
+fun Size.angle(): Double {
+    return angleOf(x = width, y = height)
+}
+
+fun Size.copy(width: Double = this.width, height: Double = this.height): Size {
+    return sizeOf(
+        width = width,
+        height = height,
+    )
+}
