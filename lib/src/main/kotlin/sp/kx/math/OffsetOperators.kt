@@ -43,3 +43,5 @@ operator fun Offset.div(value: Double): Offset {
         dY = dY / value,
     )
 }
+
+// todo offset + offset

@@ -166,6 +166,8 @@ fun getShortestDistance(
     )
 }
 
+// todo closerThan
+
 /**
  * The function calculates the shortest [Point] from point to segment.
  * It is up to the segment, and not the [Point] of the perpendicular to the straight line!
@@ -703,3 +705,5 @@ fun getIntersection(
     val yB = (aX - bX) * (cY - dY) - (aY - bY) * (cX - dX)
     return pointOf(x = xT / xB, y = yT / yB)
 }
+
+// todo isIntersected
