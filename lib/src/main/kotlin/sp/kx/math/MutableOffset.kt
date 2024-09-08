@@ -88,6 +88,16 @@ class MutableOffset(
         this.dX = dY
         dY = dX
     }
+
+    fun add(dX: Double, dY: Double) {
+        this.dX += dX
+        this.dY += dY
+    }
+
+    fun clear() {
+        dX = 0.0
+        dY = 0.0
+    }
 }
 
 /**
@@ -121,12 +131,5 @@ fun Offset.mut(): MutableOffset {
     return MutableOffset(
         dX = dX,
         dY = dY,
-    )
-}
-
-fun MutableOffset.add(dX: Double, dY: Double) {
-    set(
-        dX = this.dX + dX,
-        dY = this.dY + dY,
     )
 }
