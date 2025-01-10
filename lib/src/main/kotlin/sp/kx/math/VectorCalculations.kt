@@ -41,45 +41,6 @@ fun Vector.getPerpendicular(target: Point): Point {
 }
 
 /**
- * The function calculates the shortest distance from point to segment.
- * It is up to the segment, and not the length of the perpendicular to the straight line!
- *
- * Usage:
- * ```
- * val target = pointOf(x = 2, y = 3)
- * val vector = pointOf(x = 1, y = 1) + pointOf(x = 3, y = 1)
- * val value = vector.getShortestDistance(
- *     target = target,
- * )
- * assertEquals(2.0, value)
- *
- *   ^
- *   |        a
- * 3 -       *
- *   |
- * 2 -
- *   |    b       c
- * 1 -   *-------*
- *   |
- * 0 *---|---|---|---|--->
- *   0   1   2   3   4
- * ```
- * @return The shortest distance from the [target] point to the segment described by [this] receiver.
- * @author [Stanley Wintergreen](https://github.com/kepocnhh)
- * @since 0.7.2
- */
-fun Vector.getShortestDistance(target: Point): Double {
-    return getShortestDistance(
-        xStart = start.x,
-        yStart = start.y,
-        xFinish = finish.x,
-        yFinish = finish.y,
-        xTarget = target.x,
-        yTarget = target.y,
-    )
-}
-
-/**
  * Usage:
  * ```
  * val vector = pointOf(x = 1, y = 1) + pointOf(x = 3, y = 1)
@@ -215,373 +176,58 @@ fun getSlope(vector: Vector): Double {
     return (vector.finish.y - vector.start.y) / (vector.finish.x - vector.start.x)
 }
 
-/**
- * The function calculates the shortest [Point] from point to segment.
- * It is up to the segment, and not the [Point] of the perpendicular to the straight line!
- *
- * Usage:
- * ```
- * val vector = pointOf(x = 1, y = 1) + pointOf(x = 3, y = 1)
- * val target = pointOf(x = 2, y = 3)
- * val result = vector.getShortestPoint(target = target)
- * assertEquals(2.0, result.x)
- * assertEquals(1.0, result.y)
- *
- *   ^
- *   |        t
- * 3 -       *
- *   |
- * 2 -
- *   |    s   r   f
- * 1 -   *---*---*
- *   |
- * 0 *---|---|---|---|--->
- *   0   1   2   3   4
- * ```
- *
- * Special cases:
- * ```
- * val vector = pointOf(x = 1, y = 1) + pointOf(x = 3, y = 1)
- * val target = pointOf(x = 4, y = 3)
- * val result = vector.getShortestPoint(target = target)
- * assertEquals(3.0, result.x)
- * assertEquals(1.0, result.y)
- * assertEquals(vector.finish, result)
- *
- *   ^
- *   |                t
- * 3 -               *
- *   |
- * 2 -
- *   |    s       f
- * 1 -   *-------*
- *   |
- * 0 *---|---|---|---|--->
- *   0   1   2   3   4
- * ```
- * @return The shortest [Point] from the point [target] to the segment described by [this] receiver.
- * @author [Stanley Wintergreen](https://github.com/kepocnhh)
- * @since 0.7.3
- */
-fun Vector.getShortestPoint(target: Point): Point {
-    return getShortestPoint(
-        xStart = start.x,
-        yStart = start.y,
-        xFinish = finish.x,
-        yFinish = finish.y,
-        xTarget = target.x,
-        yTarget = target.y,
-    )
-}
-
-/**
- * The function calculates the shortest [Point] from point to segment.
- * It is up to the segment, and not the [Point] of the perpendicular to the straight line!
- *
- * Usage:
- * ```
- * val vector = pointOf(x = 1, y = 1) + pointOf(x = 3, y = 1)
- * val target = pointOf(x = 2, y = 3)
- * val result = vector.getShortestPoint(xTarget = target.x, yTarget = target.y)
- * assertEquals(2.0, result.x)
- * assertEquals(1.0, result.y)
- *
- *   ^
- *   |        t
- * 3 -       *
- *   |
- * 2 -
- *   |    s   r   f
- * 1 -   *---*---*
- *   |
- * 0 *---|---|---|---|--->
- *   0   1   2   3   4
- * ```
- *
- * Special cases:
- * ```
- * val vector = pointOf(x = 1, y = 1) + pointOf(x = 3, y = 1)
- * val target = pointOf(x = 4, y = 3)
- * val result = vector.getShortestPoint(xTarget = target.x, yTarget = target.y)
- * assertEquals(3.0, result.x)
- * assertEquals(1.0, result.y)
- * assertEquals(vector.finish, result)
- *
- *   ^
- *   |                t
- * 3 -               *
- *   |
- * 2 -
- *   |    s       f
- * 1 -   *-------*
- *   |
- * 0 *---|---|---|---|--->
- *   0   1   2   3   4
- * ```
- * @return The shortest [Point] from the coordinates [[xTarget], [yTarget]] to the segment described by [this] receiver.
- * @author [Stanley Wintergreen](https://github.com/kepocnhh)
- * @since 0.7.3
- */
-fun Vector.getShortestPoint(
+fun Vector.lt(
     xTarget: Double,
     yTarget: Double,
-): Point {
-    return getShortestPoint(
-        xStart = start.x,
-        yStart = start.y,
-        xFinish = finish.x,
-        yFinish = finish.y,
+    minDistance: Double,
+    points: Int,
+): Boolean {
+    return getShortestDistance(
         xTarget = xTarget,
         yTarget = yTarget,
-    )
+    ).lt(other = minDistance, points = points)
 }
 
-/**
- * Usage:
- * ```
- * val ab = pointOf(x = 1, y = 2) + pointOf(x = 3, y = 2)
- * val cd = pointOf(x = 2, y = 3) + pointOf(x = 2, y = 1)
- * val i = ab.getIntersection(cd)
- * assertNotNull(i)
- * assertEquals(2.0, i.x)
- * assertEquals(2.0, i.y)
- *
- *   ^
- *   |
- * 4 -
- *   |        c
- * 3 -       *
- *   |    a  |i   b
- * 2 -   *---*---*
- *   |       |d
- * 1 -       *
- *   |
- * 0 *---|---|---|---|--->
- *   0   1   2   3   4
- * ```
- *
- * Special case:
- * ```
- * val ab = pointOf(x = 2, y = 3) + pointOf(x = 4, y = 3)
- * val cd = pointOf(x = 1, y = 1) + pointOf(x = 3, y = 1)
- * val i = ab.getIntersection(cd)
- * assertNull(i)
- *
- *   ^
- *   |        a       b
- * 3 -       *-------*
- *   |
- * 2 -
- *   |    c       d
- * 1 -   *-------*
- *   |
- * 0 *---|---|---|---|--->
- *   0   1   2   3   4
- * ```
- *
- * Special case:
- * ```
- * val ab = pointOf(x = 1, y = 1) + pointOf(x = 2, y = 1)
- * val cd = pointOf(x = 3, y = 1) + pointOf(x = 4, y = 1)
- * val i = ab.getIntersection(cd)
- * assertNull(i)
- *
- *   ^
- *   |
- * 2 -
- *   |    a   b   c   d
- * 1 -   *---*   *---*
- *   |
- * 0 *---|---|---|---|---|--->
- *   0   1   2   3   4   5
- * ```
- * @return [Point] that is the intersection of two lines described by [this] receiver and the [other] vector;
- * `null` if the lines are parallel;
- * `null` if the lines are collinear
- * @author [Stanley Wintergreen](https://github.com/kepocnhh)
- * @since 0.7.3
- */
-fun Vector.getIntersection(other: Vector): Point? {
-    return getIntersection(
-        aX = start.x,
-        aY = start.y,
-        bX = finish.x,
-        bY = finish.y,
-        cX = other.start.x,
-        cY = other.start.y,
-        dX = other.finish.x,
-        dY = other.finish.y,
-    )
+fun Vector.lt(
+    target: Point,
+    minDistance: Double,
+    points: Int,
+): Boolean {
+    return getShortestDistance(target = target).lt(other = minDistance, points = points)
 }
 
-/**
- * Usage:
- * ```
- * val ab = pointOf(x = 1, y = 2) + pointOf(x = 3, y = 2)
- * val c = pointOf(x = 2, y = 3)
- * val d = pointOf(x = 2, y = 1)
- * val i = ab.getIntersection(c = c, d = d)
- * assertNotNull(i)
- * assertEquals(2.0, i.x)
- * assertEquals(2.0, i.y)
- *
- *   ^
- *   |
- * 4 -
- *   |        c
- * 3 -       *
- *   |    a  |i   b
- * 2 -   *---*---*
- *   |       |d
- * 1 -       *
- *   |
- * 0 *---|---|---|---|--->
- *   0   1   2   3   4
- * ```
- *
- * Special case:
- * ```
- * val ab = pointOf(x = 2, y = 3) + pointOf(x = 4, y = 3)
- * val c = pointOf(x = 1, y = 1)
- * val d = pointOf(x = 3, y = 1)
- * val i = ab.getIntersection(c = c, d = d)
- * assertNull(i)
- *
- *   ^
- *   |        a       b
- * 3 -       *-------*
- *   |
- * 2 -
- *   |    c       d
- * 1 -   *-------*
- *   |
- * 0 *---|---|---|---|--->
- *   0   1   2   3   4
- * ```
- *
- * Special case:
- * ```
- * val ab = pointOf(x = 1, y = 1) + pointOf(x = 2, y = 1)
- * val c = pointOf(x = 3, y = 1)
- * val d = pointOf(x = 4, y = 1)
- * val i = ab.getIntersection(c = c, d = d)
- * assertNull(i)
- *
- *   ^
- *   |
- * 2 -
- *   |    a   b   c   d
- * 1 -   *---*   *---*
- *   |
- * 0 *---|---|---|---|---|--->
- *   0   1   2   3   4   5
- * ```
- * @return [Point] that is the intersection of two lines described by [this] receiver and ([c] and [d]) points;
- * `null` if the lines are parallel;
- * `null` if the lines are collinear
- * @author [Stanley Wintergreen](https://github.com/kepocnhh)
- * @since 0.7.3
- */
-fun Vector.getIntersection(
-    c: Point,
-    d: Point,
-): Point? {
-    return getIntersection(
-        aX = start.x,
-        aY = start.y,
-        bX = finish.x,
-        bY = finish.y,
-        cX = c.x,
-        cY = c.y,
-        dX = d.x,
-        dY = d.y,
-    )
+fun Iterable<Vector>.lt(
+    xTarget: Double,
+    yTarget: Double,
+    minDistance: Double,
+    points: Int,
+): Boolean {
+    for (vector in this) {
+        val less = vector.getShortestDistance(
+            xTarget = xTarget,
+            yTarget = yTarget,
+        ).lt(
+            other = minDistance,
+            points = points,
+        )
+        if (less) return true
+    }
+    return false
 }
 
-/**
- * Usage:
- * ```
- * val a = pointOf(x = 1, y = 2)
- * val b = pointOf(x = 3, y = 2)
- * val cd = pointOf(x = 2, y = 3) + pointOf(x = 2, y = 1)
- * val i = getIntersection(a = a, b = b, cd = cd)
- * assertNotNull(i)
- * assertEquals(2.0, i.x)
- * assertEquals(2.0, i.y)
- *
- *   ^
- *   |
- * 4 -
- *   |        c
- * 3 -       *
- *   |    a  |i   b
- * 2 -   *---*---*
- *   |       |d
- * 1 -       *
- *   |
- * 0 *---|---|---|---|--->
- *   0   1   2   3   4
- * ```
- *
- * Special case:
- * ```
- * val a = pointOf(x = 2, y = 3)
- * val b = pointOf(x = 4, y = 3)
- * val cd = pointOf(x = 1, y = 1) + pointOf(x = 3, y = 1)
- * val i = getIntersection(a = a, b = b, cd = cd)
- * assertNull(i)
- *
- *   ^
- *   |        a       b
- * 3 -       *-------*
- *   |
- * 2 -
- *   |    c       d
- * 1 -   *-------*
- *   |
- * 0 *---|---|---|---|--->
- *   0   1   2   3   4
- * ```
- *
- * Special case:
- * ```
- * val a = pointOf(x = 1, y = 1)
- * val b = pointOf(x = 2, y = 1)
- * val cd = pointOf(x = 3, y = 1) + pointOf(x = 4, y = 1)
- * val i = getIntersection(a = a, b = b, cd = cd)
- * assertNull(i)
- *
- *   ^
- *   |
- * 2 -
- *   |    a   b   c   d
- * 1 -   *---*   *---*
- *   |
- * 0 *---|---|---|---|---|--->
- *   0   1   2   3   4   5
- * ```
- * @return [Point] that is the intersection of two lines described by the ([a] and [b]) points and [cd] vector;
- * `null` if the lines are parallel;
- * `null` if the lines are collinear
- * @author [Stanley Wintergreen](https://github.com/kepocnhh)
- * @since 0.7.3
- */
-fun getIntersection(
-    a: Point,
-    b: Point,
-    cd: Vector,
-): Point? {
-    return getIntersection(
-        aX = a.x,
-        aY = a.y,
-        bX = b.x,
-        bY = b.y,
-        cX = cd.start.x,
-        cY = cd.start.y,
-        dX = cd.finish.x,
-        dY = cd.finish.y,
-    )
+fun Iterable<Vector>.lt(
+    target: Point,
+    minDistance: Double,
+    points: Int,
+): Boolean {
+    for (vector in this) {
+        val less = vector.getShortestDistance(
+            target = target,
+        ).lt(
+            other = minDistance,
+            points = points,
+        )
+        if (less) return true
+    }
+    return false
 }
-
-// todo closerThan
-// todo closerThan:Iterable
