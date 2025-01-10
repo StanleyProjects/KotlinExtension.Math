@@ -3,6 +3,83 @@ package sp.kx.math
 import sp.kx.math.measure.Measure
 
 /**
+ * Usage:
+ * ```
+ * val foo = pointOf(x = 1.0, y = 2.0)
+ * val bar = foo * 2
+ *
+ *   ^
+ *   |
+ * 4 -       * bar
+ *   |
+ * 3 -
+ *   |
+ * 2 -   * foo
+ *   |
+ * 1 -
+ *   |
+ * 0 +---|---|---|---|--->
+ *   0   1   2   3   4
+ * ```
+ * @return A new [Point] object with [this] receiver's coordinates multiplied by the [value].
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.6.0
+ */
+operator fun Point.times(value: Double): Point {
+    return pointOf(
+        x = x * value,
+        y = y * value,
+    )
+}
+
+// todo doc
+operator fun Point.div(value: Double): Point {
+    return pointOf(
+        x = x / value,
+        y = y / value,
+    )
+}
+
+/**
+ * Usage:
+ * ```
+ * val foo = pointOf(x = 1.0, y = 2.0)
+ * val measure = measureOf(magnitude = 2.0)
+ * val bar = foo * measure
+ *
+ *   ^
+ *   |
+ * 4 -       * bar
+ *   |
+ * 3 -
+ *   |
+ * 2 -   * foo
+ *   |
+ * 1 -
+ *   |
+ * 0 +---|---|---|---|--->
+ *   0   1   2   3   4
+ * ```
+ * @return A new [Point] object with [this] receiver's coordinates transformed by the [measure].
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.8.0
+ */
+operator fun Point.times(measure: Measure<Double, Double>): Point {
+    return pointOf(
+        x = measure.transform(x),
+        y = measure.transform(y),
+    )
+}
+
+// todo doc
+operator fun Point.div(measure: Measure<Double, Double>): Point {
+    return pointOf(
+        x = measure.units(x),
+        y = measure.units(y),
+    )
+}
+
+/**
  * Creates a new [Point] object with a copy of [this] receiver's coordinates with [offset]'s values added to them.
  *
  * Usage:
@@ -92,77 +169,5 @@ operator fun Point.minus(other: Point): Offset {
     return offsetOf(
         dX = x - other.x,
         dY = y - other.y,
-    )
-}
-
-/**
- * Usage:
- * ```
- * val foo = pointOf(x = 1.0, y = 2.0)
- * val bar = foo * 2
- *
- *   ^
- *   |
- * 4 -       * bar
- *   |
- * 3 -
- *   |
- * 2 -   * foo
- *   |
- * 1 -
- *   |
- * 0 +---|---|---|---|--->
- *   0   1   2   3   4
- * ```
- * @return A new [Point] object with [this] receiver's coordinates multiplied by the [value].
- * @author [Stanley Wintergreen](https://github.com/kepocnhh)
- * @since 0.6.0
- */
-operator fun Point.times(value: Double): Point {
-    return pointOf(
-        x = x * value,
-        y = y * value,
-    )
-}
-
-// todo plus -> times
-/**
- * Usage:
- * ```
- * val foo = pointOf(x = 1.0, y = 2.0)
- * val measure = measureOf(magnitude = 2.0)
- * val bar = foo + measure
- *
- *   ^
- *   |
- * 4 -       * bar
- *   |
- * 3 -
- *   |
- * 2 -   * foo
- *   |
- * 1 -
- *   |
- * 0 +---|---|---|---|--->
- *   0   1   2   3   4
- * ```
- * @return A new [Point] object with [this] receiver's coordinates transformed by the [measure].
- * @author [Stanley Wintergreen](https://github.com/kepocnhh)
- * @since 0.6.0
- */
-operator fun Point.plus(
-    measure: Measure<Double, Double>,
-): Point {
-    return pointOf(
-        x = measure.transform(x),
-        y = measure.transform(y),
-    )
-}
-
-// todo minus -> div
-operator fun Point.minus(measure: Measure<Double, Double>): Point {
-    return pointOf(
-        x = measure.units(x),
-        y = measure.units(y),
     )
 }
