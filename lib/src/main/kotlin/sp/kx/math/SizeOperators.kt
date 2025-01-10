@@ -23,6 +23,7 @@ operator fun Size.plus(other: Size): Size {
     )
 }
 
+// todo plus -> times
 operator fun Size.plus(measure: Measure<Double, Double>): Size {
     return sizeOf(
         width = measure.transform(width),
@@ -30,6 +31,7 @@ operator fun Size.plus(measure: Measure<Double, Double>): Size {
     )
 }
 
+// todo minus -> div
 operator fun Size.minus(measure: Measure<Double, Double>): Size {
     return sizeOf(
         width = measure.units(width),

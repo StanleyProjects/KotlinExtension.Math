@@ -125,6 +125,7 @@ operator fun Point.times(value: Double): Point {
     )
 }
 
+// todo plus -> times
 /**
  * Usage:
  * ```
@@ -158,6 +159,7 @@ operator fun Point.plus(
     )
 }
 
+// todo minus -> div
 operator fun Point.minus(measure: Measure<Double, Double>): Point {
     return pointOf(
         x = measure.units(x),

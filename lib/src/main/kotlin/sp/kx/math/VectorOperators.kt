@@ -69,6 +69,7 @@ operator fun Vector.times(value: Double): Vector {
     )
 }
 
+// todo plus -> times
 /**
  * Usage:
  * ```
@@ -101,3 +102,5 @@ operator fun Vector.plus(
         finish = pointOf(x = measure.transform(finish.x), y = measure.transform(finish.y)),
     )
 }
+
+// todo Vector / Measure<Double, Double>

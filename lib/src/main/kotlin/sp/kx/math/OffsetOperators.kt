@@ -60,6 +60,7 @@ operator fun Offset.minus(other: Offset): Offset {
     )
 }
 
+// todo plus -> times
 operator fun Offset.plus(measure: Measure<Double, Double>): Offset {
     return offsetOf(
         dX = measure.transform(dX),
@@ -67,6 +68,7 @@ operator fun Offset.plus(measure: Measure<Double, Double>): Offset {
     )
 }
 
+// todo minus -> div
 operator fun Offset.minus(measure: Measure<Double, Double>): Offset {
     return offsetOf(
         dX = measure.units(dX),

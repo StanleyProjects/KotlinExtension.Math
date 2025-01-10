@@ -166,8 +166,6 @@ fun getShortestDistance(
     )
 }
 
-// todo closerThan
-
 /**
  * The function calculates the shortest [Point] from point to segment.
  * It is up to the segment, and not the [Point] of the perpendicular to the straight line!

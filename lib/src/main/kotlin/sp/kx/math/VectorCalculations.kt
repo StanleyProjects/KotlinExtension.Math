@@ -582,3 +582,6 @@ fun getIntersection(
         dY = cd.finish.y,
     )
 }
+
+// todo closerThan
+// todo closerThan:Iterable
