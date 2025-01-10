@@ -2,6 +2,7 @@ package sp.kx.math
 
 import sp.kx.math.measure.Measure
 
+// todo doc
 operator fun Size.times(value: Double): Size {
     return sizeOf(
         width = width * value,
@@ -9,6 +10,7 @@ operator fun Size.times(value: Double): Size {
     )
 }
 
+// todo doc
 operator fun Size.div(value: Double): Size {
     return sizeOf(
         width = width / value,
@@ -16,6 +18,23 @@ operator fun Size.div(value: Double): Size {
     )
 }
 
+// todo doc
+operator fun Size.times(measure: Measure<Double, Double>): Size {
+    return sizeOf(
+        width = measure.transform(width),
+        height = measure.transform(height),
+    )
+}
+
+// todo doc
+operator fun Size.div(measure: Measure<Double, Double>): Size {
+    return sizeOf(
+        width = measure.units(width),
+        height = measure.units(height),
+    )
+}
+
+// todo doc
 operator fun Size.plus(other: Size): Size {
     return sizeOf(
         width = width + other.width,
@@ -23,18 +42,10 @@ operator fun Size.plus(other: Size): Size {
     )
 }
 
-// todo plus -> times
-operator fun Size.plus(measure: Measure<Double, Double>): Size {
+// todo doc
+operator fun Size.minus(other: Size): Size {
     return sizeOf(
-        width = measure.transform(width),
-        height = measure.transform(height),
-    )
-}
-
-// todo minus -> div
-operator fun Size.minus(measure: Measure<Double, Double>): Size {
-    return sizeOf(
-        width = measure.units(width),
-        height = measure.units(height),
+        width = width - other.width,
+        height = height - other.height,
     )
 }
