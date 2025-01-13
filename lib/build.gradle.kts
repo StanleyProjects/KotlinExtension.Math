@@ -55,9 +55,17 @@ tasks.getByName<KotlinCompile>("compileTestKotlin") {
     kotlinOptions.jvmTarget = Version.jvmTarget
 }
 
+sourceSets.create("jmh") {
+    project.kotlin.target.compilations.also {
+        it[name].associateWith(it["main"])
+    }
+}
+
 dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-api:${Version.jupiter}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${Version.jupiter}")
+    "jmhImplementation"("org.openjdk.jmh:jmh-core:${Version.jmh}")
+    "jmhImplementation"("org.openjdk.jmh:jmh-generator-bytecode:${Version.jmh}")
 }
 
 fun Test.getExecutionData(): File {
@@ -110,6 +118,36 @@ task<JacocoCoverageVerification>("checkCoverage") {
     }
     classDirectories.setFrom(taskCoverageReport.classDirectories)
     executionData(taskCoverageReport.executionData)
+}
+
+project.kotlin.target.compilations.getByName("jmh") {
+    val issuer = name
+    val dir = buildDir().dir("${issuer}Generated")
+    val outputSourceDir = dir.asFile("sources")
+    val outputResourceDir = dir.asFile("resources")
+    val outputClassesDir = dir.dir("classes")
+    val generatorType = "default"
+    val generators = output.classesDirs.map {
+        val compiledBytecodePath = it.absolutePath
+        // Usage: generator <compiled-bytecode-dir> <output-source-dir> <output-resource-dir> [generator-type]
+        task<JavaExec>("${issuer}RunBytecodeGenerator${compiledBytecodePath.hashCode()}") {
+            dependsOn("classes")
+            mainClass.set("org.openjdk.jmh.generators.bytecode.JmhBytecodeGenerator")
+            classpath = sourceSets[issuer].runtimeClasspath
+            args(
+                compiledBytecodePath,
+                outputSourceDir.absolutePath,
+                outputResourceDir.absolutePath,
+                generatorType
+            )
+        }
+    }
+    val compileGeneratedTask = task<JavaCompile>("${issuer}CompileGenerated") {
+        dependsOn(generators)
+        classpath = sourceSets[issuer].runtimeClasspath
+        source(outputSourceDir)
+        destinationDirectory.set(outputClassesDir)
+    }
 }
 
 "unstable".also { variant ->
