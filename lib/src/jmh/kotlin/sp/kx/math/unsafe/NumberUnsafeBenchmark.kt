@@ -7,14 +7,22 @@ import org.openjdk.jmh.annotations.Scope
 import org.openjdk.jmh.annotations.Setup
 import org.openjdk.jmh.annotations.State
 import org.openjdk.jmh.infra.Blackhole
-import kotlin.math.absoluteValue
 import java.math.BigDecimal
-import java.math.BigInteger
-import java.math.RoundingMode
+import kotlin.math.absoluteValue
 
 @State(Scope.Benchmark)
 internal open class NumberUnsafeBenchmark {
-    @Param(value = ["8000", "16000", "32000"])
+    @Param(
+        value = [
+//            "4000",
+            "8000",
+//            "16000",
+            "32000",
+//            "64000",
+            "96000",
+//            "128000",
+        ],
+    )
     var size: Int = 0
 
     private lateinit var doubles: List<Pair<Double, Double>>
@@ -46,26 +54,73 @@ internal open class NumberUnsafeBenchmark {
         for (index in doubles.indices) {
             val (d1, d2) = doubles[index]
             for (points in 1..16) {
-                val diff = BigDecimal(d1).subtract(BigDecimal(d2))
-                val expected = diff
-                    .scaleByPowerOfTen(points)
-                    .setScale(1, RoundingMode.HALF_EVEN)
-                    .toBigInteger()
-                    .equals(BigInteger.ZERO)
-                val message = """
-                    size: $size
-                    index: $index
-                    d1: $d1
-                    d2: $d2
-                    points: $points
-                    diff: $diff
-                """.trimIndent()
                 val actual = try {
                     eq(it = d1, other = d2, points = points)
                 } catch (e: Throwable) {
+                    val diff = BigDecimal(d1).subtract(BigDecimal(d2))
+                    val message = """
+                        size: $size
+                        index: $index
+                        d1: $d1
+                        d2: $d2
+                        points: $points
+                        diff: $diff
+                    """.trimIndent()
                     throw IllegalStateException(message, e)
                 }
-                check(expected == actual) { message }
+                results[index] = actual
+            }
+        }
+        hole.consume(results)
+    }
+
+    @Benchmark
+    fun lt(hole: Blackhole) {
+        val results = mutableMapOf<Int, Boolean>()
+        for (index in doubles.indices) {
+            val (d1, d2) = doubles[index]
+            for (points in 1..16) {
+                val actual = try {
+                    lt(it = d1, other = d2, points = points)
+                } catch (e: Throwable) {
+                    val diff = BigDecimal(d1).subtract(BigDecimal(d2))
+                    val message = """
+                        size: $size
+                        index: $index
+                        d1: $d1
+                        d2: $d2
+                        points: $points
+                        diff: $diff
+                    """.trimIndent()
+                    throw IllegalStateException(message, e)
+                }
+                results[index] = actual
+            }
+        }
+        hole.consume(results)
+    }
+
+    @Benchmark
+    fun gt(hole: Blackhole) {
+        val results = mutableMapOf<Int, Boolean>()
+        for (index in doubles.indices) {
+            val (d1, d2) = doubles[index]
+            for (points in 1..16) {
+                val actual = try {
+                    gt(it = d1, other = d2, points = points)
+                } catch (e: Throwable) {
+                    val diff = BigDecimal(d1).subtract(BigDecimal(d2))
+                    val message = """
+                        size: $size
+                        index: $index
+                        d1: $d1
+                        d2: $d2
+                        points: $points
+                        diff: $diff
+                    """.trimIndent()
+                    throw IllegalStateException(message, e)
+                }
+                results[index] = actual
             }
         }
         hole.consume(results)

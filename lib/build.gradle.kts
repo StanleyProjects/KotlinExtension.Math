@@ -180,6 +180,8 @@ project.kotlin.target.compilations.getByName("jmh") {
             "-wi=$wi",
             "-w=${wt.inWholeMilliseconds}ms",
             "-bm=$mode",
+//            "-prof=cl",
+//            "-prof=comp",
             "-rf=$format",
             "-rff=${output.absolutePath}",
             "-t=max",

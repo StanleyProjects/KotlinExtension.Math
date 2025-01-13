@@ -1,10 +1,6 @@
 package sp.kx.math.unsafe
 
-import java.math.BigDecimal
-import java.math.BigInteger
-import java.math.RoundingMode
 import java.util.Locale
-import kotlin.math.pow
 
 internal fun toString(number: Double, points: Int, locale: Locale): String {
     return java.lang.String.format(locale, "%.${points}f", number)
@@ -15,21 +11,13 @@ internal fun toString(number: Double, total: Int, points: Int, locale: Locale): 
 }
 
 internal fun eq(it: Double, other: Double, points: Int): Boolean {
-    return BigDecimal(it - other)
-        .scaleByPowerOfTen(points)
-        .setScale(1, RoundingMode.HALF_EVEN)
-        .toBigInteger()
-        .equals(BigInteger.ZERO)
+    return java.lang.Math.round((it - other) * java.lang.Math.pow(10.0, points.toDouble())) == 0L
 }
 
 internal fun gt(it: Double, other: Double, points: Int): Boolean {
-    return BigDecimal((it - other) * 10.0.pow(points))
-        .setScale(1, RoundingMode.HALF_EVEN)
-        .toLong() > 0L
+    return java.lang.Math.round((it - other) * java.lang.Math.pow(10.0, points.toDouble())) > 0
 }
 
 internal fun lt(it: Double, other: Double, points: Int): Boolean {
-    return BigDecimal((it - other) * 10.0.pow(points))
-        .setScale(1, RoundingMode.HALF_EVEN)
-        .toLong() < 0L
+    return java.lang.Math.round((it - other) * java.lang.Math.pow(10.0, points.toDouble())) < 0
 }
