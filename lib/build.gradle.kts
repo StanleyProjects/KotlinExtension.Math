@@ -139,7 +139,7 @@ project.kotlin.target.compilations.getByName("jmh") {
                 compiledBytecodePath,
                 outputSourceDir.absolutePath,
                 outputResourceDir.absolutePath,
-                generatorType
+                generatorType,
             )
         }
     }
@@ -151,14 +151,15 @@ project.kotlin.target.compilations.getByName("jmh") {
     }
     task<JavaExec>("runBenchmark") {
         dependsOn(compileGeneratedTask)
+        val reports = buildDir().asFile("reports/jmh")
         doFirst {
-            buildDir().asFile("reports/jmh").mkdirs()
+            reports.mkdirs()
         }
         mainClass.set("org.openjdk.jmh.Main")
         classpath(
             sourceSets[issuer].runtimeClasspath,
             outputResourceDir,
-            outputClassesDir
+            outputClassesDir,
         )
         val timeout = 10.seconds
         val iterations = 1
@@ -168,6 +169,8 @@ project.kotlin.target.compilations.getByName("jmh") {
         val wi = 1
         val wt = 1.seconds
         val mode = "AverageTime"
+        val format = "text"
+        val output = reports.resolve("result.txt")
         args(
             "-to=${timeout.inWholeMilliseconds}ms",
             "-f=$forks",
@@ -176,7 +179,10 @@ project.kotlin.target.compilations.getByName("jmh") {
             "-wf=$wf",
             "-wi=$wi",
             "-w=${wt.inWholeMilliseconds}ms",
-            "-bm=$mode"
+            "-bm=$mode",
+            "-rf=$format",
+            "-rff=${output.absolutePath}",
+            "-t=max",
         )
     }
 }
