@@ -18,6 +18,7 @@ import sp.gx.core.filled
 import sp.gx.core.getByName
 import sp.gx.core.resolve
 import sp.gx.core.task
+import kotlin.time.Duration.Companion.seconds
 
 version = "0.8.0"
 
@@ -147,6 +148,36 @@ project.kotlin.target.compilations.getByName("jmh") {
         classpath = sourceSets[issuer].runtimeClasspath
         source(outputSourceDir)
         destinationDirectory.set(outputClassesDir)
+    }
+    task<JavaExec>("runBenchmark") {
+        dependsOn(compileGeneratedTask)
+        doFirst {
+            buildDir().asFile("reports/jmh").mkdirs()
+        }
+        mainClass.set("org.openjdk.jmh.Main")
+        classpath(
+            sourceSets[issuer].runtimeClasspath,
+            outputResourceDir,
+            outputClassesDir
+        )
+        val timeout = 10.seconds
+        val iterations = 1
+        val time = 1.seconds
+        val forks = 1
+        val wf = 1
+        val wi = 1
+        val wt = 1.seconds
+        val mode = "AverageTime"
+        args(
+            "-to=${timeout.inWholeMilliseconds}ms",
+            "-f=$forks",
+            "-i=$iterations",
+            "-r=${time.inWholeMilliseconds}ms",
+            "-wf=$wf",
+            "-wi=$wi",
+            "-w=${wt.inWholeMilliseconds}ms",
+            "-bm=$mode"
+        )
     }
 }
 
