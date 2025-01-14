@@ -104,8 +104,9 @@ internal class VectorConstructorTest {
             Assertions.assertEquals(1.2 - length, vector.finish.x)
             Assertions.assertEquals(3.4, vector.finish.y, 0.000000000000001)
             Assertions.assertNotEquals(3.4, vector.finish.y, 0.0000000000000001)
-            Assertions.assertTrue(vector.finish.y.eq(3.4, points = 15))
-            Assertions.assertFalse(vector.finish.y.eq(3.4, points = 16))
+            assert(it = vector.finish.y, other = 3.4, points = 14, expected = true)
+            assert(it = vector.finish.y, other = 3.4, points = 15, expected = false)
+            assert(it = vector.finish.y, other = 3.4, points = 16, expected = false)
         }
     }
 
@@ -124,6 +125,20 @@ internal class VectorConstructorTest {
             val vector: Vector = vectorOf(start = foo, length = length)
             Assertions.assertEquals(1.2 + length, vector.finish.x)
             Assertions.assertEquals(3.4, vector.finish.y)
+        }
+    }
+
+    companion object {
+        private fun assert(it: Double, other: Double, points: Int, expected: Boolean) {
+            val actual = it.eq(other = other, points = points)
+            val message = """
+                this: $it (${it.toString(24)})
+                that: $other (${other.toString(24)})
+                points: $points
+                expected: $expected
+                actual: $actual
+            """.trimIndent()
+            Assertions.assertEquals(expected, actual, message)
         }
     }
 }

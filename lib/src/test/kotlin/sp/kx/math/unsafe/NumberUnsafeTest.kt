@@ -199,8 +199,6 @@ internal class NumberUnsafeTest {
             for (points in 1..16) {
                 val b1 = BigDecimal.valueOf(d1)
                 val b2 = BigDecimal.valueOf(d2)
-                val p1 = b1.scaleByPowerOfTen(points)
-                val p2 = b2.scaleByPowerOfTen(points)
                 val s1 = b1.setScale(points, RoundingMode.DOWN)
                 val s2 = b2.setScale(points, RoundingMode.DOWN)
                 val e = java.lang.Math.pow(10.0, points.toDouble())
@@ -213,10 +211,6 @@ internal class NumberUnsafeTest {
                     index: $index
                     d1: $d1 (${d1.toString(24)})
                     d2: $d2 (${d2.toString(24)})
-                    p1: $p1
-                    p2: $p2
-                    p1: ${p1.divideAndRemainder(BigDecimal.ONE).toList()}
-                    p2: ${p2.divideAndRemainder(BigDecimal.ONE).toList()}
                     s1: $s1
                     s2: $s2
                     e: $e (${e.toString(24)})
