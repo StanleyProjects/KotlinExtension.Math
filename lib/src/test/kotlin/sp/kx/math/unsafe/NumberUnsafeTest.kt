@@ -20,27 +20,32 @@ internal class NumberUnsafeTest {
             val l2 = salt[(number - 1).absoluteValue % salt.size].toLong()
             val p1 = l1 * hashCode * 1.shl(12) / size + 13 - index
             val p2 = l2 * hashCode * 1.shl(16) / size + 13 - index
-            val d = p1.toDouble() / p2
-            val d1 = d - d.toLong() + (index % 4) * (if (index % 2 == 0) 1 else -1)
-            val d2 = d1 - java.lang.Math.pow(10.0, -(index % 16).plus(1).toDouble())
+            val fraction = p1.toDouble() / p2
+            val d = fraction - fraction.toLong()
+            val d1 = d + (index % 4) * (if (index % 4 == 0) -1 else 1)
+            val e = 1.0 / java.lang.Math.pow(10.0, (index % 16).toDouble())
+            val d2 = d1 * (if (index % 5 == 0) -1 else 1) + e
             for (points in 1..16) {
-                val diff = BigDecimal(d1).subtract(BigDecimal(d2))
-                val scaled = diff.toDouble() * java.lang.Math.pow(10.0, points.toDouble())
-                val round = java.lang.Math.round(scaled)
-                val expected = diff
+                val diff = d1 - d2
+                val de = diff * java.lang.Math.pow(10.0, points.toDouble())
+                val b1 = BigDecimal.valueOf(d1)
                     .scaleByPowerOfTen(points)
-                    .setScale(0, RoundingMode.HALF_EVEN)
                     .toBigInteger()
-                    .equals(BigInteger.ZERO)
+                val b2 = BigDecimal.valueOf(d2)
+                    .scaleByPowerOfTen(points)
+                    .toBigInteger()
+                val expected = b1 == b2
                 val message = """
                     size: $size
                     index: $index
-                    d1: $d1
-                    d2: $d2
+                    e: $e (${e.toString(24)})
+                    d1: $d1 (${d1.toString(24)})
+                    d2: $d2 (${d2.toString(24)})
+                    b1: $b1
+                    b2: $b2
                     points: $points
-                    diff: $diff
-                    scaled: $scaled (${scaled.toString(16)})
-                    round: $round (${round.toString(16)})
+                    diff: $diff (${diff.toString(24)})
+                    de: $de (${de.toString(24)})
                 """.trimIndent()
                 val actual = try {
                     eq(it = d1, other = d2, points = points)
@@ -55,6 +60,12 @@ internal class NumberUnsafeTest {
     @Test
     fun eqTest() {
         listOf(
+            Triple(3.0624999999865143, 3.0634999999865142, 3),
+            Triple(0.06944444448339876, -0.06944443448339876, 2),
+            Triple(0.1, 0.09, 1),
+            Triple(0.11, 0.19, 2),
+            Triple(5.6, 5.67, 2),
+            Triple(5.59, 5.67, 1),
             Triple(0.12, 0.10, 2),
             Triple(
                 0.06944444443148837,
@@ -66,29 +77,55 @@ internal class NumberUnsafeTest {
                 2.069444444445907,
                 15,
             ),
-        ).forEach { (v1, v2, border) ->
+            Triple(
+                2.069444444445907,
+                2.069444444445908,
+                15,
+            ),
+            Triple(
+                2.069444444445079,
+                2.06944444444507,
+                15,
+            ),
+            Triple(
+                2.122499999991322,
+                2.1225009999913222,
+                4,
+            ),
+            Triple(
+                0.1262499999828202,
+                0.8737500000171798,
+                1,
+            ),
+            Triple(
+                4.56444444,
+                4.56,
+                3,
+            ),
+        ).forEach { (d1, d2, border) ->
             for (points in 1..16) {
-                val diff = BigDecimal(v1).subtract(BigDecimal(v2))
-                val ds = diff.scaleByPowerOfTen(points)
-                val scaled = diff.toDouble() * java.lang.Math.pow(10.0, points.toDouble())
-                val round = java.lang.Math.round(scaled)
-                val dr = ds.setScale(0, RoundingMode.HALF_EVEN)
-                val di = dr.toBigInteger()
-                val expected = di == BigInteger.ZERO
+                val b1 = BigDecimal(d1)
+                val b2 = BigDecimal(d2)
+                val s1 = b1.scaleByPowerOfTen(points)
+                val s2 = b2.scaleByPowerOfTen(points)
+                val i1 = s1.toBigInteger()
+                val i2 = s2.toBigInteger()
+                val expected = points < border
                 val message = """
-                    v1: $v1
-                    v2: $v2
+                    d1: $d1 (${d1.toString(24)})
+                    d2: $d2 (${d2.toString(24)})
+                    b1: $b1
+                    b2: $b2
+                    s1: $s1
+                    s2: $s2
+                    i1: $i1
+                    i2: $i2
                     border: $border
                     points: $points
-                    diff: $diff
-                    ds: $ds
-                    dr: $dr
-                    di: $di
-                    scaled: $scaled (${scaled.toString(16)})
-                    round: $round (${round.toString(16)})
+                    expected: $expected
                 """.trimIndent()
                 val actual = try {
-                    eq(it = v1, other = v2, points = points)
+                    eq(it = d1, other = d2, points = points)
                 } catch (e: Throwable) {
                     throw IllegalStateException(message, e)
                 }

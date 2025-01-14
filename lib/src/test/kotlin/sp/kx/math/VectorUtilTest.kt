@@ -27,21 +27,15 @@ internal class VectorUtilTest {
 
     @Test
     fun eqTest() {
-        val actual = pointOf(x = 1.23, y = 4.56) + pointOf(x = 7.89, y = 10.1)
-        (pointOf(x = 1.2, y = 4.5) + pointOf(x = 7.8, y = 10.1)).also { expected: Vector ->
-            Assertions.assertTrue(actual.eq(other = expected, points = 1))
-        }
-        (pointOf(x = 1.24, y = 4.54) + pointOf(x = 7.84, y = 10.14)).also { expected: Vector ->
-            Assertions.assertTrue(actual.eq(other = expected, points = 1))
-        }
-        (pointOf(x = 1.23, y = 4.56) + pointOf(x = 7.89, y = 10.1)).also { expected: Vector ->
-            Assertions.assertTrue(actual.eq(other = expected, points = 2))
-        }
-        (pointOf(x = 1.24444444, y = 4.54444444) + pointOf(x = 7.84444444, y = 10.14444444)).also { expected: Vector ->
-            Assertions.assertTrue(actual.eq(other = expected, points = 1))
-        }
-        (pointOf(x = 1.23444444, y = 4.56444444) + pointOf(x = 7.89444444, y = 10.10444444)).also { expected: Vector ->
-            Assertions.assertTrue(actual.eq(other = expected, points = 2))
+        val other = pointOf(x = 1.23, y = 4.56) + pointOf(x = 7.89, y = 10.1)
+        listOf(
+            Pair(pointOf(x = 1.2, y = 4.5) + pointOf(x = 7.8, y = 10.1), 1),
+            Pair(pointOf(x = 1.24, y = 4.54) + pointOf(x = 7.84, y = 10.14), 1),
+            Pair(pointOf(x = 1.23, y = 4.56) + pointOf(x = 7.89, y = 10.1), 2),
+            Pair(pointOf(x = 1.24444444, y = 4.54444444) + pointOf(x = 7.84444444, y = 10.14444444), 1),
+            Pair(pointOf(x = 1.23444444, y = 4.56444444) + pointOf(x = 7.89444444, y = 10.10444444), 2),
+        ).forEach { (it: Vector, points: Int) ->
+            assert(it = it, other = other, points = points, expected = true)
         }
     }
 
@@ -208,5 +202,56 @@ internal class VectorUtilTest {
         Assertions.assertEquals(2.0, foo.start.y)
         Assertions.assertEquals(3.0, foo.finish.x)
         Assertions.assertEquals(4.0, foo.finish.y)
+    }
+
+    companion object {
+        private fun assert(it: Double, other: Double, points: Int, expected: Boolean, tag: String) {
+            val diff = it - other
+            val e = java.lang.Math.pow(10.0, points.toDouble())
+            val de = diff * e
+            val r1 = (it * e).toLong()
+            val r2 = (other * e).toLong()
+            val round = java.lang.Math.round(diff * e)
+            val floor = java.lang.Math.floor(diff * e).toLong()
+            val ceil = java.lang.Math.ceil(diff * e).toLong()
+            val message = """
+                tag: $tag
+                this: $it (${it.toString(24)})
+                that: $other (${other.toString(24)})
+                diff: $diff (${diff.toString(24)})
+                e: $e (${e.toString(24)})
+                d * e: $de (${de.toString(24)})
+                r1: $r1
+                r2: $r2
+                round: $round
+                floor: $floor
+                ceil: $ceil
+                points: $points
+            """.trimIndent()
+            Assertions.assertEquals(expected, it.eq(other = other, points = points), message)
+        }
+
+        private fun assert(it: Point, other: Point, points: Int, expected: Boolean, tag: String) {
+            assert(it = it.x, other = other.x, points = points, expected = expected, tag = "$tag:x")
+            assert(it = it.y, other = other.y, points = points, expected = expected, tag = "$tag:y")
+            val message = """
+                tag: $tag
+                this: $it
+                that: $other
+                points: $points
+            """.trimIndent()
+            Assertions.assertEquals(expected, it.eq(other = other, points = points), message)
+        }
+
+        private fun assert(it: Vector, other: Vector, points: Int, expected: Boolean) {
+            assert(it = it.start, other = other.start, points = points, expected = expected, tag = "start")
+            assert(it = it.finish, other = other.finish, points = points, expected = expected, tag = "finish")
+            val message = """
+                this: $it
+                that: $other
+                points: $points
+            """.trimIndent()
+            Assertions.assertEquals(expected, it.eq(other = other, points = points), message)
+        }
     }
 }
