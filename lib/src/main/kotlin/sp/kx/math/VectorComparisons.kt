@@ -8,6 +8,10 @@ fun Vector.lt(
     points: Int,
 ): Boolean {
     return getShortestDistance(
+        xStart = start.x,
+        yStart = start.y,
+        xFinish = finish.x,
+        yFinish = finish.y,
         xTarget = xTarget,
         yTarget = yTarget,
     ).lt(other = minDistance, points = points)
@@ -19,7 +23,14 @@ fun Vector.lt(
     minDistance: Double,
     points: Int,
 ): Boolean {
-    return getShortestDistance(target = target).lt(other = minDistance, points = points)
+    return getShortestDistance(
+        xStart = start.x,
+        yStart = start.y,
+        xFinish = finish.x,
+        yFinish = finish.y,
+        xTarget = target.x,
+        yTarget = target.y,
+    ).lt(other = minDistance, points = points)
 }
 
 // todo doc
@@ -29,17 +40,19 @@ fun Iterable<Vector>.lt(
     minDistance: Double,
     points: Int,
 ): Boolean {
-    for (vector in this) {
-        val less = vector.getShortestDistance(
+    return any { vector ->
+        getShortestDistance(
+            xStart = vector.start.x,
+            yStart = vector.start.y,
+            xFinish = vector.finish.x,
+            yFinish = vector.finish.y,
             xTarget = xTarget,
             yTarget = yTarget,
         ).lt(
             other = minDistance,
             points = points,
         )
-        if (less) return true
     }
-    return false
 }
 
 // todo doc
@@ -48,14 +61,17 @@ fun Iterable<Vector>.lt(
     minDistance: Double,
     points: Int,
 ): Boolean {
-    for (vector in this) {
-        val less = vector.getShortestDistance(
-            target = target,
+    return any { vector ->
+        getShortestDistance(
+            xStart = vector.start.x,
+            yStart = vector.start.y,
+            xFinish = vector.finish.x,
+            yFinish = vector.finish.y,
+            xTarget = target.x,
+            yTarget = target.y,
         ).lt(
             other = minDistance,
             points = points,
         )
-        if (less) return true
     }
-    return false
 }

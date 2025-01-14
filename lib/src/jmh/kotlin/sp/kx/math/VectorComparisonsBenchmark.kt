@@ -11,7 +11,7 @@ import org.openjdk.jmh.infra.Blackhole
 @State(Scope.Benchmark)
 internal open class VectorComparisonsBenchmark {
     private class VectorComparisons(
-        val vector: Vector,
+        val vectors: Iterable<Vector>,
         val xTarget: Double,
         val yTarget: Double,
         val minDistance: Double,
@@ -33,11 +33,13 @@ internal open class VectorComparisonsBenchmark {
         val accuracy = (1..16).toList()
         val distances = listOf(
             0.0,
+            0.1,
             0.5,
             1.0,
             1.5,
             2.0,
             2.5,
+            3.0,
         )
         val vectors = listOf(
             vectorOf(
@@ -72,29 +74,30 @@ internal open class VectorComparisonsBenchmark {
             ),
         )
         val targets = listOf(
+            -3.0 to 3.0,
             -2.0 to 2.0,
             -1.0 to 1.0,
+            0.0 to 4.0,
             1.0 to 1.0,
             4.0 to 2.0,
             8.0 to 0.0,
             5.0 to -1.0,
             3.0 to -2.0,
+            4.0 to -4.0,
         )
         val result = mutableListOf<VectorComparisons>()
         for (index in 0 until size) {
             val multiplier = 1.0 + index
-            vectors.forEach { vector ->
-                distances.forEach { minDistance ->
-                    accuracy.forEach { points ->
-                        targets.forEach { (xTarget, yTarget) ->
-                            result += VectorComparisons(
-                                vector = vector.map { it * multiplier },
-                                xTarget = xTarget * multiplier,
-                                yTarget = yTarget * multiplier,
-                                minDistance = minDistance * multiplier,
-                                points = points,
-                            )
-                        }
+            distances.forEach { minDistance ->
+                accuracy.forEach { points ->
+                    targets.forEach { (xTarget, yTarget) ->
+                        result += VectorComparisons(
+                            vectors = vectors,
+                            xTarget = xTarget * multiplier,
+                            yTarget = yTarget * multiplier,
+                            minDistance = minDistance * multiplier,
+                            points = points,
+                        )
                     }
                 }
             }
@@ -111,7 +114,23 @@ internal open class VectorComparisonsBenchmark {
     fun lt(hole: Blackhole) {
         val results = mutableMapOf<Int, Boolean>()
         comparisons.forEachIndexed { index, it ->
-            results[index] = it.vector.lt(
+            it.vectors.forEach { vector ->
+                results[index] = vector.lt(
+                    xTarget = it.xTarget,
+                    yTarget = it.yTarget,
+                    minDistance = it.minDistance,
+                    points = it.points,
+                )
+            }
+        }
+        hole.consume(results)
+    }
+
+    @Benchmark
+    fun ltIterable(hole: Blackhole) {
+        val results = mutableMapOf<Int, Boolean>()
+        comparisons.forEachIndexed { index, it ->
+            results[index] = it.vectors.lt(
                 xTarget = it.xTarget,
                 yTarget = it.yTarget,
                 minDistance = it.minDistance,
