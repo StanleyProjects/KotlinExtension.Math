@@ -56,3 +56,14 @@ dependencies {
 ```
 
 ---
+
+### Run benchmark
+```
+$ gradle lib:runBenchmark
+```
+or
+```
+$ gradle lib:runBenchmark -Pbenchmarks='VectorComparisonsTest'
+```
+
+---

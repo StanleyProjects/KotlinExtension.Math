@@ -150,6 +150,7 @@ project.kotlin.target.compilations.getByName("jmh") {
         destinationDirectory.set(outputClassesDir)
     }
     task<JavaExec>("runBenchmark") {
+        val benchmarks: String? by project
         dependsOn(compileGeneratedTask)
         val reports = buildDir().asFile("reports/jmh")
         doFirst {
@@ -172,6 +173,7 @@ project.kotlin.target.compilations.getByName("jmh") {
         val format = "text"
         val output = reports.resolve("result.txt")
         args(
+            benchmarks.orEmpty(),
             "-to=${timeout.inWholeMilliseconds}ms",
             "-f=$forks",
             "-i=$iterations",
