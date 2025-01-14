@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test
 
 internal class VectorComparisonsTest {
     @Test
-    fun ltTest() {
+    fun reachesTest() {
         val vector = vectorOf(
             startX = 0.0,
             startY = 0.0,
@@ -27,7 +27,7 @@ internal class VectorComparisonsTest {
             Triple(3.0, 6, true),
             Triple(3.0, 1, true),
         ).forEach { (minDistance, points, expected) ->
-            val actual = vector.lt(
+            val actual = vector.reaches(
                 xTarget = x,
                 yTarget = y,
                 minDistance = minDistance,
@@ -45,7 +45,7 @@ internal class VectorComparisonsTest {
     }
 
     @Test
-    fun ltPointTest() {
+    fun reachesPointTest() {
         val vector = vectorOf(
             startX = 0.0,
             startY = 0.0,
@@ -69,7 +69,7 @@ internal class VectorComparisonsTest {
             Triple(3.0, 6, true),
             Triple(3.0, 1, true),
         ).forEach { (minDistance, points, expected) ->
-            val actual = vector.lt(
+            val actual = vector.reaches(
                 target = target,
                 minDistance = minDistance,
                 points = points,

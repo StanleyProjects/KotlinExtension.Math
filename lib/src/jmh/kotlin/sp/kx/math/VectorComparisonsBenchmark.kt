@@ -111,11 +111,11 @@ internal open class VectorComparisonsBenchmark {
     }
 
     @Benchmark
-    fun lt(hole: Blackhole) {
+    fun reaches(hole: Blackhole) {
         val results = mutableMapOf<Int, Boolean>()
         comparisons.forEachIndexed { index, it ->
             it.vectors.forEach { vector ->
-                results[index] = vector.lt(
+                results[index] = vector.reaches(
                     xTarget = it.xTarget,
                     yTarget = it.yTarget,
                     minDistance = it.minDistance,
