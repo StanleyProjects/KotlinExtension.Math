@@ -145,22 +145,32 @@ internal class NumberUnsafeTest {
             val l2 = salt[(number - 1).absoluteValue % salt.size].toLong()
             val p1 = l1 * hashCode * 1.shl(12) / size + 13 - index
             val p2 = l2 * hashCode * 1.shl(16) / size + 13 - index
-            val d = p1.toDouble() / p2
-            val d1 = d - d.toLong() + (index % 4)
-            val d2 = d1 - java.lang.Math.pow(10.0, -(index % 16).plus(1).toDouble())
+            val fraction = p1.toDouble() / p2
+            val d = fraction - fraction.toLong()
+            val d1 = d + (index % 4) * (if (index % 4 == 0) -1 else 1)
+            val e = 1.0 / java.lang.Math.pow(10.0, (index % 16).toDouble())
+            val d2 = d1 * (if (index % 5 == 0) -1 else 1) + e
             for (points in 1..16) {
-                val diff = BigDecimal(d1).subtract(BigDecimal(d2))
-                val expected = diff
+                val diff = d1 - d2
+                val de = diff * java.lang.Math.pow(10.0, points.toDouble())
+                val b1 = BigDecimal.valueOf(d1)
                     .scaleByPowerOfTen(points)
-                    .setScale(0, RoundingMode.HALF_EVEN)
-                    .toBigInteger() < BigInteger.ZERO
+                    .toBigInteger()
+                val b2 = BigDecimal.valueOf(d2)
+                    .scaleByPowerOfTen(points)
+                    .toBigInteger()
+                val expected = b1 < b2
                 val message = """
                     size: $size
                     index: $index
-                    d1: $d1
-                    d2: $d2
+                    e: $e (${e.toString(24)})
+                    d1: $d1 (${d1.toString(24)})
+                    d2: $d2 (${d2.toString(24)})
+                    b1: $b1
+                    b2: $b2
                     points: $points
-                    diff: $diff
+                    diff: $diff (${diff.toString(24)})
+                    de: $de (${de.toString(24)})
                 """.trimIndent()
                 val actual = try {
                     lt(it = d1, other = d2, points = points)
@@ -187,18 +197,81 @@ internal class NumberUnsafeTest {
             val d1 = d - d.toLong() + (index % 4)
             val d2 = d1 - java.lang.Math.pow(10.0, -(index % 16).plus(1).toDouble())
             for (points in 1..16) {
-                val diff = BigDecimal(d1).subtract(BigDecimal(d2))
-                val expected = diff
-                    .scaleByPowerOfTen(points)
-                    .setScale(0, RoundingMode.HALF_EVEN)
-                    .toBigInteger() > BigInteger.ZERO
+                val b1 = BigDecimal.valueOf(d1)
+                val b2 = BigDecimal.valueOf(d2)
+                val p1 = b1.scaleByPowerOfTen(points)
+                val p2 = b2.scaleByPowerOfTen(points)
+                val s1 = b1.setScale(points, RoundingMode.DOWN)
+                val s2 = b2.setScale(points, RoundingMode.DOWN)
+                val e = java.lang.Math.pow(10.0, points.toDouble())
+                val f1 = d1 * e
+                val f2 = d2 * e
+                val f3 = f1 - f2
+                val expected = s1 > s2
                 val message = """
                     size: $size
                     index: $index
-                    d1: $d1
-                    d2: $d2
+                    d1: $d1 (${d1.toString(24)})
+                    d2: $d2 (${d2.toString(24)})
+                    p1: $p1
+                    p2: $p2
+                    p1: ${p1.divideAndRemainder(BigDecimal.ONE).toList()}
+                    p2: ${p2.divideAndRemainder(BigDecimal.ONE).toList()}
+                    s1: $s1
+                    s2: $s2
+                    e: $e (${e.toString(24)})
+                    f1: $f1 (${f1.toString(24)})
+                    f2: $f2 (${f2.toString(24)})
+                    f3: $f3 (${f3.toString(24)})
                     points: $points
-                    diff: $diff
+                """.trimIndent()
+                val actual = try {
+                    gt(it = d1, other = d2, points = points)
+                } catch (e: Throwable) {
+                    throw IllegalStateException(message, e)
+                }
+                assertEquals(expected, actual, message)
+            }
+        }
+    }
+
+    @Test
+    fun gtTest() {
+        listOf(
+            Triple(2.1122685185095014, 2.1122685184995014, 10),
+            Triple(2.062500000261851, 2.06250000026185, 15),
+            Triple(1.0637755101863098, 1.0537755101863098, 2),
+            Triple(0.03000000007189047, -0.06999999992810954, 2),
+            Triple(0.028698979594767485, -0.07130102040523252, 2),
+        ).forEach { (d1, d2, border) ->
+            for (points in 1..16) {
+                val b1 = BigDecimal.valueOf(d1)
+                val b2 = BigDecimal.valueOf(d2)
+                val p1 = b1.scaleByPowerOfTen(points)
+                val p2 = b2.scaleByPowerOfTen(points)
+                val s1 = b1.setScale(points, RoundingMode.DOWN)
+                val s2 = b2.setScale(points, RoundingMode.DOWN)
+                val expected = points >= border
+                val e = java.lang.Math.pow(10.0, points.toDouble())
+                val f1 = d1 * e
+                val f2 = d2 * e
+                val f3 = f1 - f2
+                val message = """
+                    d1: $d1 (${d1.toString(24)})
+                    d2: $d2 (${d2.toString(24)})
+                    b1: $b1
+                    b2: $b2
+                    p1: $p1
+                    p2: $p2
+                    s1: $s1
+                    s2: $s2
+                    border: $border
+                    points: $points
+                    expected: $expected
+                    e: $e (${e.toString(24)})
+                    f1: $f1 (${f1.toString(24)})
+                    f2: $f2 (${f2.toString(24)})
+                    f3: $f3 (${f3.toString(24)})
                 """.trimIndent()
                 val actual = try {
                     gt(it = d1, other = d2, points = points)
