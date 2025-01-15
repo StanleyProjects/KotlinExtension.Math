@@ -36,9 +36,11 @@ internal open class NumberUnsafeBenchmark {
             val l2 = bytes[(number - 1).absoluteValue % bytes.size].toLong()
             val p1 = l1 * hashCode * 1.shl(12) / size + 13 - index
             val p2 = l2 * hashCode * 1.shl(16) / size + 13 - index
-            val d = p1.toDouble() / p2
-            val d1 = d - d.toLong() + (index % 4)
-            val d2 = d1 - java.lang.Math.pow(10.0, -(index % 16).plus(1).toDouble())
+            val fraction = p1.toDouble() / p2
+            val d = fraction - fraction.toLong()
+            val d1 = d + (index % 4) * (if (index % 4 == 0) -1 else 1)
+            val e = 1.0 / java.lang.Math.pow(10.0, (index % 8).toDouble())
+            val d2 = d1 * (if (index % 5 == 0) -1 else 1) + e * (index % 3)
             d1 to d2
         }
     }
