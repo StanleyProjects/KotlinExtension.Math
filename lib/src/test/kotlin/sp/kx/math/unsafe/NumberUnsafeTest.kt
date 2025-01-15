@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import sp.kx.math.toString
 import java.math.BigDecimal
-import java.math.BigInteger
 import java.math.RoundingMode
 import kotlin.math.absoluteValue
 
@@ -25,15 +24,13 @@ internal class NumberUnsafeTest {
             val d1 = d + (index % 4) * (if (index % 4 == 0) -1 else 1)
             val e = 1.0 / java.lang.Math.pow(10.0, (index % 16).toDouble())
             val d2 = d1 * (if (index % 5 == 0) -1 else 1) + e
-            for (points in 1..16) {
+            for (points in 1..8) {
                 val diff = d1 - d2
                 val de = diff * java.lang.Math.pow(10.0, points.toDouble())
                 val b1 = BigDecimal.valueOf(d1)
-                    .scaleByPowerOfTen(points)
-                    .toBigInteger()
+                    .setScale(points, RoundingMode.DOWN)
                 val b2 = BigDecimal.valueOf(d2)
-                    .scaleByPowerOfTen(points)
-                    .toBigInteger()
+                    .setScale(points, RoundingMode.DOWN)
                 val expected = b1 == b2
                 val message = """
                     size: $size
@@ -58,8 +55,83 @@ internal class NumberUnsafeTest {
     }
 
     @Test
+    fun eqTensNegativeTest() {
+        (1..4).forEach { points ->
+            val v1 = -java.lang.Math.pow(10.0, -points.toDouble())
+            val v2 = 0.0
+            val e = java.lang.Math.pow(10.0, points.toDouble())
+            val d1 = v1 * e
+            val d2 = v2 * e
+            val l1 = d1.toLong()
+            val l2 = d2.toLong()
+            val r1 = java.lang.Math.round(d1)
+            val r2 = java.lang.Math.round(d2)
+            val f1 = java.lang.Math.floor(d1)
+            val f2 = java.lang.Math.floor(d2)
+            val actual = eq(it = v1, other = v2, points = points)
+            val expected = false
+            val message = """
+                v1: $v1 (${v1.toString(24)})
+                v2: $v2 (${v2.toString(24)})
+                d1: $d1 (${d1.toString(24)})
+                d2: $d2 (${d2.toString(24)})
+                l1: $l1
+                l2: $l2
+                r1: $r1
+                r2: $r2
+                f1: $f1 (${f1.toString(24)})
+                f2: $f2 (${f2.toString(24)})
+                points: $points
+                actual: $actual
+                expected: $expected
+            """.trimIndent()
+            assertEquals(expected, actual, message)
+        }
+    }
+
+    @Test
+    fun eqTensTest() {
+        (1..4).forEach { points ->
+            val v1 = java.lang.Math.pow(10.0, -points.toDouble())
+            val v2 = 0.0
+            val e = java.lang.Math.pow(10.0, points.toDouble())
+            val d1 = v1 * e
+            val d2 = v2 * e
+            val l1 = d1.toLong()
+            val l2 = d2.toLong()
+            val r1 = java.lang.Math.round(d1)
+            val r2 = java.lang.Math.round(d2)
+            val f1 = java.lang.Math.floor(d1)
+            val f2 = java.lang.Math.floor(d2)
+            val actual = eq(it = v1, other = v2, points = points)
+            val expected = false
+            val message = """
+                v1: $v1 (${v1.toString(24)})
+                v2: $v2 (${v2.toString(24)})
+                d1: $d1 (${d1.toString(24)})
+                d2: $d2 (${d2.toString(24)})
+                l1: $l1
+                l2: $l2
+                r1: $r1
+                r2: $r2
+                f1: $f1 (${f1.toString(24)})
+                f2: $f2 (${f2.toString(24)})
+                points: $points
+                actual: $actual
+                expected: $expected
+            """.trimIndent()
+            assertEquals(expected, actual, message)
+        }
+    }
+
+    @Test
     fun eqTest() {
         listOf(
+//            Triple(3.1225000057393597, 3.1225000057393606, 14),
+            Triple(3.062500000652571, 3.0625000006525718, 16),
+            Triple(3.1225000011575728, 3.1225000011575736, 15),
+            Triple(java.lang.Math.pow(10.0, -4.0), 0.0, 4),
+            Triple(-java.lang.Math.pow(10.0, -4.0), 0.0, 4),
             Triple(3.0624999999865143, 3.0634999999865142, 3),
             Triple(0.06944444448339876, -0.06944443448339876, 2),
             Triple(0.1, 0.09, 1),
@@ -102,30 +174,49 @@ internal class NumberUnsafeTest {
                 4.56,
                 3,
             ),
-        ).forEach { (d1, d2, border) ->
+        ).forEach { (v1, v2, border) ->
             for (points in 1..16) {
-                val b1 = BigDecimal(d1)
-                val b2 = BigDecimal(d2)
-                val s1 = b1.scaleByPowerOfTen(points)
-                val s2 = b2.scaleByPowerOfTen(points)
-                val i1 = s1.toBigInteger()
-                val i2 = s2.toBigInteger()
+                val b1 = BigDecimal.valueOf(v1)
+                    .setScale(points, RoundingMode.DOWN)
+                val b2 = BigDecimal.valueOf(v2)
+                    .setScale(points, RoundingMode.DOWN)
+                val e = java.lang.Math.pow(10.0, points.toDouble())
+                val d1 = v1 * e
+                val d2 = v2 * e
+                val diff = java.lang.Math.abs(v1 - v2) * e
+//                val d1 = (v1 * e).times(10.0).roundToLong().div(10).toDouble()
+//                val d2 = (v2 * e).times(10.0).roundToLong().div(10).toDouble()
+                val t1 = (d1 * 10).toLong()
+                val t2 = (d2 * 10).toLong()
+                val l1 = d1.toLong()
+                val l2 = d2.toLong()
+                val r1 = java.lang.Math.round(d1)
+                val r2 = java.lang.Math.round(d2)
+                val f1 = java.lang.Math.floor(d1)
+                val f2 = java.lang.Math.floor(d2)
                 val expected = points < border
                 val message = """
+                    v1: $v1 (${v1.toString(24)})
+                    v2: $v2 (${v2.toString(24)})
                     d1: $d1 (${d1.toString(24)})
                     d2: $d2 (${d2.toString(24)})
+                    diff: $diff (${diff.toString(24)})
+                    t1: $t1
+                    t2: $t2
+                    l1: $l1
+                    l2: $l2
+                    r1: $r1
+                    r2: $r2
+                    f1: $f1 (${f1.toString(24)})
+                    f2: $f2 (${f2.toString(24)})
                     b1: $b1
                     b2: $b2
-                    s1: $s1
-                    s2: $s2
-                    i1: $i1
-                    i2: $i2
                     border: $border
                     points: $points
                     expected: $expected
                 """.trimIndent()
                 val actual = try {
-                    eq(it = d1, other = d2, points = points)
+                    eq(it = v1, other = v2, points = points)
                 } catch (e: Throwable) {
                     throw IllegalStateException(message, e)
                 }

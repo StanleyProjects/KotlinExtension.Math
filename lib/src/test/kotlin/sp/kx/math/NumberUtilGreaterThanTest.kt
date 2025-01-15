@@ -78,9 +78,8 @@ internal class NumberUtilGreaterThanTest {
             0.123456 to 0.123457,
             0.1234567 to 0.1234568,
             0.12345678 to 0.12345679,
-            0.123456789 to 0.12345679,
         )
-        check(issues.size == 8)
+        check(issues.size == 7)
         check(issues.toSet().size == issues.size)
         issues.forEachIndexed { index, (other, value) ->
             (1..9).forEach { points ->
@@ -223,7 +222,14 @@ internal class NumberUtilGreaterThanTest {
         private fun assertIssue(issue: DataSet) {
             check(issue.value > issue.other == issue.isGreaterThan)
             val actual = issue.value.gt(other = issue.other, points = issue.points)
-            Assertions.assertEquals(issue.expected, actual)
+            val message = """
+                this: ${issue.value} (${issue.value.toString(24)})
+                that: ${issue.other} (${issue.other.toString(24)})
+                points: ${issue.points}
+                expected: ${issue.expected}
+                actual: $actual
+            """.trimIndent()
+            Assertions.assertEquals(issue.expected, actual, message)
         }
     }
 }

@@ -19,14 +19,14 @@ internal class OffsetUtilEqTest {
                 value = offsetOf(dX = value, dY = value),
                 other = offsetOf(dX = other, dY = other),
                 points = points,
-                equals = true,
+                expected = true,
             )
         }
         assertOffsets(
             value = offsetOf(dX = value, dY = value),
             other = offsetOf(dX = other, dY = other),
             points = 8,
-            equals = false,
+            expected = false,
         )
         val abs = (value - other).absoluteValue
         val delta = 10.0.pow(-4)
@@ -34,7 +34,7 @@ internal class OffsetUtilEqTest {
             value = offsetOf(dX = abs, dY = abs),
             other = offsetOf(dX = delta, dY = delta),
             points = 4,
-            equals = false,
+            expected = false,
         )
     }
 
@@ -45,7 +45,7 @@ internal class OffsetUtilEqTest {
                 value = offsetOf(dX = 0.0, dY = 0.0),
                 other = offsetOf(dX = 10.0.pow(-points), dY = 0.0),
                 points = points,
-                equals = false,
+                expected = false,
             )
         }
     }
@@ -58,7 +58,7 @@ internal class OffsetUtilEqTest {
                 value = offsetOf(dX = 9.12345, dY = 9.123456789),
                 other = offsetOf(dX = 9.123456789, dY = 9.123456789),
                 points = points,
-                equals = true,
+                expected = true,
             )
         }
         (6..9).forEach { points ->
@@ -66,7 +66,7 @@ internal class OffsetUtilEqTest {
                 value = offsetOf(dX = 9.12345, dY = 9.123456789),
                 other = offsetOf(dX = 9.123456789, dY = 9.123456789),
                 points = points,
-                equals = false,
+                expected = false,
             )
         }
         (1..7).forEach { points ->
@@ -74,7 +74,7 @@ internal class OffsetUtilEqTest {
                 value = offsetOf(dX = 9.1234567, dY = 9.123456789),
                 other = offsetOf(dX = 9.123456789, dY = 9.123456789),
                 points = points,
-                equals = true,
+                expected = true,
             )
         }
         (8..9).forEach { points ->
@@ -82,47 +82,47 @@ internal class OffsetUtilEqTest {
                 value = offsetOf(dX = 9.1234567, dY = 9.123456789),
                 other = offsetOf(dX = 9.123456789, dY = 9.123456789),
                 points = points,
-                equals = false,
+                expected = false,
             )
         }
         assertOffsets(
             value = offsetOf(dX = 9.1234567, dY = 9.123456789),
             other = offsetOf(dX = 9.123456789, dY = 9.123456789),
             points = 8,
-            equals = false,
+            expected = false,
         )
         assertOffsets(
             value = offsetOf(dX = 0.1234567, dY = 0.123456789),
             other = offsetOf(dX = 0.123456789, dY = 0.123456789),
             points = 8,
-            equals = false,
+            expected = false,
         )
         assertOffsets(
             value = offsetOf(dX = 0.0, dY = 0.0),
             other = offsetOf(dX = 0.000000089, dY = 0.000000089),
             points = 7,
-            equals = true,
+            expected = true,
         )
         assertOffsets(
             value = offsetOf(dX = 0.0, dY = 0.0),
             other = offsetOf(dX = 0.000000089, dY = 0.000000089),
             points = 8,
-            equals = false,
+            expected = false,
         )
         assertOffsets(
             value = offsetOf(dX = 0.0, dY = 0.0),
             other = offsetOf(dX = 0.00000001, dY = 0.0),
             points = 7,
-            equals = true,
+            expected = true,
         )
         assertOffsets(
             value = offsetOf(dX = 0.0, dY = 0.0),
             other = offsetOf(dX = 0.00000001, dY = 0.0),
             points = 8,
-            equals = false,
+            expected = false,
         )
         val actual = offsetOf(dX = 1.234, dY = 5.67)
-        assertOffsets(value = actual, other = offsetOf(dX = 1.2, dY = 5.6), points = 1, equals = true)
+        assertOffsets(value = actual, other = offsetOf(dX = 1.2, dY = 5.6), points = 1, expected = true)
         Assertions.assertTrue(actual.eq(other = offsetOf(dX = 1.23, dY = 5.67), points = 1))
         Assertions.assertTrue(actual.eq(other = offsetOf(dX = 1.23, dY = 5.67), points = 2))
         Assertions.assertTrue(actual.eq(other = offsetOf(dX = 1.2356789, dY = 5.67891234), points = 1))
@@ -154,8 +154,16 @@ internal class OffsetUtilEqTest {
     }
 
     companion object {
-        private fun assertOffsets(value: Offset, other: Offset, points: Int, equals: Boolean) {
-            Assertions.assertEquals(equals, value.eq(other = other, points = points))
+        private fun assertOffsets(value: Offset, other: Offset, points: Int, expected: Boolean) {
+            val actual = value.eq(other = other, points = points)
+            val message = """
+                this: $value (${value.toString(24)})
+                that: $other (${other.toString(24)})
+                points: $points
+                expected: $expected
+                actual: $actual
+            """.trimIndent()
+            Assertions.assertEquals(expected, actual, message)
         }
     }
 }

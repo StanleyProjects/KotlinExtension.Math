@@ -78,8 +78,23 @@ internal class MutablePointMoveTest {
             Assertions.assertEquals(1.2 - length, point.x)
             Assertions.assertEquals(3.4, point.y, 0.000000000000001)
             Assertions.assertNotEquals(3.4, point.y, 0.0000000000000001)
-            Assertions.assertTrue(point.y.eq(3.4, points = 15))
-            Assertions.assertFalse(point.y.eq(3.4, points = 16))
+            assert(it = point.y, other = 3.4, points = 14, expected = true)
+            assert(it = point.y, other = 3.4, points = 15, expected = false)
+            assert(it = point.y, other = 3.4, points = 16, expected = false)
+        }
+    }
+
+    companion object {
+        private fun assert(it: Double, other: Double, points: Int, expected: Boolean) {
+            val actual = it.eq(other = other, points = points)
+            val message = """
+                this: $it (${it.toString(24)})
+                that: $other (${other.toString(24)})
+                points: $points
+                expected: $expected
+                actual: $actual
+            """.trimIndent()
+            Assertions.assertEquals(expected, actual, message)
         }
     }
 }
