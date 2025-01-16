@@ -14,12 +14,8 @@ internal fun toString(number: Double, total: Int, points: Int, locale: Locale): 
 
 internal fun eq(it: Double, other: Double, points: Int): Boolean {
     val e = java.lang.Math.pow(10.0, points.toDouble())
-    val diff = java.lang.Math.abs(it - other)
-    val de = diff * e
-//    return de.toLong() == 0L
-    if (de.toLong() == 0L) return true
-    if (java.lang.Math.abs(it * e) < 1 && java.lang.Math.abs(other * e) < 1) return true
-    return false
+    val diff = it - other
+    return (diff * e).toLong() == 0L || (it * e).toLong() == 0L && (other * e).toLong() == 0L
 }
 
 internal fun gt(it: Double, other: Double, points: Int): Boolean {

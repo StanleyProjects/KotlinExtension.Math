@@ -105,11 +105,15 @@ internal class NumberUnsafeTest {
     @Test
     fun eqTest() {
         val issues = listOf(
+            Triple(0.9, -0.9, 1),
+            Triple(0.09, -0.09, 2),
+            Triple(0.009, -0.009, 3),
+            Triple(0.0009, -0.0009, 4),
             Triple(3.062500000652571, 3.0625000006525718, 16),
-            Triple(3.1225000011575728, 3.1225000011575736, 14),
+            Triple(3.1225000011575728, 3.1225000011575736, 15),
             Triple(java.lang.Math.pow(10.0, -4.0), 0.0, 4),
             Triple(-java.lang.Math.pow(10.0, -4.0), 0.0, 4),
-            Triple(3.0624999999865143, 3.0634999999865142, 2),
+            Triple(3.0624999999865143, 3.0634999999865142, 3),
             Triple(0.06944444448339876, -0.06944443448339876, 2),
             Triple(0.1, 0.09, 1),
             Triple(0.11, 0.19, 2),
@@ -159,7 +163,7 @@ internal class NumberUnsafeTest {
                 val diff = java.lang.Math.abs(v1 - v2)
                 val de = diff * e
                 val dl = de.toLong()
-                val expected = true
+                val expected = points < border
                 val message = """
                     v1: $v1 (${v1.toString(24)})
                     v2: $v2 (${v2.toString(24)})
