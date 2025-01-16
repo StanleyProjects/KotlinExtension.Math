@@ -29,19 +29,21 @@ internal open class NumberUnsafeBenchmark {
 
     private fun initDoubles(size: Int, salt: String): List<Pair<Double, Double>> {
         val bytes = salt.toByteArray()
-        val hashCode = salt.hashCode()
+        val hashCode = bytes.contentHashCode()
         return List(size) { index ->
             val number = hashCode * size + index + 13
             val l1 = bytes[(number + 1).absoluteValue % bytes.size].toLong()
             val l2 = bytes[(number - 1).absoluteValue % bytes.size].toLong()
             val p1 = l1 * hashCode * 1.shl(12) / size + 13 - index
             val p2 = l2 * hashCode * 1.shl(16) / size + 13 - index
-            val fraction = p1.toDouble() / p2
-            val d = fraction - fraction.toLong()
-            val d1 = d + (index % 4) * (if (index % 4 == 0) -1 else 1)
-            val e = 1.0 / java.lang.Math.pow(10.0, (index % 8).toDouble())
-            val d2 = d1 * (if (index % 5 == 0) -1 else 1) + e * (index % 3)
-            d1 to d2
+            val f = p1.toDouble() / p2 + (index % 4)
+            val s1 = if (index % 4 == 0) -1 else 1
+            val v1 = f * s1
+            val border = index % 16
+            val p = java.lang.Math.pow(10.0, -border.toDouble())
+            val s2 = if (index % 5 == 0) -1 else 1
+            val v2 = (f + p) * s2
+            v1 to v2
         }
     }
 
@@ -59,7 +61,7 @@ internal open class NumberUnsafeBenchmark {
                 val actual = try {
                     eq(it = d1, other = d2, points = points)
                 } catch (e: Throwable) {
-                    val diff = BigDecimal(d1).subtract(BigDecimal(d2))
+                    val diff = BigDecimal.valueOf(d1) - BigDecimal.valueOf(d2)
                     val message = """
                         size: $size
                         index: $index
@@ -85,7 +87,7 @@ internal open class NumberUnsafeBenchmark {
                 val actual = try {
                     lt(it = d1, other = d2, points = points)
                 } catch (e: Throwable) {
-                    val diff = BigDecimal(d1).subtract(BigDecimal(d2))
+                    val diff = BigDecimal.valueOf(d1) - BigDecimal.valueOf(d2)
                     val message = """
                         size: $size
                         index: $index
@@ -111,7 +113,7 @@ internal open class NumberUnsafeBenchmark {
                 val actual = try {
                     gt(it = d1, other = d2, points = points)
                 } catch (e: Throwable) {
-                    val diff = BigDecimal(d1).subtract(BigDecimal(d2))
+                    val diff = BigDecimal.valueOf(d1) - BigDecimal.valueOf(d2)
                     val message = """
                         size: $size
                         index: $index
