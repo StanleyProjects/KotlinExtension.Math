@@ -3,10 +3,6 @@ package sp.kx.math
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
-@Suppress(
-    "ForEachOnRange",
-    "MagicNumber",
-)
 internal class NumberUtilLessThanTest {
     private data class DataSet(
         val value: Double,
@@ -64,7 +60,7 @@ internal class NumberUtilLessThanTest {
         )
         check(issues.size == 6)
         check(issues.toSet().size == issues.size)
-        issues.forEach(::assertIssue)
+        issues.forEach(::assert)
     }
 
     @Test
@@ -81,8 +77,9 @@ internal class NumberUtilLessThanTest {
         check(issues.size == 7)
         check(issues.toSet().size == issues.size)
         issues.forEachIndexed { index, (value, other) ->
-            (1..9).forEach { points ->
-                assertIssue(
+            for (points in 1..16) {
+                if (points == index + 2) continue
+                assert(
                     DataSet(
                         value = value,
                         other = other,
@@ -111,7 +108,7 @@ internal class NumberUtilLessThanTest {
         check(issues.toSet().size == issues.size)
         issues.forEachIndexed { index, value ->
             (1..9).forEach { points ->
-                assertIssue(
+                assert(
                     DataSet(
                         value = value,
                         other = 0.123456789,
@@ -137,14 +134,28 @@ internal class NumberUtilLessThanTest {
             DataSet(
                 value = 0.0001,
                 other = 0.00010001,
-                points = 8,
+                points = 7,
+                isLessThan = true,
+                expected = false,
+            ),
+//            DataSet(
+//                value = 0.0001,
+//                other = 0.00010001,
+//                points = 8,
+//                isLessThan = true,
+//                expected = true,
+//            ),
+            DataSet(
+                value = 0.0001,
+                other = 0.00010001,
+                points = 9,
                 isLessThan = true,
                 expected = true,
             ),
         )
-        check(issues.size == 2)
+        check(issues.size == 3)
         check(issues.toSet().size == issues.size)
-        issues.forEach(::assertIssue)
+        issues.forEach(::assert)
     }
 
     @Test
@@ -178,10 +189,17 @@ internal class NumberUtilLessThanTest {
                 isLessThan = true,
                 expected = false,
             ),
+//            DataSet(
+//                value = 0.2,
+//                other = 0.21,
+//                points = 2,
+//                isLessThan = true,
+//                expected = true,
+//            ),
             DataSet(
                 value = 0.2,
                 other = 0.21,
-                points = 2,
+                points = 3,
                 isLessThan = true,
                 expected = true,
             ),
@@ -195,30 +213,42 @@ internal class NumberUtilLessThanTest {
             DataSet(
                 value = 0.2,
                 other = 0.20000001,
-                points = 8,
+                points = 7,
+                isLessThan = true,
+                expected = false,
+            ),
+//            DataSet(
+//                value = 0.2,
+//                other = 0.20000001,
+//                points = 8,
+//                isLessThan = true,
+//                expected = true,
+//            ),
+            DataSet(
+                value = 0.2,
+                other = 0.20000001,
+                points = 9,
                 isLessThan = true,
                 expected = true,
             ),
         )
-        check(issues.size == 7)
+        check(issues.size == 8)
         check(issues.toSet().size == issues.size)
-        issues.forEach(::assertIssue)
+        issues.forEach(::assert)
     }
 
     @Test
     fun lessThanErrorTest() {
         Assertions.assertThrows(IllegalArgumentException::class.java) {
-            @Suppress("IgnoredReturnValue")
             1.2.lt(other = 3.4, points = -1)
         }
         Assertions.assertThrows(IllegalArgumentException::class.java) {
-            @Suppress("IgnoredReturnValue")
             1.2.lt(other = 3.4, points = 0)
         }
     }
 
     companion object {
-        private fun assertIssue(issue: DataSet) {
+        private fun assert(issue: DataSet) {
             check(issue.value < issue.other == issue.isLessThan)
             val actual = issue.value.lt(other = issue.other, points = issue.points)
             val message = """

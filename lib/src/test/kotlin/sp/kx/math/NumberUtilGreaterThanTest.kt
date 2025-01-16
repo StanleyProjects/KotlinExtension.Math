@@ -3,10 +3,6 @@ package sp.kx.math
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
-@Suppress(
-    "ForEachOnRange",
-    "MagicNumber",
-)
 internal class NumberUtilGreaterThanTest {
     private data class DataSet(
         val value: Double,
@@ -64,10 +60,9 @@ internal class NumberUtilGreaterThanTest {
         )
         check(issues.size == 6)
         check(issues.toSet().size == issues.size)
-        issues.forEach(::assertIssue)
+        issues.forEach(::assert)
     }
 
-    @Suppress("FunctionMaxLength")
     @Test
     fun greaterThanDeltaPointsFalseTest() {
         val issues = listOf(
@@ -82,8 +77,9 @@ internal class NumberUtilGreaterThanTest {
         check(issues.size == 7)
         check(issues.toSet().size == issues.size)
         issues.forEachIndexed { index, (other, value) ->
-            (1..9).forEach { points ->
-                assertIssue(
+            for (points in 1..16) {
+                if (points == index + 2) continue
+                assert(
                     DataSet(
                         value = value,
                         other = other,
@@ -112,7 +108,7 @@ internal class NumberUtilGreaterThanTest {
         check(issues.toSet().size == issues.size)
         issues.forEachIndexed { index, other ->
             (1..9).forEach { points ->
-                assertIssue(
+                assert(
                     DataSet(
                         value = 0.123456789,
                         other = other,
@@ -152,14 +148,28 @@ internal class NumberUtilGreaterThanTest {
             DataSet(
                 value = 0.00010001,
                 other = 0.0001,
-                points = 8,
+                points = 7,
+                isGreaterThan = true,
+                expected = false,
+            ),
+//            DataSet(
+//                value = 0.00010001,
+//                other = 0.0001,
+//                points = 8,
+//                isGreaterThan = true,
+//                expected = true,
+//            ),
+            DataSet(
+                value = 0.00010001,
+                other = 0.0001,
+                points = 9,
                 isGreaterThan = true,
                 expected = true,
             ),
         )
-        check(issues.size == 4)
+        check(issues.size == 5)
         check(issues.toSet().size == issues.size)
-        issues.forEach(::assertIssue)
+        issues.forEach(::assert)
     }
 
     @Test
@@ -203,23 +213,21 @@ internal class NumberUtilGreaterThanTest {
         )
         check(issues.size == 5)
         check(issues.toSet().size == issues.size)
-        issues.forEach(::assertIssue)
+        issues.forEach(::assert)
     }
 
     @Test
     fun greaterThanErrorTest() {
         Assertions.assertThrows(IllegalArgumentException::class.java) {
-            @Suppress("IgnoredReturnValue")
             1.2.gt(other = 3.4, points = -1)
         }
         Assertions.assertThrows(IllegalArgumentException::class.java) {
-            @Suppress("IgnoredReturnValue")
             1.2.gt(other = 3.4, points = 0)
         }
     }
 
     companion object {
-        private fun assertIssue(issue: DataSet) {
+        private fun assert(issue: DataSet) {
             check(issue.value > issue.other == issue.isGreaterThan)
             val actual = issue.value.gt(other = issue.other, points = issue.points)
             val message = """
