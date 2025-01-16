@@ -46,6 +46,22 @@ operator fun Offset.div(value: Double): Offset {
     )
 }
 
+// todo doc
+operator fun Offset.times(measure: Measure<Double, Double>): Offset {
+    return offsetOf(
+        dX = measure.transform(dX),
+        dY = measure.transform(dY),
+    )
+}
+
+// todo doc
+operator fun Offset.div(measure: Measure<Double, Double>): Offset {
+    return offsetOf(
+        dX = measure.units(dX),
+        dY = measure.units(dY),
+    )
+}
+
 operator fun Offset.plus(other: Offset): Offset {
     return offsetOf(
         dX = dX + other.dX,
@@ -57,21 +73,5 @@ operator fun Offset.minus(other: Offset): Offset {
     return offsetOf(
         dX = dX - other.dX,
         dY = dY - other.dY,
-    )
-}
-
-// todo plus -> times
-operator fun Offset.plus(measure: Measure<Double, Double>): Offset {
-    return offsetOf(
-        dX = measure.transform(dX),
-        dY = measure.transform(dY),
-    )
-}
-
-// todo minus -> div
-operator fun Offset.minus(measure: Measure<Double, Double>): Offset {
-    return offsetOf(
-        dX = measure.units(dX),
-        dY = measure.units(dY),
     )
 }
