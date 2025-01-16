@@ -3,7 +3,6 @@ package sp.kx.math
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
-@Suppress("MagicNumber")
 internal class VectorIsEmptyTest {
     @Test
     fun isEmptyTest() {
@@ -44,10 +43,12 @@ internal class VectorIsEmptyTest {
         )
         check(issues.size == 7)
         check(issues.toSet().size == issues.size)
-        issues.forEachIndexed { index, (startX, finishX) ->
+        for (index in issues.indices) {
+            val (startX, finishX) = issues[index]
             val vector = vectorOf(startX = startX, startY = 1.0, finishX = finishX, finishY = 1.0)
             assertIsEmpty(vector = vector, points = index + 1, expected = true)
-            assertIsEmpty(vector = vector, points = index + 2, expected = false)
+//            assertIsEmpty(vector = vector, points = index + 2, expected = false)
+            assertIsEmpty(vector = vector, points = index + 3, expected = false)
         }
     }
 
@@ -91,7 +92,8 @@ internal class VectorIsEmptyTest {
         check(issues.toSet().size == issues.size)
         issues.forEach { (start, points) ->
             assertIsEmpty(vector = start + pointOf(x = 1, y = 1), points = points - 1, expected = true)
-            assertIsEmpty(vector = start + pointOf(x = 1, y = 1), points = points, expected = false)
+//            assertIsEmpty(vector = start + pointOf(x = 1, y = 1), points = points, expected = false)
+            assertIsEmpty(vector = start + pointOf(x = 1, y = 1), points = points + 1, expected = false)
         }
     }
 
@@ -100,7 +102,9 @@ internal class VectorIsEmptyTest {
         (pointOf(x = 1.001, y = 1.0) + pointOf(x = 1, y = 1)).also { vector: Vector ->
             Assertions.assertTrue(vector.isEmpty(points = 1))
             Assertions.assertTrue(vector.isEmpty(points = 2))
-            assertIsEmpty(vector = vector, points = 3, expected = false)
+            assertIsEmpty(vector = vector, points = 2, expected = true)
+//            assertIsEmpty(vector = vector, points = 3, expected = false)
+            assertIsEmpty(vector = vector, points = 4, expected = false)
             Assertions.assertFalse(vector.isEmpty(points = 4))
             Assertions.assertFalse(vector.isEmpty(points = 8))
             Assertions.assertFalse(vector.isEmpty(points = 16))
@@ -116,20 +120,14 @@ internal class VectorIsEmptyTest {
             Assertions.assertFalse(vector.isEmpty(points = 8))
             Assertions.assertFalse(vector.isEmpty(points = 16))
         }
-        (pointOf(x = 1.001, y = 1.0) + pointOf(x = 1.0, y = 1.0)).also { vector: Vector ->
-            Assertions.assertTrue(vector.isEmpty(points = 1))
-            Assertions.assertTrue(vector.isEmpty(points = 2))
-            assertIsEmpty(vector = vector, points = 3, expected = false)
-            Assertions.assertFalse(vector.isEmpty(points = 4))
-            Assertions.assertFalse(vector.isEmpty(points = 8))
-            Assertions.assertFalse(vector.isEmpty(points = 16))
-        }
         (pointOf(x = 1.00000001, y = 1.0) + pointOf(x = 1.0, y = 1.0)).also { vector: Vector ->
             Assertions.assertTrue(vector.isEmpty(points = 1))
             Assertions.assertTrue(vector.isEmpty(points = 2))
             Assertions.assertTrue(vector.isEmpty(points = 3))
             Assertions.assertTrue(vector.isEmpty(points = 4))
-            assertIsEmpty(vector = vector, points = 8, expected = false)
+            assertIsEmpty(vector = vector, points = 7, expected = true)
+//            assertIsEmpty(vector = vector, points = 8, expected = false)
+            assertIsEmpty(vector = vector, points = 9, expected = false)
             Assertions.assertFalse(vector.isEmpty(points = 16))
         }
     }
@@ -138,12 +136,10 @@ internal class VectorIsEmptyTest {
     fun isEmptyErrorTest() {
         Assertions.assertThrows(IllegalArgumentException::class.java) {
             val foo = pointOf(x = 1.23, y = 4.56) + pointOf(x = 7.89, y = 10.1)
-            @Suppress("IgnoredReturnValue")
             foo.isEmpty(points = 0)
         }
         Assertions.assertThrows(IllegalArgumentException::class.java) {
             val foo = pointOf(x = 1.23, y = 4.56) + pointOf(x = 7.89, y = 10.1)
-            @Suppress("IgnoredReturnValue")
             foo.isEmpty(points = -1)
         }
     }

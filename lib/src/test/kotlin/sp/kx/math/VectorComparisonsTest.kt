@@ -15,32 +15,33 @@ internal class VectorComparisonsTest {
         val x = 1.0
         val y = 2.24
         setOf(
-            Triple(1.0, 12, false),
-            Triple(1.0, 6, false),
-            Triple(1.0, 1, false),
-            Triple(2.0, 12, false),
-            Triple(2.0, 6, false),
-            Triple(2.0, 1, false),
-            Triple(2.25, 1, false),
-            Triple(2.25, 2, true),
-            Triple(3.0, 12, true),
-            Triple(3.0, 6, true),
-            Triple(3.0, 1, true),
-        ).forEach { (minDistance, points, expected) ->
-            val actual = vector.reaches(
-                xTarget = x,
-                yTarget = y,
-                minDistance = minDistance,
-                points = points,
-            )
-            val message = """
-                vector: $vector
-                x: $x
-                y: $y
-                minDistance: $minDistance
-                points: $points
-            """.trimIndent()
-            assertEquals(expected, actual, message)
+            1.0 to 17,
+            2.0 to 17,
+            2.23 to 17,
+            2.25 to 2,
+            2.26 to 2,
+            3.0 to 0,
+            4.0 to 0,
+        ).forEach { (minDistance, border) ->
+            for (points in 1..16) {
+                if (points == border) continue
+                val expected = points > border
+                val actual = vector.reaches(
+                    xTarget = x,
+                    yTarget = y,
+                    minDistance = minDistance,
+                    points = points,
+                )
+                val message = """
+                    vector: $vector
+                    x: $x
+                    y: $y
+                    minDistance: $minDistance
+                    points: $points
+                    border: $border
+                """.trimIndent()
+                assertEquals(expected, actual, message)
+            }
         }
     }
 
@@ -57,30 +58,31 @@ internal class VectorComparisonsTest {
             y = 2.24,
         )
         setOf(
-            Triple(1.0, 12, false),
-            Triple(1.0, 6, false),
-            Triple(1.0, 1, false),
-            Triple(2.0, 12, false),
-            Triple(2.0, 6, false),
-            Triple(2.0, 1, false),
-            Triple(2.25, 1, false),
-            Triple(2.25, 2, true),
-            Triple(3.0, 12, true),
-            Triple(3.0, 6, true),
-            Triple(3.0, 1, true),
-        ).forEach { (minDistance, points, expected) ->
-            val actual = vector.reaches(
-                target = target,
-                minDistance = minDistance,
-                points = points,
-            )
-            val message = """
-                vector: $vector
-                target: $target
-                minDistance: $minDistance
-                points: $points
-            """.trimIndent()
-            assertEquals(expected, actual, message)
+            1.0 to 17,
+            2.0 to 17,
+            2.23 to 17,
+            2.25 to 2,
+            2.26 to 2,
+            3.0 to 0,
+            4.0 to 0,
+        ).forEach { (minDistance, border) ->
+            for (points in 1..16) {
+                if (points == border) continue
+                val expected = points > border
+                val actual = vector.reaches(
+                    target = target,
+                    minDistance = minDistance,
+                    points = points,
+                )
+                val message = """
+                    vector: $vector
+                    target: $target
+                    minDistance: $minDistance
+                    points: $points
+                    border: $border
+                """.trimIndent()
+                assertEquals(expected, actual, message)
+            }
         }
     }
 
@@ -102,32 +104,33 @@ internal class VectorComparisonsTest {
         val y = 3.24
         val vectors = listOf(v1, v2)
         setOf(
-            Triple(1.0, 12, false),
-            Triple(1.0, 6, false),
-            Triple(1.0, 1, false),
-            Triple(2.0, 12, false),
-            Triple(2.0, 6, false),
-            Triple(2.0, 1, false),
-            Triple(2.25, 1, false),
-            Triple(2.25, 2, true),
-            Triple(3.0, 12, true),
-            Triple(3.0, 6, true),
-            Triple(3.0, 1, true),
-        ).forEach { (minDistance, points, expected) ->
-            val actual = vectors.lt(
-                xTarget = x,
-                yTarget = y,
-                minDistance = minDistance,
-                points = points,
-            )
-            val message = """
-                vectors: $vectors
-                x: $x
-                y: $y
-                minDistance: $minDistance
-                points: $points
-            """.trimIndent()
-            assertEquals(expected, actual, message)
+            1.0 to 17,
+            2.0 to 17,
+            2.23 to 17,
+            2.25 to 2,
+            2.26 to 2,
+            3.0 to 0,
+            4.0 to 0,
+        ).forEach { (minDistance, border) ->
+            for (points in 1..16) {
+                if (points == border) continue
+                val expected = points > border
+                val actual = vectors.lt(
+                    xTarget = x,
+                    yTarget = y,
+                    minDistance = minDistance,
+                    points = points,
+                )
+                val message = """
+                    vectors: $vectors
+                    x: $x
+                    y: $y
+                    minDistance: $minDistance
+                    points: $points
+                    border: $border
+                """.trimIndent()
+                assertEquals(expected, actual, message)
+            }
         }
     }
 
@@ -151,30 +154,31 @@ internal class VectorComparisonsTest {
         )
         val vectors = listOf(v1, v2)
         setOf(
-            Triple(1.0, 12, false),
-            Triple(1.0, 6, false),
-            Triple(1.0, 1, false),
-            Triple(2.0, 12, false),
-            Triple(2.0, 6, false),
-            Triple(2.0, 1, false),
-            Triple(2.25, 1, false),
-            Triple(2.25, 2, true),
-            Triple(3.0, 12, true),
-            Triple(3.0, 6, true),
-            Triple(3.0, 1, true),
-        ).forEach { (minDistance, points, expected) ->
-            val actual = vectors.lt(
-                target = target,
-                minDistance = minDistance,
-                points = points,
-            )
-            val message = """
-                vectors: $vectors
-                target: $target
-                minDistance: $minDistance
-                points: $points
-            """.trimIndent()
-            assertEquals(expected, actual, message)
+            1.0 to 17,
+            2.0 to 17,
+            2.23 to 17,
+            2.25 to 2,
+            2.26 to 2,
+            3.0 to 0,
+            4.0 to 0,
+        ).forEach { (minDistance, border) ->
+            for (points in 1..16) {
+                if (points == border) continue
+                val expected = points > border
+                val actual = vectors.lt(
+                    target = target,
+                    minDistance = minDistance,
+                    points = points,
+                )
+                val message = """
+                    vectors: $vectors
+                    target: $target
+                    minDistance: $minDistance
+                    points: $points
+                    border: $border
+                """.trimIndent()
+                assertEquals(expected, actual, message)
+            }
         }
     }
 }

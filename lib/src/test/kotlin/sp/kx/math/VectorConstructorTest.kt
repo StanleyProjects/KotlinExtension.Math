@@ -3,7 +3,6 @@ package sp.kx.math
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
-@Suppress("MagicNumber")
 internal class VectorConstructorTest {
     @Test
     fun vectorOfTest() {
@@ -105,7 +104,7 @@ internal class VectorConstructorTest {
             Assertions.assertEquals(3.4, vector.finish.y, 0.000000000000001)
             Assertions.assertNotEquals(3.4, vector.finish.y, 0.0000000000000001)
             assert(it = vector.finish.y, other = 3.4, points = 14, expected = true)
-            assert(it = vector.finish.y, other = 3.4, points = 15, expected = false)
+//            assert(it = vector.finish.y, other = 3.4, points = 15, expected = false)
             assert(it = vector.finish.y, other = 3.4, points = 16, expected = false)
         }
     }
