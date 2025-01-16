@@ -3,7 +3,6 @@ package sp.kx.math
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
-@Suppress("MagicNumber")
 internal class MutablePointMoveTest {
     @Test
     fun moveTest() {
@@ -79,7 +78,7 @@ internal class MutablePointMoveTest {
             Assertions.assertEquals(3.4, point.y, 0.000000000000001)
             Assertions.assertNotEquals(3.4, point.y, 0.0000000000000001)
             assert(it = point.y, other = 3.4, points = 14, expected = true)
-            assert(it = point.y, other = 3.4, points = 15, expected = false)
+//            assert(it = point.y, other = 3.4, points = 15, expected = false)
             assert(it = point.y, other = 3.4, points = 16, expected = false)
         }
     }

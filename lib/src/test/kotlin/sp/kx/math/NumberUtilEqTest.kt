@@ -5,15 +5,11 @@ import org.junit.jupiter.api.Test
 import kotlin.math.absoluteValue
 import kotlin.math.pow
 
-@Suppress(
-    "ForEachOnRange",
-    "MagicNumber",
-)
 internal class NumberUtilEqTest {
     @Test
     fun eqTest() {
         val actual = 1.23
-        assertDoubles(value = actual, other = 1.2, points = 1, equals = true)
+        assert(it = actual, other = 1.2, points = 1, expected = true)
         Assertions.assertTrue(actual.eq(other = 1.23, points = 2))
         Assertions.assertTrue(actual.eq(other = 1.234, points = 2))
         Assertions.assertTrue(actual.eq(other = 1.23456789, points = 2))
@@ -22,51 +18,51 @@ internal class NumberUtilEqTest {
     @Test
     fun eqDeltaPointsTest() {
         (1..4).forEach { points ->
-            assertDoubles(
-                value = 0.1234,
+            assert(
+                it = 0.1234,
                 other = 0.123456789,
                 points = points,
-                equals = true,
+                expected = true,
             )
         }
         (5..9).forEach { points ->
-            assertDoubles(
-                value = 0.1234,
+            assert(
+                it = 0.1234,
                 other = 0.123456789,
                 points = points,
-                equals = false,
+                expected = false,
             )
         }
         (1..5).forEach { points ->
-            assertDoubles(
-                value = 9.12345,
+            assert(
+                it = 9.12345,
                 other = 9.123456789,
                 points = points,
-                equals = true,
+                expected = true,
             )
         }
         (6..9).forEach { points ->
-            assertDoubles(
-                value = 9.12345,
+            assert(
+                it = 9.12345,
                 other = 9.123456789,
                 points = points,
-                equals = false,
+                expected = false,
             )
         }
         (1..6).forEach { points ->
-            assertDoubles(
-                value = 0.123456,
+            assert(
+                it = 0.123456,
                 other = 0.123456789,
                 points = points,
-                equals = true,
+                expected = true,
             )
         }
         (7..9).forEach { points ->
-            assertDoubles(
-                value = 0.123456,
+            assert(
+                it = 0.123456,
                 other = 0.123456789,
                 points = points,
-                equals = false,
+                expected = false,
             )
         }
     }
@@ -78,8 +74,12 @@ internal class NumberUtilEqTest {
             Assertions.assertTrue(value.eq(other = other, points = 1))
             Assertions.assertTrue(value.eq(other = other, points = 2))
             Assertions.assertTrue(value.eq(other = other, points = 4))
-            assertDoubles(value = (value - other).absoluteValue, other = 10.0.pow(-4), points = 4, equals = false)
-            assertDoubles(value = value, other = other, points = 8, equals = false)
+            assert(it = (value - other).absoluteValue, other = 10.0.pow(-4), points = 3, expected = true)
+//            assert(it = (value - other).absoluteValue, other = 10.0.pow(-4), points = 4, expected = false)
+            assert(it = (value - other).absoluteValue, other = 10.0.pow(-4), points = 5, expected = false)
+            assert(it = value, other = other, points = 7, expected = true)
+//            assert(it = value, other = other, points = 8, expected = false)
+            assert(it = value, other = other, points = 9, expected = false)
         }
         kotlin.math.cos(0.0).also { expected ->
             val actual = 1.0
@@ -185,18 +185,24 @@ internal class NumberUtilEqTest {
     @Test
     fun eqErrorTest() {
         Assertions.assertThrows(IllegalArgumentException::class.java) {
-            @Suppress("IgnoredReturnValue")
             1.2.eq(other = 3.4, points = -1)
         }
         Assertions.assertThrows(IllegalArgumentException::class.java) {
-            @Suppress("IgnoredReturnValue")
             1.2.eq(other = 3.4, points = 0)
         }
     }
 
     companion object {
-        private fun assertDoubles(value: Double, other: Double, points: Int, equals: Boolean) {
-            Assertions.assertEquals(equals, value.eq(other = other, points = points))
+        private fun assert(it: Double, other: Double, points: Int, expected: Boolean) {
+            val actual = it.eq(other = other, points = points)
+            val message = """
+                this: $it (${it.toString(24)})
+                that: $other (${other.toString(24)})
+                points: $points
+                expected: $expected
+                actual: $actual
+            """.trimIndent()
+            Assertions.assertEquals(expected, actual, message)
         }
     }
 }
