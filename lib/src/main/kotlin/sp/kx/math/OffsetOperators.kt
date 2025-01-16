@@ -62,6 +62,7 @@ operator fun Offset.div(measure: Measure<Double, Double>): Offset {
     )
 }
 
+// todo doc
 operator fun Offset.plus(other: Offset): Offset {
     return offsetOf(
         dX = dX + other.dX,
@@ -69,6 +70,7 @@ operator fun Offset.plus(other: Offset): Offset {
     )
 }
 
+// todo doc
 operator fun Offset.minus(other: Offset): Offset {
     return offsetOf(
         dX = dX - other.dX,
