@@ -6,7 +6,7 @@ import sp.kx.math.measure.Measure
  * Usage:
  * ```
  * val measure = measureOf(magnitude = 2.0)
- * val point = pointOf(x = 1.0, y = 2.0, measure = measure)
+ * val point = pointOf(x = 2.0, y = 1.0, measure = measure)
  *
  *   ^
  *   |
