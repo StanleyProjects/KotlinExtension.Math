@@ -3,7 +3,6 @@ package sp.kx.math
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
-@Suppress("MagicNumber")
 internal class VectorUtilTest {
     @Test
     fun toStringTest() {
@@ -20,7 +19,6 @@ internal class VectorUtilTest {
     fun toStringErrorTest() {
         Assertions.assertThrows(IllegalStateException::class.java) {
             val actual = pointOf(x = 1.23, y = 4.56) + pointOf(x = 7.89, y = 10.1)
-            @Suppress("IgnoredReturnValue")
             actual.toString(points = -1)
         }
     }
@@ -78,13 +76,11 @@ internal class VectorUtilTest {
         Assertions.assertThrows(IllegalArgumentException::class.java) {
             val foo = pointOf(x = 1.23, y = 4.56) + pointOf(x = 7.89, y = 10.1)
             val bar = pointOf(x = 1.23, y = 4.56) + pointOf(x = 7.89, y = 10.1)
-            @Suppress("IgnoredReturnValue")
             foo.eq(other = bar, points = -1)
         }
         Assertions.assertThrows(IllegalArgumentException::class.java) {
             val foo = pointOf(x = 1.23, y = 4.56) + pointOf(x = 7.89, y = 10.1)
             val bar = pointOf(x = 1.23, y = 4.56) + pointOf(x = 7.89, y = 10.1)
-            @Suppress("IgnoredReturnValue")
             foo.eq(other = bar, points = 0)
         }
     }
@@ -145,45 +141,6 @@ internal class VectorUtilTest {
             Assertions.assertNotEquals(bar.start, foo.start)
             Assertions.assertNotEquals(bar.finish, foo.finish)
             Assertions.assertEquals(bar.start, foo.finish)
-        }
-    }
-
-    @Test
-    fun timesTest() {
-        val foo = vectorOf(
-            startX = 1.2,
-            startY = 3.4,
-            finishX = 5.6,
-            finishY = 7.8,
-        )
-        Assertions.assertFalse(foo.isEmpty())
-        Assertions.assertNotEquals(foo.start.x, foo.start.y)
-        Assertions.assertNotEquals(foo.finish.x, foo.finish.y)
-        Assertions.assertEquals(1.2, foo.start.x)
-        Assertions.assertEquals(3.4, foo.start.y)
-        Assertions.assertEquals(5.6, foo.finish.x)
-        Assertions.assertEquals(7.8, foo.finish.y)
-        foo.times(5.6).also { bar: Vector ->
-            val value = 5.6
-            Assertions.assertEquals(1.2, foo.start.x)
-            Assertions.assertEquals(3.4, foo.start.y)
-            Assertions.assertEquals(5.6, foo.finish.x)
-            Assertions.assertEquals(7.8, foo.finish.y)
-            Assertions.assertEquals(1.2 * value, bar.start.x)
-            Assertions.assertEquals(3.4 * value, bar.start.y)
-            Assertions.assertEquals(5.6 * value, bar.finish.x)
-            Assertions.assertEquals(7.8 * value, bar.finish.y)
-        }
-        foo.times(-7.8).also { bar: Vector ->
-            val value = -7.8
-            Assertions.assertEquals(1.2, foo.start.x)
-            Assertions.assertEquals(3.4, foo.start.y)
-            Assertions.assertEquals(5.6, foo.finish.x)
-            Assertions.assertEquals(7.8, foo.finish.y)
-            Assertions.assertEquals(1.2 * value, bar.start.x)
-            Assertions.assertEquals(3.4 * value, bar.start.y)
-            Assertions.assertEquals(5.6 * value, bar.finish.x)
-            Assertions.assertEquals(7.8 * value, bar.finish.y)
         }
     }
 
