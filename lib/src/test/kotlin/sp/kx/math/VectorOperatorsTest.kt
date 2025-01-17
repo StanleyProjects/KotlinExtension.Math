@@ -27,17 +27,17 @@ internal class VectorOperatorsTest {
     }
 
     @Test
-    fun plusMeasureTest() {
+    fun timesMeasureTest() {
         val vector = pointOf(x = 1.2, y = 3.4) + pointOf(x = 5.6, y = 7.8)
         measureOf(magnitude = 1.23).also { measure: Measure<Double, Double> ->
-            val actual = vector + measure
+            val actual = vector * measure
             Assertions.assertEquals(actual.start.x, measure.transform(vector.start.x))
             Assertions.assertEquals(actual.start.y, measure.transform(vector.start.y))
             Assertions.assertEquals(actual.finish.x, measure.transform(vector.finish.x))
             Assertions.assertEquals(actual.finish.y, measure.transform(vector.finish.y))
         }
         measureOf(magnitude = -4.56).also { measure: Measure<Double, Double> ->
-            val actual = vector + measure
+            val actual = vector * measure
             Assertions.assertEquals(actual.start.x, measure.transform(vector.start.x))
             Assertions.assertEquals(actual.start.y, measure.transform(vector.start.y))
             Assertions.assertEquals(actual.finish.x, measure.transform(vector.finish.x))
