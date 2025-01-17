@@ -12,8 +12,7 @@ import org.openjdk.jmh.infra.Blackhole
 internal open class VectorComparisonsBenchmark {
     private class VectorComparisons(
         val vectors: Iterable<Vector>,
-        val xTarget: Double,
-        val yTarget: Double,
+        val target: Point,
         val minDistance: Double,
         val points: Int,
     )
@@ -93,8 +92,10 @@ internal open class VectorComparisonsBenchmark {
                     targets.forEach { (xTarget, yTarget) ->
                         result += VectorComparisons(
                             vectors = vectors,
-                            xTarget = xTarget * multiplier,
-                            yTarget = yTarget * multiplier,
+                            target = pointOf(
+                                x = xTarget * multiplier,
+                                y = yTarget * multiplier,
+                            ),
                             minDistance = minDistance * multiplier,
                             points = points,
                         )
@@ -116,8 +117,8 @@ internal open class VectorComparisonsBenchmark {
         comparisons.forEachIndexed { index, it ->
             it.vectors.forEach { vector ->
                 results[index] = vector.reaches(
-                    xTarget = it.xTarget,
-                    yTarget = it.yTarget,
+                    xTarget = it.target.x,
+                    yTarget = it.target.y,
                     minDistance = it.minDistance,
                     points = it.points,
                 )
@@ -127,12 +128,40 @@ internal open class VectorComparisonsBenchmark {
     }
 
     @Benchmark
-    fun ltIterable(hole: Blackhole) {
+    fun reachesPoint(hole: Blackhole) {
         val results = mutableMapOf<Int, Boolean>()
         comparisons.forEachIndexed { index, it ->
-            results[index] = it.vectors.lt(
-                xTarget = it.xTarget,
-                yTarget = it.yTarget,
+            it.vectors.forEach { vector ->
+                results[index] = vector.reaches(
+                    target = it.target,
+                    minDistance = it.minDistance,
+                    points = it.points,
+                )
+            }
+        }
+        hole.consume(results)
+    }
+
+    @Benchmark
+    fun reachesIterable(hole: Blackhole) {
+        val results = mutableMapOf<Int, Boolean>()
+        comparisons.forEachIndexed { index, it ->
+            results[index] = it.vectors.reaches(
+                xTarget = it.target.x,
+                yTarget = it.target.y,
+                minDistance = it.minDistance,
+                points = it.points,
+            )
+        }
+        hole.consume(results)
+    }
+
+    @Benchmark
+    fun reachesIterablePoint(hole: Blackhole) {
+        val results = mutableMapOf<Int, Boolean>()
+        comparisons.forEachIndexed { index, it ->
+            results[index] = it.vectors.reaches(
+                target = it.target,
                 minDistance = it.minDistance,
                 points = it.points,
             )

@@ -87,7 +87,7 @@ internal class VectorComparisonsTest {
     }
 
     @Test
-    fun ltIterableTest() {
+    fun reachesIterableTest() {
         val v1 = vectorOf(
             startX = 0.0,
             startY = 0.0,
@@ -115,7 +115,7 @@ internal class VectorComparisonsTest {
             for (points in 1..16) {
                 if (points == border) continue
                 val expected = points > border
-                val actual = vectors.lt(
+                val actual = vectors.reaches(
                     xTarget = x,
                     yTarget = y,
                     minDistance = minDistance,
@@ -135,7 +135,7 @@ internal class VectorComparisonsTest {
     }
 
     @Test
-    fun ltIterablePointTest() {
+    fun reachesIterablePointTest() {
         val v1 = vectorOf(
             startX = 0.0,
             startY = 0.0,
@@ -165,7 +165,7 @@ internal class VectorComparisonsTest {
             for (points in 1..16) {
                 if (points == border) continue
                 val expected = points > border
-                val actual = vectors.lt(
+                val actual = vectors.reaches(
                     target = target,
                     minDistance = minDistance,
                     points = points,

@@ -63,7 +63,7 @@ $ gradle lib:runBenchmark
 ```
 or
 ```
-$ gradle lib:runBenchmark -Pbenchmarks='VectorComparisonsTest'
+$ gradle lib:runBenchmark -Pbenchmarks='VectorComparisonsBenchmark'
 ```
 
 ---

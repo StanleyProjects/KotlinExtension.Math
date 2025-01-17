@@ -93,7 +93,7 @@ fun Vector.reaches(
 }
 
 // todo doc
-fun Iterable<Vector>.lt(
+fun Iterable<Vector>.reaches(
     xTarget: Double,
     yTarget: Double,
     minDistance: Double,
@@ -115,7 +115,7 @@ fun Iterable<Vector>.lt(
 }
 
 // todo doc
-fun Iterable<Vector>.lt(
+fun Iterable<Vector>.reaches(
     target: Point,
     minDistance: Double,
     points: Int,
