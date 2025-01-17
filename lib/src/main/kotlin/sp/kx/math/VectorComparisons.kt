@@ -92,7 +92,40 @@ fun Vector.reaches(
     ).lt(other = minDistance, points = points)
 }
 
-// todo doc
+/**
+ * The function calculates whether any [Vector] from [this] receiver reaches the point.
+ *
+ * Usage:
+ * ```
+ * val target = pointOf(x = 2, y = 3)
+ * val ab = pointOf(x = 1, y = 1) + pointOf(x = 3, y = 1)
+ * val cd = pointOf(x = 2, y = 2) + pointOf(x = 4, y = 2)
+ * val actual = listOf(ab, cd).reaches(
+ *     xTarget = target.x,
+ *     yTarget = target.y,
+ *     minDistance = 1.0,
+ *     points = 16,
+ * )
+ * assertTrue(actual)
+ * ```
+ *
+ * ```
+ *   ^
+ *   |        target
+ * 3 -       *
+ *   |        c       d
+ * 2 -       *-------*
+ *   |    a       b
+ * 1 -   *-------*
+ *   |
+ * 0 *---|---|---|---|--->
+ *   0   1   2   3   4
+ * ```
+ * @return Is the shortest distance from the [Point] from the coordinates [[xTarget], [yTarget]]
+ * to any [Vector] from [this] receiver less than the [minDistance].
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.8.0
+ */
 fun Iterable<Vector>.reaches(
     xTarget: Double,
     yTarget: Double,
@@ -114,7 +147,39 @@ fun Iterable<Vector>.reaches(
     }
 }
 
-// todo doc
+/**
+ * The function calculates whether any [Vector] from [this] receiver reaches the point.
+ *
+ * Usage:
+ * ```
+ * val target = pointOf(x = 2, y = 3)
+ * val ab = pointOf(x = 1, y = 1) + pointOf(x = 3, y = 1)
+ * val cd = pointOf(x = 2, y = 2) + pointOf(x = 4, y = 2)
+ * val actual = listOf(ab, cd).reaches(
+ *     target = target,
+ *     minDistance = 1.0,
+ *     points = 16,
+ * )
+ * assertTrue(actual)
+ * ```
+ *
+ * ```
+ *   ^
+ *   |        target
+ * 3 -       *
+ *   |        c       d
+ * 2 -       *-------*
+ *   |    a       b
+ * 1 -   *-------*
+ *   |
+ * 0 *---|---|---|---|--->
+ *   0   1   2   3   4
+ * ```
+ * @return Is the shortest distance from the [target]
+ * to any [Vector] from [this] receiver less than the [minDistance].
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.8.0
+ */
 fun Iterable<Vector>.reaches(
     target: Point,
     minDistance: Double,
