@@ -127,6 +127,31 @@ fun offsetOf(
     return MutableOffset(dX = dX, dY = dY)
 }
 
+/**
+ * Creates a new [MutableOffset] object with a copy of [this] receiver's values.
+ *
+ * Usage:
+ * ```
+ * val foo = offsetOf(dX = 3.0, dY = 2.0)
+ * val bar = foo.mut()
+ * bar.y = 3.0
+ * ```
+ *
+ * ```
+ *   ^
+ *   |
+ * 3 -   -   -   * bar
+ *   |
+ *dY -   -   -   * foo
+ *   |
+ * 1 -           |
+ *   |
+ * 0 +---|---|---|---|--->
+ *   0   1   2   dX  4
+ * ```
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.8.0
+ */
 fun Offset.mut(): MutableOffset {
     return MutableOffset(
         dX = dX,

@@ -111,4 +111,31 @@ fun sizeOf(
     )
 }
 
-// todo sizeOf measure
+/**
+ * Creates a new [MutableSize] object with a copy of [this] receiver's values.
+ *
+ * Usage:
+ * ```
+ * val foo = sizeOf(width = 3.0, height = 2.0)
+ * val bar = foo.mut()
+ * bar.y = 3.0
+ * ```
+ *
+ * ```
+ *   ^
+ *   |
+ * 3 -   -   -   * bar
+ *   |
+ * h -   -   -   * foo
+ *   |
+ * 1 -           |
+ *   |
+ * 0 +---|---|---|---|--->
+ *   0   1   2   w   4
+ * ```
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.8.0
+ */
+fun Size.mut(): MutableSize {
+    return MutableSize(width = width, height = height)
+}
