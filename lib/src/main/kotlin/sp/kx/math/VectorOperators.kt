@@ -7,7 +7,14 @@ import sp.kx.math.measure.Measure
  * ```
  * val foo = pointOf(x = 1.0, y = 2.0) + pointOf(x = 2.0, y = 1.0)
  * val bar = foo * 2
+ * assertFalse(foo === bar)
+ * assertEquals(2.0, bar.start.x)
+ * assertEquals(4.0, bar.start.y)
+ * assertEquals(4.0, bar.finish.x)
+ * assertEquals(2.0, bar.finish.y)
+ * ```
  *
+ * ```
  *   ^
  *   |
  * 4 -       * bar.start
@@ -34,7 +41,36 @@ operator fun Vector.times(value: Double): Vector {
     )
 }
 
-// todo doc
+/**
+ * Usage:
+ * ```
+ * val foo = pointOf(x = 2.0, y = 4.0) + pointOf(x = 4.0, y = 2.0)
+ * val bar = foo / 2
+ * assertFalse(foo === bar)
+ * assertEquals(1.0, bar.start.x)
+ * assertEquals(2.0, bar.start.y)
+ * assertEquals(2.0, bar.finish.x)
+ * assertEquals(1.0, bar.finish.y)
+ * ```
+ *
+ * ```
+ *   ^
+ *   |
+ * 4 -       * foo.start
+ *   |
+ * 3 -
+ *   |
+ * 2 -   * bar.start * foo.finish
+ *   |
+ * 1 -       * bar.finish
+ *   |
+ * 0 +---|---|---|---|--->
+ *   0   1   2   x   4
+ * ```
+ * @return A new [Vector] object with [this] receiver's [Point]s divided by the [value].
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.8.0
+ */
 operator fun Vector.div(value: Double): Vector {
     return vectorOf(
         startX = start.x / value,
@@ -50,7 +86,14 @@ operator fun Vector.div(value: Double): Vector {
  * val foo = pointOf(x = 1.0, y = 2.0) + pointOf(x = 2.0, y = 1.0)
  * val measure = measureOf(magnitude = 2.0)
  * val bar = foo * measure
+ * assertFalse(foo === bar)
+ * assertEquals(2.0, bar.start.x)
+ * assertEquals(4.0, bar.start.y)
+ * assertEquals(4.0, bar.finish.x)
+ * assertEquals(2.0, bar.finish.y)
+ * ```
  *
+ * ```
  *   ^
  *   |
  * 4 -       * bar.start
@@ -77,7 +120,37 @@ operator fun Vector.times(
     )
 }
 
-// todo doc
+/**
+ * Usage:
+ * ```
+ * val foo = pointOf(x = 2.0, y = 4.0) + pointOf(x = 4.0, y = 2.0)
+ * val measure = measureOf(magnitude = 2.0)
+ * val bar = foo / measure
+ * assertFalse(foo === bar)
+ * assertEquals(1.0, bar.start.x)
+ * assertEquals(2.0, bar.start.y)
+ * assertEquals(2.0, bar.finish.x)
+ * assertEquals(1.0, bar.finish.y)
+ * ```
+ *
+ * ```
+ *   ^
+ *   |
+ * 4 -       * foo.start
+ *   |
+ * 3 -
+ *   |
+ * 2 -   * bar.start * foo.finish
+ *   |
+ * 1 -       * bar.finish
+ *   |
+ * 0 +---|---|---|---|--->
+ *   0   1   2   x   4
+ * ```
+ * @return A new [Vector] object with [this] receiver's [Point]s units calculated by the [measure].
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.6.0
+ */
 operator fun Vector.div(
     measure: Measure<Double, Double>,
 ): Vector {
