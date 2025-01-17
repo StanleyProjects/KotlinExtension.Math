@@ -7,7 +7,12 @@ import sp.kx.math.measure.Measure
  * ```
  * val foo = pointOf(x = 1.0, y = 2.0)
  * val bar = foo * 2
+ * assertFalse(foo === bar)
+ * assertEquals(2.0, bar.x)
+ * assertEquals(4.0, bar.y)
+ * ```
  *
+ * ```
  *   ^
  *   |
  * 4 -       * bar
@@ -32,7 +37,34 @@ operator fun Point.times(value: Double): Point {
     )
 }
 
-// todo doc
+/**
+ * Usage:
+ * ```
+ * val foo = pointOf(x = 2.0, y = 4.0)
+ * val bar = foo / 2
+ * assertFalse(foo === bar)
+ * assertEquals(1.0, bar.x)
+ * assertEquals(2.0, bar.y)
+ * ```
+ *
+ * ```
+ *   ^
+ *   |
+ * 4 -       * foo
+ *   |
+ * 3 -
+ *   |
+ * 2 -   * bar
+ *   |
+ * 1 -
+ *   |
+ * 0 +---|---|---|---|--->
+ *   0   1   2   3   4
+ * ```
+ * @return A new [Point] object with [this] receiver's coordinates divided by the [value].
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.8.0
+ */
 operator fun Point.div(value: Double): Point {
     return pointOf(
         x = x / value,
@@ -46,7 +78,12 @@ operator fun Point.div(value: Double): Point {
  * val foo = pointOf(x = 1.0, y = 2.0)
  * val measure = measureOf(magnitude = 2.0)
  * val bar = foo * measure
+ * assertFalse(foo === bar)
+ * assertEquals(2.0, bar.x)
+ * assertEquals(4.0, bar.y)
+ * ```
  *
+ * ```
  *   ^
  *   |
  * 4 -       * bar
@@ -71,7 +108,35 @@ operator fun Point.times(measure: Measure<Double, Double>): Point {
     )
 }
 
-// todo doc
+/**
+ * Usage:
+ * ```
+ * val foo = pointOf(x = 2.0, y = 4.0)
+ * val measure = measureOf(magnitude = 2.0)
+ * val bar = foo / measure
+ * assertFalse(foo === bar)
+ * assertEquals(1.0, bar.x)
+ * assertEquals(2.0, bar.y)
+ * ```
+ *
+ * ```
+ *   ^
+ *   |
+ * 4 -       * foo
+ *   |
+ * 3 -
+ *   |
+ * 2 -   * bar
+ *   |
+ * 1 -
+ *   |
+ * 0 +---|---|---|---|--->
+ *   0   1   2   3   4
+ * ```
+ * @return A new [Point] object with [this] receiver's coordinates units calculated by the [measure].
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.8.0
+ */
 operator fun Point.div(measure: Measure<Double, Double>): Point {
     return pointOf(
         x = measure.units(x),
