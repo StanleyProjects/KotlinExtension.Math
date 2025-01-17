@@ -153,10 +153,10 @@ fun Size.isEmpty(): Boolean {
  *   |
  * 3 -
  *   |
- * 2 -           *
- *   |
- * 1 -
- *   |
+ * 2 -   -   -   *
+ *   |           .
+ * 1 -           .
+ *   |           .
  * 0 +---|---|---|---|--->
  *   0   1   2   3   4
  * ```
@@ -182,14 +182,51 @@ fun Size.diagonal(): Double {
  *   |
  * 3 -
  *   |
- * 2 -           *
- *   |
- * 1 -
- *   |
+ * 2 -   -   -   *
+ *   |           .
+ * 1 -           .
+ *   |           .
  * 0 +---|---|---|---|--->
  *   0   1   2   3   4
  * ```
- * @return The angle in radians between the x-axis and the diagonal of a rectangle that has dimensions [Size.width] x [Size.height] of [this] receiver.
+ *
+ * Special cases:
+ * ```
+ * val size: Size = sizeOf(1, 1)
+ * assertEquals(kotlin.math.PI / 4, size.diagonalAngle())
+ * ```
+ *
+ * ```
+ *   ^
+ *   |
+ *   -
+ *   |
+ * 1 -   -   *
+ *   |       .
+ *   -       .
+ *   |       .
+ * 0 +---|---|---|---|--->
+ *   0       1       2
+ * ```
+ *
+ * ```
+ * val size: Size = sizeOf(-1, -1)
+ * assertEquals(-(kotlin.math.PI / 4) * 3, size.diagonalAngle())
+ * ```
+ *
+ * ```
+ *   -2      -1       0
+ * ---|---|---|---|---+
+ *            .       |
+ *            .       -
+ *            .       |
+ *            *   -   - -1
+ *                    |
+ *                    -
+ *                    |
+ * ```
+ * @return The angle in radians between the x-axis and the diagonal of a rectangle
+ * that has dimensions [Size.width] x [Size.height] of [this] receiver.
  * @author [Stanley Wintergreen](https://github.com/kepocnhh)
  * @since 0.8.0
  */

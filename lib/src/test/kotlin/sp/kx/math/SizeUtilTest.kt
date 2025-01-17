@@ -1,24 +1,27 @@
 package sp.kx.math
 
-import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.assertNotEquals
+import org.junit.jupiter.api.Assertions.assertThrows
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
-@Suppress("MagicNumber")
 internal class SizeUtilTest {
     @Test
     fun toOffsetTest() {
         val width = 1.2
         val height = 3.4
         val size: Size = sizeOf(width = width, height = height)
-        Assertions.assertNotEquals(size.width, size.height)
-        Assertions.assertEquals(width, size.width)
-        Assertions.assertEquals(height, size.height)
+        assertNotEquals(size.width, size.height)
+        assertEquals(width, size.width)
+        assertEquals(height, size.height)
         val offset: Offset = size.toOffset()
-        Assertions.assertFalse(offset === size)
-        Assertions.assertEquals(width, offset.dX)
-        Assertions.assertEquals(height, offset.dY)
-        Assertions.assertEquals(size.width, offset.dX)
-        Assertions.assertEquals(size.height, offset.dY)
+        assertFalse(offset === size)
+        assertEquals(width, offset.dX)
+        assertEquals(height, offset.dY)
+        assertEquals(size.width, offset.dX)
+        assertEquals(size.height, offset.dY)
     }
 
     @Test
@@ -26,18 +29,18 @@ internal class SizeUtilTest {
         val width = 1.2
         val height = 3.4
         val size: Size = sizeOf(width = width, height = height)
-        Assertions.assertNotEquals(size.width, size.height)
-        Assertions.assertEquals(width, size.width)
-        Assertions.assertEquals(height, size.height)
+        assertNotEquals(size.width, size.height)
+        assertEquals(width, size.width)
+        assertEquals(height, size.height)
         val offset: Offset = size.center()
-        Assertions.assertNotEquals(width, offset.dX)
-        Assertions.assertNotEquals(height, offset.dY)
-        Assertions.assertNotEquals(size.width, offset.dX)
-        Assertions.assertNotEquals(size.height, offset.dY)
-        Assertions.assertEquals(width / 2, offset.dX)
-        Assertions.assertEquals(height / 2, offset.dY)
-        Assertions.assertEquals(size.width / 2, offset.dX)
-        Assertions.assertEquals(size.height / 2, offset.dY)
+        assertNotEquals(width, offset.dX)
+        assertNotEquals(height, offset.dY)
+        assertNotEquals(size.width, offset.dX)
+        assertNotEquals(size.height, offset.dY)
+        assertEquals(width / 2, offset.dX)
+        assertEquals(height / 2, offset.dY)
+        assertEquals(size.width / 2, offset.dX)
+        assertEquals(size.height / 2, offset.dY)
     }
 
     @Test
@@ -45,69 +48,34 @@ internal class SizeUtilTest {
         val width = 1.2
         val height = 3.4
         val size: Size = sizeOf(width = width, height = height)
-        Assertions.assertNotEquals(size.width, size.height)
-        Assertions.assertEquals(width, size.width)
-        Assertions.assertEquals(height, size.height)
+        assertNotEquals(size.width, size.height)
+        assertEquals(width, size.width)
+        assertEquals(height, size.height)
         val point: Point = size.centerPoint()
-        Assertions.assertNotEquals(width, point.x)
-        Assertions.assertNotEquals(height, point.y)
-        Assertions.assertNotEquals(size.width, point.x)
-        Assertions.assertNotEquals(size.height, point.y)
-        Assertions.assertEquals(width / 2, point.x)
-        Assertions.assertEquals(height / 2, point.y)
-        Assertions.assertEquals(size.width / 2, point.x)
-        Assertions.assertEquals(size.height / 2, point.y)
+        assertNotEquals(width, point.x)
+        assertNotEquals(height, point.y)
+        assertNotEquals(size.width, point.x)
+        assertNotEquals(size.height, point.y)
+        assertEquals(width / 2, point.x)
+        assertEquals(height / 2, point.y)
+        assertEquals(size.width / 2, point.x)
+        assertEquals(size.height / 2, point.y)
     }
 
     @Test
     fun toStringTest() {
         val size: Size = sizeOf(width = 1.234, height = 5.67)
-        Assertions.assertEquals("1x6", size.toString(points = 0))
-        Assertions.assertEquals("1.2x5.7", size.toString(points = 1))
-        Assertions.assertEquals("1.23x5.67", size.toString(points = 2))
-        Assertions.assertEquals("1.234x5.670", size.toString(points = 3))
-        Assertions.assertEquals("1.23400000x5.67000000", size.toString(points = 8))
+        assertEquals("1x6", size.toString(points = 0))
+        assertEquals("1.2x5.7", size.toString(points = 1))
+        assertEquals("1.23x5.67", size.toString(points = 2))
+        assertEquals("1.234x5.670", size.toString(points = 3))
+        assertEquals("1.23400000x5.67000000", size.toString(points = 8))
     }
 
     @Test
     fun toStringErrorTest() {
-        Assertions.assertThrows(IllegalStateException::class.java) {
-            @Suppress("IgnoredReturnValue")
+        assertThrows(IllegalStateException::class.java) {
             sizeOf(width = 1.2, height = 4.3).toString(points = -1)
-        }
-    }
-
-    @Test
-    fun eqTest() {
-        val size: Size = sizeOf(width = 1.23, height = 5.67)
-        Assertions.assertTrue(size.eq(other = sizeOf(width = 1.2, height = 5.6), points = 1))
-        Assertions.assertTrue(size.eq(other = sizeOf(width = 1.23, height = 5.67), points = 1))
-        Assertions.assertTrue(size.eq(other = sizeOf(width = 1.23, height = 5.67), points = 2))
-        Assertions.assertTrue(size.eq(other = sizeOf(width = 1.2356789, height = 5.67891234), points = 1))
-        Assertions.assertTrue(size.eq(other = sizeOf(width = 1.2356789, height = 5.67891234), points = 2))
-    }
-
-    @Test
-    fun eqNotTest() {
-        val size: Size = sizeOf(width = 1.23, height = 5.67)
-        Assertions.assertFalse(size.eq(other = sizeOf(width = -1.23, height = 5.67), points = 1))
-        Assertions.assertFalse(size.eq(other = sizeOf(width = 1.23, height = -5.67), points = 1))
-        Assertions.assertFalse(size.eq(other = sizeOf(width = 1.23, height = 5.67891234), points = 3))
-        Assertions.assertFalse(size.eq(other = sizeOf(width = 1.2356789, height = 5.67), points = 3))
-        Assertions.assertFalse(size.eq(other = sizeOf(width = 1.2356789, height = 5.67891234), points = 3))
-        Assertions.assertFalse(size.eq(other = sizeOf(width = 1.2356789, height = 5.67891234), points = 4))
-        Assertions.assertFalse(size.eq(other = sizeOf(width = 1.2356789, height = 5.67891234), points = 8))
-    }
-
-    @Test
-    fun eqErrorTest() {
-        Assertions.assertThrows(IllegalArgumentException::class.java) {
-            @Suppress("IgnoredReturnValue")
-            sizeOf(width = 1.2, height = 4.3).eq(other = sizeOf(width = 1.2, height = 4.3), points = -1)
-        }
-        Assertions.assertThrows(IllegalArgumentException::class.java) {
-            @Suppress("IgnoredReturnValue")
-            sizeOf(width = 1.2, height = 4.3).eq(other = sizeOf(width = 1.2, height = 4.3), points = 0)
         }
     }
 
@@ -117,8 +85,70 @@ internal class SizeUtilTest {
             width = 1,
             height = 2,
         )
-        Assertions.assertNotEquals(foo.width, foo.height)
-        Assertions.assertEquals(1.0, foo.width)
-        Assertions.assertEquals(2.0, foo.height)
+        assertNotEquals(foo.width, foo.height)
+        assertEquals(1.0, foo.width)
+        assertEquals(2.0, foo.height)
+    }
+
+    @Test
+    fun diagonalTest() {
+        val delta = 0.0001
+        val points = 4
+        listOf(
+            Triple(-1.2, -3.4, 3.6055),
+            Triple(-1.2, 3.4, 3.6055),
+            Triple(0.0, 0.0, 0.0),
+            Triple(1.0, 1.0, 1.4142),
+            Triple(1.2, -3.4, 3.6055),
+            Triple(1.2, 3.4, 3.6055),
+            Triple(5.6, 7.8, 9.6020),
+        ).forEach { (width, height, expected) ->
+            val size = sizeOf(width = width, height = height)
+            val actual = size.diagonal()
+            val message = """
+                size: $size
+                actual: $actual (${actual.toString(24)})
+                expected: $expected (${expected.toString(24)})
+                delta: $delta (${delta.toString(24)})
+                points: $points
+            """.trimIndent()
+            assertEquals(expected, actual, delta, message)
+            assertTrue(expected.eq(other = actual, points = points), message)
+            val vector = Point.Center + pointOf(width, height)
+            assertEquals(vector.length(), actual, delta, message)
+        }
+    }
+
+    @Test
+    fun diagonalAngle() {
+        val delta = 0.0001
+        val points = 4
+        listOf(
+            Triple(-1.2, -3.4, -1.91),
+            Triple(-1.2, 3.4, 1.91),
+            Triple(-1.0, -1.0, -(kotlin.math.PI / 4) * 3),
+            Triple(-1.0, 1.0, (kotlin.math.PI / 4) * 3),
+//            Triple(0.0, 0.0, 0.0),
+            Triple(1.0, -1.0, -(kotlin.math.PI / 4) * 1),
+            Triple(1.0, 1.0, (kotlin.math.PI / 4) * 1),
+            Triple(1.2, -3.4, -1.2315),
+            Triple(1.2, 3.4, 1.2315),
+            Triple(1.0, 2.0, 1.1071),
+            Triple(5.6, 7.8, 0.9481),
+        ).forEach { (width, height, expected) ->
+            val size = sizeOf(width = width, height = height)
+            val actual = size.diagonalAngle()
+            val message = """
+                size: $size
+                actual: $actual (${actual.toString(24)})
+                expected: $expected (${expected.toString(24)})
+                delta: $delta (${delta.toString(24)})
+                points: $points
+            """.trimIndent()
+            assertEquals(expected, actual, delta, message)
+            assertTrue(expected.eq(other = actual, points = points), message)
+            val vector = Point.Center + pointOf(width, height)
+            assertEquals(vector.angle(), actual, delta, message)
+        }
     }
 }

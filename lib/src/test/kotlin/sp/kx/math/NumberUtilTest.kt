@@ -1,10 +1,33 @@
 package sp.kx.math
 
 import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
 @Suppress("MagicNumber")
 internal class NumberUtilTest {
+    @Test
+    fun radiansManyTest() {
+        val delta = 0.0001
+        val points = 4
+        listOf(
+            -1.2315 to 5.0516,
+            1.2315 to 1.2315,
+        ).forEach { (radians, expected) ->
+            val actual = radians.radians()
+            val message = """
+                radians: $radians (${radians.toString(24)})
+                actual: $actual (${actual.toString(24)})
+                expected: $expected (${expected.toString(24)})
+                delta: $delta (${delta.toString(24)})
+                points: $points
+            """.trimIndent()
+            assertEquals(expected, actual, delta, message)
+            assertTrue(expected.eq(other = actual, points = points), message)
+        }
+    }
+
     @Test
     fun radiansTest() {
         val actual = kotlin.math.PI * 2 + kotlin.math.PI / 3
