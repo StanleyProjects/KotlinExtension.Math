@@ -128,6 +128,35 @@ fun offsetOf(
 }
 
 /**
+ * An integer version of the `offsetOf` method with [Double]s.
+ *
+ * Usage:
+ * ```
+ * val offset = offsetOf(dX = 3, dY = 2)
+ *
+ *   ^
+ *   |
+ * 3 -
+ *   |
+ * dY-   -   -   *
+ *   |
+ * 1 -           |
+ *   |
+ * 0 +---|---|---|---|--->
+ *   0   1   2   dX  4
+ * ```
+ * @return An instance of [Offset] built from the [Double] values [dX] and [dY].
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.7.3
+ */
+fun offsetOf(
+    dX: Int,
+    dY: Int,
+): Offset {
+    return offsetOf(dX = dX.toDouble(), dY = dY.toDouble())
+}
+
+/**
  * Creates a new [MutableOffset] object with a copy of [this] receiver's values.
  *
  * Usage:

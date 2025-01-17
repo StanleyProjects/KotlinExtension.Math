@@ -141,44 +141,59 @@ fun Size.isEmpty(): Boolean {
 }
 
 /**
- * An integer version of the `sizeOf` method with [Double]s.
- *
  * Usage:
  * ```
- * val size = sizeOf(width = 2, height = 1)
- * val foo = pointOf(1, 1)
- * val bar = pointOf(x = foo.x + size.width, y = foo.y + size.height)
+ * val size: Size = sizeOf(width = 3, height = 2)
+ * val vector = Point.Center + pointOf(size.width, size.height)
+ * assertEquals(vector.length(), size.diagonal())
+ * ```
  *
+ * ```
  *   ^
  *   |
  * 3 -
  *   |
- * 2 -            * bar
+ * 2 -           *
  *   |
- * 1 -   * foo
+ * 1 -
  *   |
  * 0 +---|---|---|---|--->
  *   0   1   2   3   4
  * ```
- * @return An instance of [Size] built from the [Int] values [width] and [height].
+ * @return The size of the diagonal of a rectangle that has dimensions [Size.width] x [Size.height] of [this] receiver.
  * @author [Stanley Wintergreen](https://github.com/kepocnhh)
- * @since 0.6.0
+ * @since 0.8.0
  */
-fun sizeOf(
-    width: Int,
-    height: Int,
-): Size {
-    return MutableSize(
-        width = width.toDouble(),
-        height = height.toDouble(),
-    )
-}
-
 fun Size.diagonal(): Double {
     return kotlin.math.sqrt(width * width + height * height)
+//    return kotlin.math.hypot(x = width, y = height) // todo benchmark
 }
 
-fun Size.angle(): Double {
+/**
+ * Usage:
+ * ```
+ * val size: Size = sizeOf(width = 3, height = 2)
+ * val vector = Point.Center + pointOf(size.width, size.height)
+ * assertEquals(vector.angle(), size.diagonalAngle())
+ * ```
+ *
+ * ```
+ *   ^
+ *   |
+ * 3 -
+ *   |
+ * 2 -           *
+ *   |
+ * 1 -
+ *   |
+ * 0 +---|---|---|---|--->
+ *   0   1   2   3   4
+ * ```
+ * @return The angle in radians between the x-axis and the diagonal of a rectangle that has dimensions [Size.width] x [Size.height] of [this] receiver.
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.8.0
+ */
+fun Size.diagonalAngle(): Double {
     return angleOf(x = width, y = height)
 }
 

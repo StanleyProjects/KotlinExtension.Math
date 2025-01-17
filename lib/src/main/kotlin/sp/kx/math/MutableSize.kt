@@ -112,6 +112,40 @@ fun sizeOf(
 }
 
 /**
+ * An integer version of the `sizeOf` method with [Double]s.
+ *
+ * Usage:
+ * ```
+ * val size = sizeOf(width = 2, height = 1)
+ * val foo = pointOf(1, 1)
+ * val bar = pointOf(x = foo.x + size.width, y = foo.y + size.height)
+ *
+ *   ^
+ *   |
+ * 3 -
+ *   |
+ * 2 -            * bar
+ *   |
+ * 1 -   * foo
+ *   |
+ * 0 +---|---|---|---|--->
+ *   0   1   2   3   4
+ * ```
+ * @return An instance of [Size] built from the [Int] values [width] and [height].
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.6.0
+ */
+fun sizeOf(
+    width: Int,
+    height: Int,
+): Size {
+    return MutableSize(
+        width = width.toDouble(),
+        height = height.toDouble(),
+    )
+}
+
+/**
  * Creates a new [MutableSize] object with a copy of [this] receiver's values.
  *
  * Usage:
