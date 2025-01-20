@@ -38,5 +38,11 @@ interface Point {
          * @since 0.8.0
          */
         val Center: Point = CenterPoint
+
+        /**
+         * A special case of a point with reference coordinates of exactly one division.
+         * @since 0.8.0
+         */
+        val Reference: Point = ReferencePoint
     }
 }
