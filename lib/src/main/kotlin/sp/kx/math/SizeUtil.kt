@@ -256,6 +256,30 @@ fun Size.diagonalAngle(): Double {
     return angleOf(x = width, y = height)
 }
 
+/**
+ * Creates a new [Size] object with a copy of [this] receiver's values or the values [width] and [height] passed in.
+ *
+ * Usage:
+ * ```
+ * val foo = sizeOf(width = 3.0, height = 2.0)
+ * val bar = foo.copy(height = 3.0)
+ *
+ *   ^
+ *   |
+ * 3 -   -   -   * bar
+ *   |
+ * 2 -   -   -   * foo
+ *   |
+ * 1 -           |
+ *   |
+ * 0 +---|---|---|---|--->
+ *   0   1   2   3   4
+ * ```
+ * @param width This value will be set as the [Size.width]. Default is [Size.width] value of [this] receiver.
+ * @param height This value will be set as the [Size.height]. Default is [Size.height] value of [this] receiver.
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.8.0
+ */
 fun Size.copy(width: Double = this.width, height: Double = this.height): Size {
     return sizeOf(
         width = width,
