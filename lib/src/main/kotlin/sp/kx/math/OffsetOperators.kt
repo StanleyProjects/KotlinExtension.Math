@@ -92,8 +92,8 @@ operator fun Offset.div(measure: Measure<Double, Double>): Offset {
  * val baz = foo + bar
  * assertFalse(foo === baz)
  * assertFalse(bar === baz)
- * assertEquals(4.0, bar.dX)
- * assertEquals(6.0, bar.dY)
+ * assertEquals(4.0, baz.dX)
+ * assertEquals(6.0, baz.dY)
  * ```
  * @return A new [Offset] object with a copy of [this] receiver's [Offset.dX] and [Offset.dY] with [other]'s [Offset.dX] and [Offset.dY] added to them.
  * @author [Stanley Wintergreen](https://github.com/kepocnhh)
@@ -114,8 +114,8 @@ operator fun Offset.plus(other: Offset): Offset {
  * val baz = foo - bar
  * assertFalse(foo === baz)
  * assertFalse(bar === baz)
- * assertEquals(2.0, bar.dX)
- * assertEquals(2.0, bar.dY)
+ * assertEquals(2.0, baz.dX)
+ * assertEquals(2.0, baz.dY)
  * ```
  * @return A new [Offset] object with a copy of [this] receiver's [Offset.dX] and [Offset.dY] with [other]'s [Offset.dX] and [Offset.dY] subtracted to them.
  * @author [Stanley Wintergreen](https://github.com/kepocnhh)
@@ -126,4 +126,22 @@ operator fun Offset.minus(other: Offset): Offset {
         dX = dX - other.dX,
         dY = dY - other.dY,
     )
+}
+
+/**
+ * Usage:
+ * ```
+ * val foo = offsetOf(dX = 3.0, dY = 4.0)
+ * val bar = sizeOf(width = 1.0, height = 2.0)
+ * val baz = foo + bar
+ * assertFalse(foo === baz)
+ * assertEquals(4.0, baz.dX)
+ * assertEquals(6.0, baz.dY)
+ * ```
+ * @return A new [Offset] object with a copy of [this] receiver's [Offset.dX] and [Offset.dY] with [size]'s [Size.width] and [Size.height] added to them.
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.8.0
+ */
+operator fun Offset.plus(size: Size): Offset {
+    return offsetOf(dX = dX + size.width, dY = dY + size.height)
 }
