@@ -115,3 +115,20 @@ fun Offset.isEmpty(points: Int): Boolean {
 fun Offset.isEmpty(): Boolean {
     return dX == 0.0 && dY == 0.0
 }
+
+/**
+ * Usage:
+ * ```
+ * val foo = offsetOf(dX = 1.0, dY = 2.0)
+ * val bar = foo.reversed()
+ * assertFalse(foo === bar)
+ * assertEquals(-1.0, bar.dX)
+ * assertEquals(-2.0, bar.dY)
+ * ```
+ * @return A new [Offset] object with [this] receiver's [Offset.dX] and [Offset.dY] multiplied by the -1.0.
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.5.0
+ */
+fun Offset.reversed(): Offset {
+    return offsetOf(dX = dX * -1.0, dY = dY * -1.0)
+}
