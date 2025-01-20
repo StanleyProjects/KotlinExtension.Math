@@ -18,7 +18,7 @@ internal class EmptyVector(override val start: Point) : Vector {
     }
 
     override fun hashCode(): Int {
-        return Objects.hash(start.x, start.y, start.x, start.y) // todo Objects.hash(start.x, start.y)
+        return Objects.hash(start.x, start.y, start.x, start.y)
     }
 }
 

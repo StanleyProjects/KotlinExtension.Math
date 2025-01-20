@@ -35,8 +35,8 @@ interface Point {
     companion object {
         /**
          * A special case of a point with coordinates in the center.
-         * @since 0.3.1
+         * @since 0.8.0
          */
-        val Center = pointOf(x = 0.0, y = 0.0)
+        val Center: Point = CenterPoint
     }
 }
