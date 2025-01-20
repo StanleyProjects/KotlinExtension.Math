@@ -166,7 +166,7 @@ fun Size.isEmpty(): Boolean {
  */
 fun Size.diagonal(): Double {
     return kotlin.math.sqrt(width * width + height * height)
-//    return kotlin.math.hypot(x = width, y = height) // todo benchmark
+//    return kotlin.math.hypot(x = width, y = height) // todo speed vs accuracy
 }
 
 /**
