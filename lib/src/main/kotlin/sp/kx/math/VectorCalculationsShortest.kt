@@ -39,6 +39,37 @@ fun Vector.getShortestDistance(target: Point): Double {
     )
 }
 
+/**
+ * The function calculates the shortest distance from point to segment.
+ * It is up to the segment, and not the length of the perpendicular to the straight line!
+ *
+ * Usage:
+ * ```
+ * val target = pointOf(x = 2, y = 3)
+ * val vector = pointOf(x = 1, y = 1) + pointOf(x = 3, y = 1)
+ * val value = vector.getShortestDistance(
+ *     xTarget = target.x,
+ *     yTarget = target.y,
+ * )
+ * assertEquals(2.0, value)
+ * ```
+ *
+ * ```
+ *   ^
+ *   |        a
+ * 3 -       *
+ *   |
+ * 2 -
+ *   |    b       c
+ * 1 -   *-------*
+ *   |
+ * 0 *---|---|---|---|--->
+ *   0   1   2   3   4
+ * ```
+ * @return The shortest distance from the coordinates [[xTarget], [yTarget]] to the segment described by [this] receiver.
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.8.0
+ */
 fun Vector.getShortestDistance(
     xTarget: Double,
     yTarget: Double,
