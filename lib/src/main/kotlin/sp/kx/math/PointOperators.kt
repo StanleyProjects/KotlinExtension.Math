@@ -212,8 +212,8 @@ operator fun Point.minus(offset: Offset): Point {
  * val foo = pointOf(x = 3.0, y = 3.0)
  * val bar = pointOf(x = 2.0, y = 1.0)
  * val offset = foo - bar
- * assertEquals(1.0, offset.x)
- * assertEquals(2.0, offset.y)
+ * assertEquals(1.0, offset.dX)
+ * assertEquals(2.0, offset.dY)
  *
  *   ^
  *   |

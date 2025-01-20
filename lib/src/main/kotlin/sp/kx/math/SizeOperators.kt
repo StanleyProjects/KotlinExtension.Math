@@ -84,7 +84,21 @@ operator fun Size.div(measure: Measure<Double, Double>): Size {
     )
 }
 
-// todo doc
+/**
+ * Usage:
+ * ```
+ * val foo = sizeOf(width = 3.0, height = 4.0)
+ * val bar = sizeOf(width = 1.0, height = 2.0)
+ * val baz = foo + bar
+ * assertFalse(foo === baz)
+ * assertFalse(bar === baz)
+ * assertEquals(4.0, baz.width)
+ * assertEquals(6.0, baz.height)
+ * ```
+ * @return A new [Size] object with a copy of [this] receiver's [Size.width] and [Size.height] with [other]'s [Size.width] and [Size.height] added to them.
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.8.0
+ */
 operator fun Size.plus(other: Size): Size {
     return sizeOf(
         width = width + other.width,
@@ -92,7 +106,21 @@ operator fun Size.plus(other: Size): Size {
     )
 }
 
-// todo doc
+/**
+ * Usage:
+ * ```
+ * val foo = sizeOf(width = 3.0, height = 4.0)
+ * val bar = sizeOf(width = 1.0, height = 2.0)
+ * val baz = foo - bar
+ * assertFalse(foo === baz)
+ * assertFalse(bar === baz)
+ * assertEquals(2.0, baz.width)
+ * assertEquals(2.0, baz.height)
+ * ```
+ * @return A new [Size] object with a copy of [this] receiver's [Size.width] and [Size.height] with [other]'s [Size.width] and [Size.height] subtracted to them.
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.8.0
+ */
 operator fun Size.minus(other: Size): Size {
     return sizeOf(
         width = width - other.width,
