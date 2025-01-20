@@ -68,6 +68,28 @@ fun Size.toOffset(): Offset {
 }
 
 /**
+ * Converts [Size] to [Offset].
+ * In particular, it can be used to obtain the [Offset] relative to the center of a rectangle that has dimensions [Size.width] x [Size.height].
+ *
+ * Usage:
+ * ```
+ * val size = sizeOf(width = 3, height = 2)
+ * val offset = size.toOffset(multiplier = -0.5)
+ * assertEquals(-1.5, offset.dX)
+ * assertEquals(-0.5, offset.dY)
+ * ```
+ * @return The [Offset] using the [Size.width] and the [Size.height] multiplied by the [multiplier].
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.8.0
+ */
+fun Size.toOffset(multiplier: Double): Offset {
+    return offsetOf(
+        dX = width * multiplier,
+        dY = height * multiplier,
+    )
+}
+
+/**
  * Usage:
  * ```
  * val size: Size = sizeOf(width = 1.2, height = 3.4)

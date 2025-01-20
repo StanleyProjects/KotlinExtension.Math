@@ -10,18 +10,62 @@ import org.junit.jupiter.api.Test
 internal class SizeUtilTest {
     @Test
     fun toOffsetTest() {
-        val width = 1.2
-        val height = 3.4
-        val size: Size = sizeOf(width = width, height = height)
-        assertNotEquals(size.width, size.height)
-        assertEquals(width, size.width)
-        assertEquals(height, size.height)
-        val offset: Offset = size.toOffset()
-        assertFalse(offset === size)
-        assertEquals(width, offset.dX)
-        assertEquals(height, offset.dY)
-        assertEquals(size.width, offset.dX)
-        assertEquals(size.height, offset.dY)
+        val delta = 0.0001
+        val points = 4
+        listOf(
+            -1.0 to -1.0,
+            -1.0 to 0.0,
+            0.0 to -1.0,
+            0.0 to 0.0,
+            0.0 to 1.0,
+            1.0 to -1.0,
+            1.0 to 0.0,
+            1.0 to 1.0,
+            1.2 to 3.4,
+            5.6 to 7.8,
+        ).forEach { (width, height) ->
+            val size = sizeOf(width = width, height = height)
+            val actual = size.toOffset()
+            val expected = offsetOf(dX = width, dY = height)
+            val message = """
+                size: $size
+                actual: $actual (${actual.toString(24)})
+                expected: $expected (${expected.toString(24)})
+                delta: $delta (${delta.toString(24)})
+                points: $points
+            """.trimIndent()
+            assertEquals(actual.dX, expected.dX, delta, message)
+            assertEquals(actual.dY, expected.dY, delta, message)
+            assertEquals(expected, actual, message)
+            assertTrue(expected.eq(other = actual, points = points), message)
+        }
+    }
+
+    @Test
+    fun toOffsetMultiplierTest() {
+        val delta = 0.0001
+        val points = 4
+        listOf(
+            Triple(sizeOf(1.2, 3.4), -1.0, offsetOf(-1.2, -3.4)),
+            Triple(sizeOf(1.2, 3.4), -0.5, offsetOf(-0.6, -1.7)),
+            Triple(sizeOf(1.2, 3.4), 0.0, offsetOf(0.0, 0.0)),
+            Triple(sizeOf(1.2, 3.4), 0.5, offsetOf(0.6, 1.7)),
+            Triple(sizeOf(1.2, 3.4), 1.0, offsetOf(1.2, 3.4)),
+            Triple(sizeOf(1.2, 3.4), 2.0, offsetOf(2.4, 6.8)),
+        ).forEach { (size, multiplier, expected) ->
+            val actual = size.toOffset(multiplier = multiplier)
+            val message = """
+                size: $size
+                actual: $actual (${actual.toString(24)})
+                expected: $expected (${expected.toString(24)})
+                delta: $delta (${delta.toString(24)})
+                points: $points
+            """.trimIndent()
+            assertEquals(actual.dX, expected.dX, delta, message)
+            assertEquals(actual.dY, expected.dY, delta, message)
+            assertEquals(expected, actual, message)
+            assertTrue(expected.eq(other = actual, points = points), message)
+        }
     }
 
     @Test
