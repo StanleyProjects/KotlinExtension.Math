@@ -44,7 +44,7 @@ internal class SizeOperatorsTest {
             2.0 to sizeOf(2.1, 3.2),
             1.0 to sizeOf(4.2, 6.4),
             0.5 to sizeOf(8.4, 12.8),
-            (2.0/3.0) to sizeOf(6.3, 9.6),
+            (2.0 / 3.0) to sizeOf(6.3, 9.6),
         ).forEach { (multiplier, expected) ->
             val actual = size / multiplier
             val message = """
@@ -101,7 +101,7 @@ internal class SizeOperatorsTest {
             2.0 to sizeOf(2.1, 3.2),
             1.0 to sizeOf(4.2, 6.4),
             0.5 to sizeOf(8.4, 12.8),
-            (2.0/3.0) to sizeOf(6.3, 9.6),
+            (2.0 / 3.0) to sizeOf(6.3, 9.6),
         ).forEach { (magnitude, expected) ->
             val measure = measureOf(magnitude = magnitude)
             val actual = size / measure
