@@ -176,6 +176,7 @@ class MutablePoint(
      * @author [Stanley Wintergreen](https://github.com/kepocnhh)
      * @since 0.3.1
      */
+    // todo add -> plusAssign MutablePointOperators
     fun add(offset: Offset) {
         x += offset.dX
         y += offset.dY
@@ -298,6 +299,63 @@ fun pointOf(
     )
 }
 
+/**
+ * An integer version of the `pointOf` method with [Double]s.
+ *
+ * Usage:
+ * ```
+ * val point = pointOf(x = 3, y = 2)
+ *
+ *   ^
+ *   |
+ * 3 -
+ *   |
+ * y -   -   -   *
+ *   |
+ * 1 -           |
+ *   |
+ * 0 +---|---|---|---|--->
+ *   0   1   2   x   4
+ * ```
+ * @return An instance of [Point] built from the [Int] values [x] and [y].
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.4.1
+ */
+fun pointOf(
+    x: Int,
+    y: Int,
+): Point {
+    return pointOf(
+        x = x.toDouble(),
+        y = y.toDouble(),
+    )
+}
+
+/**
+ * Creates a new [MutablePoint] object with a copy of [this] receiver's coordinates.
+ *
+ * Usage:
+ * ```
+ * val foo = pointOf(x = 3.0, y = 2.0)
+ * val bar = foo.mut()
+ * bar.y = 3.0
+ * ```
+ *
+ * ```
+ *   ^
+ *   |
+ * 3 -   -   -   * bar
+ *   |
+ * y -   -   -   * foo
+ *   |
+ * 1 -           |
+ *   |
+ * 0 +---|---|---|---|--->
+ *   0   1   2   x   4
+ * ```
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.8.0
+ */
 fun Point.mut(): MutablePoint {
     return MutablePoint(x = x, y = y)
 }

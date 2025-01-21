@@ -2,7 +2,6 @@ package sp.kx.math
 
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
-import sp.kx.math.measure.measureOf
 
 @Suppress("MagicNumber")
 internal class PointTransformTest {
@@ -26,19 +25,6 @@ internal class PointTransformTest {
         Assertions.assertEquals(1.2, foo.x)
         Assertions.assertEquals(3.4, foo.y)
         val bar = foo.map { it * 2 }
-        Assertions.assertEquals(1.2, foo.x)
-        Assertions.assertEquals(3.4, foo.y)
-        Assertions.assertEquals(1.2 * 2, bar.x)
-        Assertions.assertEquals(3.4 * 2, bar.y)
-    }
-
-    @Test
-    fun mapMeasureTest() {
-        val foo = pointOf(x = 1.2, y = 3.4)
-        Assertions.assertNotEquals(foo.x, foo.y)
-        Assertions.assertEquals(1.2, foo.x)
-        Assertions.assertEquals(3.4, foo.y)
-        val bar = foo + measureOf(magnitude = 2.0)
         Assertions.assertEquals(1.2, foo.x)
         Assertions.assertEquals(3.4, foo.y)
         Assertions.assertEquals(1.2 * 2, bar.x)

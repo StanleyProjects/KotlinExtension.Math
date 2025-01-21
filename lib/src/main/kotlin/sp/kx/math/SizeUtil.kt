@@ -68,6 +68,28 @@ fun Size.toOffset(): Offset {
 }
 
 /**
+ * Converts [Size] to [Offset].
+ * In particular, it can be used to obtain the [Offset] relative to the center of a rectangle that has dimensions [Size.width] x [Size.height].
+ *
+ * Usage:
+ * ```
+ * val size = sizeOf(width = 3, height = 2)
+ * val offset = size.toOffset(multiplier = -0.5)
+ * assertEquals(-1.5, offset.dX)
+ * assertEquals(-0.5, offset.dY)
+ * ```
+ * @return The [Offset] using the [Size.width] and the [Size.height] multiplied by the [multiplier].
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.8.0
+ */
+fun Size.toOffset(multiplier: Double): Offset {
+    return offsetOf(
+        dX = width * multiplier,
+        dY = height * multiplier,
+    )
+}
+
+/**
  * Usage:
  * ```
  * val size: Size = sizeOf(width = 1.2, height = 3.4)
@@ -141,47 +163,123 @@ fun Size.isEmpty(): Boolean {
 }
 
 /**
- * An integer version of the `sizeOf` method with [Double]s.
- *
  * Usage:
  * ```
- * val size = sizeOf(width = 2, height = 1)
- * val foo = pointOf(1, 1)
- * val bar = pointOf(x = foo.x + size.width, y = foo.y + size.height)
+ * val size: Size = sizeOf(width = 3, height = 2)
+ * val vector = Point.Center + pointOf(size.width, size.height)
+ * assertEquals(vector.length(), size.diagonal())
+ * ```
  *
+ * ```
  *   ^
  *   |
  * 3 -
  *   |
- * 2 -            * bar
+ * 2 -   -   -   *
+ *   |           .
+ * 1 -           .
+ *   |           .
+ * 0 +---|---|---|---|--->
+ *   0   1   2   3   4
+ * ```
+ * @return The size of the diagonal of a rectangle that has dimensions [Size.width] x [Size.height] of [this] receiver.
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.8.0
+ */
+fun Size.diagonal(): Double {
+    return kotlin.math.sqrt(width * width + height * height)
+//    return kotlin.math.hypot(x = width, y = height) // todo speed vs accuracy
+}
+
+/**
+ * Usage:
+ * ```
+ * val size: Size = sizeOf(width = 3, height = 2)
+ * val vector = Point.Center + pointOf(size.width, size.height)
+ * assertEquals(vector.angle(), size.diagonalAngle())
+ * ```
+ *
+ * ```
+ *   ^
  *   |
- * 1 -   * foo
+ * 3 -
+ *   |
+ * 2 -   -   -   *
+ *   |           .
+ * 1 -           .
+ *   |           .
+ * 0 +---|---|---|---|--->
+ *   0   1   2   3   4
+ * ```
+ *
+ * Special cases:
+ * ```
+ * val size: Size = sizeOf(1, 1)
+ * assertEquals(kotlin.math.PI / 4, size.diagonalAngle())
+ * ```
+ *
+ * ```
+ *   ^
+ *   |
+ *   -
+ *   |
+ * 1 -   -   *
+ *   |       .
+ *   -       .
+ *   |       .
+ * 0 +---|---|---|---|--->
+ *   0       1       2
+ * ```
+ *
+ * ```
+ * val size: Size = sizeOf(-1, -1)
+ * assertEquals(-(kotlin.math.PI / 4) * 3, size.diagonalAngle())
+ * ```
+ *
+ * ```
+ *   -2      -1       0
+ * ---|---|---|---|---+
+ *            .       |
+ *            .       -
+ *            .       |
+ *            *   -   - -1
+ *                    |
+ *                    -
+ *                    |
+ * ```
+ * @return The angle in radians between the x-axis and the diagonal of a rectangle
+ * that has dimensions [Size.width] x [Size.height] of [this] receiver.
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.8.0
+ */
+fun Size.diagonalAngle(): Double {
+    return angleOf(x = width, y = height)
+}
+
+/**
+ * Creates a new [Size] object with a copy of [this] receiver's values or the values [width] and [height] passed in.
+ *
+ * Usage:
+ * ```
+ * val foo = sizeOf(width = 3.0, height = 2.0)
+ * val bar = foo.copy(height = 3.0)
+ *
+ *   ^
+ *   |
+ * 3 -   -   -   * bar
+ *   |
+ * 2 -   -   -   * foo
+ *   |
+ * 1 -           |
  *   |
  * 0 +---|---|---|---|--->
  *   0   1   2   3   4
  * ```
- * @return An instance of [Size] built from the [Int] values [width] and [height].
+ * @param width This value will be set as the [Size.width]. Default is [Size.width] value of [this] receiver.
+ * @param height This value will be set as the [Size.height]. Default is [Size.height] value of [this] receiver.
  * @author [Stanley Wintergreen](https://github.com/kepocnhh)
- * @since 0.6.0
+ * @since 0.8.0
  */
-fun sizeOf(
-    width: Int,
-    height: Int,
-): Size {
-    return MutableSize(
-        width = width.toDouble(),
-        height = height.toDouble(),
-    )
-}
-
-fun Size.diagonal(): Double {
-    return kotlin.math.sqrt(width * width + height * height)
-}
-
-fun Size.angle(): Double {
-    return angleOf(x = width, y = height)
-}
-
 fun Size.copy(width: Double = this.width, height: Double = this.height): Size {
     return sizeOf(
         width = width,

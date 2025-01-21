@@ -3,6 +3,164 @@ package sp.kx.math
 import sp.kx.math.measure.Measure
 
 /**
+ * Usage:
+ * ```
+ * val foo = pointOf(x = 1.0, y = 2.0) + pointOf(x = 2.0, y = 1.0)
+ * val bar = foo * 2
+ * assertFalse(foo === bar)
+ * assertEquals(2.0, bar.start.x)
+ * assertEquals(4.0, bar.start.y)
+ * assertEquals(4.0, bar.finish.x)
+ * assertEquals(2.0, bar.finish.y)
+ * ```
+ *
+ * ```
+ *   ^
+ *   |
+ * 4 -       * bar.start
+ *   |
+ * 3 -
+ *   |
+ * 2 -   * foo.start * bar.finish
+ *   |
+ * 1 -       * foo.finish
+ *   |
+ * 0 +---|---|---|---|--->
+ *   0   1   2   x   4
+ * ```
+ * @return A new [Vector] object with [this] receiver's [Point]s multiplied by the [value].
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.6.0
+ */
+operator fun Vector.times(value: Double): Vector {
+    return vectorOf(
+        startX = start.x * value,
+        startY = start.y * value,
+        finishX = finish.x * value,
+        finishY = finish.y * value,
+    )
+}
+
+/**
+ * Usage:
+ * ```
+ * val foo = pointOf(x = 2.0, y = 4.0) + pointOf(x = 4.0, y = 2.0)
+ * val bar = foo / 2
+ * assertFalse(foo === bar)
+ * assertEquals(1.0, bar.start.x)
+ * assertEquals(2.0, bar.start.y)
+ * assertEquals(2.0, bar.finish.x)
+ * assertEquals(1.0, bar.finish.y)
+ * ```
+ *
+ * ```
+ *   ^
+ *   |
+ * 4 -       * foo.start
+ *   |
+ * 3 -
+ *   |
+ * 2 -   * bar.start * foo.finish
+ *   |
+ * 1 -       * bar.finish
+ *   |
+ * 0 +---|---|---|---|--->
+ *   0   1   2   x   4
+ * ```
+ * @return A new [Vector] object with [this] receiver's [Point]s divided by the [value].
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.8.0
+ */
+operator fun Vector.div(value: Double): Vector {
+    return vectorOf(
+        startX = start.x / value,
+        startY = start.y / value,
+        finishX = finish.x / value,
+        finishY = finish.y / value,
+    )
+}
+
+/**
+ * Usage:
+ * ```
+ * val foo = pointOf(x = 1.0, y = 2.0) + pointOf(x = 2.0, y = 1.0)
+ * val measure = measureOf(magnitude = 2.0)
+ * val bar = foo * measure
+ * assertFalse(foo === bar)
+ * assertEquals(2.0, bar.start.x)
+ * assertEquals(4.0, bar.start.y)
+ * assertEquals(4.0, bar.finish.x)
+ * assertEquals(2.0, bar.finish.y)
+ * ```
+ *
+ * ```
+ *   ^
+ *   |
+ * 4 -       * bar.start
+ *   |
+ * 3 -
+ *   |
+ * 2 -   * foo.start * bar.finish
+ *   |
+ * 1 -       * foo.finish
+ *   |
+ * 0 +---|---|---|---|--->
+ *   0   1   2   x   4
+ * ```
+ * @return A new [Vector] object with [this] receiver's [Point]s transformed by the [measure].
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.6.0
+ */
+operator fun Vector.times(
+    measure: Measure<Double, Double>,
+): Vector {
+    return ImmutableVector(
+        start = pointOf(x = measure.transform(start.x), y = measure.transform(start.y)),
+        finish = pointOf(x = measure.transform(finish.x), y = measure.transform(finish.y)),
+    )
+}
+
+/**
+ * Usage:
+ * ```
+ * val foo = pointOf(x = 2.0, y = 4.0) + pointOf(x = 4.0, y = 2.0)
+ * val measure = measureOf(magnitude = 2.0)
+ * val bar = foo / measure
+ * assertFalse(foo === bar)
+ * assertEquals(1.0, bar.start.x)
+ * assertEquals(2.0, bar.start.y)
+ * assertEquals(2.0, bar.finish.x)
+ * assertEquals(1.0, bar.finish.y)
+ * ```
+ *
+ * ```
+ *   ^
+ *   |
+ * 4 -       * foo.start
+ *   |
+ * 3 -
+ *   |
+ * 2 -   * bar.start * foo.finish
+ *   |
+ * 1 -       * bar.finish
+ *   |
+ * 0 +---|---|---|---|--->
+ *   0   1   2   x   4
+ * ```
+ * @return A new [Vector] object with [this] receiver's [Point]s units calculated by the [measure].
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.6.0
+ */
+operator fun Vector.div(
+    measure: Measure<Double, Double>,
+): Vector {
+    return ImmutableVector(
+        start = pointOf(x = measure.units(start.x), y = measure.units(start.y)),
+        finish = pointOf(x = measure.units(finish.x), y = measure.units(finish.y)),
+    )
+}
+
+/**
  * Creates a new [Vector] object with a copy of [this] receiver's [Point]s with [offset]'s values added to them.
  *
  * Usage:
@@ -34,70 +192,5 @@ operator fun Vector.plus(offset: Offset): Vector {
         startY = start.y + offset.dY,
         finishX = finish.x + offset.dX,
         finishY = finish.y + offset.dY,
-    )
-}
-
-/**
- * Usage:
- * ```
- * val foo = pointOf(x = 1.0, y = 2.0) + pointOf(x = 2.0, y = 1.0)
- * val bar = foo * 2
- *
- *   ^
- *   |
- * 4 -       * bar.start
- *   |
- * 3 -
- *   |
- * 2 -   * foo.start * bar.finish
- *   |
- * 1 -       * foo.finish
- *   |
- * 0 +---|---|---|---|--->
- *   0   1   2   x   4
- * ```
- * @return A new [Vector] object with [this] receiver's [Point]s multiplied by the [value].
- * @author [Stanley Wintergreen](https://github.com/kepocnhh)
- * @since 0.6.0
- */
-operator fun Vector.times(value: Double): Vector {
-    return vectorOf(
-        startX = start.x * value,
-        startY = start.y * value,
-        finishX = finish.x * value,
-        finishY = finish.y * value,
-    )
-}
-
-/**
- * Usage:
- * ```
- * val foo = pointOf(x = 1.0, y = 2.0) + pointOf(x = 2.0, y = 1.0)
- * val measure = measureOf(magnitude = 2.0)
- * val bar = foo + measure
- *
- *   ^
- *   |
- * 4 -       * bar.start
- *   |
- * 3 -
- *   |
- * 2 -   * foo.start * bar.finish
- *   |
- * 1 -       * foo.finish
- *   |
- * 0 +---|---|---|---|--->
- *   0   1   2   x   4
- * ```
- * @return A new [Vector] object with [this] receiver's [Point]s transformed by the [measure].
- * @author [Stanley Wintergreen](https://github.com/kepocnhh)
- * @since 0.6.0
- */
-operator fun Vector.plus(
-    measure: Measure<Double, Double>,
-): Vector {
-    return ImmutableVector(
-        start = pointOf(x = measure.transform(start.x), y = measure.transform(start.y)),
-        finish = pointOf(x = measure.transform(finish.x), y = measure.transform(finish.y)),
     )
 }

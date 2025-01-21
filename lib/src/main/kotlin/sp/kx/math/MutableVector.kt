@@ -135,6 +135,32 @@ class MutableVector(
     }
 }
 
+/**
+ * Creates a new [MutableVector] object with a copy of [this] receiver's points.
+ *
+ * Usage:
+ * ```
+ * val foo = pointOf(1, 1) + pointOf(3, 1)
+ * val bar = foo.mut()
+ * bar.finish.x = 1.0
+ * bar.finish.y = 3.0
+ * ```
+ *
+ * ```
+ *   ^
+ *   |
+ * 3 -   ^ bar
+ *   |   |
+ * 2 -   |
+ *   |   |
+ * 1 -   * - - - > foo
+ *   |
+ * 0 +---|---|---|---|--->
+ *   0   1   2   3   4
+ * ```
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.8.0
+ */
 fun Vector.mut(): MutableVector {
     return MutableVector(
         start = start.mut(),

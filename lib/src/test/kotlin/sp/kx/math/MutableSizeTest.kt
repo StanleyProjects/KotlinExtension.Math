@@ -1,9 +1,11 @@
 package sp.kx.math
 
-import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.assertNotEquals
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
-@Suppress("MagicNumber")
 internal class MutableSizeTest {
     @Test
     fun constructorTest() {
@@ -11,15 +13,15 @@ internal class MutableSizeTest {
             width = 1.2,
             height = 3.4,
         )
-        Assertions.assertNotEquals(size.width, size.height)
-        Assertions.assertEquals(1.2, size.width)
-        Assertions.assertEquals(3.4, size.height)
+        assertNotEquals(size.width, size.height)
+        assertEquals(1.2, size.width)
+        assertEquals(3.4, size.height)
         size.width = 5.6
-        Assertions.assertEquals(5.6, size.width)
-        Assertions.assertEquals(3.4, size.height)
+        assertEquals(5.6, size.width)
+        assertEquals(3.4, size.height)
         size.height = 7.8
-        Assertions.assertEquals(5.6, size.width)
-        Assertions.assertEquals(7.8, size.height)
+        assertEquals(5.6, size.width)
+        assertEquals(7.8, size.height)
     }
 
     @Test
@@ -28,19 +30,19 @@ internal class MutableSizeTest {
             width = 1.2,
             height = 5.6,
         ).also { size: Size ->
-            Assertions.assertEquals("1.20x5.60", size.toString())
+            assertEquals("1.20x5.60", size.toString())
         }
         MutableSize(
             width = 1.23,
             height = 5.67,
         ).also { size: Size ->
-            Assertions.assertEquals("1.23x5.67", size.toString())
+            assertEquals("1.23x5.67", size.toString())
         }
         MutableSize(
             width = 1.234,
             height = 5.678,
         ).also { size: Size ->
-            Assertions.assertEquals("1.23x5.68", size.toString())
+            assertEquals("1.23x5.68", size.toString())
         }
     }
 
@@ -54,9 +56,9 @@ internal class MutableSizeTest {
             width = 1.2,
             height = 3.4,
         )
-        Assertions.assertEquals(foo, bar)
-        Assertions.assertFalse(foo === bar)
-        Assertions.assertTrue(foo == bar)
+        assertEquals(foo, bar)
+        assertFalse(foo === bar)
+        assertTrue(foo == bar)
     }
 
     @Test
@@ -65,18 +67,17 @@ internal class MutableSizeTest {
             width = 1.2,
             height = 3.4,
         )
-        Assertions.assertNotEquals(MutableSize(1.2, 1.2), foo)
-        Assertions.assertFalse(MutableSize(1.2, 1.2) == foo)
-        Assertions.assertNotEquals(MutableSize(3.4, 3.4), foo)
-        Assertions.assertFalse(MutableSize(3.4, 3.4) == foo)
-        Assertions.assertNotEquals(MutableSize(3.4, 1.2), foo)
-        Assertions.assertFalse(MutableSize(3.4, 1.2) == foo)
-        Assertions.assertFalse(foo.equals(Unit))
+        assertNotEquals(MutableSize(1.2, 1.2), foo)
+        assertFalse(MutableSize(1.2, 1.2) == foo)
+        assertNotEquals(MutableSize(3.4, 3.4), foo)
+        assertFalse(MutableSize(3.4, 3.4) == foo)
+        assertNotEquals(MutableSize(3.4, 1.2), foo)
+        assertFalse(MutableSize(3.4, 1.2) == foo)
+        assertFalse(foo.equals(Unit))
     }
 
     @Test
     fun hashCodeTest() {
-        @Suppress("IgnoredReturnValue")
         MutableSize(
             width = 1.2,
             height = 3.4,
@@ -89,13 +90,13 @@ internal class MutableSizeTest {
             width = 1.2,
             height = 3.4,
         )
-        Assertions.assertNotEquals(actual.width, actual.height)
-        Assertions.assertEquals(1.2, actual.width)
-        Assertions.assertEquals(3.4, actual.height)
+        assertNotEquals(actual.width, actual.height)
+        assertEquals(1.2, actual.width)
+        assertEquals(3.4, actual.height)
         actual.set(width = 5.6, height = 7.8)
-        Assertions.assertNotEquals(actual.width, actual.height)
-        Assertions.assertEquals(5.6, actual.width)
-        Assertions.assertEquals(7.8, actual.height)
+        assertNotEquals(actual.width, actual.height)
+        assertEquals(5.6, actual.width)
+        assertEquals(7.8, actual.height)
     }
 
     @Test
@@ -104,14 +105,45 @@ internal class MutableSizeTest {
             width = 1.2,
             height = 3.4,
         )
-        Assertions.assertNotEquals(foo.width, foo.height)
-        Assertions.assertEquals(1.2, foo.width)
-        Assertions.assertEquals(3.4, foo.height)
+        assertNotEquals(foo.width, foo.height)
+        assertEquals(1.2, foo.width)
+        assertEquals(3.4, foo.height)
         val bar = sizeOf(width = 5.6, height = 7.8)
-        Assertions.assertNotEquals(foo, bar)
+        assertNotEquals(foo, bar)
         foo.set(bar)
-        Assertions.assertEquals(5.6, foo.width)
-        Assertions.assertEquals(7.8, foo.height)
-        Assertions.assertEquals(foo, bar)
+        assertEquals(5.6, foo.width)
+        assertEquals(7.8, foo.height)
+        assertEquals(foo, bar)
+    }
+
+    @Test
+    fun mutTest() {
+        val delta = 0.00000001
+        listOf(
+            -9.0 to 1.2,
+            -1.2 to 2.4,
+            0.0 to 0.0,
+            1.0 to 1.0,
+            1.2 to 3.4,
+            5.6 to -7.8,
+            5.6 to 7.8,
+        ).forEach { (width, height) ->
+            val expected = sizeOf(width = width, height = height)
+            val actual = expected.mut()
+            check(width == expected.width)
+            check(height == expected.height)
+            val message = """
+                expected: $expected
+                actual: $actual
+                delta: $delta (${delta.toString(24)})
+            """.trimIndent()
+            assertEquals(actual::class.java, MutableSize::class.java, message)
+            assertEquals(width, actual.width, delta, message)
+            assertEquals(height, actual.height, delta, message)
+            assertEquals(expected, actual, message)
+            val value = 128.0
+            actual.width = value
+            assertEquals(value, actual.width, delta, message)
+        }
     }
 }

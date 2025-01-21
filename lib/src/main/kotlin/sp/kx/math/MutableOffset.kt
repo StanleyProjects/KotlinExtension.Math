@@ -88,6 +88,17 @@ class MutableOffset(
         this.dX = dY
         dY = dX
     }
+
+    // todo plusAssign MutableOffsetOperators
+    fun add(dX: Double, dY: Double) {
+        this.dX += dX
+        this.dY += dY
+    }
+
+    fun clear() {
+        dX = 0.0
+        dY = 0.0
+    }
 }
 
 /**
@@ -117,16 +128,63 @@ fun offsetOf(
     return MutableOffset(dX = dX, dY = dY)
 }
 
+/**
+ * An integer version of the `offsetOf` method with [Double]s.
+ *
+ * Usage:
+ * ```
+ * val offset = offsetOf(dX = 3, dY = 2)
+ *
+ *   ^
+ *   |
+ * 3 -
+ *   |
+ * dY-   -   -   *
+ *   |
+ * 1 -           |
+ *   |
+ * 0 +---|---|---|---|--->
+ *   0   1   2   dX  4
+ * ```
+ * @return An instance of [Offset] built from the [Double] values [dX] and [dY].
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.7.3
+ */
+fun offsetOf(
+    dX: Int,
+    dY: Int,
+): Offset {
+    return offsetOf(dX = dX.toDouble(), dY = dY.toDouble())
+}
+
+/**
+ * Creates a new [MutableOffset] object with a copy of [this] receiver's values.
+ *
+ * Usage:
+ * ```
+ * val foo = offsetOf(dX = 3.0, dY = 2.0)
+ * val bar = foo.mut()
+ * bar.y = 3.0
+ * ```
+ *
+ * ```
+ *   ^
+ *   |
+ * 3 -   -   -   * bar
+ *   |
+ *dY -   -   -   * foo
+ *   |
+ * 1 -           |
+ *   |
+ * 0 +---|---|---|---|--->
+ *   0   1   2   dX  4
+ * ```
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.8.0
+ */
 fun Offset.mut(): MutableOffset {
     return MutableOffset(
         dX = dX,
         dY = dY,
-    )
-}
-
-fun MutableOffset.add(dX: Double, dY: Double) {
-    set(
-        dX = this.dX + dX,
-        dY = this.dY + dY,
     )
 }

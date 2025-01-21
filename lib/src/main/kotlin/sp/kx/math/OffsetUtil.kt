@@ -117,30 +117,60 @@ fun Offset.isEmpty(): Boolean {
 }
 
 /**
- * An integer version of the `offsetOf` method with [Double]s.
+ * Usage:
+ * ```
+ * val foo = offsetOf(dX = 1.0, dY = 2.0)
+ * val bar = foo.reversed()
+ * assertFalse(foo === bar)
+ * assertEquals(-1.0, bar.dX)
+ * assertEquals(-2.0, bar.dY)
+ * ```
+ * @return A new [Offset] object with [this] receiver's [Offset.dX] and [Offset.dY] multiplied by the -1.0.
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.5.0
+ */
+fun Offset.reversed(): Offset {
+    return offsetOf(dX = dX * -1.0, dY = dY * -1.0)
+}
+
+/**
+ * In particular, it can be used to obtain the [Offset] relative to the center of a rectangle that has dimensions [Size.width] x [Size.height].
  *
  * Usage:
  * ```
- * val offset = offsetOf(dX = 3, dY = 2)
- *
- *   ^
- *   |
- * 3 -
- *   |
- * dY-   -   -   *
- *   |
- * 1 -           |
- *   |
- * 0 +---|---|---|---|--->
- *   0   1   2   dX  4
+ * val foo = offsetOf(dX = 3.0, dY = 4.0)
+ * val bar = sizeOf(width = 1.0, height = 2.0)
+ * val baz = foo.plus(size = bar, multiplier = 2.0)
+ * assertFalse(foo === baz)
+ * assertEquals(5.0, baz.dX)
+ * assertEquals(8.0, baz.dY)
  * ```
- * @return An instance of [Offset] built from the [Double] values [dX] and [dY].
+ *
+ * Special case:
+ * ```
+ * val offset: Offset = ...
+ * val size: Size = ...
+ * val foo = offset.plus(size = size, multiplier = -0.5)
+ * ```
+ *
+ * ```
+ *  ^
+ *  |    offset
+ *  -   *
+ *  |        size
+ *  -       * - - - *
+ *  |       |       |
+ *  -       |       |
+ *  |       |       |
+ *  -       * - - - *
+ *  |
+ *  *---|---|---|---|--->
+ * ```
+ *
+ * @return A new [Offset] object with a copy of [this] receiver's [Offset.dX] and [Offset.dY] with [size]'s [Size.width] and [Size.height] multiplied by the [multiplier] added to them.
  * @author [Stanley Wintergreen](https://github.com/kepocnhh)
- * @since 0.7.3
+ * @since 0.8.0
  */
-fun offsetOf(
-    dX: Int,
-    dY: Int,
-): Offset {
-    return offsetOf(dX = dX.toDouble(), dY = dY.toDouble())
+fun Offset.plus(size: Size, multiplier: Double): Offset {
+    return offsetOf(dX = dX + size.width * multiplier, dY = dY + size.height * multiplier)
 }
