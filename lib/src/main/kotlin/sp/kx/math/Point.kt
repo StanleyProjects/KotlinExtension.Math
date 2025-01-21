@@ -44,5 +44,7 @@ interface Point {
          * @since 0.8.0
          */
         val Reference: Point = ReferencePoint
+
+        val Undefined: Point = UndefinedPoint
     }
 }

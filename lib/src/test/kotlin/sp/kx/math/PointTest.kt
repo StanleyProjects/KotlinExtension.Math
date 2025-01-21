@@ -33,6 +33,7 @@ internal class PointTest {
         assertFalse(Point.Center == pointOf(1.0, 0.0))
         assertNotEquals(pointOf(0.0, 1.0), Point.Center)
         assertFalse(Point.Center == pointOf(0.0, 1.0))
+        assertNotEquals(null, Point.Center)
         assertNotEquals(Unit, Point.Center)
         assertFalse(Point.Center.equals(Unit))
     }

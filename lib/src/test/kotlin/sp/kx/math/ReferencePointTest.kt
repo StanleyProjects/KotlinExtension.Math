@@ -28,6 +28,7 @@ internal class ReferencePointTest {
             assertNotEquals(unexpected, Point.Reference)
             assertFalse(Point.Reference == unexpected)
         }
+        assertNotEquals(null, Point.Reference)
         assertNotEquals(Unit, Point.Reference)
         assertFalse(Point.Reference.equals(Unit))
     }
