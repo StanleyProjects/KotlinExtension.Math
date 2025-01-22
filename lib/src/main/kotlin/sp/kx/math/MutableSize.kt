@@ -84,21 +84,71 @@ class MutableSize(
         height = 0.0
     }
 
-    operator fun divAssign(value: Double) {
-        width /= value
-        height /= value
-    }
-
+    /**
+     * Usage:
+     * ```
+     * val size = MutableSize(width = 1.0, height = 2.0)
+     * size *= 2
+     * assertEquals(2.0, size.width)
+     * assertEquals(4.0, size.height)
+     * ```
+     * @param value The [width] and [height] values will be multiplied by this value.
+     * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+     * @since 0.8.1
+     */
     operator fun timesAssign(value: Double) {
         width *= value
         height *= value
     }
 
+    /**
+     * Usage:
+     * ```
+     * val size = MutableSize(width = 2.0, height = 4.0)
+     * size /= 2
+     * assertEquals(1.0, size.width)
+     * assertEquals(2.0, size.height)
+     * ```
+     * @param value The [width] and [height] values will be divided by this value.
+     * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+     * @since 0.8.1
+     */
+    operator fun divAssign(value: Double) {
+        width /= value
+        height /= value
+    }
+
+    /**
+     * Usage:
+     * ```
+     * val size = MutableSize(width = 4.0, height = 3.0)
+     * val offset = offsetOf(dX = 2.0, dY = 1.0)
+     * size += offset
+     * assertEquals(6.0, size.width)
+     * assertEquals(4.0, size.height)
+     * ```
+     * @param offset This values will be added to the [width] and [height] values.
+     * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+     * @since 0.8.1
+     */
     operator fun plusAssign(offset: Offset) {
         width += offset.dX
         height += offset.dY
     }
 
+    /**
+     * Usage:
+     * ```
+     * val size = MutableSize(width = 4.0, height = 3.0)
+     * val offset = offsetOf(dX = 2.0, dY = 1.0)
+     * size -= offset
+     * assertEquals(2.0, size.width)
+     * assertEquals(2.0, size.height)
+     * ```
+     * @param offset This values will be subtracted from the [width] and [height] values.
+     * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+     * @since 0.8.1
+     */
     operator fun minusAssign(offset: Offset) {
         width -= offset.dX
         height -= offset.dY
