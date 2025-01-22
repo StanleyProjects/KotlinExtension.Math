@@ -89,15 +89,39 @@ class MutableOffset(
         dY = dX
     }
 
-    // todo plusAssign MutableOffsetOperators
-    fun add(dX: Double, dY: Double) {
-        this.dX += dX
-        this.dY += dY
-    }
-
     fun clear() {
         dX = 0.0
         dY = 0.0
+    }
+
+    operator fun divAssign(value: Double) {
+        dX /= value
+        dY /= value
+    }
+
+    operator fun timesAssign(value: Double) {
+        dX *= value
+        dY *= value
+    }
+
+    operator fun plusAssign(value: Double) {
+        dX += value
+        dY += value
+    }
+
+    operator fun minusAssign(value: Double) {
+        dX -= value
+        dY -= value
+    }
+
+    operator fun MutableOffset.plusAssign(other: Offset) {
+        dX += other.dX
+        dY += other.dY
+    }
+
+    operator fun MutableOffset.minusAssign(other: Offset) {
+        dX -= other.dX
+        dY -= other.dY
     }
 }
 
