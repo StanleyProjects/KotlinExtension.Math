@@ -65,9 +65,54 @@ class MutableSize(
         height = other.height
     }
 
-    // todo plusAssign
-    // todo add
-    // todo swap
+    fun add(
+        dX: Double,
+        dY: Double,
+    ) {
+        width += dX
+        height += dY
+    }
+
+    fun swap() {
+        val width = width
+        this.width = height
+        height = width
+    }
+
+    fun clear() {
+        width = 0.0
+        height = 0.0
+    }
+
+    operator fun divAssign(value: Double) {
+        width /= value
+        height /= value
+    }
+
+    operator fun timesAssign(value: Double) {
+        width *= value
+        height *= value
+    }
+
+    operator fun plusAssign(value: Double) {
+        width += value
+        height += value
+    }
+
+    operator fun minusAssign(value: Double) {
+        width -= value
+        height -= value
+    }
+
+    operator fun plusAssign(offset: Offset) {
+        width += offset.dX
+        height += offset.dY
+    }
+
+    operator fun minusAssign(offset: Offset) {
+        width -= offset.dX
+        height -= offset.dY
+    }
 
     override fun toString(): String {
         return toString(size = this, points = 2, locale = Locale.US)
