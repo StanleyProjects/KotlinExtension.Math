@@ -153,36 +153,6 @@ class MutablePoint(
     }
 
     /**
-     * Method for adding offset to [x] and [y] coordinates.
-     *
-     * Usage:
-     * ```
-     * val point = MutablePoint(x = 1.0, y = 2.0)
-     * val offset = offsetOf(dX = 2.0, dY = 1.0)
-     * point.add(offset)
-     *
-     *   ^
-     *   |
-     * y -   -   -   * new
-     *   |
-     * 2 -   * old   |
-     *   |
-     * 1 -   |       |
-     *   |
-     * 0 +---|---|---|---|--->
-     *   0   1   2   x   4
-     * ```
-     * @param offset The [Offset.dX] and [Offset.dY] from here will be added to the [x] and [y] coordinates respectively.
-     * @author [Stanley Wintergreen](https://github.com/kepocnhh)
-     * @since 0.3.1
-     */
-    // todo add -> plusAssign MutablePointOperators
-    fun add(offset: Offset) {
-        x += offset.dX
-        y += offset.dY
-    }
-
-    /**
      * The method changes the [x] and [y] coordinates of this point
      * to the coordinates of a point that lies at a distance [length].
      *
@@ -266,6 +236,65 @@ class MutablePoint(
      */
     fun move(length: Double) {
         x += length
+    }
+
+    fun clear() {
+        x = 0.0
+        y = 0.0
+    }
+
+    operator fun divAssign(value: Double) {
+        x /= value
+        y /= value
+    }
+
+    operator fun timesAssign(value: Double) {
+        x *= value
+        y *= value
+    }
+
+    operator fun plusAssign(value: Double) {
+        x += value
+        y += value
+    }
+
+    operator fun minusAssign(value: Double) {
+        x -= value
+        y -= value
+    }
+
+    /**
+     * Method for adding offset to [x] and [y] coordinates.
+     *
+     * Usage:
+     * ```
+     * val point = MutablePoint(x = 1.0, y = 2.0)
+     * val offset = offsetOf(dX = 2.0, dY = 1.0)
+     * point += offset
+     *
+     *   ^
+     *   |
+     * y -   -   -   * new
+     *   |
+     * 2 -   * old   |
+     *   |
+     * 1 -   |       |
+     *   |
+     * 0 +---|---|---|---|--->
+     *   0   1   2   x   4
+     * ```
+     * @param offset The [Offset.dX] and [Offset.dY] from here will be added to the [x] and [y] coordinates respectively.
+     * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+     * @since 0.8.1
+     */
+    operator fun plusAssign(offset: Offset) {
+        x += offset.dX
+        y += offset.dY
+    }
+
+    operator fun minusAssign(offset: Offset) {
+        x -= offset.dX
+        y -= offset.dY
     }
 }
 

@@ -114,12 +114,12 @@ class MutableOffset(
         dY -= value
     }
 
-    operator fun MutableOffset.plusAssign(other: Offset) {
+    operator fun plusAssign(other: Offset) {
         dX += other.dX
         dY += other.dY
     }
 
-    operator fun MutableOffset.minusAssign(other: Offset) {
+    operator fun minusAssign(other: Offset) {
         dX -= other.dX
         dY -= other.dY
     }
