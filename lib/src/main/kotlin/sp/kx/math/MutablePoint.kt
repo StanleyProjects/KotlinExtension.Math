@@ -243,14 +243,14 @@ class MutablePoint(
         y = 0.0
     }
 
-    operator fun divAssign(value: Double) {
-        x /= value
-        y /= value
-    }
-
     operator fun timesAssign(value: Double) {
         x *= value
         y *= value
+    }
+
+    operator fun divAssign(value: Double) {
+        x /= value
+        y /= value
     }
 
     operator fun plusAssign(value: Double) {
