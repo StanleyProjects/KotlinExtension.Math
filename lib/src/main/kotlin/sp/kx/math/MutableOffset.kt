@@ -94,21 +94,71 @@ class MutableOffset(
         dY = 0.0
     }
 
-    operator fun divAssign(value: Double) {
-        dX /= value
-        dY /= value
-    }
-
+    /**
+     * Usage:
+     * ```
+     * val offset = MutableOffset(dX = 1.0, dY = 2.0)
+     * offset *= 2
+     * assertEquals(2.0, offset.dX)
+     * assertEquals(4.0, offset.dY)
+     * ```
+     * @param value The [dX] and [dY] values will be multiplied by this value.
+     * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+     * @since 0.8.1
+     */
     operator fun timesAssign(value: Double) {
         dX *= value
         dY *= value
     }
 
+    /**
+     * Usage:
+     * ```
+     * val offset = MutableOffset(dX = 2.0, dY = 4.0)
+     * offset /= 2
+     * assertEquals(1.0, offset.dX)
+     * assertEquals(2.0, offset.dY)
+     * ```
+     * @param value The [dX] and [dY] values will be divided by this value.
+     * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+     * @since 0.8.1
+     */
+    operator fun divAssign(value: Double) {
+        dX /= value
+        dY /= value
+    }
+
+    /**
+     * Usage:
+     * ```
+     * val offset = MutableOffset(dX = 4.0, dY = 3.0)
+     * val other = offsetOf(dX = 2.0, dY = 1.0)
+     * offset += other
+     * assertEquals(6.0, offset.dX)
+     * assertEquals(4.0, offset.dY)
+     * ```
+     * @param other These values will be added to the [dX] and [dY] values.
+     * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+     * @since 0.8.1
+     */
     operator fun plusAssign(other: Offset) {
         dX += other.dX
         dY += other.dY
     }
 
+    /**
+     * Usage:
+     * ```
+     * val offset = MutableOffset(dX = 4.0, dY = 3.0)
+     * val other = offsetOf(dX = 2.0, dY = 1.0)
+     * offset -= other
+     * assertEquals(2.0, offset.dX)
+     * assertEquals(2.0, offset.dY)
+     * ```
+     * @param other These values will be subtracted from the [dX] and [dY] values.
+     * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+     * @since 0.8.1
+     */
     operator fun minusAssign(other: Offset) {
         dX -= other.dX
         dY -= other.dY
