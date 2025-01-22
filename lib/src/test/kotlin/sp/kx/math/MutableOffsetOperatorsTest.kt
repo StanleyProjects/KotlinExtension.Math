@@ -43,48 +43,6 @@ internal class MutableOffsetOperatorsTest {
     }
 
     @Test
-    fun plusAssignTest() {
-        val initial = offsetOf(4.2, 6.4)
-        val points = 8
-        val delta = 0.00000001
-        listOf(
-            -6.4 to offsetOf(-2.2, 0.0),
-            -4.2 to offsetOf(0.0, 2.2),
-            -0.5 to offsetOf(3.7, 5.9),
-            0.0 to offsetOf(4.2, 6.4),
-            0.5 to offsetOf(4.7, 6.9),
-            1.0 to offsetOf(5.2, 7.4),
-            1.5 to offsetOf(5.7, 7.9),
-            2.0 to offsetOf(6.2, 8.4),
-        ).forEach { (value, expected) ->
-            val actual = MutableOffset(dX = initial.dX, dY = initial.dY)
-            actual += value
-            assert(expected = expected, actual = actual, points = points, delta = delta)
-        }
-    }
-
-    @Test
-    fun minusAssignTest() {
-        val initial = offsetOf(4.2, 6.4)
-        val points = 8
-        val delta = 0.00000001
-        listOf(
-            6.4 to offsetOf(-2.2, 0.0),
-            4.2 to offsetOf(0.0, 2.2),
-            0.5 to offsetOf(3.7, 5.9),
-            0.0 to offsetOf(4.2, 6.4),
-            -0.5 to offsetOf(4.7, 6.9),
-            -1.0 to offsetOf(5.2, 7.4),
-            -1.5 to offsetOf(5.7, 7.9),
-            -2.0 to offsetOf(6.2, 8.4),
-        ).forEach { (value, expected) ->
-            val actual = MutableOffset(dX = initial.dX, dY = initial.dY)
-            actual -= value
-            assert(expected = expected, actual = actual, points = points, delta = delta)
-        }
-    }
-
-    @Test
     fun plusAssignOffsetTest() {
         val initial = offsetOf(1.2, 3.4)
         val points = 8

@@ -94,16 +94,6 @@ class MutableSize(
         height *= value
     }
 
-    operator fun plusAssign(value: Double) {
-        width += value
-        height += value
-    }
-
-    operator fun minusAssign(value: Double) {
-        width -= value
-        height -= value
-    }
-
     operator fun plusAssign(offset: Offset) {
         width += offset.dX
         height += offset.dY

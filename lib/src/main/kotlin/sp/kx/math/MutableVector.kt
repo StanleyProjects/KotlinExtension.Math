@@ -144,14 +144,14 @@ class MutableVector(
         finish *= value
     }
 
-    operator fun plusAssign(value: Double) {
-        start += value
-        finish += value
+    operator fun plusAssign(offset: Offset) {
+        start += offset
+        finish += offset
     }
 
-    operator fun minusAssign(value: Double) {
-        start -= value
-        finish -= value
+    operator fun minusAssign(offset: Offset) {
+        start -= offset
+        finish -= offset
     }
 }
 

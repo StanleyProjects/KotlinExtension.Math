@@ -43,48 +43,6 @@ internal class MutableSizeOperatorsTest {
     }
 
     @Test
-    fun plusAssignTest() {
-        val initial = sizeOf(4.2, 6.4)
-        val points = 8
-        val delta = 0.00000001
-        listOf(
-            -6.4 to sizeOf(-2.2, 0.0),
-            -4.2 to sizeOf(0.0, 2.2),
-            -0.5 to sizeOf(3.7, 5.9),
-            0.0 to sizeOf(4.2, 6.4),
-            0.5 to sizeOf(4.7, 6.9),
-            1.0 to sizeOf(5.2, 7.4),
-            1.5 to sizeOf(5.7, 7.9),
-            2.0 to sizeOf(6.2, 8.4),
-        ).forEach { (value, expected) ->
-            val actual = MutableSize(width = initial.width, height = initial.height)
-            actual += value
-            assert(expected = expected, actual = actual, points = points, delta = delta)
-        }
-    }
-
-    @Test
-    fun minusAssignTest() {
-        val initial = sizeOf(4.2, 6.4)
-        val points = 8
-        val delta = 0.00000001
-        listOf(
-            6.4 to sizeOf(-2.2, 0.0),
-            4.2 to sizeOf(0.0, 2.2),
-            0.5 to sizeOf(3.7, 5.9),
-            0.0 to sizeOf(4.2, 6.4),
-            -0.5 to sizeOf(4.7, 6.9),
-            -1.0 to sizeOf(5.2, 7.4),
-            -1.5 to sizeOf(5.7, 7.9),
-            -2.0 to sizeOf(6.2, 8.4),
-        ).forEach { (value, expected) ->
-            val actual = MutableSize(width = initial.width, height = initial.height)
-            actual -= value
-            assert(expected = expected, actual = actual, points = points, delta = delta)
-        }
-    }
-
-    @Test
     fun plusAssignOffsetTest() {
         val initial = sizeOf(1.2, 3.4)
         val points = 8

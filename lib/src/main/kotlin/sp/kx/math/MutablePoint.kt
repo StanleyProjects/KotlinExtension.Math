@@ -253,16 +253,6 @@ class MutablePoint(
         y /= value
     }
 
-    operator fun plusAssign(value: Double) {
-        x += value
-        y += value
-    }
-
-    operator fun minusAssign(value: Double) {
-        x -= value
-        y -= value
-    }
-
     /**
      * Method for adding offset to [x] and [y] coordinates.
      *
