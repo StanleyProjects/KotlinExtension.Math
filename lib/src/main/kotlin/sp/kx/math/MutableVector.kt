@@ -133,6 +133,26 @@ class MutableVector(
         start.set(finish)
         finish.set(x = x, y = y)
     }
+
+    operator fun divAssign(value: Double) {
+        start /= value
+        finish /= value
+    }
+
+    operator fun timesAssign(value: Double) {
+        start *= value
+        finish *= value
+    }
+
+    operator fun plusAssign(value: Double) {
+        start += value
+        finish += value
+    }
+
+    operator fun minusAssign(value: Double) {
+        start -= value
+        finish -= value
+    }
 }
 
 /**
