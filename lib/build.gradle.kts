@@ -20,7 +20,7 @@ import sp.gx.core.resolve
 import sp.gx.core.task
 import kotlin.time.Duration.Companion.seconds
 
-version = "0.8.0"
+version = "0.8.1"
 
 val maven = Maven.Artifact(
     group = "com.github.kepocnhh",
