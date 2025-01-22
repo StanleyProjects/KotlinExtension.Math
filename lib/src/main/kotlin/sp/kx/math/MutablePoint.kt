@@ -243,25 +243,79 @@ class MutablePoint(
         y = 0.0
     }
 
+    /**
+     * Usage:
+     * ```
+     * val point = MutablePoint(x = 1.0, y = 2.0)
+     * point *= 2
+     * assertEquals(2.0, point.x)
+     * assertEquals(4.0, point.y)
+     * ```
+     *
+     * ```
+     *   ^
+     *   |
+     * 4 -       * new
+     *   |
+     * 3 -
+     *   |
+     * 2 -   * old
+     *   |
+     * 1 -
+     *   |
+     * 0 +---|---|---|---|--->
+     *   0   1   2   3   4
+     * ```
+     * @param value The [x] and [y] coordinates will be multiplied by this value.
+     * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+     * @since 0.8.1
+     */
     operator fun timesAssign(value: Double) {
         x *= value
         y *= value
     }
 
+    /**
+     * Usage:
+     * ```
+     * val point = MutablePoint(x = 2.0, y = 4.0)
+     * point /= 2
+     * assertEquals(1.0, point.x)
+     * assertEquals(2.0, point.y)
+     * ```
+     *
+     * ```
+     *   ^
+     *   |
+     * 4 -       * old
+     *   |
+     * 3 -
+     *   |
+     * 2 -   * new
+     *   |
+     * 1 -
+     *   |
+     * 0 +---|---|---|---|--->
+     *   0   1   2   3   4
+     * ```
+     * @param value The [x] and [y] coordinates will be divided by this value.
+     * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+     * @since 0.8.1
+     */
     operator fun divAssign(value: Double) {
         x /= value
         y /= value
     }
 
     /**
-     * Method for adding offset to [x] and [y] coordinates.
-     *
      * Usage:
      * ```
      * val point = MutablePoint(x = 1.0, y = 2.0)
      * val offset = offsetOf(dX = 2.0, dY = 1.0)
      * point += offset
+     * ```
      *
+     * ```
      *   ^
      *   |
      * y -   -   -   * new
@@ -273,7 +327,7 @@ class MutablePoint(
      * 0 +---|---|---|---|--->
      *   0   1   2   x   4
      * ```
-     * @param offset The [Offset.dX] and [Offset.dY] from here will be added to the [x] and [y] coordinates respectively.
+     * @param offset This values will be added to the [x] and [y] coordinates.
      * @author [Stanley Wintergreen](https://github.com/kepocnhh)
      * @since 0.8.1
      */
@@ -282,6 +336,30 @@ class MutablePoint(
         y += offset.dY
     }
 
+    /**
+     * Usage:
+     * ```
+     * val point = MutablePoint(x = 3.0, y = 3.0)
+     * val offset = offsetOf(dX = 2.0, dY = 1.0)
+     * point -= offset
+     * ```
+     *
+     * ```
+     *   ^
+     *   |
+     * 3 -   -   -   * old
+     *   |
+     * 2 -   * new   |
+     *   |
+     * 1 -   |       |
+     *   |
+     * 0 +---|---|---|---|--->
+     *   0   1   2   3   4
+     * ```
+     * @param offset These values will be subtracted from the [x] and [y] coordinates.
+     * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+     * @since 0.8.1
+     */
     operator fun minusAssign(offset: Offset) {
         x -= offset.dX
         y -= offset.dY
