@@ -5,7 +5,7 @@ internal object ReferenceSize : Size {
     override val height = 1.0
 
     override fun toString(): String {
-        return ""
+        return "1.00x1.00"
     }
 
     override fun equals(other: Any?): Boolean {
@@ -14,6 +14,6 @@ internal object ReferenceSize : Size {
     }
 
     override fun hashCode(): Int {
-        return -1
+        return -33553471
     }
 }

@@ -5,7 +5,7 @@ internal object ReferenceOffset : Offset {
     override val dY = 1.0
 
     override fun toString(): String {
-        return ""
+        return "{dX: 1.00, dY: 1.00}"
     }
 
     override fun equals(other: Any?): Boolean {
@@ -14,6 +14,6 @@ internal object ReferenceOffset : Offset {
     }
 
     override fun hashCode(): Int {
-        return -1
+        return -33553471
     }
 }
