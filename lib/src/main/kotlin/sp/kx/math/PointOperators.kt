@@ -6,7 +6,7 @@ import sp.kx.math.measure.Measure
  * Usage:
  * ```
  * val foo = pointOf(x = 1.0, y = 2.0)
- * val bar = foo * 2
+ * val bar = foo * 2.0
  * assertFalse(foo === bar)
  * assertEquals(2.0, bar.x)
  * assertEquals(4.0, bar.y)
@@ -41,7 +41,7 @@ operator fun Point.times(value: Double): Point {
  * Usage:
  * ```
  * val foo = pointOf(x = 2.0, y = 4.0)
- * val bar = foo / 2
+ * val bar = foo / 2.0
  * assertFalse(foo === bar)
  * assertEquals(1.0, bar.x)
  * assertEquals(2.0, bar.y)
