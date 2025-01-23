@@ -34,7 +34,7 @@ interface Point {
 
     companion object {
         /**
-         * A special case of a point with coordinates in the center.
+         * A special case of a [Point] with coordinates in the center.
          *
          * Usage:
          * ```
@@ -46,7 +46,7 @@ interface Point {
         val Center: Point = CenterPoint
 
         /**
-         * A special case of a point with reference coordinates of exactly one division.
+         * A special case of a [Point] with reference coordinates of exactly one division.
          *
          * Usage:
          * ```
@@ -58,19 +58,19 @@ interface Point {
         val Reference: Point = ReferencePoint
 
         /**
-         * A special case of a point with undefined coordinates.
+         * A special case of a [Point] with undefined coordinates.
          *
          * Usage:
          * ```
          * var point = Point.Undefined
          * ...
          * if (condition) {
-         *     point = pointOf(x = 1, y = 0)
+         *     point = pointOf(0.0, 1.0)
          * } else {
-         *     point = pointOf(x = 0, y = 1)
+         *     point = pointOf(1.0, 0.0)
          * }
          * ```
-         * @since 0.8.0
+         * @since 0.8.1
          */
         val Undefined: Point = UndefinedPoint
     }

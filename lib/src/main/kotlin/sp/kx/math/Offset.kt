@@ -47,7 +47,33 @@ interface Offset {
          */
         val Empty: Offset = EmptyOffset
 
+        /**
+         * A special case of a [Offset] with reference values of exactly one division.
+         *
+         * Usage:
+         * ```
+         * val multiplier = 0.25
+         * val offset = Offset.Reference * multiplier
+         * ```
+         * @since 0.8.1
+         */
         val Reference: Offset = ReferenceOffset
+
+        /**
+         * A special case of a [Offset] with undefined values.
+         *
+         * Usage:
+         * ```
+         * var offset = Offset.Undefined
+         * ...
+         * if (condition) {
+         *     offset = offsetOf(0.0, 1.0)
+         * } else {
+         *     offset = offsetOf(1.0, 0.0)
+         * }
+         * ```
+         * @since 0.8.1
+         */
         val Undefined: Offset = UndefinedOffset
     }
 }

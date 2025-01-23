@@ -37,8 +37,47 @@ interface Size {
     val height: Double
 
     companion object {
+        /**
+         * A special case of a [Size] with zeroes.
+         *
+         * Usage:
+         * ```
+         * val foo = offsetOf(1.0, 2.0)
+         * val bar = foo + Size.Empty
+         * assertEquals(1.0, bar.dX)
+         * assertEquals(2.0, bar.dY)
+         * ```
+         * @since 0.8.1
+         */
         val Empty: Size = EmptySize
+
+        /**
+         * A special case of a [Size] with reference values of exactly one division.
+         *
+         * Usage:
+         * ```
+         * val multiplier = 0.25
+         * val size = Size.Reference * multiplier
+         * ```
+         * @since 0.8.1
+         */
         val Reference: Size = ReferenceSize
+
+        /**
+         * A special case of a [Size] with undefined values.
+         *
+         * Usage:
+         * ```
+         * var size = Size.Undefined
+         * ...
+         * if (condition) {
+         *     size = sizeOf(0.0, 1.0)
+         * } else {
+         *     size = sizeOf(1.0, 0.0)
+         * }
+         * ```
+         * @since 0.8.1
+         */
         val Undefined: Size = UndefinedSize
     }
 }
