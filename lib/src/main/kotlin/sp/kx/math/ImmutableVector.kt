@@ -61,6 +61,51 @@ fun vectorOf(
 }
 
 /**
+ * An integer version of the `vectorOf` method with [Double]s.
+ *
+ * Usage:
+ * ```
+ * val vector = vectorOf(
+ *     startX = 1,
+ *     startY = 2,
+ *     finishX = 3,
+ *     finishY = 3,
+ * )
+ *
+ *   ^
+ *   |
+ * y -           * vector.finish
+ *   |
+ * 2 -   * vector.start
+ *   |
+ * 1 -
+ *   |
+ * 0 +---|---|---|---|--->
+ *   0   1   2   x   4
+ * ```
+ * @return An instance of [Vector] built from the [Int] values.
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.7.2
+ */
+fun vectorOf(
+    startX: Int,
+    startY: Int,
+    finishX: Int,
+    finishY: Int,
+): Vector {
+    return ImmutableVector(
+        start = pointOf(
+            x = startX.toDouble(),
+            y = startY.toDouble(),
+        ),
+        finish = pointOf(
+            x = finishX.toDouble(),
+            y = finishY.toDouble(),
+        ),
+    )
+}
+
+/**
  * Usage:
  * ```
  * val vector = vectorOf(

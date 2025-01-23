@@ -59,29 +59,8 @@ fun Offset.eq(other: Offset, points: Int): Boolean {
  * @author [Stanley Wintergreen](https://github.com/kepocnhh)
  * @since 0.3.0
  */
-fun Offset.copy(
-    dX: Double = this.dX,
-    dY: Double = this.dY,
-): Offset {
+fun Offset.copy(dX: Double = this.dX, dY: Double = this.dY): Offset {
     return offsetOf(dX = dX, dY = dY)
-}
-
-/**
- * Creates a new [Offset] object with a copy of [this] receiver's swapped values.
- *
- * Usage:
- * ```
- * val foo = offsetOf(dX = 1.2, dY = 3.4)
- * val bar = foo.swapped()
- * assertNotEquals(foo, bar)
- * assertEquals(foo.dX, bar.dY)
- * assertEquals(foo.dY, bar.dX)
- * ```
- * @author [Stanley Wintergreen](https://github.com/kepocnhh)
- * @since 0.3.0
- */
-fun Offset.swapped(): Offset {
-    return offsetOf(dX = dY, dY = dX)
 }
 
 /**
@@ -117,30 +96,36 @@ fun Offset.isEmpty(): Boolean {
 }
 
 /**
- * An integer version of the `offsetOf` method with [Double]s.
+ * Creates a new [Offset] object with a copy of [this] receiver's swapped values.
  *
  * Usage:
  * ```
- * val offset = offsetOf(dX = 3, dY = 2)
- *
- *   ^
- *   |
- * 3 -
- *   |
- * dY-   -   -   *
- *   |
- * 1 -           |
- *   |
- * 0 +---|---|---|---|--->
- *   0   1   2   dX  4
+ * val foo = offsetOf(dX = 1.2, dY = 3.4)
+ * val bar = foo.swapped()
+ * assertNotEquals(foo, bar)
+ * assertEquals(foo.dX, bar.dY)
+ * assertEquals(foo.dY, bar.dX)
  * ```
- * @return An instance of [Offset] built from the [Double] values [dX] and [dY].
  * @author [Stanley Wintergreen](https://github.com/kepocnhh)
- * @since 0.7.3
+ * @since 0.3.0
  */
-fun offsetOf(
-    dX: Int,
-    dY: Int,
-): Offset {
-    return offsetOf(dX = dX.toDouble(), dY = dY.toDouble())
+fun Offset.swapped(): Offset {
+    return offsetOf(dX = dY, dY = dX)
+}
+
+/**
+ * Usage:
+ * ```
+ * val foo = offsetOf(dX = 1.0, dY = 2.0)
+ * val bar = foo.reversed()
+ * assertFalse(foo === bar)
+ * assertEquals(-1.0, bar.dX)
+ * assertEquals(-2.0, bar.dY)
+ * ```
+ * @return A new [Offset] object with [this] receiver's [Offset.dX] and [Offset.dY] multiplied by the -1.0.
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.5.0
+ */
+fun Offset.reversed(): Offset {
+    return offsetOf(dX = dX * -1.0, dY = dY * -1.0)
 }

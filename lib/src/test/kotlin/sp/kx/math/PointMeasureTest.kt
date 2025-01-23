@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import sp.kx.math.measure.measureOf
 
-@Suppress("MagicNumber")
 internal class PointMeasureTest {
     @Test
     fun pointOfTest() {

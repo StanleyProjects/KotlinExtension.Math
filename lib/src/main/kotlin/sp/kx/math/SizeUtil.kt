@@ -48,6 +48,70 @@ fun Size.eq(other: Size, points: Int): Boolean {
 }
 
 /**
+ * Creates a new [Size] object with a copy of [this] receiver's values or the values [width] and [height] passed in.
+ *
+ * Usage:
+ * ```
+ * val foo = sizeOf(width = 3.0, height = 2.0)
+ * val bar = foo.copy(height = 3.0)
+ *
+ *   ^
+ *   |
+ * 3 -   -   -   * bar
+ *   |
+ * 2 -   -   -   * foo
+ *   |
+ * 1 -           |
+ *   |
+ * 0 +---|---|---|---|--->
+ *   0   1   2   3   4
+ * ```
+ * @param width This value will be set as the [Size.width]. Default is [Size.width] value of [this] receiver.
+ * @param height This value will be set as the [Size.height]. Default is [Size.height] value of [this] receiver.
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.8.0
+ */
+fun Size.copy(width: Double = this.width, height: Double = this.height): Size {
+    return sizeOf(
+        width = width,
+        height = height,
+    )
+}
+
+/**
+ * Usage:
+ * ```
+ * assertTrue(sizeOf(width = 0.0, height = 0.01).isEmpty(points = 1))
+ * assertFalse(sizeOf(width = 0.0, height = 0.01).isEmpty(points = 2))
+ * ```
+ * @param points The number of decimal places to compare coordinates with.
+ * @return `true` if [this] receiver's [Size.width] is equal to `0`
+ * and [this] receiver's [Size.height] is equal to `0` to [points] decimal places; `false` otherwise
+ * @throws IllegalArgumentException if [points] lower than 1.
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.5.0
+ * @see Double.eq
+ */
+fun Size.isEmpty(points: Int): Boolean {
+    require(points > 0)
+    return eq(it = width, other = 0.0, points = points) && eq(it = height, other = 0.0, points = points)
+}
+
+/**
+ * Usage:
+ * ```
+ * assertTrue(sizeOf(width = 0.0, height = 0.0).isEmpty())
+ * assertFalse(sizeOf(width = 1.2, height = 3.4).isEmpty())
+ * ```
+ * @return `true` if [this] receiver's [Size.width] is equal to `0` and [this] receiver's [Size.height] is equal to `0`; `false` otherwise
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.5.0
+ */
+fun Size.isEmpty(): Boolean {
+    return width == 0.0 && height == 0.0
+}
+
+/**
  * Usage:
  * ```
  * val size: Size = sizeOf(width = 1.2, height = 3.4)
@@ -64,6 +128,28 @@ fun Size.toOffset(): Offset {
     return offsetOf(
         dX = width,
         dY = height,
+    )
+}
+
+/**
+ * Converts [Size] to [Offset].
+ * In particular, it can be used to obtain the [Offset] relative to the center of a rectangle that has dimensions [Size.width] x [Size.height].
+ *
+ * Usage:
+ * ```
+ * val size = sizeOf(width = 3, height = 2)
+ * val offset = size.toOffset(multiplier = -0.5)
+ * assertEquals(-1.5, offset.dX)
+ * assertEquals(-0.5, offset.dY)
+ * ```
+ * @return The [Offset] using the [Size.width] and the [Size.height] multiplied by the [multiplier].
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.8.0
+ */
+fun Size.toOffset(multiplier: Double): Offset {
+    return offsetOf(
+        dX = width * multiplier,
+        dY = height * multiplier,
     )
 }
 
@@ -104,72 +190,5 @@ fun Size.centerPoint(): Point {
     return pointOf(
         x = width / 2,
         y = height / 2,
-    )
-}
-
-/**
- * Usage:
- * ```
- * assertTrue(sizeOf(width = 0.0, height = 0.01).isEmpty(points = 1))
- * assertFalse(sizeOf(width = 0.0, height = 0.01).isEmpty(points = 2))
- * ```
- * @param points The number of decimal places to compare coordinates with.
- * @return `true` if [this] receiver's [Size.width] is equal to `0`
- * and [this] receiver's [Size.height] is equal to `0` to [points] decimal places; `false` otherwise
- * @throws IllegalArgumentException if [points] lower than 1.
- * @author [Stanley Wintergreen](https://github.com/kepocnhh)
- * @since 0.5.0
- * @see Double.eq
- */
-fun Size.isEmpty(points: Int): Boolean {
-    require(points > 0)
-    return eq(it = width, other = 0.0, points = points) && eq(it = height, other = 0.0, points = points)
-}
-
-/**
- * Usage:
- * ```
- * assertTrue(sizeOf(width = 0.0, height = 0.0).isEmpty())
- * assertFalse(sizeOf(width = 1.2, height = 3.4).isEmpty())
- * ```
- * @return `true` if [this] receiver's [Size.width] is equal to `0` and [this] receiver's [Size.height] is equal to `0`; `false` otherwise
- * @author [Stanley Wintergreen](https://github.com/kepocnhh)
- * @since 0.5.0
- */
-fun Size.isEmpty(): Boolean {
-    return width == 0.0 && height == 0.0
-}
-
-/**
- * An integer version of the `sizeOf` method with [Double]s.
- *
- * Usage:
- * ```
- * val size = sizeOf(width = 2, height = 1)
- * val foo = pointOf(1, 1)
- * val bar = pointOf(x = foo.x + size.width, y = foo.y + size.height)
- *
- *   ^
- *   |
- * 3 -
- *   |
- * 2 -            * bar
- *   |
- * 1 -   * foo
- *   |
- * 0 +---|---|---|---|--->
- *   0   1   2   3   4
- * ```
- * @return An instance of [Size] built from the [Int] values [width] and [height].
- * @author [Stanley Wintergreen](https://github.com/kepocnhh)
- * @since 0.6.0
- */
-fun sizeOf(
-    width: Int,
-    height: Int,
-): Size {
-    return MutableSize(
-        width = width.toDouble(),
-        height = height.toDouble(),
     )
 }

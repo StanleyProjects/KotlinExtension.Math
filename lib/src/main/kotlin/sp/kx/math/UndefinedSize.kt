@@ -1,0 +1,18 @@
+package sp.kx.math
+
+internal object UndefinedSize : Size {
+    override val width = Double.NaN
+    override val height = Double.NaN
+
+    override fun toString(): String {
+        return "NaNxNaN"
+    }
+
+    override fun equals(other: Any?): Boolean {
+        return other === this
+    }
+
+    override fun hashCode(): Int {
+        return -16_776_255
+    }
+}

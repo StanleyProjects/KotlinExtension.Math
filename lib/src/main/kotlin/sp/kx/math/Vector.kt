@@ -31,4 +31,23 @@ interface Vector {
      * The [Point] up to which the direction of the [Vector] can be computed.
      */
     val finish: Point
+
+    companion object {
+        /**
+         * A special case of a [Vector] with undefined points.
+         *
+         * Usage:
+         * ```
+         * var vector = Vector.Undefined
+         * ...
+         * if (condition) {
+         *     vector = Point.Center + pointOf(0.0, 1.0)
+         * } else {
+         *     vector = Point.Center + pointOf(1.0, 0.0)
+         * }
+         * ```
+         * @since 0.8.1
+         */
+        val Undefined: Vector = UndefinedVector
+    }
 }

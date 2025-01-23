@@ -133,4 +133,187 @@ class MutableVector(
         start.set(finish)
         finish.set(x = x, y = y)
     }
+
+    /**
+     * Usage:
+     * ```
+     * val vector = MutableVector(
+     *     start = MutablePoint(x = 0.0, y = 0.0),
+     *     finish = MutablePoint(x = 2.0, y = 2.0),
+     * )
+     * vector *= 2
+     * assertEquals(0.0, vector.start.x)
+     * assertEquals(0.0, vector.start.y)
+     * assertEquals(4.0, vector.finish.x)
+     * assertEquals(4.0, vector.finish.y)
+     * ```
+     *
+     * ```
+     *   ^
+     *   |
+     * 4 -               * new
+     *   |             /
+     * 3 -           /
+     *   |         /
+     * 2 -       * old
+     *   |     /
+     * 1 -   /
+     *   | /
+     * 0 +---|---|---|---|--->
+     *   0   1   2   3   4
+     * ```
+     * @param value The [start] and [finish] points will be multiplied by this value.
+     * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+     * @since 0.8.1
+     */
+    operator fun timesAssign(value: Double) {
+        start *= value
+        finish *= value
+    }
+
+    /**
+     * Usage:
+     * ```
+     * val vector = MutableVector(
+     *     start = MutablePoint(x = 0.0, y = 0.0),
+     *     finish = MutablePoint(x = 4.0, y = 4.0),
+     * )
+     * vector /= 2
+     * assertEquals(0.0, vector.start.x)
+     * assertEquals(0.0, vector.start.y)
+     * assertEquals(2.0, vector.finish.x)
+     * assertEquals(2.0, vector.finish.y)
+     * ```
+     *
+     * ```
+     *   ^
+     *   |
+     * 4 -               * old
+     *   |             /
+     * 3 -           /
+     *   |         /
+     * 2 -       * new
+     *   |     /
+     * 1 -   /
+     *   | /
+     * 0 +---|---|---|---|--->
+     *   0   1   2   3   4
+     * ```
+     * @param value The [start] and [finish] points will be divided by this value.
+     * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+     * @since 0.8.1
+     */
+    operator fun divAssign(value: Double) {
+        start /= value
+        finish /= value
+    }
+
+    /**
+     * Usage:
+     * ```
+     * val vector = MutableVector(
+     *     start = MutablePoint(x = 0.0, y = 0.0),
+     *     finish = MutablePoint(x = 2.0, y = 2.0),
+     * )
+     * val offset = offsetOf(dX = 2.0, dY = 2.0)
+     * vector += offset
+     * assertEquals(0.0, vector.start.x)
+     * assertEquals(0.0, vector.start.y)
+     * assertEquals(4.0, vector.finish.x)
+     * assertEquals(4.0, vector.finish.y)
+     * ```
+     *
+     * ```
+     *   ^
+     *   |
+     * 4 -               * new
+     *   |             /
+     * 3 -           /
+     *   |         /
+     * 2 -       * old
+     *   |     /
+     * 1 -   /
+     *   | /
+     * 0 +---|---|---|---|--->
+     *   0   1   2   3   4
+     * ```
+     * @param offset This values will be added to the [start] and [finish] points.
+     * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+     * @since 0.8.1
+     */
+    operator fun plusAssign(offset: Offset) {
+        start += offset
+        finish += offset
+    }
+
+    /**
+     * Usage:
+     * ```
+     * val vector = MutableVector(
+     *     start = MutablePoint(x = 0.0, y = 0.0),
+     *     finish = MutablePoint(x = 4.0, y = 4.0),
+     * )
+     * val offset = offsetOf(dX = 2.0, dY = 2.0)
+     * vector -= offset
+     * assertEquals(0.0, vector.start.x)
+     * assertEquals(0.0, vector.start.y)
+     * assertEquals(2.0, vector.finish.x)
+     * assertEquals(2.0, vector.finish.y)
+     * ```
+     *
+     * ```
+     *   ^
+     *   |
+     * 4 -               * old
+     *   |             /
+     * 3 -           /
+     *   |         /
+     * 2 -       * new
+     *   |     /
+     * 1 -   /
+     *   | /
+     * 0 +---|---|---|---|--->
+     *   0   1   2   3   4
+     * ```
+     * @param offset This values will be subtracted from the [start] and [finish] points.
+     * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+     * @since 0.8.1
+     */
+    operator fun minusAssign(offset: Offset) {
+        start -= offset
+        finish -= offset
+    }
+}
+
+/**
+ * Creates a new [MutableVector] object with a copy of [this] receiver's points.
+ *
+ * Usage:
+ * ```
+ * val foo = pointOf(1, 1) + pointOf(3, 1)
+ * val bar = foo.mut()
+ * bar.finish.x = 1.0
+ * bar.finish.y = 3.0
+ * ```
+ *
+ * ```
+ *   ^
+ *   |
+ * 3 -   ^ bar
+ *   |   |
+ * 2 -   |
+ *   |   |
+ * 1 -   * - - - > foo
+ *   |
+ * 0 +---|---|---|---|--->
+ *   0   1   2   3   4
+ * ```
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.8.0
+ */
+fun Vector.mut(): MutableVector {
+    return MutableVector(
+        start = start.mut(),
+        finish = finish.mut(),
+    )
 }

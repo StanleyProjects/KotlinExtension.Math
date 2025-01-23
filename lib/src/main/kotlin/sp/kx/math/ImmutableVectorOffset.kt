@@ -215,3 +215,25 @@ fun Point.toVector(finish: Point, offset: Offset): Vector {
         finish = finish + offset,
     )
 }
+
+/**
+ * Usage:
+ * ```
+ * val start = pointOf(x = 2.0, y = 1.0)
+ * val finish = pointOf(x = 3.0, y = 3.0)
+ * val vector = start + finish
+ * val offset = vector.toOffset()
+ * assertEquals(1.0, offset.dX)
+ * assertEquals(2.0, offset.dY)
+ * ```
+ * @receiver Coordinates of [Point]s of this [Vector] will be passed to the result [Offset].
+ * @return The difference between the coordinates of [this] receivers [Vector.finish] and the [Vector.start] coordinates, represented as an [Offset] object.
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.8.0
+ */
+fun Vector.toOffset(): Offset {
+    return offsetOf(
+        dX = finish.x - start.x,
+        dY = finish.y - start.y,
+    )
+}

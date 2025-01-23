@@ -6,18 +6,22 @@ import sp.kx.math.measure.Measure
  * Usage:
  * ```
  * val measure = measureOf(magnitude = 2.0)
- * val point = pointOf(x = 1.0, y = 2.0, measure = measure)
+ * val point = pointOf(x = 1.5, y = 1.0, measure = measure)
+ * assertEquals(3.0, point.x)
+ * assertEquals(2.0, point.y)
+ * ```
  *
+ * ```
  *   ^
  *   |
  * 3 -
  *   |
- * 2 -               *
+ * y -           *
  *   |
  * 1 -
  *   |
  * 0 +---|---|---|---|--->
- *   0   1   2   3   4
+ *   0   1   2   x   4
  * ```
  * @return An instance of [Point] built from the [Double] values and the [Measure].
  * @author [Stanley Wintergreen](https://github.com/kepocnhh)

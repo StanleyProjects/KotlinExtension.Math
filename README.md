@@ -5,10 +5,10 @@ A few math extensions.
 
 ## Snapshot
 
-![version](https://img.shields.io/static/v1?label=version&message=0.7.3-SNAPSHOT&labelColor=212121&color=2962ff&style=flat)
+![version](https://img.shields.io/static/v1?label=version&message=0.8.1-SNAPSHOT&labelColor=212121&color=2962ff&style=flat)
 
-- [Maven](https://s01.oss.sonatype.org/content/repositories/snapshots/com/github/kepocnhh/KotlinExtension.Math/0.7.3-SNAPSHOT)
-- [Documentation](https://StanleyProjects.github.io/KotlinExtension.Math/doc/0.7.3-SNAPSHOT)
+- [Maven](https://s01.oss.sonatype.org/content/repositories/snapshots/com/github/kepocnhh/KotlinExtension.Math/0.8.1-SNAPSHOT)
+- [Documentation](https://StanleyProjects.github.io/KotlinExtension.Math/doc/0.8.1-SNAPSHOT)
 
 ### Build
 ```
@@ -22,7 +22,7 @@ repositories {
 }
 
 dependencies {
-    implementation("com.github.kepocnhh:KotlinExtension.Math:0.7.3-SNAPSHOT")
+    implementation("com.github.kepocnhh:KotlinExtension.Math:0.8.1-SNAPSHOT")
 }
 ```
 
@@ -30,5 +30,40 @@ dependencies {
 ### Backlog
 
 - [ ] Double.toString DecimalFormat?
+
+---
+
+## Unstable
+
+![version](https://img.shields.io/static/v1?label=version&message=0.8.0u-SNAPSHOT&labelColor=212121&color=2962ff&style=flat)
+
+- [Maven](https://s01.oss.sonatype.org/content/repositories/snapshots/com/github/kepocnhh/KotlinExtension.Math/0.8.0u-SNAPSHOT)
+
+### Build
+```
+$ gradle lib:assembleUnstableJar
+```
+
+### Import
+```kotlin
+repositories {
+    maven("https://s01.oss.sonatype.org/content/repositories/snapshots")
+}
+
+dependencies {
+    implementation("com.github.kepocnhh:KotlinExtension.Math:0.8.0u-SNAPSHOT")
+}
+```
+
+---
+
+### Run benchmark
+```
+$ gradle lib:runBenchmark
+```
+or
+```
+$ gradle lib:runBenchmark -Pbenchmarks='VectorComparisonsBenchmark'
+```
 
 ---

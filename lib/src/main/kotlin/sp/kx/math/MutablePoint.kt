@@ -18,6 +18,7 @@ import java.util.Objects
  * @author [Stanley Wintergreen](https://github.com/kepocnhh)
  * @since 0.2.0
  */
+@Suppress("TooManyFunctions")
 class MutablePoint(
     override var x: Double,
     override var y: Double,
@@ -93,34 +94,6 @@ class MutablePoint(
     }
 
     /**
-     * Swaps [x] and [y] coordinates.
-     *
-     * Usage:
-     * ```
-     * val point = MutablePoint(x = 3.0, y = 2.0)
-     * point.swap()
-     *
-     *   ^
-     *   |
-     * 3 -   -   * new
-     *   |       |
-     * y -   -   -   * old
-     *   |
-     * 1 -       |   |
-     *   |
-     * 0 +---|---|---|---|--->
-     *   0   1   2   x   4
-     * ```
-     * @author [Stanley Wintergreen](https://github.com/kepocnhh)
-     * @since 0.2.2
-     */
-    fun swap() {
-        val x = x
-        this.x = y
-        y = x
-    }
-
-    /**
      * Method for adding offset to [x] and [y] coordinates.
      *
      * Usage:
@@ -153,14 +126,124 @@ class MutablePoint(
     }
 
     /**
-     * Method for adding offset to [x] and [y] coordinates.
+     * Swaps [x] and [y] coordinates.
      *
+     * Usage:
+     * ```
+     * val point = MutablePoint(x = 3.0, y = 2.0)
+     * point.swap()
+     *
+     *   ^
+     *   |
+     * 3 -   -   * new
+     *   |       |
+     * y -   -   -   * old
+     *   |
+     * 1 -       |   |
+     *   |
+     * 0 +---|---|---|---|--->
+     *   0   1   2   x   4
+     * ```
+     * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+     * @since 0.2.2
+     */
+    fun swap() {
+        val x = x
+        this.x = y
+        y = x
+    }
+
+    /**
+     * Sets [x] and [y] coordinates to `0.0`.
+     *
+     * Usage:
+     * ```
+     * val point = MutablePoint(dX = 1.0, dY = 2.0)
+     * point.clear()
+     * assertEquals(0.0, point.x)
+     * assertEquals(0.0, point.y)
+     * ```
+     * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+     * @since 0.8.1
+     */
+    fun clear() {
+        x = 0.0
+        y = 0.0
+    }
+
+    /**
+     * Usage:
+     * ```
+     * val point = MutablePoint(x = 1.0, y = 2.0)
+     * point *= 2
+     * assertEquals(2.0, point.x)
+     * assertEquals(4.0, point.y)
+     * ```
+     *
+     * ```
+     *   ^
+     *   |
+     * 4 -       * new
+     *   |
+     * 3 -
+     *   |
+     * 2 -   * old
+     *   |
+     * 1 -
+     *   |
+     * 0 +---|---|---|---|--->
+     *   0   1   2   3   4
+     * ```
+     * @param value The [x] and [y] coordinates will be multiplied by this value.
+     * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+     * @since 0.8.1
+     */
+    operator fun timesAssign(value: Double) {
+        x *= value
+        y *= value
+    }
+
+    /**
+     * Usage:
+     * ```
+     * val point = MutablePoint(x = 2.0, y = 4.0)
+     * point /= 2
+     * assertEquals(1.0, point.x)
+     * assertEquals(2.0, point.y)
+     * ```
+     *
+     * ```
+     *   ^
+     *   |
+     * 4 -       * old
+     *   |
+     * 3 -
+     *   |
+     * 2 -   * new
+     *   |
+     * 1 -
+     *   |
+     * 0 +---|---|---|---|--->
+     *   0   1   2   3   4
+     * ```
+     * @param value The [x] and [y] coordinates will be divided by this value.
+     * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+     * @since 0.8.1
+     */
+    operator fun divAssign(value: Double) {
+        x /= value
+        y /= value
+    }
+
+    /**
      * Usage:
      * ```
      * val point = MutablePoint(x = 1.0, y = 2.0)
      * val offset = offsetOf(dX = 2.0, dY = 1.0)
-     * point.add(offset)
+     * point += offset
+     * ```
      *
+     * ```
      *   ^
      *   |
      * y -   -   -   * new
@@ -172,13 +255,42 @@ class MutablePoint(
      * 0 +---|---|---|---|--->
      *   0   1   2   x   4
      * ```
-     * @param offset The [Offset.dX] and [Offset.dY] from here will be added to the [x] and [y] coordinates respectively.
+     * @param offset This values will be added to the [x] and [y] coordinates.
      * @author [Stanley Wintergreen](https://github.com/kepocnhh)
-     * @since 0.3.1
+     * @since 0.8.1
      */
-    fun add(offset: Offset) {
+    operator fun plusAssign(offset: Offset) {
         x += offset.dX
         y += offset.dY
+    }
+
+    /**
+     * Usage:
+     * ```
+     * val point = MutablePoint(x = 3.0, y = 3.0)
+     * val offset = offsetOf(dX = 2.0, dY = 1.0)
+     * point -= offset
+     * ```
+     *
+     * ```
+     *   ^
+     *   |
+     * 3 -   -   -   * old
+     *   |
+     * 2 -   * new   |
+     *   |
+     * 1 -   |       |
+     *   |
+     * 0 +---|---|---|---|--->
+     *   0   1   2   3   4
+     * ```
+     * @param offset These values will be subtracted from the [x] and [y] coordinates.
+     * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+     * @since 0.8.1
+     */
+    operator fun minusAssign(offset: Offset) {
+        x -= offset.dX
+        y -= offset.dY
     }
 
     /**
@@ -296,4 +408,65 @@ fun pointOf(
         x = x,
         y = y,
     )
+}
+
+/**
+ * An integer version of the `pointOf` method with [Double]s.
+ *
+ * Usage:
+ * ```
+ * val point = pointOf(x = 3, y = 2)
+ *
+ *   ^
+ *   |
+ * 3 -
+ *   |
+ * y -   -   -   *
+ *   |
+ * 1 -           |
+ *   |
+ * 0 +---|---|---|---|--->
+ *   0   1   2   x   4
+ * ```
+ * @return An instance of [Point] built from the [Int] values [x] and [y].
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.4.1
+ */
+fun pointOf(
+    x: Int,
+    y: Int,
+): Point {
+    return pointOf(
+        x = x.toDouble(),
+        y = y.toDouble(),
+    )
+}
+
+/**
+ * Creates a new [MutablePoint] object with a copy of [this] receiver's coordinates.
+ *
+ * Usage:
+ * ```
+ * val foo = pointOf(x = 3.0, y = 2.0)
+ * val bar = foo.mut()
+ * bar.y = 3.0
+ * ```
+ *
+ * ```
+ *   ^
+ *   |
+ * 3 -   -   -   * bar
+ *   |
+ * y -   -   -   * foo
+ *   |
+ * 1 -           |
+ *   |
+ * 0 +---|---|---|---|--->
+ *   0   1   2   x   4
+ * ```
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.8.0
+ */
+fun Point.mut(): MutablePoint {
+    return MutablePoint(x = x, y = y)
 }

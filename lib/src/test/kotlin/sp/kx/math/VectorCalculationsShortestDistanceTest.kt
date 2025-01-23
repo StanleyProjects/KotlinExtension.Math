@@ -1,6 +1,6 @@
 package sp.kx.math
 
-import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 @Suppress(
@@ -29,7 +29,7 @@ internal class VectorCalculationsShortestDistanceTest {
         val vector = start + finish
         targets.forEach { target ->
             val actual = vector.getShortestDistance(target = target)
-            Assertions.assertEquals(expected, actual, 0.000000000000001) {
+            assertEquals(expected, actual, 0.000000000000001) {
                 "target: $target"
             }
         }
@@ -58,7 +58,7 @@ internal class VectorCalculationsShortestDistanceTest {
         val vector = start + finish
         targets.forEach { target ->
             val actual = vector.getShortestDistance(target = target)
-            Assertions.assertEquals(expected, actual, 0.000000000000001) {
+            assertEquals(expected, actual, 0.000000000000001) {
                 "target: $target"
             }
         }
@@ -87,7 +87,7 @@ internal class VectorCalculationsShortestDistanceTest {
         val vector = start + finish
         targets.forEach { target ->
             val actual = vector.getShortestDistance(target = target)
-            Assertions.assertEquals(expected, actual, 0.000000000000001) {
+            assertEquals(expected, actual, 0.000000000000001) {
                 "target: $target"
             }
         }
@@ -112,7 +112,7 @@ internal class VectorCalculationsShortestDistanceTest {
         val vector = start + finish
         targets.forEach { target ->
             val actual = vector.getShortestDistance(target = target)
-            Assertions.assertEquals(2.0, actual) {
+            assertEquals(2.0, actual) {
                 "target: $target"
             }
         }
@@ -137,7 +137,7 @@ internal class VectorCalculationsShortestDistanceTest {
         val vector = start + finish
         targets.forEach { target ->
             val actual = vector.getShortestDistance(target = target)
-            Assertions.assertEquals(2.0, actual) {
+            assertEquals(2.0, actual) {
                 "target: $target"
             }
         }
@@ -164,9 +164,46 @@ internal class VectorCalculationsShortestDistanceTest {
         val vector = start + finish
         targets.forEach { target ->
             val actual = vector.getShortestDistance(target = target)
-            Assertions.assertEquals(expected, actual, 0.000000000000001) {
+            assertEquals(expected, actual, 0.000000000000001) {
                 "target: $target"
             }
+        }
+    }
+
+    @Test
+    fun getShortestDCoordinatesTest() {
+        val expected = distanceOf(x = 1.0, y = 1.0)
+        check(expected > 0)
+        val targets = listOf(
+            pointOf(x = 2, y = 2),
+            pointOf(x = 2, y = 4),
+            pointOf(x = 3, y = 5),
+            pointOf(x = 4, y = 6),
+            pointOf(x = 4, y = 2),
+            pointOf(x = 5, y = 3),
+            pointOf(x = 6, y = 4),
+            pointOf(x = 6, y = 6),
+        )
+        check(targets.size == 8)
+        check(targets.toSet().size == targets.size)
+        val start = pointOf(x = 3, y = 3)
+        val finish = pointOf(x = 5, y = 5)
+        val vector = start + finish
+        val delta = 0.000000000000001
+        targets.forEach { target ->
+            val actual = vector.getShortestDistance(
+                xTarget = target.x,
+                yTarget = target.y,
+            )
+            val message = """
+                vector: $vector (${vector.toString(24)})
+                xTarget: ${target.x} (${target.x.toString(24)})
+                yTarget: ${target.y} (${target.y.toString(24)})
+                expected: $expected (${expected.toString(24)})
+                actual: $actual (${actual.toString(24)})
+                delta: $delta (${delta.toString(24)})
+            """.trimIndent()
+            assertEquals(expected, actual, delta, message)
         }
     }
 }
