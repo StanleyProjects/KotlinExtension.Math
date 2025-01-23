@@ -5,7 +5,7 @@ internal object UndefinedVector : Vector {
     override val finish = Point.Undefined
 
     override fun toString(): String {
-        return ""
+        return "{x: NaN, y: NaN} -> {x: NaN, y: NaN}"
     }
 
     override fun equals(other: Any?): Boolean {
@@ -13,6 +13,6 @@ internal object UndefinedVector : Vector {
     }
 
     override fun hashCode(): Int {
-        return -1
+        return 1041110913
     }
 }

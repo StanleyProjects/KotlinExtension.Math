@@ -5,7 +5,7 @@ internal object UndefinedSize : Size {
     override val height = Double.NaN
 
     override fun toString(): String {
-        return ""
+        return "NaNxNaN"
     }
 
     override fun equals(other: Any?): Boolean {
@@ -13,6 +13,6 @@ internal object UndefinedSize : Size {
     }
 
     override fun hashCode(): Int {
-        return -1
+        return -16776255
     }
 }

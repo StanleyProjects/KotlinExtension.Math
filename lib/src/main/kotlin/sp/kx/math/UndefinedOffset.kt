@@ -5,7 +5,7 @@ internal object UndefinedOffset : Offset {
     override val dY = Double.NaN
 
     override fun toString(): String {
-        return ""
+        return "{dX: NaN, dY: NaN}"
     }
 
     override fun equals(other: Any?): Boolean {
@@ -13,6 +13,6 @@ internal object UndefinedOffset : Offset {
     }
 
     override fun hashCode(): Int {
-        return -1
+        return -16776255
     }
 }
