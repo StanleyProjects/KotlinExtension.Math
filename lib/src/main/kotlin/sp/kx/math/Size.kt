@@ -35,4 +35,11 @@ interface Size {
      * Height size. Vertical size. Parallel to the y-axis.
      */
     val height: Double
+
+    companion object {
+        val Empty: Size = EmptySize
+    }
 }
+
+// todo sizeOf(1, 1)
+// todo sizeOf(NaN, NaN)

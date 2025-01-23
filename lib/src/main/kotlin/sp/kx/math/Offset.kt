@@ -45,8 +45,9 @@ interface Offset {
          * ```
          * @since 0.4.4
          */
-        val Empty = offsetOf(dX = 0.0, dY = 0.0)
+        val Empty: Offset = EmptyOffset
     }
 }
 
 // todo offsetOf(1, 1)
+// todo offsetOf(NaN, NaN)
