@@ -1,33 +1,73 @@
 package sp.kx.math
 
-import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
-@Suppress("MagicNumber")
 internal class PointTransformTest {
     @Test
     fun pointOfTest() {
-        val actual = pointOf(
-            x = 1.2,
-            y = 3.4,
-        ) {
-            it * 2
+        val points = 8
+        val delta = 0.00000001
+        listOf(
+            -0.5 to pointOf(-2.1, -3.2),
+            0.0 to pointOf(0, 0),
+            0.5 to pointOf(2.1, 3.2),
+            1.0 to pointOf(4.2, 6.4),
+            2.0 to pointOf(8.4, 12.8),
+            1.5 to pointOf(6.3, 9.6),
+        ).forEach { (multiplier, expected) ->
+            val actual = pointOf(x = 4.2, y = 6.4) { it * multiplier }
+            assert(expected = expected, actual = actual, points = points, delta = delta)
         }
-        Assertions.assertNotEquals(actual.x, actual.y)
-        Assertions.assertEquals(1.2 * 2, actual.x)
-        Assertions.assertEquals(3.4 * 2, actual.y)
     }
 
     @Test
     fun mapTest() {
-        val foo = pointOf(x = 1.2, y = 3.4)
-        Assertions.assertNotEquals(foo.x, foo.y)
-        Assertions.assertEquals(1.2, foo.x)
-        Assertions.assertEquals(3.4, foo.y)
-        val bar = foo.map { it * 2 }
-        Assertions.assertEquals(1.2, foo.x)
-        Assertions.assertEquals(3.4, foo.y)
-        Assertions.assertEquals(1.2 * 2, bar.x)
-        Assertions.assertEquals(3.4 * 2, bar.y)
+        val point = pointOf(x = 4.2, y = 6.4)
+        val points = 8
+        val delta = 0.00000001
+        listOf(
+            -0.5 to pointOf(-2.1, -3.2),
+            0.0 to pointOf(0, 0),
+            0.5 to pointOf(2.1, 3.2),
+            1.0 to pointOf(4.2, 6.4),
+            2.0 to pointOf(8.4, 12.8),
+            1.5 to pointOf(6.3, 9.6),
+        ).forEach { (multiplier, expected) ->
+            val actual = point.map { it * multiplier }
+            assert(expected = expected, actual = actual, points = points, delta = delta)
+        }
+    }
+
+    @Test
+    fun pointOfMultiplierTest() {
+        val points = 8
+        val delta = 0.00000001
+        listOf(
+            -0.5 to pointOf(-2.1, -3.2),
+            0.0 to pointOf(0, 0),
+            0.5 to pointOf(2.1, 3.2),
+            1.0 to pointOf(4.2, 6.4),
+            2.0 to pointOf(8.4, 12.8),
+            1.5 to pointOf(6.3, 9.6),
+        ).forEach { (multiplier, expected) ->
+            val actual = pointOf(x = 4.2, y = 6.4, multiplier = multiplier)
+            assert(expected = expected, actual = actual, points = points, delta = delta)
+        }
+    }
+
+    companion object {
+        private fun assert(expected: Point, actual: Point, points: Int, delta: Double) {
+            val message = """
+                expected: $expected
+                actual: $actual
+                points: $points
+                delta: ${delta.toString(24)}
+            """.trimIndent()
+            assertEquals(expected.x, actual.x, delta, message)
+            assertEquals(expected.y, actual.y, delta, message)
+            assertTrue(expected.eq(other = actual, points = points), message)
+        }
     }
 }

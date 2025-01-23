@@ -27,7 +27,7 @@ fun pointOf(
     y: Double,
     transform: (Double) -> Double,
 ): Point {
-    return MutablePoint(
+    return pointOf(
         x = transform(x),
         y = transform(y),
     )
@@ -70,7 +70,7 @@ fun pointOf(
     y: Double,
     multiplier: Double,
 ): Point {
-    return MutablePoint(
+    return pointOf(
         x = x * multiplier,
         y = y * multiplier,
     )
