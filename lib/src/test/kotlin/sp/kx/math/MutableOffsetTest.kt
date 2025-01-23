@@ -136,4 +136,51 @@ internal class MutableOffsetTest {
             assertEquals(value, actual.dX, delta, message)
         }
     }
+
+    @Test
+    fun clearTest() {
+        listOf(
+            -9.0 to 1.2,
+            -1.2 to 2.4,
+            1.0 to 1.0,
+            1.2 to 3.4,
+            5.6 to -7.8,
+            5.6 to 7.8,
+        ).forEach { (dX, dY) ->
+            val offset = MutableOffset(dX = dX, dY = dY)
+            check(!offset.isEmpty())
+            offset.clear()
+            assertTrue(offset.isEmpty())
+            assertEquals(0.0, offset.dX)
+            assertEquals(0.0, offset.dY)
+        }
+    }
+
+    @Test
+    fun clearZeroTest() {
+        val offset = MutableOffset(dX = 0.0, dY = 0.0)
+        check(offset.isEmpty())
+        offset.clear()
+        assertTrue(offset.isEmpty())
+        assertEquals(0.0, offset.dX)
+        assertEquals(0.0, offset.dY)
+    }
+
+    @Test
+    fun addTest() {
+        val delta = 0.00000001
+        listOf(
+            -9.0 to 1.2,
+            -1.2 to 2.4,
+            1.0 to 1.0,
+            1.2 to 3.4,
+            5.6 to -7.8,
+            5.6 to 7.8,
+        ).forEach { (dX, dY) ->
+            val offset = MutableOffset(dX = 1.2, dY = 3.4)
+            offset.add(dX = dX, dY = dY)
+            assertEquals(1.2 + dX, offset.dX, delta)
+            assertEquals(3.4 + dY, offset.dY, delta)
+        }
+    }
 }

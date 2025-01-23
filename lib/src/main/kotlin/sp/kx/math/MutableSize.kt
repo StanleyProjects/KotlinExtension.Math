@@ -22,6 +22,19 @@ class MutableSize(
     override var width: Double,
     override var height: Double,
 ) : Size {
+    override fun toString(): String {
+        return toString(size = this, points = 2, locale = Locale.US)
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (other !is Size) return false
+        return width == other.width && height == other.height
+    }
+
+    override fun hashCode(): Int {
+        return Objects.hash(width, height)
+    }
+
     /**
      * Method for setting both [width] and [height] values.
      *
@@ -152,19 +165,6 @@ class MutableSize(
     operator fun minusAssign(offset: Offset) {
         width -= offset.dX
         height -= offset.dY
-    }
-
-    override fun toString(): String {
-        return toString(size = this, points = 2, locale = Locale.US)
-    }
-
-    override fun equals(other: Any?): Boolean {
-        if (other !is Size) return false
-        return width == other.width && height == other.height
-    }
-
-    override fun hashCode(): Int {
-        return Objects.hash(width, height)
     }
 }
 

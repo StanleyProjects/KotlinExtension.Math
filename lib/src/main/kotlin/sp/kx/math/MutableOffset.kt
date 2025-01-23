@@ -70,6 +70,14 @@ class MutableOffset(
         dY = other.dY
     }
 
+    fun add(
+        dX: Double,
+        dY: Double,
+    ) {
+        this.dX += dX
+        this.dY += dY
+    }
+
     /**
      * Swaps [dX] and [dY] offsets.
      *

@@ -145,4 +145,33 @@ internal class MutablePointTest {
             assertEquals(value, actual.x, delta, message)
         }
     }
+
+    @Test
+    fun clearTest() {
+        listOf(
+            -9.0 to 1.2,
+            -1.2 to 2.4,
+            1.0 to 1.0,
+            1.2 to 3.4,
+            5.6 to -7.8,
+            5.6 to 7.8,
+        ).forEach { (x, y) ->
+            val point = MutablePoint(x = x, y = y)
+            assertNotEquals(0.0, point.x)
+            assertNotEquals(0.0, point.y)
+            point.clear()
+            assertEquals(0.0, point.x)
+            assertEquals(0.0, point.y)
+        }
+    }
+
+    @Test
+    fun clearZeroTest() {
+        val point = MutablePoint(x = 0.0, y = 0.0)
+        assertEquals(0.0, point.x)
+        assertEquals(0.0, point.y)
+        point.clear()
+        assertEquals(0.0, point.x)
+        assertEquals(0.0, point.y)
+    }
 }

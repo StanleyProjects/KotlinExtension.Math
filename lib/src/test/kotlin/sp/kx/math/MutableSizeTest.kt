@@ -146,4 +146,71 @@ internal class MutableSizeTest {
             assertEquals(value, actual.width, delta, message)
         }
     }
+
+    @Test
+    fun clearTest() {
+        listOf(
+            -9.0 to 1.2,
+            -1.2 to 2.4,
+            1.0 to 1.0,
+            1.2 to 3.4,
+            5.6 to -7.8,
+            5.6 to 7.8,
+        ).forEach { (width, height) ->
+            val size = MutableSize(width = width, height = height)
+            assertNotEquals(0.0, size.width)
+            assertNotEquals(0.0, size.height)
+            size.clear()
+            assertEquals(0.0, size.width)
+            assertEquals(0.0, size.height)
+        }
+    }
+
+    @Test
+    fun clearZeroTest() {
+        val size = MutableSize(width = 0.0, height = 0.0)
+        assertEquals(0.0, size.width)
+        assertEquals(0.0, size.height)
+        size.clear()
+        assertEquals(0.0, size.width)
+        assertEquals(0.0, size.height)
+    }
+
+    @Test
+    fun addTest() {
+        val delta = 0.00000001
+        listOf(
+            -9.0 to 1.2,
+            -1.2 to 2.4,
+            1.0 to 1.0,
+            1.2 to 3.4,
+            5.6 to -7.8,
+            5.6 to 7.8,
+        ).forEach { (dX, dY) ->
+            val size = MutableSize(width = 1.2, height = 3.4)
+            size.add(dX = dX, dY = dY)
+            assertEquals(1.2 + dX, size.width, delta)
+            assertEquals(3.4 + dY, size.height, delta)
+        }
+    }
+
+    @Test
+    fun swapTest() {
+        val delta = 0.00000001
+        listOf(
+            -9.0 to 1.2,
+            -1.2 to 2.4,
+            1.0 to 1.0,
+            1.2 to 3.4,
+            5.6 to -7.8,
+            5.6 to 7.8,
+        ).forEach { (width, height) ->
+            val size = MutableSize(width = width, height = height)
+            assertEquals(width, size.width, delta)
+            assertEquals(height, size.height, delta)
+            size.swap()
+            assertEquals(height, size.width, delta)
+            assertEquals(width, size.height, delta)
+        }
+    }
 }
