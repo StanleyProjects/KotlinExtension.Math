@@ -14,6 +14,6 @@ internal object ReferenceOffset : Offset {
     }
 
     override fun hashCode(): Int {
-        return -33553471
+        return -33_553_471
     }
 }

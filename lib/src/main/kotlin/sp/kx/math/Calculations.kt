@@ -703,5 +703,3 @@ fun getIntersection(
     val yB = (aX - bX) * (cY - dY) - (aY - bY) * (cX - dX)
     return pointOf(x = xT / xB, y = yT / yB)
 }
-
-// todo isIntersected

@@ -48,6 +48,70 @@ fun Size.eq(other: Size, points: Int): Boolean {
 }
 
 /**
+ * Creates a new [Size] object with a copy of [this] receiver's values or the values [width] and [height] passed in.
+ *
+ * Usage:
+ * ```
+ * val foo = sizeOf(width = 3.0, height = 2.0)
+ * val bar = foo.copy(height = 3.0)
+ *
+ *   ^
+ *   |
+ * 3 -   -   -   * bar
+ *   |
+ * 2 -   -   -   * foo
+ *   |
+ * 1 -           |
+ *   |
+ * 0 +---|---|---|---|--->
+ *   0   1   2   3   4
+ * ```
+ * @param width This value will be set as the [Size.width]. Default is [Size.width] value of [this] receiver.
+ * @param height This value will be set as the [Size.height]. Default is [Size.height] value of [this] receiver.
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.8.0
+ */
+fun Size.copy(width: Double = this.width, height: Double = this.height): Size {
+    return sizeOf(
+        width = width,
+        height = height,
+    )
+}
+
+/**
+ * Usage:
+ * ```
+ * assertTrue(sizeOf(width = 0.0, height = 0.01).isEmpty(points = 1))
+ * assertFalse(sizeOf(width = 0.0, height = 0.01).isEmpty(points = 2))
+ * ```
+ * @param points The number of decimal places to compare coordinates with.
+ * @return `true` if [this] receiver's [Size.width] is equal to `0`
+ * and [this] receiver's [Size.height] is equal to `0` to [points] decimal places; `false` otherwise
+ * @throws IllegalArgumentException if [points] lower than 1.
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.5.0
+ * @see Double.eq
+ */
+fun Size.isEmpty(points: Int): Boolean {
+    require(points > 0)
+    return eq(it = width, other = 0.0, points = points) && eq(it = height, other = 0.0, points = points)
+}
+
+/**
+ * Usage:
+ * ```
+ * assertTrue(sizeOf(width = 0.0, height = 0.0).isEmpty())
+ * assertFalse(sizeOf(width = 1.2, height = 3.4).isEmpty())
+ * ```
+ * @return `true` if [this] receiver's [Size.width] is equal to `0` and [this] receiver's [Size.height] is equal to `0`; `false` otherwise
+ * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+ * @since 0.5.0
+ */
+fun Size.isEmpty(): Boolean {
+    return width == 0.0 && height == 0.0
+}
+
+/**
  * Usage:
  * ```
  * val size: Size = sizeOf(width = 1.2, height = 3.4)
@@ -126,163 +190,5 @@ fun Size.centerPoint(): Point {
     return pointOf(
         x = width / 2,
         y = height / 2,
-    )
-}
-
-/**
- * Usage:
- * ```
- * assertTrue(sizeOf(width = 0.0, height = 0.01).isEmpty(points = 1))
- * assertFalse(sizeOf(width = 0.0, height = 0.01).isEmpty(points = 2))
- * ```
- * @param points The number of decimal places to compare coordinates with.
- * @return `true` if [this] receiver's [Size.width] is equal to `0`
- * and [this] receiver's [Size.height] is equal to `0` to [points] decimal places; `false` otherwise
- * @throws IllegalArgumentException if [points] lower than 1.
- * @author [Stanley Wintergreen](https://github.com/kepocnhh)
- * @since 0.5.0
- * @see Double.eq
- */
-fun Size.isEmpty(points: Int): Boolean {
-    require(points > 0)
-    return eq(it = width, other = 0.0, points = points) && eq(it = height, other = 0.0, points = points)
-}
-
-/**
- * Usage:
- * ```
- * assertTrue(sizeOf(width = 0.0, height = 0.0).isEmpty())
- * assertFalse(sizeOf(width = 1.2, height = 3.4).isEmpty())
- * ```
- * @return `true` if [this] receiver's [Size.width] is equal to `0` and [this] receiver's [Size.height] is equal to `0`; `false` otherwise
- * @author [Stanley Wintergreen](https://github.com/kepocnhh)
- * @since 0.5.0
- */
-fun Size.isEmpty(): Boolean {
-    return width == 0.0 && height == 0.0
-}
-
-/**
- * Usage:
- * ```
- * val size: Size = sizeOf(width = 3, height = 2)
- * val vector = Point.Center + pointOf(size.width, size.height)
- * assertEquals(vector.length(), size.diagonal())
- * ```
- *
- * ```
- *   ^
- *   |
- * 3 -
- *   |
- * 2 -   -   -   *
- *   |           .
- * 1 -           .
- *   |           .
- * 0 +---|---|---|---|--->
- *   0   1   2   3   4
- * ```
- * @return The size of the diagonal of a rectangle that has dimensions [Size.width] x [Size.height] of [this] receiver.
- * @author [Stanley Wintergreen](https://github.com/kepocnhh)
- * @since 0.8.0
- */
-fun Size.diagonal(): Double {
-    return kotlin.math.sqrt(width * width + height * height)
-//    return kotlin.math.hypot(x = width, y = height) // todo speed vs accuracy
-}
-
-/**
- * Usage:
- * ```
- * val size: Size = sizeOf(width = 3, height = 2)
- * val vector = Point.Center + pointOf(size.width, size.height)
- * assertEquals(vector.angle(), size.diagonalAngle())
- * ```
- *
- * ```
- *   ^
- *   |
- * 3 -
- *   |
- * 2 -   -   -   *
- *   |           .
- * 1 -           .
- *   |           .
- * 0 +---|---|---|---|--->
- *   0   1   2   3   4
- * ```
- *
- * Special cases:
- * ```
- * val size: Size = sizeOf(1, 1)
- * assertEquals(kotlin.math.PI / 4, size.diagonalAngle())
- * ```
- *
- * ```
- *   ^
- *   |
- *   -
- *   |
- * 1 -   -   *
- *   |       .
- *   -       .
- *   |       .
- * 0 +---|---|---|---|--->
- *   0       1       2
- * ```
- *
- * ```
- * val size: Size = sizeOf(-1, -1)
- * assertEquals(-(kotlin.math.PI / 4) * 3, size.diagonalAngle())
- * ```
- *
- * ```
- *   -2      -1       0
- * ---|---|---|---|---+
- *            .       |
- *            .       -
- *            .       |
- *            *   -   - -1
- *                    |
- *                    -
- *                    |
- * ```
- * @return The angle in radians between the x-axis and the diagonal of a rectangle
- * that has dimensions [Size.width] x [Size.height] of [this] receiver.
- * @author [Stanley Wintergreen](https://github.com/kepocnhh)
- * @since 0.8.0
- */
-fun Size.diagonalAngle(): Double {
-    return angleOf(x = width, y = height)
-}
-
-/**
- * Creates a new [Size] object with a copy of [this] receiver's values or the values [width] and [height] passed in.
- *
- * Usage:
- * ```
- * val foo = sizeOf(width = 3.0, height = 2.0)
- * val bar = foo.copy(height = 3.0)
- *
- *   ^
- *   |
- * 3 -   -   -   * bar
- *   |
- * 2 -   -   -   * foo
- *   |
- * 1 -           |
- *   |
- * 0 +---|---|---|---|--->
- *   0   1   2   3   4
- * ```
- * @param width This value will be set as the [Size.width]. Default is [Size.width] value of [this] receiver.
- * @param height This value will be set as the [Size.height]. Default is [Size.height] value of [this] receiver.
- * @author [Stanley Wintergreen](https://github.com/kepocnhh)
- * @since 0.8.0
- */
-fun Size.copy(width: Double = this.width, height: Double = this.height): Size {
-    return sizeOf(
-        width = width,
-        height = height,
     )
 }

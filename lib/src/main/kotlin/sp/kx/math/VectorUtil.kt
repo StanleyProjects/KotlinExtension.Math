@@ -216,6 +216,3 @@ fun Vector.isEmpty(points: Int): Boolean {
 fun Vector.isEmpty(): Boolean {
     return start == finish
 }
-
-// todo angle vector x perpendicular
-// todo angle vector x vector

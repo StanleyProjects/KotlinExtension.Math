@@ -18,6 +18,7 @@ import java.util.Objects
  * @author [Stanley Wintergreen](https://github.com/kepocnhh)
  * @since 0.5.0
  */
+@Suppress("TooManyFunctions")
 class MutableSize(
     override var width: Double,
     override var height: Double,

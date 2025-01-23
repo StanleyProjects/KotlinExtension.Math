@@ -54,5 +54,3 @@ fun distanceOf(offset: Offset): Double {
         y = offset.dY,
     )
 }
-
-// todo distanceOf(point, offset)

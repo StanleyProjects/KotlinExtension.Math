@@ -10,18 +10,21 @@ internal fun toString(number: Double, total: Int, points: Int, locale: Locale): 
     return java.lang.String.format(locale, "%0$total.${points}f", number)
 }
 
+@Suppress("MagicNumber")
 internal fun eq(it: Double, other: Double, points: Int): Boolean {
     val e = java.lang.Math.pow(10.0, points.toDouble())
     val diff = it - other
     return (diff * e).toLong() == 0L || (it * e).toLong() == 0L && (other * e).toLong() == 0L
 }
 
+@Suppress("MagicNumber")
 internal fun gt(it: Double, other: Double, points: Int): Boolean {
     val e = java.lang.Math.pow(10.0, points.toDouble())
     val diff = it - other
     return (diff * e).toLong() > 0L && ((it * e).toLong() != 0L || (other * e).toLong() != 0L)
 }
 
+@Suppress("MagicNumber")
 internal fun lt(it: Double, other: Double, points: Int): Boolean {
     val e = java.lang.Math.pow(10.0, points.toDouble())
     val diff = it - other

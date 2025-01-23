@@ -13,6 +13,6 @@ internal object UndefinedVector : Vector {
     }
 
     override fun hashCode(): Int {
-        return 1041110913
+        return 1_041_110_913
     }
 }

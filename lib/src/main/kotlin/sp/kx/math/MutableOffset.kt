@@ -18,6 +18,7 @@ import java.util.Objects
  * @author [Stanley Wintergreen](https://github.com/kepocnhh)
  * @since 0.3.0
  */
+@Suppress("TooManyFunctions")
 class MutableOffset(
     override var dX: Double,
     override var dY: Double,

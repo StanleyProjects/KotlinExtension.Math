@@ -18,6 +18,7 @@ import java.util.Objects
  * @author [Stanley Wintergreen](https://github.com/kepocnhh)
  * @since 0.2.0
  */
+@Suppress("TooManyFunctions")
 class MutablePoint(
     override var x: Double,
     override var y: Double,

@@ -13,6 +13,6 @@ internal object UndefinedPoint : Point {
     }
 
     override fun hashCode(): Int {
-        return -16776255
+        return -16_776_255
     }
 }
