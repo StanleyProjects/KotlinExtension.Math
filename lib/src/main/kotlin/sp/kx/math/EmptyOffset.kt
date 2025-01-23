@@ -5,7 +5,7 @@ internal object EmptyOffset : Offset {
     override val dY = 0.0
 
     override fun toString(): String {
-        return ""
+        return "{dX: 0.00, dY: 0.00}"
     }
 
     override fun equals(other: Any?): Boolean {
@@ -14,6 +14,6 @@ internal object EmptyOffset : Offset {
     }
 
     override fun hashCode(): Int {
-        return -1
+        return 961
     }
 }

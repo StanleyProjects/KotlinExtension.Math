@@ -5,7 +5,7 @@ internal object EmptySize : Size {
     override val height = 0.0
 
     override fun toString(): String {
-        return ""
+        return "0.00x0.00"
     }
 
     override fun equals(other: Any?): Boolean {
@@ -14,6 +14,6 @@ internal object EmptySize : Size {
     }
 
     override fun hashCode(): Int {
-        return -1
+        return 961
     }
 }
