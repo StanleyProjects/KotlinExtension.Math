@@ -152,6 +152,19 @@ class MutablePoint(
         y = x
     }
 
+    /**
+     * Sets [x] and [y] coordinates to `0.0`.
+     *
+     * Usage:
+     * ```
+     * val point = MutablePoint(dX = 1.0, dY = 2.0)
+     * point.clear()
+     * assertEquals(0.0, point.x)
+     * assertEquals(0.0, point.y)
+     * ```
+     * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+     * @since 0.8.1
+     */
     fun clear() {
         x = 0.0
         y = 0.0

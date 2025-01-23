@@ -70,6 +70,21 @@ class MutableOffset(
         dY = other.dY
     }
 
+    /**
+     * Method for adding offset to [dX] and [dY] values.
+     *
+     * Usage:
+     * ```
+     * val offset = MutableOffset(dX = 1.0, dY = 2.0)
+     * offset.add(dX = 2.0, dY = 1.0)
+     * assertEquals(3.0, offset.dX)
+     * assertEquals(3.0, offset.dY)
+     * ```
+     * @param dX This offset will be added to the [dX] value.
+     * @param dY This offset will be added to the [dY] value.
+     * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+     * @since 0.8.1
+     */
     fun add(
         dX: Double,
         dY: Double,
@@ -97,6 +112,20 @@ class MutableOffset(
         dY = dX
     }
 
+    /**
+     * Sets [dX] and [dY] values to `0.0`.
+     *
+     * Usage:
+     * ```
+     * val offset = MutableOffset(dX = 1.0, dY = 2.0)
+     * offset.clear()
+     * assertEquals(0.0, offset.dX)
+     * assertEquals(0.0, offset.dX)
+     * assertTrue(offset.isEmpty())
+     * ```
+     * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+     * @since 0.8.1
+     */
     fun clear() {
         dX = 0.0
         dY = 0.0

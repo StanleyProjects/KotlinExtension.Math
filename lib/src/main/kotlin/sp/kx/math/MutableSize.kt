@@ -78,6 +78,21 @@ class MutableSize(
         height = other.height
     }
 
+    /**
+     * Method for adding offset to [width] and [height] values.
+     *
+     * Usage:
+     * ```
+     * val size = MutableSize(width = 1.0, height = 2.0)
+     * size.add(dX = 2.0, dY = 1.0)
+     * assertEquals(3.0, size.width)
+     * assertEquals(3.0, size.height)
+     * ```
+     * @param dX This offset will be added to the [width] value.
+     * @param dY This offset will be added to the [height] value.
+     * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+     * @since 0.8.1
+     */
     fun add(
         dX: Double,
         dY: Double,
@@ -86,12 +101,39 @@ class MutableSize(
         height += dY
     }
 
+    /**
+     * Swaps [width] and [height] values.
+     *
+     * Usage:
+     * ```
+     * val size = MutableSize(width = 1.0, height = 2.0)
+     * size.swap()
+     * assertEquals(2.0, size.width)
+     * assertEquals(1.0, size.height)
+     * ```
+     * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+     * @since 0.8.1
+     */
     fun swap() {
         val width = width
         this.width = height
         height = width
     }
 
+    /**
+     * Sets [width] and [height] values to `0.0`.
+     *
+     * Usage:
+     * ```
+     * val size = MutableSize(width = 1.0, height = 2.0)
+     * size.clear()
+     * assertEquals(0.0, size.width)
+     * assertEquals(0.0, size.height)
+     * assertTrue(size.isEmpty())
+     * ```
+     * @author [Stanley Wintergreen](https://github.com/kepocnhh)
+     * @since 0.8.1
+     */
     fun clear() {
         width = 0.0
         height = 0.0
