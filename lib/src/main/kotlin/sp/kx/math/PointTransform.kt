@@ -3,22 +3,26 @@ package sp.kx.math
 /**
  * Usage:
  * ```
- * val point = pointOf(x = 1.0, y = 2.0) { it * 2 }
+ * val point = pointOf(x = 1.0, y = 2.0) { it * 2.0 }
+ * assertEquals(2.0, point.x)
+ * assertEquals(4.0, point.y)
+ * ```
  *
+ * ```
  *   ^
  *   |
- * 4 -   -   * point
+ * 4 -       *
  *   |
- * 3 -       |
+ * 3 -
  *   |
- * 2 -       |
+ * 2 -
  *   |
- * 1 -       |
+ * 1 -
  *   |
  * 0 +---|---|---|---|--->
  *   0   1   2   3   4
  * ```
- * @return An instance of [Point] built from the [Double] values [x], [y] and the [transform] function.
+ * @return A new [Point] object with the [x] and [y] transformed by the [transform] function.
  * @author [Stanley Wintergreen](https://github.com/kepocnhh)
  * @since 0.6.0
  */
@@ -36,23 +40,28 @@ fun pointOf(
 /**
  * Usage:
  * ```
- * val foo = pointOf(x = 1.0, y = 2.0)
- * val bar = foo.map { it * 2 }
+ * val foo = offsetOf(dX = 1.0, dY = 2.0)
+ * val bar = foo.map { it * 2.0 }
+ * assertFalse(foo === bar)
+ * assertEquals(2.0, bar.x)
+ * assertEquals(4.0, bar.y)
+ * ```
  *
+ * ```
  *   ^
  *   |
- * 4 -   -   * bar
+ * 4 -       * bar
  *   |
- * 3 -       |
+ * 3 -
  *   |
  * 2 -   * foo
  *   |
- * 1 -   |   |
+ * 1 -
  *   |
  * 0 +---|---|---|---|--->
  *   0   1   2   3   4
  * ```
- * @return An instance of [Point] built from [this] receiver [Point] and the [transform] function.
+ * @return A new [Point] object with [this] receiver's [Point.x] and [Point.y] transformed by the [transform] function.
  * @author [Stanley Wintergreen](https://github.com/kepocnhh)
  * @since 0.6.0
  */

@@ -6,7 +6,7 @@ import sp.kx.math.measure.Measure
  * Usage:
  * ```
  * val foo = offsetOf(dX = 1.0, dY = 2.0)
- * val bar = foo * 2
+ * val bar = foo * 2.0
  * assertFalse(foo === bar)
  * assertEquals(2.0, bar.dX)
  * assertEquals(4.0, bar.dY)
