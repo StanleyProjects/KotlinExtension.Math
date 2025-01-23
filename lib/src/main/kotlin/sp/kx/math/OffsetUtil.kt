@@ -174,3 +174,31 @@ fun Offset.reversed(): Offset {
 fun Offset.plus(size: Size, multiplier: Double): Offset {
     return offsetOf(dX = dX + size.width * multiplier, dY = dY + size.height * multiplier)
 }
+
+fun Offset.plus(dX: Double, dY: Double): Offset {
+    return offsetOf(
+        dX = this.dX + dX,
+        dY = this.dY + dY,
+    )
+}
+
+fun Offset.plus(size: Size, dX: Double, dY: Double): Offset {
+    return offsetOf(
+        dX = this.dX + size.width + dX,
+        dY = this.dY + size.height + dY,
+    )
+}
+
+fun Offset.plus(dX: Double, dY: Double, multiplier: Double): Offset {
+    return offsetOf(
+        dX = this.dX + dX * multiplier,
+        dY = this.dY + dY * multiplier,
+    )
+}
+
+fun Offset.plus(size: Size, dX: Double, dY: Double, multiplier: Double): Offset {
+    return offsetOf(
+        dX = this.dX + (size.width + dX) * multiplier,
+        dY = this.dY + (size.height + dY) * multiplier,
+    )
+}
