@@ -64,3 +64,14 @@ fun Point.map(
         y = transform(y),
     )
 }
+
+fun pointOf(
+    x: Double,
+    y: Double,
+    multiplier: Double,
+): Point {
+    return MutablePoint(
+        x = x * multiplier,
+        y = y * multiplier,
+    )
+}
