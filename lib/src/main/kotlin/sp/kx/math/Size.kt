@@ -39,7 +39,6 @@ interface Size {
     companion object {
         val Empty: Size = EmptySize
         val Reference: Size = ReferenceSize
+        val Undefined: Size = UndefinedSize
     }
 }
-
-// todo sizeOf(NaN, NaN)

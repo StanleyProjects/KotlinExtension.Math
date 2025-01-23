@@ -48,7 +48,6 @@ interface Offset {
         val Empty: Offset = EmptyOffset
 
         val Reference: Offset = ReferenceOffset
+        val Undefined: Offset = UndefinedOffset
     }
 }
-
-// todo offsetOf(NaN, NaN)

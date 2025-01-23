@@ -31,7 +31,8 @@ interface Vector {
      * The [Point] up to which the direction of the [Vector] can be computed.
      */
     val finish: Point
-}
 
-// todo angle vector x perpendicular
-// todo angle vector x vector
+    companion object {
+        val Undefined: Vector = UndefinedVector
+    }
+}
